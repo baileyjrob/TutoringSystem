@@ -22,8 +22,6 @@ default: &default
 development:
   <<: *default
   database: ORSHSTutoringSystem_development
-  username: <%= ENV.fetch("LOCAL_POSTGRES_USERNAME") %>
-  password: <%= ENV.fetch("LOCAL_POSTGRES_PASSWORD") %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -31,11 +29,7 @@ development:
 test:
   <<: *default
   database: ORSHSTutoringSystem_test
-  username: <%= ENV.fetch("LOCAL_POSTGRES_USERNAME") %>
-  password: <%= ENV.fetch("LOCAL_POSTGRES_PASSWORD") %>
 
 production:
   <<: *default
   database: ORSHSTutoringSystem_production
-  username: tutoringsystem
-  password: <%= ENV['BOOKCOLLECTION_DATABASE_PASSWORD'] %>

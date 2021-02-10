@@ -31,8 +31,8 @@ development:
 test:
   <<: *default
   database: ORSHSTutoringSystem_test
-  username: <%= ENV.fetch("LOCAL_POSTGRES_USERNAME") %>
-  password: <%= ENV.fetch("LOCAL_POSTGRES_PASSWORD") %>
+  username: postgres
+  password: postgres
 
 production:
   <<: *default
