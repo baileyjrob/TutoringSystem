@@ -1,24 +1,10 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+For development, please be sure to make a file /config/local_env.yml and add the following lines:
 
-Things you may want to cover:
+LOCAL_POSTGRES_USERNAME: 'XXX'
+LOCAL_POSTGRES_PASSWORD: 'YYY'
 
-* Ruby version
+With your local postgres username/password properly filling in the blanks.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Main Heroku site: https://still-meadow-96529.herokuapp.com/
