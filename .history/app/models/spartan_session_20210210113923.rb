@@ -1,0 +1,2 @@
+class SpartanSession < ApplicationRecord
+end
