@@ -1,0 +1,11 @@
+<h1>Student Scheduling Page</h1>
+<%= button_to "Cancel", {:action => 'index'}, :method => :get %>
+<p>Please enter session date and time</p>
+<%= form_with model: @tutoring_session, include_id: false do |form| %>
+  <%= form.label :date %>
+  <br>
+  <%= form.datetime_select :date, order: [:month, :day, :year], ampm: true, start_year: Date.today.year, end_year: Date.today.year + 1 %>
+  <br>
+  <br>
+  <%= form.submit "Schedule session" %>
+<% end %>
