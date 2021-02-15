@@ -23,12 +23,5 @@ RSpec.describe EncryptionService, type: :model do
             #     expect(receiver_account.balance).to eq(500)
             # end
         end
-
-        context 'involving user data' do
-            it 'automatically encrypts user data'
-            it 'automatically decrypts user data'
-            it 'still finds correct user with encrypted data'
-        end
-        
     #end
 end

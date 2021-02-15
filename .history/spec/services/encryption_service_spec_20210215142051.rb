@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe EncryptionService, type: :model do
-    #describe 'Encryption and Decryption' do
+    describe '#encrypt' do
         #let(:sender) { create(:user) }
         #let!(:sender_account) { create(:account, balance: 1_000, user: sender) }
         #let(:encrypted_data) {EncryptionService.encrypt(data)}
@@ -23,12 +23,5 @@ RSpec.describe EncryptionService, type: :model do
             #     expect(receiver_account.balance).to eq(500)
             # end
         end
-
-        context 'involving user data' do
-            it 'automatically encrypts user data'
-            it 'automatically decrypts user data'
-            it 'still finds correct user with encrypted data'
-        end
-        
-    #end
+    end
 end
