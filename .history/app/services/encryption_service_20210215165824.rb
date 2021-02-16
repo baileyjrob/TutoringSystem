@@ -11,13 +11,11 @@ module Encryptable
           #     "encrypted_#{attribute}=".to_sym,
           #     EncryptionService.encrypt(value)
           # )
-          
           self.write_attribute(attribute, EncryptionService.encrypt(value))
         end
 
         define_method(attribute) do
-          #value = self.public_send("encrypted_#{attribute}".to_sym)
-          value = self.read_attribute(attribute)
+          value = self.public_send("encrypted_#{attribute}".to_sym)
           EncryptionService.decrypt(value) if value.present?
         end
       end

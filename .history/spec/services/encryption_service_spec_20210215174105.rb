@@ -23,23 +23,24 @@ RSpec.describe EncryptionService, type: :model do
     end
     context 'involving user data' do
       it 'automatically encrypts user data' do
-        #expect(@user.read_attribute("uin".to_sym)).not_to eq(111111111)
+        expect(@user.read_attribute("uin".to_sym)).not_to eq(111111111)
         expect(@user.read_attribute("first_name".to_sym)).not_to eq("John")
         expect(@user.read_attribute("last_name".to_sym)).not_to eq("Doe")
         expect(@user.read_attribute("email".to_sym)).not_to eq("johndoe@tamu.edu")
       end
       it 'automatically decrypts user data' do
-        #puts(@user.read_attribute("uin".to_sym))
-        #expect(@user.uin).to eq(111111111)
+        expect(@user.uin).to eq("111111111")
         expect(@user.first_name).to eq("John")
         expect(@user.last_name).to eq("Doe")
         expect(@user.email).to eq("johndoe@tamu.edu")
       end
-      it 'still finds correct user with encrypted data' do
-        @user.save
-        expect(User.find(111111111)).to eq(@user)
-        User.delete_all
-      end
+      it 'still finds correct user with encrypted data'
+    end
+
+    context 'joins' do
+      it 'maintains encryption as foreign keys'
+      it 'correctly joins at join tables'
+      it 'recognizes nonexistant joins'
     end
       
   #end

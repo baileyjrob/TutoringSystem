@@ -11,7 +11,6 @@ module Encryptable
           #     "encrypted_#{attribute}=".to_sym,
           #     EncryptionService.encrypt(value)
           # )
-          
           self.write_attribute(attribute, EncryptionService.encrypt(value))
         end
 

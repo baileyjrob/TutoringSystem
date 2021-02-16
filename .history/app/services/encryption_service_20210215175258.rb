@@ -18,7 +18,13 @@ module Encryptable
         define_method(attribute) do
           #value = self.public_send("encrypted_#{attribute}".to_sym)
           value = self.read_attribute(attribute)
+          if (attribute == "uin".to_sym)
+            value = value.to_s
+          end
           EncryptionService.decrypt(value) if value.present?
+          if (attribute == "uin".to_sym)
+            value = value.to_i
+          end
         end
       end
     end

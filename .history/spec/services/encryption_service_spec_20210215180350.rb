@@ -36,10 +36,16 @@ RSpec.describe EncryptionService, type: :model do
         expect(@user.email).to eq("johndoe@tamu.edu")
       end
       it 'still finds correct user with encrypted data' do
-        @user.save
-        expect(User.find(111111111)).to eq(@user)
-        User.delete_all
+        @book.save
+        expect(User.find(111111111)).to equal(@user)
+        @book.destroy
       end
+    end
+
+    context 'joins' do
+      it 'maintains encryption as foreign keys'
+      it 'correctly joins at join tables'
+      it 'recognizes nonexistant joins'
     end
       
   #end

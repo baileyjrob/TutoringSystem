@@ -41,6 +41,12 @@ RSpec.describe EncryptionService, type: :model do
         User.delete_all
       end
     end
+
+    context 'joins' do
+      it 'maintains encryption as foreign keys'
+      it 'correctly joins at join tables'
+      it 'recognizes nonexistant joins'
+    end
       
   #end
 end
