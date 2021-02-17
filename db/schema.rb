@@ -10,7 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 2021_02_16_235151) do
 
   # These are extensions that must be enabled in order to support this database
@@ -32,7 +31,7 @@ ActiveRecord::Schema.define(version: 2021_02_16_235151) do
   end
 
   create_table "departments", force: :cascade do |t|
-    t.string "subject_name"
+    t.string "department_name"
   end
 
   create_table "roles", force: :cascade do |t|
