@@ -5,4 +5,7 @@ Rails.application.routes.draw do
   get 'student/schedule'
 
   post 'student/schedule' => 'student#schedule_session'
+  post 'student/create'
+  post 'student/delete'
+  post 'student/temp'
 end
