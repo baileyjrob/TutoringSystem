@@ -1,0 +1,83 @@
+<div class="container tutoring-index">
+  <div class="row mt-3">
+    <div class="calendar-title-container col-8">
+      <h3 class="calendar-title">
+        <%= @start_of_week %> - <%= @end_of_week %>
+      </h3>
+    </div>
+    <div class="col col-calendar-controls">
+      <div class="calendar-controls float-end">
+        <a href="#" class="btn btn-primary change-week" data-week-offset="-1">&lt;</a>
+        <a href="#" class="btn btn-primary change-today">Today</a>
+        <a href="#" class="btn btn-primary change-week" data-week-offset="1">&gt;</a>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="calendar mb-3">
+      <div class="calendar-header">
+        <div class="col-day col-sun">
+          <p>Sunday</p>
+        </div>
+        <div class="col-day col-mon">
+          <p>Monday</p>
+        </div>
+        <div class="col-day col-tue">
+          <p>Tuesday</p>
+        </div>
+        <div class="col-day col-wed">
+          <p>Wednesday</p>
+        </div>
+        <div class="col-day col-thu">
+          <p>Thursday</p>
+        </div>
+        <div class="col-day col-fri">
+          <p>Friday</p>
+        </div>
+        <div class="col-day col-sat">
+          <p>Saturday</p>
+        </div>
+      </div>
+      <div class="calendar-body">
+        <% @week.each do |index, day| %>
+        <div class="col-day">
+          <% day.each do |session| %>
+          <div class="tsession status-<%= session.session_status %>" style="top: <%= session.top_offset %>" 
+           data-edit-url="<%= tutoring_session_path(session) %>">
+            <div class="tsession-content" >
+              <p><%= session.scheduled_datetime.strftime("%I:%M %p") %></p>
+              <p><%= session.duration_datetime.strftime("%I:%M %p") %></p>
+              <i class="far fa-eye edit"></i>
+            </div>
+          </div>
+          <% end %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <%=link_to "Add Session", new_tutoring_session_path, class: 'btn btn-primary float-end mt-2' %>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(function() {
+    $('.tsession').on('click', function() {
+      window.location = $(this).data("edit-url");
+    });
+    $('.calendar-controls a.change-week').on('click', function() {
+      document.cookie = "week_offset=" + $(this).data('week-offset') + ";";
+      window.location.reload();
+    });
+    
+    $('.calendar-controls a.change-today').on('click', function() {
+      document.cookie = "start_week= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+      window.location.reload();
+    });
+    document.cookie
+    
+  });
+</script>
