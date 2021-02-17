@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_12_182208) do
+ActiveRecord::Schema.define(version: 2021_02_16_235151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2021_02_12_182208) do
   end
 
   create_table "departments", force: :cascade do |t|
-    t.string "subject_name"
+    t.string "department_name"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 2021_02_12_182208) do
     t.datetime "scheduled_datetime"
     t.datetime "completed_datetime"
     t.string "session_status"
+    t.datetime "session_date"
   end
 
   create_table "tutoring_sessions_users", id: false, force: :cascade do |t|
