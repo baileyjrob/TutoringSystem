@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   post 'student/create'
   post 'student/delete'
   post 'student/temp'
-  #resources :student, only: [:index, :create, :destroy]
-  #resources :student
+  #esources :student, only: [:index, :create, :destroy]
   resources :tutoring_session
 end

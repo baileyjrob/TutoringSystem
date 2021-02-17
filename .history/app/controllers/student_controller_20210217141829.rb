@@ -1,8 +1,49 @@
+class BooksController < ApplicationController
+
+    def edit
+        @book = Book.find(params[:id])
+    end
+
+    def update
+        @book = Book.find(params[:id])
+
+        if @book.update(book_params)
+            redirect_to root_path, notice: ("Book \"".concat(@book.title.concat("\" was updated")))
+        else
+            render :edit
+        end
+    end
+
+    def destroy
+        @book = Book.find(params[:id])
+        if params[:confirm] == "1"
+            @book.destroy
+            redirect_to root_path, notice: ("Book \"".concat(@book.title.concat("\" was deleted")))
+        end
+    end
+
+    private
+        def book_params
+            params.require(:book).permit(:title, :author, :genre, :price, :published_date)
+        end
+end
+
 class StudentController < ApplicationController
 
   def index
     # TODO: Add necessary models here
-    @students = User.all
+  end
+
+  def show
+    # TODO: Display single model
+  end
+
+  def edit
+    # TODO: Implement edit
+  end
+
+  def update
+    # TODO: Implement update
   end
 
   def schedule
@@ -21,6 +62,10 @@ class StudentController < ApplicationController
 
     # Send us back to the student index page
     redirect_to '/student/index'
+  end
+
+  def new
+    #TODO: Create object
   end
 
   # Every method below here is temporary for the purpose of creating and deleting data to make everything function

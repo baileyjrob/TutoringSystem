@@ -2,7 +2,6 @@ class StudentController < ApplicationController
 
   def index
     # TODO: Add necessary models here
-    @students = User.all
   end
 
   def schedule

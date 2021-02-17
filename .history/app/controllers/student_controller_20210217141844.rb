@@ -2,7 +2,18 @@ class StudentController < ApplicationController
 
   def index
     # TODO: Add necessary models here
-    @students = User.all
+  end
+
+  def show
+    # TODO: Display single model
+  end
+
+  def edit
+    # TODO: Implement edit
+  end
+
+  def update
+    # TODO: Implement update
   end
 
   def schedule
@@ -23,6 +34,10 @@ class StudentController < ApplicationController
     redirect_to '/student/index'
   end
 
+  def new
+    #TODO: Create object
+  end
+
   # Every method below here is temporary for the purpose of creating and deleting data to make everything function
   def create
     # Create some users and tutoring sessions
@@ -36,7 +51,7 @@ class StudentController < ApplicationController
     redirect_to '/student/index'
   end
 
-  def delete
+  def destroy
     # Delete users and tutoring sessions from the create function
     User.find(1).destroy
     User.find(2).destroy

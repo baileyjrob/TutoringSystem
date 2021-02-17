@@ -1,3 +1,5 @@
+
+
 class EncryptionService
   module Encryptable extend ActiveSupport::Concern
 
