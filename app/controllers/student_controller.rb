@@ -16,7 +16,7 @@ class StudentController < ApplicationController
     session = TutoringSession.find(params[:sessionID])
 
     # TODO: Figure out how the join table works so that the user can be linked to the tutoring session
-    #user.tutoringSession = session
+    session.users << user
 
     # Send us back to the student index page
     redirect_to '/student/index'
