@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   root 'landing#index'
-
   get 'student/index'
   get 'student/schedule'
 
@@ -8,4 +7,5 @@ Rails.application.routes.draw do
   post 'student/create'
   post 'student/delete'
   post 'student/temp'
+  resources :tutoring_session
 end
