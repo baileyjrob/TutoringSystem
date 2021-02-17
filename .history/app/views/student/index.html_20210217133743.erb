@@ -6,10 +6,3 @@
         ex: {:action => 'schedule', :user => User.get(1)}, :method => :get
 -->
 <%= button_to "Schedule tutoring session", {:action => 'schedule'}, :method => :get %>
-<ul>
-  <% @students.each do |user| %>
-  <li>
-    <%= link_to user.first_name, user %>
-  </li>
-  <% end %>
-</ul>
