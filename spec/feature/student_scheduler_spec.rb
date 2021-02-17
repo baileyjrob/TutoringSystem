@@ -1,14 +1,50 @@
 require 'rails_helper'
 RSpec.describe 'Student scheduler', type: :feature do
   describe 'student scheduler' do
-    it 'schedules a tutoring session for the student' do
-      # Start at student index page and create fake data
-      visit 'student/index'
-      find_button 'Create temp data'
-      expect(page).to have_content('Student Home Page')
-      click_button 'Create temp data'
 
-      # Go schedule a tutoring session
+    it 'schedules a tutoring session' do
+      # Delete everything
+      User.delete_all
+      TutoringSession.delete_all
+
+      # Create some data
+      User.create(:uin => 1,
+                  :first_name => "John",
+                  :last_name => "Doe",
+                  :email => "john@doe.com"
+      )
+
+      User.create(:uin => 2,
+                  :first_name => "Jane",
+                  :last_name => "Doe",
+                  :email => "jane@doe.com"
+      )
+
+      User.create(:uin => 3,
+                  :first_name => "Jeff",
+                  :last_name => "Doe",
+                  :email => "jeff@doe.com"
+      )
+
+      TutoringSession.create(:id => 1,
+                             :tutor_uin => 2,
+                             :scheduled_datetime => Time.now,
+                             :completed_datetime => nil,
+                             :session_status => ""
+      )
+
+      TutoringSession.create(:id => 2,
+                             :tutor_uin => 3,
+                             :scheduled_datetime => Time.now,
+                             :completed_datetime => nil,
+                             :session_status => ""
+      )
+
+      # Start at student index page
+      visit 'student/index'
+      expect(page).to have_content('Student Home Page')
+
+      # Go to scheduling page
       find_button 'Schedule tutoring session'
       click_button 'Schedule tutoring session'
       expect(page).to have_content('Student Scheduling Page')
@@ -16,8 +52,13 @@ RSpec.describe 'Student scheduler', type: :feature do
       # Cancel join and then go back and schedule
       find_button 'Cancel'
       click_button 'Cancel'
+      expect(page).to have_content('Student Home Page')
+
+      # Go back to scheduling page
       click_button 'Schedule tutoring session'
       expect(page).to have_content('Student Scheduling Page')
+
+      # Join a session
       find_button 'Join session', id: 1
       find_button 'Join session', id: 2
       click_button 'Join session', id: 1
@@ -25,9 +66,9 @@ RSpec.describe 'Student scheduler', type: :feature do
       # Expect to be at student index page
       expect(page).to have_content('Student Home Page')
 
-      # Delete fake data
-      find_button 'Delete temp data'
-      click_on 'Delete temp data'
+      # Delete everything
+      User.delete_all
+      TutoringSession.delete_all
     end
   end
 end
