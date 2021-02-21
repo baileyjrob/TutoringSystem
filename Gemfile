@@ -57,6 +57,11 @@ group :test do
   gem 'selenium-webdriver'
   # Tests code coverage in tests
   gem 'simplecov', require: false
+  # time freezing for tests
+  gem 'timecop'
+  gem 'show_me_the_cookies'
+  gem 'selenium-webdriver'
+  gem 'apparition'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
