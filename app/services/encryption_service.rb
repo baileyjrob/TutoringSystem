@@ -1,23 +1,23 @@
 class EncryptionService
-  module Encryptable extend ActiveSupport::Concern
-
+  module Encryptable
+    extend ActiveSupport::Concern
     class_methods do
       def attr_encrypted(*attributes)
         attributes.each do |attribute|
           define_method("#{attribute}=".to_sym) do |value|
             return if value.nil?
-        
+
             # self.public_send(
             #     "encrypted_#{attribute}=".to_sym,
             #     EncryptionService.encrypt(value)
             # )
-            
-            self.write_attribute(attribute, EncryptionService.encrypt(value))
+
+            write_attribute(attribute, EncryptionService.encrypt(value))
           end
 
           define_method(attribute) do
-            #value = self.public_send("encrypted_#{attribute}".to_sym)
-            value = self.read_attribute(attribute)
+            # value = self.public_send("encrypted_#{attribute}".to_sym)
+            value = read_attribute(attribute)
             EncryptionService.decrypt(value) if value.present?
           end
         end
@@ -25,9 +25,9 @@ class EncryptionService
     end
   end
   KEY = ActiveSupport::KeyGenerator.new(
-    ENV.fetch("SECRET_KEY_BASE")
+    ENV.fetch('SECRET_KEY_BASE')
   ).generate_key(
-    ENV.fetch("ENCRYPTION_SERVICE_SALT"),
+    ENV.fetch('ENCRYPTION_SERVICE_SALT'),
     ActiveSupport::MessageEncryptor.key_len
   ).freeze
 

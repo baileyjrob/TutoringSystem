@@ -1,5 +1,4 @@
 class StudentController < ApplicationController
-
   def index
     # TODO: Add necessary models here
     @students = User.all
@@ -26,11 +25,13 @@ class StudentController < ApplicationController
   # Every method below here is temporary for the purpose of creating and deleting data to make everything function
   def create
     # Create some users and tutoring sessions
-    User.create(:uin => 1, :first_name => "John", :last_name => "Doe", :major => "MATH", :email => "john@doe.com")
-    User.create(:uin => 2, :first_name => "Jane", :last_name => "Doe", :major => "MATH", :email => "jane@doe.com")
-    User.create(:uin => 3, :first_name => "Jeff", :last_name => "Doe", :major => "MATH", :email => "jeff@doe.com")
-    TutoringSession.create(:id => 1, :tutor_uin => 2, :scheduled_datetime => Time.now, :completed_datetime => nil, :session_status => "")
-    TutoringSession.create(:id => 2, :tutor_uin => 3, :scheduled_datetime => Time.now, :completed_datetime => nil, :session_status => "")
+    User.create(uin: 1, first_name: 'John', last_name: 'Doe', major: 'MATH', email: 'john@doe.com')
+    User.create(uin: 2, first_name: 'Jane', last_name: 'Doe', major: 'MATH', email: 'jane@doe.com')
+    User.create(uin: 3, first_name: 'Jeff', last_name: 'Doe', major: 'MATH', email: 'jeff@doe.com')
+    TutoringSession.create(id: 1, tutor_uin: 2, scheduled_datetime: Time.now, completed_datetime: nil,
+                           session_status: '')
+    TutoringSession.create(id: 2, tutor_uin: 3, scheduled_datetime: Time.now, completed_datetime: nil,
+                           session_status: '')
 
     # Send us back to the student index page
     redirect_to '/student/index'
@@ -47,5 +48,4 @@ class StudentController < ApplicationController
     # Send us back to the student index page
     redirect_to '/student/index'
   end
-
 end

@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2021_02_16_235151) do
   end
 
   create_table "departments", force: :cascade do |t|
-    t.string "department_name"
+    t.string "subject_name"
   end
 
   create_table "roles", force: :cascade do |t|
