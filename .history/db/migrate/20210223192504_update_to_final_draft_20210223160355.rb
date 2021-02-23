@@ -49,11 +49,15 @@ class UpdateToFinalDraft < ActiveRecord::Migration[6.1]
     end
 
     change_table :roles_users do |t|
+      t.string :link_status
+      t.text :student_notes
       t.foreign_key :roles
       t.foreign_key :users
     end
 
     change_table :courses_tutoring_sessions do |t|
+      t.string :link_status
+      t.text :student_notes
       t.foreign_key :tutoring_sessions
       t.foreign_key :courses
     end
