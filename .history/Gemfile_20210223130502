@@ -61,6 +61,7 @@ group :test do
   # time freezing for tests
   gem 'timecop'
   gem 'show_me_the_cookies'
+  gem 'selenium-webdriver'
   gem 'apparition'
 end
 

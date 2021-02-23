@@ -253,7 +253,7 @@ DEPENDENCIES
   apparition
   bootsnap (>= 1.4.4)
   byebug
-  capybara
+  capybara (>= 3.26)
   devise
   jbuilder (~> 2.7)
   pg (~> 1.1)

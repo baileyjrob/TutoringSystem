@@ -62,7 +62,6 @@ ActiveRecord::Schema.define(version: 2021_02_17_072005) do
     t.datetime "scheduled_datetime"
     t.datetime "completed_datetime"
     t.string "session_status"
-    t.datetime "session_date"
   end
 
   create_table "tutoring_sessions_users", id: false, force: :cascade do |t|
@@ -79,7 +78,6 @@ ActiveRecord::Schema.define(version: 2021_02_17_072005) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.index ["email"], name: "index_users_on_email"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
