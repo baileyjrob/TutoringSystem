@@ -2,7 +2,7 @@ class UpdateToFinalDraft < ActiveRecord::Migration[6.1]
   def change
     execute 'ALTER TABLE "users" DROP CONSTRAINT "users_pkey"'
     add_column :users, :id, :primary_key
-    
+
     change_table :courses do |t|
       t.rename :subject_id, :department_id
       t.foreign_key :departments
@@ -36,9 +36,8 @@ class UpdateToFinalDraft < ActiveRecord::Migration[6.1]
     
     change_table :tutoring_sessions do |t|
       t.remove :tutor_uin
-      t.bigint :tutor_id
       t.string :semester
-      t.foreign_key :users, column: :tutor_id
+      t.references :users, column: :tutor_id
     end
 
     change_table :tutoring_sessions_users do |t|
