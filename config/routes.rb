@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   #resources :student, only: [:index, :create, :destroy]
   #resources :student
   resources :tutoring_session
+  resources :user
 end
