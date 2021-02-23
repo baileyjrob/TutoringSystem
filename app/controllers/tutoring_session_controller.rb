@@ -47,7 +47,7 @@ class TutoringSessionController < ApplicationController
     if @tsession.update(tsession_params)
       redirect_to @tsession, notice: 'Tutoring session created.'
     else
-      render 'new'
+      render 'edit'
     end
   end
 
