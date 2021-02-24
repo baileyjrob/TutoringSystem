@@ -1,3 +1,4 @@
+include EncryptionService::Encryptable
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -8,6 +9,8 @@ class User < ApplicationRecord
   has_and_belongs_to_many :roles
 
   validate :email_domain
+  #attr_encrypted :first_name, :last_name, :email
+  attr_encrypted :first_name, :last_name
   def email_domain
     domain = email.split("@").last
     if !email.blank?

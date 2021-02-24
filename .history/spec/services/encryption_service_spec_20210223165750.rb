@@ -15,10 +15,10 @@ RSpec.describe EncryptionService, type: :model do
       end
     end
     before do
-      @user = User.new(:uin => 111111111, 
-        :first_name => "John", 
+      @user = User.new(:first_name => "John", 
         :last_name => "Doe",
-        :email => "johndoe@tamu.edu"
+        :email => "johndoe@tamu.edu",
+        :encrypted_password => "password123"
       )
     end
     context 'involving user data' do
@@ -35,9 +35,17 @@ RSpec.describe EncryptionService, type: :model do
         expect(@user.last_name).to eq("Doe")
         expect(@user.email).to eq("johndoe@tamu.edu")
       end
-      it 'still finds correct user with encrypted data' do
+      context 'still finds correct user with encrypted ' do
         @user.save
-        expect(User.find(111111111)).to eq(@user)
+        it 'first name' do
+          expect(User.find_by first_name: 'John').to eq(@user)
+        end
+        it 'last name' do
+          expect(User.find_by last_name: 'Doe').to eq(@user)
+        end
+        it 'email' do
+          expect(User.find_by email: 'johndoe@tamu.edu').to eq(@user)
+        end
         @user.destroy
       end
     end
