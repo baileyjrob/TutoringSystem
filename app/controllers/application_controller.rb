@@ -9,4 +9,11 @@ class ApplicationController < ActionController::Base
                                                        :last_name,
                                                        :major])
   end
+
+  before_action :update_sanitized_params, if: :devise_controller?
+
+     def update_sanitized_params
+       devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation, :first_name, :last_name, :major])
+       devise_parameter_sanitizer.permit(:account_update, keys: [:email, :password, :password_confirmation, :first_name, :last_name, :major])
+     end
 end

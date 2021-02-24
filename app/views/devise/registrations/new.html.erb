@@ -31,11 +31,6 @@
     <%= f.text_field :last_name, autocomplete: "last name", required: true %>
   </div>
 
-  <%# This does not affect the role tables yet %>
-  <div class="field">
-    <%= f.label :role %><br />
-    <%= f.collection_select :id, Role.order(:role_name),:id,:role_name, include_blank: false %>
-  </div>
 
   <div class="field">
     <%= f.label :major %><br />
