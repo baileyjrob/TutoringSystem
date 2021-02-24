@@ -20,6 +20,10 @@ class EncryptionService
             value = read_attribute(attribute)
             EncryptionService.decrypt(value) if value.present?
           end
+
+          define_method("find_by_#{attribute}") do |value|
+            return self.find_by({attribute}: EncryptionService.encrypt(value))
+          end
         end
       end
     end
