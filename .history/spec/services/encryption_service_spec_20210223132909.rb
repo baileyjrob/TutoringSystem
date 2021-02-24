@@ -38,7 +38,7 @@ RSpec.describe EncryptionService, type: :model do
       it 'still finds correct user with encrypted data' do
         @user.save
         expect(User.find(111111111)).to eq(@user)
-        @user.destroy
+        User.delete_all
       end
     end
       
