@@ -9,14 +9,16 @@ class User < ApplicationRecord
     #validates :uin, presence: true
 
     validate :email_domain
-    include EncryptionService::Encryptable
-    # attr_encrypted :uin, :first_name, :last_name, :email Cannot encrypt numbers
-    attr_encrypted :first_name, :last_name, :email
+
+    #commented out temporarily vv
+    #include EncryptionService::Encryptable
+    #attr_encrypted :uin, :first_name, :last_name, :email Cannot encrypt numbers
+    #attr_encrypted :first_name, :last_name
   def email_domain
     domain = email.split("@").last
     if !email.blank?
       errors.add(:email, "Invalid Domain. Please use your TAMU or Spartan email") if domain != "tamu.edu" and domain != "spartan-tutoring.com"
-      errors.add(:email, "indicates wrong role selected. Please select \'Spartan Tutor\'") if domain == "spartan-tutoring.com"
+      #errors.add(:email, "indicates wrong role selected. Please select \'Spartan Tutor\'") if domain == "spartan-tutoring.com"
     end
   end
 end
