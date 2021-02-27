@@ -6,6 +6,8 @@
         ex: {:action => 'schedule', :user => User.get(1)}, :method => :get
 -->
 <%= button_to "Schedule tutoring session", {:action => 'schedule'}, :method => :get %>
+<%= button_to "Find a Tutor", {:action => 'matching'}, :method => :get %>
+
 <ul>
   <% @students.each do |user| %>
   <li>

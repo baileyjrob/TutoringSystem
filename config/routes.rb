@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'student#index'
   get 'student/index'
   get 'student/schedule'
+  get 'student/matching'
   post 'student/schedule' => 'student#schedule_session'
   post 'student/create'
   post 'student/delete'
