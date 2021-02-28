@@ -3,11 +3,16 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  has_and_belongs_to_many :tutoring_sessions
-  has_and_belongs_to_many :courses
-  has_and_belongs_to_many :roles
+    has_and_belongs_to_many :tutoring_sessions
+    has_and_belongs_to_many :courses
+    has_and_belongs_to_many :roles
+    #validates :uin, presence: true
 
-  validate :email_domain
+    validate :email_domain
+    validates_presence_of :encrypted_password
+    include EncryptionService::Encryptable
+    # attr_encrypted :uin, :first_name, :last_name, :email Cannot encrypt numbers
+    attr_encrypted :first_name, :last_name, :email
   def email_domain
     domain = email.split("@").last
     if !email.blank?
