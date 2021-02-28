@@ -72,6 +72,7 @@ class TutoringSessionController < ApplicationController
 
   def destroy
     @tsession = TutoringSession.find(params[:id])
+    @tsession.users.delete_all
     @tsession.delete # Destroy tries to delete all objects attatched to the session as well. Not good
 
     redirect_to tutoring_session_index_path, notice: 'Tutoring session deleted.'

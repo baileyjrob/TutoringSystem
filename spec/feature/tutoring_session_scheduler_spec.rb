@@ -1,10 +1,14 @@
 require 'rails_helper'
 RSpec.describe TutoringSessionController, type: :feature do
   let(:frozen_time) { '25 May 02:00:00 +0000'.to_datetime }
-  before { Timecop.freeze(frozen_time) }
+  before { 
+    Timecop.freeze(frozen_time) 
+    User.create(first_name: 'Admin', last_name: 'User', password: 'T3st!!a', email: 'admin@tamu.edu') 
+  }
+  
   after { Timecop.return }
 
-  let(:tutor) { User.new(uin: 0, first_name: 'Tutor', last_name: 'User') }
+  let(:tutor) { User.new(first_name: 'Tutor', last_name: 'User', password: 'T3st!!a', email: 'tutor@tamu.edu') }
   let(:scheduled_datetime) { '26 May 2021 08:00:00 +0000'.to_datetime }
   let(:beginning_of_week) { Date.today.beginning_of_week(start_day = :sunday) }
   
@@ -26,7 +30,7 @@ RSpec.describe TutoringSessionController, type: :feature do
       create_cookie('week_offset', '1')
       visit('/tutoring_session')
       expect(page).to have_content('May 30th, 2021')
-    end 
+    end
     
     it 'should decrement week on decrement cookie' do 
       visit('/tutoring_session')
