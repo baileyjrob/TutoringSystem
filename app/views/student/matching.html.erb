@@ -1,8 +1,0 @@
-<h1>Tutor Matching Page</h1>
-<h3>testing</h3>
-
-<%= form_for(User.all) do |f| %>
-<%= f.collection_select :major, user.order(major), :id, :first_name %>
- <% end %> 
-
-<%= button_to "Cancel", {:action => 'index'}, :method => :get %>

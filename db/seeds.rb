@@ -13,16 +13,19 @@ user2 = User.create!(first_name: "Jane", last_name: "Doe", email: "jane@tamu.edu
 user3 = User.create!(first_name: "Jeff", last_name: "Doe", email: "jeff@tamu.edu", password: "T3st!!d")
 
 
-user5 = User.create!(id: 15, first_name: 'Apple', last_name: 'Juice', major: 'CHEM', email: "apple@tamu.edu", password: "T3st!!e")
-user6 = User.create!(id: 16, first_name: 'Orange', last_name: 'Juice', major: 'CHEM', email: "orange@tamu.edu", password: "T3st!!f")
-user7 = User.create!(id: 17, first_name: 'Grape', last_name: 'Juice', major: 'CHEM', email: "grape@tamu.edu", password: "T3st!!g")
-user8 = User.create!(id: 18, first_name: 'Lemon', last_name: 'Juice', major: 'MATH', email: "lemon@tamu.edu", password: "T3st!!h")
-user9 = User.create!(id: 19, first_name: 'Pineapple', last_name: 'Juice', major: 'MATH', email: "pineapple@tamu.edu", password: "T3st!!i")
+user5 = User.create!(id: 15, first_name: 'Adam', last_name: 'Doe', major: 'CHEM', email: "adam@tamu.edu", password: "T3st!!e")
+user6 = User.create!(id: 16, first_name: 'Ben', last_name: 'Doe', major: 'CHEM', email: "ben@tamu.edu", password: "T3st!!f")
+user7 = User.create!(id: 17, first_name: 'Christine', last_name: 'Doe', major: 'CHEM', email: "christine@tamu.edu", password: "T3st!!g")
+user8 = User.create!(id: 18, first_name: 'Dakota', last_name: 'Doe', major: 'MATH', email: "dakota@tamu.edu", password: "T3st!!h")
+user9 = User.create!(id: 19, first_name: 'Ethan', last_name: 'Doe', major: 'MATH', email: "ethan@tamu.edu", password: "T3st!!i")
 
+=begin
 #role_id 1 is tutor, 2 is student, left 0 open for admin during testing purposes
-role5 = Roles_user.create!(id: 15, role_id: 1)
-role6 = Roles_user.create!(id: 16, role_id: 1)
-role7 = Roles_user.create!(id: 17, role_id: 2)
-role8 = Roles_user.create!(id: 18, role_id: 1)
-role9 = Roles_user.create!(id: 19, role_id: 2)
-
+role5 = Role.create!(id: 15, role_id: 1)
+role6 = Role.create!(id: 16, role_id: 1)
+role7 = Role.create!(id: 17, role_id: 2)
+role8 = Role.create!(id: 18, role_id: 1)
+role9 = Role.create!(id: 19, role_id: 2)
+=end
+TutoringSession.create(id: 1, tutor_id: user2.id, scheduled_datetime: Time.now, completed_datetime: 0, session_status: "")
+TutoringSession.create(id: 2, tutor_id: user3.id, scheduled_datetime: Time.now, completed_datetime: 0, session_status: "")
