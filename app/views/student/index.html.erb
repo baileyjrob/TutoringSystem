@@ -1,0 +1,13 @@
+<h1>Student Home Page</h1>
+<!--
+    TODO: Add the user to the params passed in to schedule
+        ex: {:action => 'schedule', :user => User.get(1)}, :method => :get
+-->
+<%= button_to "Schedule tutoring session", {:action => 'schedule'}, :method => :get %>
+<ul>
+  <% @students.each do |user| %>
+  <li>
+    <%= link_to user.first_name, user %>
+  </li>
+  <% end %>
+</ul>
