@@ -22,6 +22,7 @@
   Signed in as <%=current_user.email%>
   <%= link_to 'Sign out', destroy_user_session_path,
     method: :delete %>
+  <%= link_to 'My Account', edit_user_registration_path %>
   <% else %>
   <%= link_to 'Sign up', new_user_registration_path%>
 
