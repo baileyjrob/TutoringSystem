@@ -1,2 +1,0 @@
-class TutoringSession < ApplicationRecord
-end

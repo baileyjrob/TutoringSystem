@@ -3,34 +3,38 @@ RSpec.describe 'Student scheduler', type: :feature do
   describe 'student scheduler' do
 
     it 'schedules a tutoring session' do
+      # Delete everything
+      User.delete_all
+      TutoringSession.delete_all
+
       # Create some data
-      user1 = User.create!(:first_name => "John",
-                   :last_name => "Doe",
-                   :email => "john@tamu.edu",
-                   :password => "T3st!!b"
+      User.create(:id => 1,
+                  :first_name => "John",
+                  :last_name => "Doe",
+                  :email => "john@doe.com"
       )
 
-      user2 = User.create!(:first_name => "Jane",
-                   :last_name => "Doe",
-                   :email => "jane@tamu.edu",
-                   :password => "T3st!!c"
+      User.create(:id => 2,
+                  :first_name => "Jane",
+                  :last_name => "Doe",
+                  :email => "jane@doe.com"
       )
 
-      user3 = User.create!(:first_name => "Jeff",
-                   :last_name => "Doe",
-                   :email => "jeff@tamu.edu",
-                   :password => "T3st!!d"
+      User.create(:id => 3,
+                  :first_name => "Jeff",
+                  :last_name => "Doe",
+                  :email => "jeff@doe.com"
       )
 
-      tsession1 = TutoringSession.create!(:id => 1,
-                             :tutor_id => user2.id,
+      TutoringSession.create(:id => 1,
+                             :tutor_id => 2,
                              :scheduled_datetime => Time.now,
                              :completed_datetime => nil,
                              :session_status => ""
       )
 
-      tsession2 = TutoringSession.create!(:id => 2,
-                             :tutor_id => user3.id,
+      TutoringSession.create(:id => 2,
+                             :tutor_id => 3,
                              :scheduled_datetime => Time.now,
                              :completed_datetime => nil,
                              :session_status => ""
@@ -55,31 +59,16 @@ RSpec.describe 'Student scheduler', type: :feature do
       expect(page).to have_content('Student Scheduling Page')
 
       # Join a session
-      find_button 'Join session', id: tsession1.id
-      find_button 'Join session', id: tsession2.id
-      click_button 'Join session', id: tsession1.id
+      find_button 'Join session', id: 1
+      find_button 'Join session', id: 2
+      click_button 'Join session', id: 1
 
       # Expect to be at student index page
       expect(page).to have_content('Student Home Page')
 
-      # Make sure join table worked
-      @count = false
-      TutoringSession.find(tsession1.id).users.each do |user|
-        if user.id == user1.id
-          @count = true
-        end
-      end
-      expect(@count).to eq(true)
-
       # Delete everything
-      sessions = TutoringSession.all
-      sessions.each do |session|
-        unless session.users.blank?
-          session.users.destroy_all
-        end
-      end
-      TutoringSession.delete_all
       User.delete_all
+      TutoringSession.delete_all
     end
   end
 end
