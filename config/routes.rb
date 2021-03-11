@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post 'student/delete'
   post 'student/temp'
   get '/users/:id', :to => 'users#show', :as => :user
+  get '/users/schedule', :to => 'users#show_schedule', :as => :user
   #resources :student, only: [:index, :create, :destroy]
   #resources :student
   resources :tutoring_session

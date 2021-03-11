@@ -41,6 +41,10 @@ class UsersController < ApplicationController
         redirect_to root_path
     end
 
+    def show_schedule
+      @sessions = TutoringSession.joins(:users).where(users: { id: current_user.id})
+    end
+
     private
         def user_params
             params.require(:user).permit(:first_name, :last_name, :major, :email, :encrypted_password)
