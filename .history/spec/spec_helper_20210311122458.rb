@@ -18,6 +18,8 @@ require 'show_me_the_cookies'
 
 require 'capybara/apparition'
 
+#Allows for ease of sign-in testing
+require 'support/users_helpers'
 Capybara.javascript_driver = :apparition
 
 SimpleCov.start 'rails' do
@@ -33,6 +35,12 @@ RSpec.configure do |config|
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
   config.include ShowMeTheCookies, :type => :feature
+
+  #Adds sign-in feature to any spec using users
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :view
+  config.include UserHelpers, type: :controller
+  config.include UserHelpers, type: :controller
 
   config.expect_with :rspec do |expectations|
     # This option will default to `true` in RSpec 4. It makes the `description`

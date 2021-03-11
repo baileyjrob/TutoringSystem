@@ -18,6 +18,8 @@ require 'show_me_the_cookies'
 
 require 'capybara/apparition'
 
+#Allows for ease of sign-in testing
+require 'support/users_helpers'
 Capybara.javascript_driver = :apparition
 
 SimpleCov.start 'rails' do

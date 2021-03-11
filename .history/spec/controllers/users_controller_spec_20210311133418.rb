@@ -1,3 +1,25 @@
+require 'rails_helper'
+RSpec.describe UsersController, type: :controller do
+  describe "GET index" do
+    it "assigns @users" do
+      user = User.create
+      get :index
+      expect(assigns(:users)).to eq([user])
+    end
+
+    it "renders the index view" do
+      get :index
+      expect(resposne).to render("index")
+    end
+  end
+
+  #TODO: Implement others for posterity
+
+  describe "GET show_schedule" do
+    context "when user is signed in"
+  end
+end
+
 class UsersController < ApplicationController
   #before_action :authenticate_user!
   def index  
@@ -44,7 +66,7 @@ class UsersController < ApplicationController
 
   def show_schedule
     if user_signed_in?
-      @sessions = current_user.tutoring_sessions
+      @sessions = TutoringSession.joins(:users).where(users: { id: current_user.id})
     else
       redirect_to new_user_session_path
     end

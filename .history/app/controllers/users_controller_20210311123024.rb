@@ -44,7 +44,7 @@ class UsersController < ApplicationController
 
   def show_schedule
     if user_signed_in?
-      @sessions = current_user.tutoring_sessions
+      @sessions = TutoringSession.joins(:users).where(users: { id: current_user.id})
     else
       redirect_to new_user_session_path
     end

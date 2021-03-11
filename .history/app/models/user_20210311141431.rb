@@ -10,7 +10,7 @@ class User < ApplicationRecord
   validates_presence_of :first_name, :last_name, :email, :password
   validate :email_domain
   def email_domain
-    domain = email.split("@").last if !email.blank?
+    domain = email.split("@").last
     if !email.blank?
       errors.add(:email, "Invalid Domain. Please use your TAMU or Spartan email") if domain != "tamu.edu" and domain != "spartan-tutoring.com"
       #errors.add(:email, "indicates wrong role selected. Please select \'Spartan Tutor\'") if domain == "spartan-tutoring.com"

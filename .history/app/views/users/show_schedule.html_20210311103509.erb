@@ -10,16 +10,17 @@
       TODO: Make sure the date is later than now and that the status is not cancelled
     -->
   <tr>
-    <!-- Make a row in the table for each tutoring session. Includes details and leave option -->
+    <!-- Make a row in the table for each tutoring session. Includes details and join option -->
     <% tutor = User.find(session.tutor_id) %>
     <td><%= tutor.first_name + " " + tutor.last_name %></td>
     <td><%= tutor.email %></td>
     <% date = session.scheduled_datetime.localtime.strftime("%B %d at %l:%M %p %Z") %>
     <td><%= date %></td>
     <!--
-        TODO: Implement delete button
+        TODO: Pass user that was passed in to button instead of hard coded value
+            ex: {:action => 'schedule', :id => session.id, :user => params[:user]}
       -->
-    <td>Placeholder For Leave Session</td>
+    <td>Placeholder For Deletion</td>
   </tr>
   <% end %>
 </table>

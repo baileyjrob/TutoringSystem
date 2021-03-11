@@ -22,6 +22,11 @@ RSpec.describe 'users/show_schedule.html.erb', type: :view do
       expect(rendered).to have_content('27 May 02:00:00 +0000'.to_datetime)
     end
   end
+  it 'displays an error message when no user logged on' do
+    current_user = nil
+    render
+    expect(rendered).to have_content('Error')
+  end
   it 'has the option for users to opt-out of sessions' do
     render
     expect(rendered).to have_content('Leave Session')
