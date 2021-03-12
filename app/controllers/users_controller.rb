@@ -5,6 +5,7 @@ class UsersController < ApplicationController
     
     def show
         @user = User.find(params[:id])
+        @tutoring_sessions = TutoringSession.all
     end
 
     def new
@@ -39,6 +40,20 @@ class UsersController < ApplicationController
         @user = User.find(params[:id])
         @user.destroy
         redirect_to root_path
+    end
+
+    def schedule_student
+        @user = User.find(params[:id])
+        @sessions = TutoringSession.all
+    end
+
+    def schedule_session_student
+        user = User.find(params[:id])
+        tutor_session = TutoringSession.find(params[:sessionID])
+
+        tutor_session.users << user
+
+        redirect_to '/users/' + params[:id]
     end
 
     private
