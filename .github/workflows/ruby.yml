@@ -25,7 +25,7 @@ jobs:
         ports: ["5432:5432"]
         env:
           POSTGRES_USERNAME: ${{ secrets.LOCAL_POSTGRES_USERNAME }}
-          POSTGRES_PASSWORD:: ${{ secrets.LOCAL_POSTGRES_PASSWORD }}
+          POSTGRES_PASSWORD: ${{ secrets.LOCAL_POSTGRES_PASSWORD }}
         options: >-
           --health-cmd pg_isready 
           --health-interval 10s 
