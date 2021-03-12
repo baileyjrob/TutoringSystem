@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   devise_for :users
   root 'student#index'
@@ -7,9 +9,9 @@ Rails.application.routes.draw do
   post 'student/create'
   post 'student/delete'
   post 'student/temp'
-  get '/users/:id', :to => 'users#show', :as => :user
-  #resources :student, only: [:index, :create, :destroy]
-  #resources :student
+  get '/users/:id', to: 'users#show', as: :user
+  # resources :student, only: [:index, :create, :destroy]
+  # resources :student
   resources :tutoring_session
   resources :user
 end

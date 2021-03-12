@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class UpdateToFinalDraft < ActiveRecord::Migration[6.1]
   def change
     execute 'ALTER TABLE "users" DROP CONSTRAINT "users_pkey"'
     add_column :users, :id, :primary_key
-    
+
     change_table :courses do |t|
       t.rename :subject_id, :department_id
       t.foreign_key :departments
@@ -25,7 +27,7 @@ class UpdateToFinalDraft < ActiveRecord::Migration[6.1]
       t.foreign_key :users
       t.foreign_key :spartan_sessions
     end
-    
+
     change_table :subjects_tutoring_sessions do |t|
       t.rename :subject_id, :department_id
       t.foreign_key :departments
@@ -33,7 +35,7 @@ class UpdateToFinalDraft < ActiveRecord::Migration[6.1]
     end
 
     rename_table :subjects_tutoring_sessions, :departments_tutoring_sessions
-    
+
     change_table :tutoring_sessions do |t|
       t.remove :tutor_uin
       t.bigint :tutor_id
@@ -57,6 +59,5 @@ class UpdateToFinalDraft < ActiveRecord::Migration[6.1]
       t.foreign_key :tutoring_sessions
       t.foreign_key :courses
     end
-    
   end
 end
