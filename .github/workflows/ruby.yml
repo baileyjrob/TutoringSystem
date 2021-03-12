@@ -15,7 +15,6 @@ on:
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -32,4 +31,7 @@ jobs:
         ruby-version: ${{ matrix.ruby-version }}
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - name: Run tests
+      env:
+        LOCAL_POSTGRES_USERNAME: ${{ secrets.LOCAL_POSTGRES_USERNAME }}
+        LOCAL_POSTGRES_PASSWORD: ${{ secrets.LOCAL_POSTGRES_PASSWORD }}
       run: bundle exec rake
