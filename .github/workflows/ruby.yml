@@ -24,8 +24,8 @@ jobs:
         image: postgres:13
         ports: ["5432:5432"]
         env:
-          LOCAL_POSTGRES_USERNAME: ${{ secrets.LOCAL_POSTGRES_USERNAME }}
-          LOCAL_POSTGRES_PASSWORD: ${{ secrets.LOCAL_POSTGRES_PASSWORD }}
+          POSTGRES_USERNAME: ${{ secrets.LOCAL_POSTGRES_USERNAME }}
+          POSTGRES_PASSWORD:: ${{ secrets.LOCAL_POSTGRES_PASSWORD }}
         options: >-
           --health-cmd pg_isready 
           --health-interval 10s 
@@ -50,6 +50,8 @@ jobs:
         PG_HOST: localhost
         LOCAL_POSTGRES_USERNAME: ${{ secrets.LOCAL_POSTGRES_USERNAME }}
         LOCAL_POSTGRES_PASSWORD: ${{ secrets.LOCAL_POSTGRES_PASSWORD }}
+        POSTGRES_USERNAME: ${{ secrets.LOCAL_POSTGRES_USERNAME }}
+        POSTGRES_PASSWORD: ${{ secrets.LOCAL_POSTGRES_PASSWORD }}
         RAILS_ENV: test
         WITH_COVERAGE: true
         DISABLE_SPRING: 1
