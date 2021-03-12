@@ -1,4 +1,6 @@
 class TutoringSessionController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     if cookies.key?('start_week')
       week_offset = 0
@@ -23,6 +25,7 @@ class TutoringSessionController < ApplicationController
     # Get all sessions in the week (Might be not needed due to how rails parses queries)
     @tsessions = TutoringSession
                  .where('scheduled_datetime BETWEEN ? AND ?', start_week, start_week + 1.week)
+                 .where('tutor_id = ?', current_user.id)
 
     # Get the sessions on every day and put them into a hash for frontend
     (0..6).each do |i|
@@ -54,10 +57,9 @@ class TutoringSessionController < ApplicationController
   def create
     # Creates the new session, then adds the tutor to the session
     @tsession = TutoringSession.new(tsession_params)
-    @admin = User.where(first_name: 'Admin') # TODO: Add tutor instead of admin
 
     @tsession.session_status = 'new'
-    @tsession.users << @admin
+    @tsession.tutor_id = current_user.id
 
     if @tsession.save
       redirect_to tutoring_session_index_path, notice: 'Tutoring session created.'
