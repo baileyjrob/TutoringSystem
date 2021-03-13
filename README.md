@@ -23,3 +23,6 @@ ActiveSupport::KeyGenerator.new('password').generate_key(XXX)
 With the XXX in the command replaced by the SECRET_KEY_BASE value, and replace YYY with the output value.
 
 Main Heroku site: https://still-meadow-96529.herokuapp.com/
+
+Testing commit
+
