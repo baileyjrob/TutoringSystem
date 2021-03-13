@@ -8,40 +8,41 @@
         <%end%>
     </select>
 
-    <h2>All tutors</h2>
-<table>
-    <tr>
-        <th>Name</th>
-    </tr>
-   
-    
-</table>
-<ul>
-  <% @matchingTutors.each do |matchingTutor| %>
-  <li>
-    <%= link_to user.first_name, user %>
-  </li>
-  <% end %>
-</ul>
-
-
 <%
 =end %>
 
-<p>
-"testing: tutors "<br>
-<%= @tutors.inspect %>
-</p>
-
-<%=form_tag('index', :method => "get" ) do %>
-    <%submit_tag "Course Department", name: :filter_major %>
-    <%button_tag "Find" %> 
+<%=form_tag('index', :method => "get", :controller => 'tutor' ) do %>
+    <%= label_tag(:filter_major, "Course Department: ") %> 
+    <br>
+        <%= text_field_tag(:filter_major) %>
+    <br>
+        <%= submit_tag("Find") %> 
 <%end%>
 
+<% if @matchingTutors.present? == false %>
+    <p> 
+        <%= @noTutors %>
+        <br>
+        <%= @askRequest %> 
+        <%=form_tag('request_submission', :method => "get", :controller => 'tutor' ) do %>
+            <%= label_tag(:requestedCourse, "Requested Course Department: ") %> 
+            <br>
+                <%= text_field_tag(:requestedCourse) %>
+            <br>
+                <%= submit_tag("Submit") %> 
+        <%end%>
 
-<p>
-"testing: matching tutors "<br>
-<%= @matchingTutors.inspect %>
-</p>
+    </p>
+<% else %>
+    <ul>
+    <% @matchingTutors.each do |user| %>
+        <% if user.major.nil? == false %>
+        <!-- makes sure users with no majors are not displayed -->
+            <li>
+                <%= link_to user.first_name.to_s + ' ' + user.last_name.to_s + ' Major: ' + user.major.to_s, user %>
+            </li>
+            <% end %>
+        <% end %>
+    </ul>    
 
-
+<%end%>

@@ -24,5 +24,3 @@ With the XXX in the command replaced by the SECRET_KEY_BASE value, and replace Y
 
 Main Heroku site: https://still-meadow-96529.herokuapp.com/
 
-Testing commit
-
