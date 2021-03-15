@@ -38,7 +38,7 @@ class TutoringSessionController < ApplicationController
     end
 
     @start_of_week = start_week.to_date.to_formatted_s(:long_ordinal)
-    @end_of_week = (start_week + 6.day).to_date.to_formatted_s(:long_ordinal)
+    @end_of_week = (start_week + 6.days).to_date.to_formatted_s(:long_ordinal)
   end
 
   def new; end

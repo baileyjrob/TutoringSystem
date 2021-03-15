@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
 RSpec.describe TutoringSession, type: :model do
-  let(:frozen_time) { '25 May 2AM'.to_datetime }
-  before { Timecop.freeze(frozen_time) }
-  after { Timecop.return }
   subject do
     described_class.new(scheduled_datetime: DateTime.now)
   end
+
+  let(:frozen_time) { '25 May 2AM'.to_datetime }
+
+  before { Timecop.freeze(frozen_time) }
+
+  after { Timecop.return }
 
   it 'is valid with valid attributes' do
     expect(subject).to be_valid
@@ -14,7 +17,7 @@ RSpec.describe TutoringSession, type: :model do
 
   it 'is not valid without scheduled_datetime' do
     subject.scheduled_datetime = nil
-    expect(subject).to_not be_valid
+    expect(subject).not_to be_valid
   end
 
   it '.duration_datetime should be 1 hour' do
@@ -26,7 +29,7 @@ RSpec.describe TutoringSession, type: :model do
   end
 
   it '.top_offset should be [(2 + 20/60) / 24] * 100 % for a 2:20AM Meeting' do
-    subject.scheduled_datetime = DateTime.now + 20.minute
+    subject.scheduled_datetime = DateTime.now + 20.minutes
     expect(subject.top_offset).to eq("#{((2 + 20 / 60.0) / 24.0) * 100}%")
   end
 end

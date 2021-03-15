@@ -68,7 +68,7 @@ RSpec.describe 'Student scheduler', type: :feature do
       # Delete everything
       sessions = TutoringSession.all
       sessions.each do |session|
-        session.users.destroy_all unless session.users.blank?
+        session.users.destroy_all if session.users.present?
       end
       TutoringSession.delete_all
       User.delete_all

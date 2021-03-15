@@ -2,7 +2,7 @@
 
 # Scheduled Tutoring Sessions
 class TutoringSession < ApplicationRecord
-  validates_presence_of :scheduled_datetime
+  validates :scheduled_datetime, presence: true
   has_and_belongs_to_many :users
   has_and_belongs_to_many :departments
   has_and_belongs_to_many :courses

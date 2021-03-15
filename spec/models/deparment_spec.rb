@@ -8,8 +8,9 @@ RSpec.describe Department, type: :model do
   it 'is valid with a name' do
     expect(subject).to be_valid
   end
+
   it 'is not valid without a name' do
     subject.department_name = nil
-    expect(subject).to_not be_valid
+    expect(subject).not_to be_valid
   end
 end
