@@ -1,11 +1,15 @@
+# frozen_string_literal: true
+
+# Primary management class for users
 class UsersController < ApplicationController
-  #before_action :authenticate_user!
-  def index  
+  # before_action :authenticate_user!
+  def index
     @users = User.all
   end
-  
+
   def show
     @user = User.find(params[:id])
+    @tutoring_sessions = TutoringSession.all
   end
 
   def new
@@ -50,8 +54,28 @@ class UsersController < ApplicationController
     end
   end
 
+  def schedule_student
+    @user = User.find(params[:id])
+    @sessions = TutoringSession.all
+  end
+
+  def schedule_session_student
+    user = User.find(params[:id])
+    tutor_session = TutoringSession.find(params[:sessionID])
+
+    tutor_session.users << user
+
+    redirect_to "/users/#{params[:id]}"
+  end
+
   private
-    def user_params
-        params.require(:user).permit(:first_name, :last_name, :major, :email, :encrypted_password)
-    end
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :major, :email, :encrypted_password)
+  end
 end
+
+# t.string "reset_password_token"
+# t.datetime "reset_password_sent_at"
+# t.datetime "remember_created_at"
+# t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
