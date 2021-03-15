@@ -4,7 +4,7 @@ class TutoringSessionController < ApplicationController
   def index
     if cookies.key?('start_week')
       week_offset = 0
-      start_week = Time.at(cookies['start_week'].to_f / 1000)
+      start_week = Time.at(cookies['start_week'].to_f / 1000).beginning_of_day
 
       if cookies.key?('week_offset')
         week_offset = cookies['week_offset'].to_f * 1.week
@@ -16,8 +16,8 @@ class TutoringSessionController < ApplicationController
 
       start_week += 1.day # Have to offset by a day due to how the time parses out when converted from cookie
     else
-      start_week = Date.today.beginning_of_week(start_day = :sunday)
-      cookies['start_week'] = start_week.to_datetime.strftime('%Q')
+      start_week = Date.today.beginning_of_week(start_day = :sunday).to_datetime
+      cookies['start_week'] = start_week.strftime('%Q')
     end
 
     @week = {}
@@ -26,10 +26,12 @@ class TutoringSessionController < ApplicationController
     @tsessions = TutoringSession
                  .where('scheduled_datetime BETWEEN ? AND ?', start_week, start_week + 1.week)
                  .where('tutor_id = ?', current_user.id)
-
+                 
     # Get the sessions on every day and put them into a hash for frontend
-    (0..6).each do |i|
-      @week[i] = @tsessions
+    increments = (0..6)
+    dates = increments.to_a.map{|increment| start_week + increment.day}
+    increments.each do |i|
+      @week[dates[i]] = @tsessions
                  .where('scheduled_datetime BETWEEN ? AND ?', start_week + i.day, start_week + (i + 1).day)
                  .order('scheduled_datetime asc')
     end
@@ -56,13 +58,20 @@ class TutoringSessionController < ApplicationController
 
   def create
     # Creates the new session, then adds the tutor to the session
+    repeat = params[:repeat]
     @tsession = TutoringSession.new(tsession_params)
 
     @tsession.session_status = 'new'
     @tsession.tutor_id = current_user.id
 
+
     if @tsession.save
+      if repeat
+        @tsession.generate_repeating_sessions_until_end_of_semester
+      end
+      
       redirect_to tutoring_session_index_path, notice: 'Tutoring session created.'
+
     else
       render 'new'
     end
@@ -74,8 +83,14 @@ class TutoringSessionController < ApplicationController
 
   def destroy
     @tsession = TutoringSession.find(params[:id])
+    
+    if params[:delete_repeating]
+      @tsession.delete_repeating_sessions
+    end
+
     @tsession.users.delete_all
     @tsession.delete # Destroy tries to delete all objects attatched to the session as well. Not good
+
 
     redirect_to tutoring_session_index_path, notice: 'Tutoring session deleted.'
   end

@@ -65,6 +65,10 @@ ActiveRecord::Schema.define(version: 2021_02_23_221214) do
     t.datetime "scheduled_datetime"
     t.datetime "completed_datetime"
     t.string "session_status"
+<<<<<<< Updated upstream
+=======
+    t.datetime "session_date"
+>>>>>>> Stashed changes
     t.bigint "tutor_id"
     t.string "semester"
   end

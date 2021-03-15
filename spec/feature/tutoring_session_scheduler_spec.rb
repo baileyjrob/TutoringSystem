@@ -1,19 +1,26 @@
 require 'rails_helper'
 RSpec.describe TutoringSessionController, type: :feature do
   let(:frozen_time) { '25 May 02:00:00 +0000'.to_datetime }
-  before { 
-    Timecop.freeze(frozen_time) 
-    User.create(first_name: 'Admin', last_name: 'User', password: 'T3st!!a', email: 'admin@tamu.edu') 
-  }
-  
   after { Timecop.return }
 
-  let(:tutor) { User.new(first_name: 'Tutor', last_name: 'User', password: 'T3st!!a', email: 'tutor@tamu.edu') }
+  let(:tutor) { User.where(first_name: 'Tutor', last_name: 'User').first }
   let(:scheduled_datetime) { '26 May 2021 08:00:00 +0000'.to_datetime }
   let(:beginning_of_week) { Date.today.beginning_of_week(start_day = :sunday) }
-  
-  describe 'GET index' do 
-    it 'should show schedule at beginning of week (sunday)' do 
+
+  before do
+    Timecop.freeze(frozen_time)
+    User.create(first_name: 'Admin', last_name: 'User', password: 'T3st!!a', email: 'admin@tamu.edu')
+    User.create(first_name: 'Tutor', last_name: 'User', password: 'T3st!!a', email: 'tutor@tamu.edu')
+
+    visit('/users/sign_in/')
+    fill_in 'user_email', with: 'tutor@tamu.edu'
+    fill_in 'user_password', with: 'T3st!!a'
+
+    find(:link_or_button, 'Log in').click
+  end
+
+  describe 'GET index' do
+    it 'should show schedule at beginning of week (sunday)' do
       visit('/tutoring_session')
       expect(page).to have_content('May 23rd, 2021')
     end 
@@ -59,10 +66,10 @@ RSpec.describe TutoringSessionController, type: :feature do
       expect(page).to have_selector(:link_or_button, 'Add Session')
       find(:link_or_button, 'Add Session').click
       expect(page).to have_content('Create Tutoring Session')
-    end  
-    
-    it 'should be able to see sessions' do 
-      tsession = TutoringSession.create(:scheduled_datetime => scheduled_datetime)
+    end
+
+    it 'should be able to see sessions' do
+      tsession = TutoringSession.create(scheduled_datetime: scheduled_datetime, tutor_id: tutor.id)
       tsession.users << tutor
 
       visit('/tutoring_session')
@@ -96,7 +103,7 @@ RSpec.describe TutoringSessionController, type: :feature do
   end
   describe 'SHOW' do
     it 'should be able to view session details' do 
-      tsession = TutoringSession.create(:scheduled_datetime => scheduled_datetime)
+      tsession = TutoringSession.create(:scheduled_datetime => scheduled_datetime, tutor_id: tutor.id)
       tsession.users << tutor
 
       visit('/tutoring_session/' + tsession.id.to_s)
@@ -105,7 +112,7 @@ RSpec.describe TutoringSessionController, type: :feature do
     end
 
     it 'should be able to delete session', :js => true do 
-      tsession = TutoringSession.create(:scheduled_datetime => scheduled_datetime)
+      tsession = TutoringSession.create(:scheduled_datetime => scheduled_datetime, tutor_id: tutor.id)
       tsession.users << tutor
       
       expect(TutoringSession.all.count).to eq(1)
@@ -119,7 +126,7 @@ RSpec.describe TutoringSessionController, type: :feature do
 
   describe 'UPDATE' do
     it 'should be able to edit session details' do 
-      tsession = TutoringSession.create(:scheduled_datetime => scheduled_datetime)
+      tsession = TutoringSession.create(:scheduled_datetime => scheduled_datetime, tutor_id: tutor.id)
       tsession.users << tutor
 
       visit('/tutoring_session/' + tsession.id.to_s)
@@ -135,7 +142,7 @@ RSpec.describe TutoringSessionController, type: :feature do
     end
 
     it 'should error on missing scheduled_datetime edit session details' do 
-      tsession = TutoringSession.create(:scheduled_datetime => scheduled_datetime)
+      tsession = TutoringSession.create(:scheduled_datetime => scheduled_datetime, tutor_id: tutor.id)
       tsession.users << tutor
 
       visit('/tutoring_session/' + tsession.id.to_s)
