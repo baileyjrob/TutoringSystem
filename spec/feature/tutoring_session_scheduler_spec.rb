@@ -26,7 +26,8 @@ RSpec.describe TutoringSessionController, type: :feature do
     it 'sets start_week cookie' do
       expect(get_me_the_cookie('start_week')).to eq(nil)
       visit('/tutoring_session')
-      expect(get_me_the_cookie('start_week')[:value]).to eq(beginning_of_week.to_datetime.strftime('%Q'))
+      expect(get_me_the_cookie('start_week')[:value])
+        .to eq(beginning_of_week.to_datetime.strftime('%Q'))
     end
 
     it 'increments week on increment cookie' do

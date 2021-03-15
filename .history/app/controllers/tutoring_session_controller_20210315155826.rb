@@ -33,8 +33,8 @@ class TutoringSessionController < ApplicationController
     # Get the sessions on every day and put them into a hash for frontend
     (0..6).each do |i|
       @week[i] = @tsessions
-                 .where('scheduled_datetime BETWEEN ? AND ?',
-                        start_week + i.day, start_week + (i + 1).day)
+                 .where('scheduled_datetime BETWEEN ? AND ?', 
+                 start_week + i.day, start_week + (i + 1).day)
                  .order('scheduled_datetime asc')
     end
 

@@ -8,7 +8,6 @@ class TutoringSessionController < ApplicationController
     if cookies.key?('start_week')
       week_offset = 0
       start_week = Time.at(cookies['start_week'].to_f / 1000)
-
       if cookies.key?('week_offset')
         week_offset = cookies['week_offset'].to_f * 1.week
         cookies.delete 'week_offset'
