@@ -40,7 +40,9 @@ class TutoringSessionController < ApplicationController
     @end_of_week = (start_week + 6.day).to_date.to_formatted_s(:long_ordinal)
   end
 
-  def new; end
+  def new
+    @tsession = TutoringSession.new
+   end
 
   def edit
     @tsession = TutoringSession.find(params[:id])
@@ -64,9 +66,8 @@ class TutoringSessionController < ApplicationController
     @tsession.session_status = 'new'
     @tsession.tutor_id = current_user.id
 
-
     if @tsession.save
-      if repeat
+      if repeat['session'].to_i  == 1
         @tsession.generate_repeating_sessions_until_end_of_semester
       end
       

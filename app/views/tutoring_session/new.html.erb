@@ -2,7 +2,14 @@
   <div class="row">
     <div class="col-12">
       <h1 class="mb-4 mt-3">Create Tutoring Session</h1>
-      <%= form_for :tutoring_session, url: tutoring_session_index_path do |f| %>
+      <%= form_with(model: @tsession, url: tutoring_session_index_path) do |f| %>
+        <% if @tsession.errors.full_messages.any? %>
+        <div class="mb-5">
+          <% @tsession.errors.full_messages.each do |error_message| %>
+            <p class="text-danger"><%= error_message %></p>
+          <% end %>
+        </div>
+        <% end %>
         <div class="mb-3">
           <%= f.label :scheduled_datetime %><br>
           <%= f.datetime_field  :scheduled_datetime, class: "form-control", required: true %>

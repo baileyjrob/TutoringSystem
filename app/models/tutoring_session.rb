@@ -1,5 +1,7 @@
 class TutoringSession < ApplicationRecord
   validates_presence_of :scheduled_datetime
+  validate :scheduled_datetime_has_no_overlap
+
   has_and_belongs_to_many :users
   has_and_belongs_to_many :departments
   has_and_belongs_to_many :courses
@@ -54,6 +56,22 @@ class TutoringSession < ApplicationRecord
     rtsessions.each do |rtsession|
       rtsession.users.delete_all
       rtsession.delete
+    end
+  end
+
+
+  private
+  
+  def scheduled_datetime_has_no_overlap
+    if scheduled_datetime == nil
+      return
+    end
+    
+    overlap = TutoringSession
+                .where('scheduled_datetime BETWEEN ? AND ?', scheduled_datetime, duration_datetime)
+                .where('tutor_id = ?', tutor_id)
+    if overlap.exists?
+      errors.add(:scheduled_datetime, "overlaps with one of yours that is currently scheduled")
     end
   end
 end

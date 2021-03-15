@@ -83,11 +83,27 @@ RSpec.describe TutoringSessionController, type: :feature do
 
       visit('/tutoring_session/new')
       fill_in 'tutoring_session_scheduled_datetime', with: scheduled_datetime
-      find(:link_or_button, 'Save Tutoring session').click
+      uncheck 'repeat_session'
+      find(:link_or_button, 'Create Tutoring session').click
 
       expect(page).to_not have_content('Create Tutoring Session')
       expect(TutoringSession.all.count).to eq(1)
       expect(TutoringSession.first.scheduled_datetime).to eq(scheduled_datetime)
+    end  
+
+    it 'should create multiple sessions on form submission with repeat selected' do 
+      expect(TutoringSession.all.count).to eq(0)
+
+      visit('/tutoring_session/new')
+      fill_in 'tutoring_session_scheduled_datetime', with: scheduled_datetime
+      check 'repeat_session'
+      find(:link_or_button, 'Create Tutoring session').click
+
+      expect(page).to_not have_content('Create Tutoring Session')
+      first_session = TutoringSession.where(scheduled_datetime: scheduled_datetime).first
+      # Calculate how many weeks are between the scheduled date and end of semester, then add 1 for the original week
+      session_count = ((first_session.end_of_semester_datetime.to_time - first_session.scheduled_datetime.to_time) / 1.week).to_i + 1
+      expect(TutoringSession.all.count).to eq(session_count)
     end  
 
     it 'should error on no scheduled date time submission' do 
@@ -95,10 +111,28 @@ RSpec.describe TutoringSessionController, type: :feature do
 
       visit('/tutoring_session/new')
       fill_in 'tutoring_session_scheduled_datetime', with: 
-      find(:link_or_button, 'Save Tutoring session').click
+      find(:link_or_button, 'Create Tutoring session').click
 
       expect(page).to have_content('Create Tutoring Session')
       expect(TutoringSession.all.count).to eq(0)
+    end  
+    
+    it 'should error on session overlap' do 
+      expect(TutoringSession.all.count).to eq(0)
+
+      visit('/tutoring_session/new')
+      fill_in 'tutoring_session_scheduled_datetime', with: scheduled_datetime
+      find(:link_or_button, 'Create Tutoring session').click
+      
+      expect(TutoringSession.all.count).to eq(1)
+      
+      visit('/tutoring_session/new')
+      fill_in 'tutoring_session_scheduled_datetime', with: scheduled_datetime
+      find(:link_or_button, 'Create Tutoring session').click
+
+      expect(page).to have_content('Create Tutoring Session')
+      expect(page).to have_content('overlaps with one of yours that is currently scheduled')
+      
     end  
   end
   describe 'SHOW' do
@@ -119,6 +153,20 @@ RSpec.describe TutoringSessionController, type: :feature do
       visit('/tutoring_session/' + tsession.id.to_s)
       accept_confirm do
         find(:link_or_button, 'delete').click
+      end
+      expect(TutoringSession.all.count).to eq(0)
+    end
+    
+    it 'should be able to delete session and any repeating sessions at the same time', :js => true do 
+      tsession = TutoringSession.create(:scheduled_datetime => scheduled_datetime, tutor_id: tutor.id)
+      tsession.users << tutor
+      tsession2 = TutoringSession.create(:scheduled_datetime => scheduled_datetime + 1.week, tutor_id: tutor.id)
+      tsession2.users << tutor
+      
+      expect(TutoringSession.all.count).to eq(2)
+      visit('/tutoring_session/' + tsession.id.to_s)
+      accept_confirm do
+        find(:link_or_button, 'delete self and following repeats').click
       end
       expect(TutoringSession.all.count).to eq(0)
     end
