@@ -11,15 +11,21 @@
           null,
           1,
           null,
+          null,
           1,
+          1,
+          null,
+          1,
+          1,
+          null,
           1,
           1,
           null,
           1,
           1,
           1,
-          0,
-          0,
+          3,
+          3,
           0,
           null,
           null,
@@ -82,74 +88,105 @@
           null
         ]
       },
-      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/course.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null
-        ]
-      },
-      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/department.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null
-        ]
-      },
-      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/role.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null
-        ]
-      },
-      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/spartan_session.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null
-        ]
-      },
       "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/tutoring_session.rb": {
         "lines": [
           null,
           null,
           null,
           1,
+          null,
           1,
           1,
+          null,
           1,
           1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null
+        ]
+      },
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/controllers/student_controller.rb": {
+        "lines": [
+          null,
+          null,
           null,
           null,
           1,
           1,
           null,
+          3,
           null,
           null,
           1,
+          null,
+          2,
           2,
           null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          null
+        ]
+      },
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/controllers/application_controller.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/tutoring_session_user.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
           null
         ]
       },
@@ -166,70 +203,6 @@
       "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/channels/application_cable/connection.rb": {
         "lines": [
           0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/controllers/application_controller.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          0,
-          null,
-          0,
-          null,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/controllers/student_controller.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
           0,
           0,
           0
@@ -457,8 +430,144 @@
         ],
         "branches": {
         }
+      },
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/course.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/course_tutoring_session.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/course_user.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/department.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/department_tutoring_session.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/role.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/role_user.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/spartan_session.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/spartan_session_user.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
       }
     },
-    "timestamp": 1615863603
+    "timestamp": 1615867106
   }
 }

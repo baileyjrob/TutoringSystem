@@ -4,7 +4,7 @@
 class TutoringSession < ApplicationRecord
   #has_and_belongs_to_many :courses
   has_many :course_tutoring_sessions
-  has_many :courses, through: :course_tutoring_sessions
+  has_many :users, through: :course_tutoring_sessions
   #has_and_belongs_to_many :departments
   has_many :department_tutoring_sessions
   has_many :departments, through: :department_tutoring_sessions
