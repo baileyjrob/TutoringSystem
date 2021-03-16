@@ -53,26 +53,26 @@ RSpec.describe UsersController, type: :controller do
     context 'when user is signed in' do
       let!(:tutor) do
         User.new(first_name: 'Tutor', last_name: 'User', password: 'T3st!!a',
-                 email: 'tutor@tamu.edu')
+                          email: 'tutor@tamu.edu')
       end
       let(:tutoring_session1) do
         TutoringSession.new(tutor_id: tutor.id,
-                            scheduled_datetime: '25 May 02:00:00 +0000'.to_datetime)
+                                                 scheduled_datetime: '25 May 02:00:00 +0000'.to_datetime)
       end
       let(:tutoring_session2) do
         TutoringSession.new(tutor_id: tutor.id,
-                            scheduled_datetime: '26 May 02:00:00 +0000'.to_datetime)
+                                                 scheduled_datetime: '26 May 02:00:00 +0000'.to_datetime)
       end
       let(:tutoring_session3) do
         TutoringSession.new(tutor_id: tutor.id,
-                            scheduled_datetime: '26 May 02:00:00 +0000'.to_datetime)
+                                                 scheduled_datetime: '26 May 02:00:00 +0000'.to_datetime)
       end
       let!(:user) do
         User.new(first_name: 'Student', last_name: 'User', password: 'T3st!!a',
-                 email: 'student@tamu.edu')
+                         email: 'student@tamu.edu')
       end
 
-      # Tried to figure out a way to do this via stubbing database access, but can't. Revise.
+      # I've tried to figure out a way to do this via stubbing database access, but I just can't. Feel free to revise.
       before do
         tutor.save
         user.save

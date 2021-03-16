@@ -69,12 +69,16 @@ class UsersController < ApplicationController
   end
 
   def delete_session
-    @user = User.find(current_user.id)
-    @tutor_session = TutoringSession.find(params[:id])
+    user = current_user
+    tutor_session = TutoringSession.find(params[:sessionID])
+    if user == nil || tutor_session == nil
+      puts "User or Tutor Session is nil"
+      return
+    end
 
-    @user.tutoring_sessions.delete(@tutor_session)
+    user.tutoring_sessions.delete(tutor_session)
 
-    # redirect_to :back
+    redirect_to :back
   end
 
   private

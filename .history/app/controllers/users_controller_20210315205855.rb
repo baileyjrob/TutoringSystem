@@ -71,10 +71,10 @@ class UsersController < ApplicationController
   def delete_session
     @user = User.find(current_user.id)
     @tutor_session = TutoringSession.find(params[:id])
+    
+    user.tutoring_sessions.delete(tutor_session)
 
-    @user.tutoring_sessions.delete(@tutor_session)
-
-    # redirect_to :back
+    #redirect_to :back
   end
 
   private

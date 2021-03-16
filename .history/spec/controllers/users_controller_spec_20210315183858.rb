@@ -51,52 +51,32 @@ RSpec.describe UsersController, type: :controller do
 
   describe 'POST delete_schedule' do
     context 'when user is signed in' do
-      let!(:tutor) do
-        User.new(first_name: 'Tutor', last_name: 'User', password: 'T3st!!a',
-                 email: 'tutor@tamu.edu')
-      end
       let(:tutoring_session1) do
-        TutoringSession.new(tutor_id: tutor.id,
-                            scheduled_datetime: '25 May 02:00:00 +0000'.to_datetime)
+        TutoringSession.new(id: 1, tutor_id: 1, scheduled_datetime: '25 May 02:00:00 +0000'.to_datetime)
       end
       let(:tutoring_session2) do
-        TutoringSession.new(tutor_id: tutor.id,
-                            scheduled_datetime: '26 May 02:00:00 +0000'.to_datetime)
+        TutoringSession.new(id: 2, tutor_id: 1, scheduled_datetime: '26 May 02:00:00 +0000'.to_datetime)
       end
       let(:tutoring_session3) do
-        TutoringSession.new(tutor_id: tutor.id,
-                            scheduled_datetime: '26 May 02:00:00 +0000'.to_datetime)
+        TutoringSession.new(id: 3, tutor_id: 1, scheduled_datetime: '26 May 02:00:00 +0000'.to_datetime)
       end
-      let!(:user) do
-        User.new(first_name: 'Student', last_name: 'User', password: 'T3st!!a',
-                 email: 'student@tamu.edu')
-      end
+      let(:user) { User.create }
 
-      # Tried to figure out a way to do this via stubbing database access, but can't. Revise.
       before do
-        tutor.save
-        user.save
-        tutoring_session1.save
-        tutoring_session2.save
-        tutoring_session3.save
-        user.tutoring_sessions << [tutoring_session1, tutoring_session2, tutoring_session3]
+        allow(user).to receive(:tutoring_sessions).and_call_original
+        allow(TutoringSession).to receive(:find).with(1) {tutoring_session1}
+        allow(TutoringSession).to receive(:find).with(2) {tutoring_session2}
+        allow(TutoringSession).to receive(:find).with(3) {tutoring_session3}
         sign_in user
+        user.tutoring_sessions << [tutoring_session1, tutoring_session2, tutoring_session3]
       end
-
-      after do
-        user.tutoring_sessions.destroy_all
-        user.destroy
-        tutoring_session1.destroy
-        tutoring_session2.destroy
-        tutoring_session3.destroy
-        tutor.destroy
-      end
-
-      it 'deletes' do
-        post :delete_session, params: { id: tutoring_session2.id }
-        expect(controller.view_assigns['user']).to eq(user)
+      it 'assigns tutor_session' do
+        delete_session_path(tutoring_session2)
         expect(controller.view_assigns['tutor_session']).to eq(tutoring_session2)
-        expect(user.tutoring_sessions.reload).to eq([tutoring_session1, tutoring_session3])
+      end
+      it 'deletes' do
+        delete_session_path(tutoring_session2)
+        expect(user.tutoring_sessions).to eq([tutoring_session1, tutoring_session3])
       end
     end
   end

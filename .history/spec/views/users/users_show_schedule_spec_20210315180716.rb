@@ -41,7 +41,7 @@ RSpec.describe 'users/show_schedule.html.erb', type: :view do
     end
   end
 
-  it 'has a button for users to opt-out of sessions' do
+  it 'has the option for users to opt-out of sessions' do
     render
     expect(rendered).to have_content('Leave Session')
   end

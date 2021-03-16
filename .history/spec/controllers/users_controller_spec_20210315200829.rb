@@ -52,27 +52,22 @@ RSpec.describe UsersController, type: :controller do
   describe 'POST delete_schedule' do
     context 'when user is signed in' do
       let!(:tutor) do
-        User.new(first_name: 'Tutor', last_name: 'User', password: 'T3st!!a',
-                 email: 'tutor@tamu.edu')
+        User.new(first_name: 'Tutor', last_name: 'User', password: 'T3st!!a', email: 'tutor@tamu.edu')
       end
       let(:tutoring_session1) do
-        TutoringSession.new(tutor_id: tutor.id,
-                            scheduled_datetime: '25 May 02:00:00 +0000'.to_datetime)
+        TutoringSession.new(tutor_id: tutor.id, scheduled_datetime: '25 May 02:00:00 +0000'.to_datetime)
       end
       let(:tutoring_session2) do
-        TutoringSession.new(tutor_id: tutor.id,
-                            scheduled_datetime: '26 May 02:00:00 +0000'.to_datetime)
+        TutoringSession.new(tutor_id: tutor.id, scheduled_datetime: '26 May 02:00:00 +0000'.to_datetime)
       end
       let(:tutoring_session3) do
-        TutoringSession.new(tutor_id: tutor.id,
-                            scheduled_datetime: '26 May 02:00:00 +0000'.to_datetime)
+        TutoringSession.new(tutor_id: tutor.id, scheduled_datetime: '26 May 02:00:00 +0000'.to_datetime)
       end
-      let!(:user) do
-        User.new(first_name: 'Student', last_name: 'User', password: 'T3st!!a',
-                 email: 'student@tamu.edu')
+      let(:user) do
+        User.new(first_name: 'Student', last_name: 'User', password: 'T3st!!a', email: 'student@tamu.edu')
       end
 
-      # Tried to figure out a way to do this via stubbing database access, but can't. Revise.
+      #I've tried to figure out a way to do this via stubbing database access, but I just can't. Feel free to revise.
       before do
         tutor.save
         user.save
@@ -82,7 +77,6 @@ RSpec.describe UsersController, type: :controller do
         user.tutoring_sessions << [tutoring_session1, tutoring_session2, tutoring_session3]
         sign_in user
       end
-
       after do
         user.tutoring_sessions.destroy_all
         user.destroy
@@ -91,11 +85,9 @@ RSpec.describe UsersController, type: :controller do
         tutoring_session3.destroy
         tutor.destroy
       end
-
       it 'deletes' do
-        post :delete_session, params: { id: tutoring_session2.id }
-        expect(controller.view_assigns['user']).to eq(user)
-        expect(controller.view_assigns['tutor_session']).to eq(tutoring_session2)
+        delete_session_path(tutoring_session2)
+        user = User.find(user.id)
         expect(user.tutoring_sessions.reload).to eq([tutoring_session1, tutoring_session3])
       end
     end

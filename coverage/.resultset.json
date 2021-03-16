@@ -18,8 +18,8 @@
           1,
           1,
           1,
-          0,
-          0,
+          3,
+          3,
           0,
           null,
           null,
@@ -133,10 +133,10 @@
           null,
           null,
           1,
-          0,
-          0,
+          2,
+          1,
           null,
-          0,
+          1,
           null,
           null,
           null,
@@ -152,6 +152,15 @@
           0,
           null,
           0,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
           null,
           null,
           1,
@@ -217,6 +226,43 @@
           1,
           0,
           null,
+          null
+        ]
+      },
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/role.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/course.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/department.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
           null
         ]
       },
@@ -397,49 +443,6 @@
         "branches": {
         }
       },
-      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/course.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/department.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/role.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
       "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/spartan_session.rb": {
         "lines": [
           null,
@@ -454,6 +457,6 @@
         }
       }
     },
-    "timestamp": 1615845446
+    "timestamp": 1615860395
   }
 }

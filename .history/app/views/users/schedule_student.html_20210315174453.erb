@@ -23,7 +23,7 @@
         TODO: Pass user that was passed in to button instead of hard coded value
             ex: {:action => 'schedule', :id => session.id, :user => params[:user]}
       -->
-    <td><%= button_to "Join session", {:action => 'schedule_session_student', :sessionID => session}, :method => :post %></td>
+    <td><%= button_to "Join session", {:action => 'delete_session', :sessionID => session}, :method => :post %></td>
   </tr>
   <% end %>
 </table>
