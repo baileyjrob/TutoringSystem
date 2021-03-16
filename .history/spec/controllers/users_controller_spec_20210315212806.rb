@@ -52,13 +52,16 @@ RSpec.describe UsersController, type: :controller do
   describe 'POST delete_schedule' do
     context 'when user is signed in' do
       let(:tutoring_session1) do
-        TutoringSession.new(scheduled_datetime: '25 May 02:00:00 +0000'.to_datetime)
+        TutoringSession.new(tutor_id: tutor.id,
+                            scheduled_datetime: '25 May 02:00:00 +0000'.to_datetime)
       end
       let(:tutoring_session2) do
-        TutoringSession.new(scheduled_datetime: '26 May 02:00:00 +0000'.to_datetime)
+        TutoringSession.new(tutor_id: tutor.id,
+                            scheduled_datetime: '26 May 02:00:00 +0000'.to_datetime)
       end
       let(:tutoring_session3) do
-        TutoringSession.new(scheduled_datetime: '26 May 02:00:00 +0000'.to_datetime)
+        TutoringSession.new(tutor_id: tutor.id,
+                            scheduled_datetime: '26 May 02:00:00 +0000'.to_datetime)
       end
       let!(:user) do
         User.new(first_name: 'Student', last_name: 'User', password: 'T3st!!a',
