@@ -51,12 +51,20 @@ RSpec.describe UsersController, type: :controller do
 
   describe 'POST delete_schedule' do
     context 'when user is signed in' do
-      let(:tutoring_session1) { TutoringSession.create }
-      let(:tutoring_session2) { TutoringSession.create }
-      let(:tutoring_session3) { TutoringSession.create }
-      let!(:user) { User.create }
+      let(:tutoring_session1) do
+        TutoringSession.create
+      end
+      let(:tutoring_session2) do
+        TutoringSession.create
+      end
+      let(:tutoring_session3) do
+        TutoringSession.create
+      end
+      let!(:user) do
+        User.create
+      end
 
-      # Prepares to find the tutoring session's id and the user's id, as well as "table" entry
+      # Tried to figure out a way to do this via stubbing database access, but can't. Revise.
       before do
         user.tutoring_sessions << [tutoring_session1, tutoring_session2, tutoring_session3]
         allow(tutoring_session2).to receive(:id).and_return(2)
