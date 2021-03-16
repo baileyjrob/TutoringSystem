@@ -4,5 +4,5 @@
 class SpartanSessionUser < ApplicationRecord
   belongs_to :user
   belongs_to :spartan_session
-  validates_presence_of :user_id, :spartan_session_id
+  validates :user_id, :spartan_session_id, presence: true
 end

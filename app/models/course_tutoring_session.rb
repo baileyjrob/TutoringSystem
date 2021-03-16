@@ -4,5 +4,5 @@
 class CourseTutoringSession < ApplicationRecord
   belongs_to :course
   belongs_to :tutoring_session
-  validates_presence_of :course_id, :tutoring_session_id
+  validates :course_id, :tutoring_session_id, presence: true
 end

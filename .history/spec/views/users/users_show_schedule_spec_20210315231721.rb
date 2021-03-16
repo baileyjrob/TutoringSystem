@@ -32,7 +32,6 @@ RSpec.describe 'users/show_schedule.html.erb', type: :view do
       expect(rendered).to have_content('Tutor User')
     end
   end
-
   it 'displays tutor\'s scheduled time' do
     render
     within 'table' do

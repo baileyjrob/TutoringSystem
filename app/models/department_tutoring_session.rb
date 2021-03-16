@@ -4,5 +4,5 @@
 class DepartmentTutoringSession < ApplicationRecord
   belongs_to :department
   belongs_to :tutoring_session
-  validates_presence_of :department_id, :tutoring_session_id
+  validates :department_id, :tutoring_session_id, presence: true
 end
