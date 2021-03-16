@@ -75,16 +75,15 @@ RSpec.describe UsersController, type: :controller do
       # Tried to figure out a way to do this via stubbing database access, but can't. Revise.
       before do
         user.tutoring_sessions << [tutoring_session1, tutoring_session2, tutoring_session3]
-        allow(tutoring_session2).to receive(:id).and_return(2)
-        allow(user).to receive(:id).and_return(0)
-        allow(User).to receive(:find).with(0) { user }
-        allow(TutoringSession).to receive(:find).with('2') { tutoring_session2 }
         sign_in user
       end
-
       it 'deletes' do
+        expect(tutoring_session2).to receive(:id) {2}
+        expect(user).to receive(:id) {0}
+        expect(User).to receive(:find).with(0) {user}
+        expect(TutoringSession).to receive(:find).with("2") {tutoring_session2}
         post :delete_session, params: { id: tutoring_session2.id }
-        expect(user.tutoring_sessions).to eq([tutoring_session1, tutoring_session3])
+        expect(user.tutoring_sessions.reload).to eq([tutoring_session1, tutoring_session3])
       end
     end
   end
