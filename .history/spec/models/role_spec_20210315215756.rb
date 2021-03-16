@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Role, type: :model do
-  subject(:role) { described_class.new(role_name: 'Admin') }
+  subject(:role) {described_class.new(role_name: 'Admin')}
 
   it 'is valid with a name' do
     expect(role).to be_valid

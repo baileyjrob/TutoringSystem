@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe SpartanSession, type: :model do
-  subject(:spartan_session) { described_class.new(session_datetime: DateTime.now) }
+  subject(:spartan_session) {described_class.new(session_datetime: DateTime.now)}
 
   let(:frozen_time) { '25 May 2AM'.to_datetime }
 

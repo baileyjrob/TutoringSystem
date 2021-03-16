@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe TutoringSession, type: :model do
-  subject(:tutoring_session) { described_class.new(scheduled_datetime: DateTime.now) }
+  subject(:tutoring_session) {described_class.new(scheduled_datetime: DateTime.now)}
 
   let(:frozen_time) { '25 May 2AM'.to_datetime }
 
