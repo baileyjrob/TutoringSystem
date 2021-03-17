@@ -6,5 +6,7 @@
 <p>Major: <%= @user.major %></p>
 
 <br>
+<% if @user.roles.find_by(role_name: 'Student') %>
 <p>Join a tutoring session:</p>
 <%= button_to "Schedule tutoring session", {:action => 'schedule_student'}, :method => :get %>
+<% end %>
