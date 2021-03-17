@@ -2,21 +2,13 @@
 
 # Scheduled Tutoring Sessions
 class TutoringSession < ApplicationRecord
-  # has_and_belongs_to_many :courses
-  has_many :course_tutoring_sessions, dependent: :delete_all
-  has_many :courses, through: :course_tutoring_sessions
-  # has_and_belongs_to_many :departments
-  has_many :department_tutoring_sessions, dependent: :delete_all
-  has_many :departments, through: :department_tutoring_sessions
-  # has_and_belongs_to_many :users
-  has_many :tutoring_session_users, dependent: :delete_all
-  has_many :users, through: :tutoring_session_users
-
-  validates :scheduled_datetime, presence: true
-
   validates_presence_of :scheduled_datetime
   validate :scheduled_datetime_has_no_overlap
-  
+
+  has_and_belongs_to_many :users
+  has_and_belongs_to_many :departments
+  has_and_belongs_to_many :courses
+
   # Duration of all sessions set to 1 hour
   def duration_datetime
     scheduled_datetime + 1.hour

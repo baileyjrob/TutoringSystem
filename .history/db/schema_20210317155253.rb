@@ -60,19 +60,37 @@ ActiveRecord::Schema.define(version: 2021_03_16_031810) do
     t.datetime "session_datetime"
     t.string "semester"
   end
-  
+
+<<<<<<< HEAD
   create_table "tutoring_session_users", id: false, force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "tutoring_session_id", null: false
     t.string "link_status"
     t.text "student_notes"
+=======
+<<<<<<< HEAD
+  create_table "tutoring_sessions", force: :cascade do |t|
+    t.datetime "scheduled_datetime"
+    t.datetime "completed_datetime"
+    t.string "session_status"
+    t.datetime "session_date"
+    t.bigint "tutor_id"
+    t.string "semester"
+=======
+  create_table 'tutoring_sessions', force: :cascade do |t|
+    t.datetime 'scheduled_datetime'
+    t.datetime 'completed_datetime'
+    t.string 'session_status'
+    t.bigint 'tutor_id'
+    t.string 'semester'
+>>>>>>> dev
+>>>>>>> aa2bf4a2fe8f839b0862879d13e5aae851ee4f53
   end
 
   create_table "tutoring_sessions", force: :cascade do |t|
     t.datetime "scheduled_datetime"
     t.datetime "completed_datetime"
     t.string "session_status"
-    t.datetime "session_date"
     t.bigint "tutor_id"
     t.string "semester"
   end

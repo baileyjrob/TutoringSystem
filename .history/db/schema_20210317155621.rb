@@ -66,7 +66,6 @@ ActiveRecord::Schema.define(version: 2021_03_16_031810) do
     t.bigint "tutoring_session_id", null: false
     t.string "link_status"
     t.text "student_notes"
-  end
 
   create_table "tutoring_sessions", force: :cascade do |t|
     t.datetime "scheduled_datetime"
