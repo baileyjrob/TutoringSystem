@@ -21,6 +21,10 @@
       <p class="mt-5"><%= link_to 'edit', edit_tutoring_session_path(@tsession) %> | 
             <%= link_to 'delete', tutoring_session_path(@tsession),
               method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+              | 
+            <%= link_to 'delete self and following repeats', tutoring_session_path(@tsession, :delete_repeating => true),
+              method: :delete,
               data: { confirm: 'Are you sure?' } %></p>
     </div>
   </div>  
