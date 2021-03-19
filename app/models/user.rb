@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Record of Users registered to the system
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -12,14 +15,13 @@ class User < ApplicationRecord
 
   validate :email_domain
   def email_domain
-    if email == nil
-      errors.add(:email, "Email missing.")
-    else
-      domain = email.split("@").last
-      unless email.blank?
-        errors.add(:email, "Invalid Domain. Please use your TAMU or Spartan email") if domain != "tamu.edu" and domain != "spartan-tutoring.com"
-        #errors.add(:email, "indicates wrong role selected. Please select \'Spartan Tutor\'") if domain == "spartan-tutoring.com"
-      end
+  if email == nil
+    errors.add(:email, "Email missing.")
+  else
+    domain = email.split("@").last
+    if email.present? && ((domain != 'tamu.edu') && (domain != 'spartan-tutoring.com'))
+      errors.add(:email,
+                 'Invalid Domain. Please use your TAMU or Spartan email')
     end
   end
 end
