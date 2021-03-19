@@ -62,12 +62,22 @@ ActiveRecord::Schema.define(version: 20_210_223_221_214) do
     t.datetime 'second_checkin'
   end
 
+<<<<<<< HEAD
+  create_table "tutoring_sessions", force: :cascade do |t|
+    t.datetime "scheduled_datetime"
+    t.datetime "completed_datetime"
+    t.string "session_status"
+    t.datetime "session_date"
+    t.bigint "tutor_id"
+    t.string "semester"
+=======
   create_table 'tutoring_sessions', force: :cascade do |t|
     t.datetime 'scheduled_datetime'
     t.datetime 'completed_datetime'
     t.string 'session_status'
     t.bigint 'tutor_id'
     t.string 'semester'
+>>>>>>> dev
   end
 
   create_table 'tutoring_sessions_users', id: false, force: :cascade do |t|
