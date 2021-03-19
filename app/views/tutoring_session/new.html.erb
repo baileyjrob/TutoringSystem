@@ -2,20 +2,27 @@
   <div class="row">
     <div class="col-12">
       <h1 class="mb-4 mt-3">Create Tutoring Session</h1>
-      <%= form_for :tutoring_session, url: tutoring_session_index_path do |f| %>
+      <%= form_with(model: @tsession, url: tutoring_session_index_path) do |f| %>
+        <% if @tsession.errors.full_messages.any? %>
+        <div class="mb-5">
+          <% @tsession.errors.full_messages.each do |error_message| %>
+            <p class="text-danger"><%= error_message %></p>
+          <% end %>
+        </div>
+        <% end %>
         <div class="mb-3">
           <%= f.label :scheduled_datetime %><br>
           <%= f.datetime_field  :scheduled_datetime, class: "form-control", required: true %>
         </div>
         <div class="mb-3">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="repeatSessionDate">
-            <label class="form-check-label" for="repeatSessionDate">
-              Repeat schedule session for following weeks (Dev: This does nothing yet :] )
+            <%= check_box :repeat, :session, class: "form-check-input" %>
+            <label class="form-check-label" for="repeat_session">
+              Repeat schedule session for following weeks until the end of the semester
             </label>
           </div>
         </div>
-        <%=link_to "Cancel", root_path, class: 'btn btn-danger' %>  
+        <%=link_to "Cancel", tutoring_session_index_path, class: 'btn btn-danger' %>  
         <%= f.submit class: "btn btn-primary float-right" %>
       <% end %>
     </div>

@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 RSpec.describe 'Student scheduler', type: :feature do
   describe 'student scheduler' do
-
     it 'schedules a tutoring session' do
       # Create some data
       Role.create!([{ role_name: 'Admin' },
@@ -10,38 +11,38 @@ RSpec.describe 'Student scheduler', type: :feature do
                     { role_name: 'Spartan Tutor' }])
 
       user1 = User.create!(:first_name => "John",
-                   :last_name => "Doe",
-                   :email => "john@tamu.edu",
-                   :password => "T3st!!b"
+                           :last_name => "Doe",
+                           :email => "john@tamu.edu",
+                           :password => "T3st!!b"
       )
       user1.roles << Role.find_by(role_name: "Student")
 
       user2 = User.create!(:first_name => "Jane",
-                   :last_name => "Doe",
-                   :email => "jane@tamu.edu",
-                   :password => "T3st!!c"
+                           :last_name => "Doe",
+                           :email => "jane@tamu.edu",
+                           :password => "T3st!!c"
       )
       user2.roles << Role.find_by(role_name: "Tutor")
 
       user3 = User.create!(:first_name => "Jeff",
-                   :last_name => "Doe",
-                   :email => "jeff@tamu.edu",
-                   :password => "T3st!!d"
+                           :last_name => "Doe",
+                           :email => "jeff@tamu.edu",
+                           :password => "T3st!!d"
       )
       user3.roles << Role.find_by(role_name: "Tutor")
 
       tsession1 = TutoringSession.create!(:id => 1,
-                             :tutor_id => user2.id,
-                             :scheduled_datetime => Time.now + 100000,
-                             :completed_datetime => nil,
-                             :session_status => ""
+                                          :tutor_id => user2.id,
+                                          :scheduled_datetime => Time.now + 100000,
+                                          :completed_datetime => nil,
+                                          :session_status => ""
       )
 
       tsession2 = TutoringSession.create!(:id => 2,
-                             :tutor_id => user3.id,
-                             :scheduled_datetime => Time.now + 100000,
-                             :completed_datetime => nil,
-                             :session_status => ""
+                                          :tutor_id => user3.id,
+                                          :scheduled_datetime => Time.now + 100000,
+                                          :completed_datetime => nil,
+                                          :session_status => ""
       )
 
       tsession3 = TutoringSession.create!(:id => 3,
@@ -101,9 +102,7 @@ RSpec.describe 'Student scheduler', type: :feature do
       Role.delete_all
       sessions = TutoringSession.all
       sessions.each do |session|
-        unless session.users.blank?
-          session.users.destroy_all
-        end
+        session.users.destroy_all if session.users.present?
       end
       TutoringSession.delete_all
       User.delete_all
