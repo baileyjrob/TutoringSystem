@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -42,7 +44,7 @@ group :development, :test do
   gem 'webdrivers'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
 end
 
 group :development do
@@ -54,19 +56,16 @@ group :development do
 end
 
 group :test do
-
   # Adds support for Capybara system testing and selenium driver
-  #gem 'capybara', '>= 3.26'
+  # gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver'
   # Tests code coverage in tests
   gem 'simplecov', require: false
   # time freezing for tests
-  gem 'timecop'
-  gem 'show_me_the_cookies'
   gem 'apparition'
+  gem 'show_me_the_cookies'
+  gem 'timecop'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-gem 'devise'
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
