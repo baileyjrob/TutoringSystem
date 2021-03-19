@@ -57,4 +57,4 @@ jobs:
         DISABLE_SPRING: 1
       run: |
         bundle exec rake db:setup
-        bundle exec rspec --format documentation
+        bundle exec rspec
