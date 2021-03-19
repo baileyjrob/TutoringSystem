@@ -1,11 +1,11 @@
+<!-- TODO: Make this render different based on role -->
+
 <%= link_to "Home", root_path %>
 <h1><%= @user.first_name %> <%= @user.last_name %></h1>
 <p>Email: <%= @user.email %></p>
 <p>Major: <%= @user.major %></p>
 
-<!-- TODO: Make sure this user is the signed in user so no one can join a session for them -->
 <br>
-<!-- Student role options -->
 <% if @user.roles.find_by(role_name: 'Student') %>
 <p>Join a tutoring session:</p>
 <%= button_to "Schedule tutoring session", {:action => 'schedule_student'}, :method => :get %>
