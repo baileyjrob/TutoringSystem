@@ -15,7 +15,7 @@
     <tr>
       <!-- Make a row in the table for each tutoring session. Includes details and join option -->
       <% user = User.find(session.tutor_id) %>
-      <td><%=  user.first_name + " " + user.last_name  %></td>
+      <td><%= user.first_name + " " + user.last_name %></td>
       <td><%= user.email %></td>
       <% date = session.scheduled_datetime.localtime.strftime("%B %d at %l:%M %p %Z") %>
       <td><%= date %></td>
