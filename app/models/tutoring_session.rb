@@ -2,7 +2,7 @@
 
 # Scheduled Tutoring Sessions
 class TutoringSession < ApplicationRecord
-  validates_presence_of :scheduled_datetime
+  validates :scheduled_datetime, presence: true
   validate :scheduled_datetime_has_no_overlap
 
   has_and_belongs_to_many :users
@@ -20,10 +20,8 @@ class TutoringSession < ApplicationRecord
   end
 
   def end_of_semester_datetime
-    ret = ('May 12th, ' + scheduled_datetime.year.to_s).to_datetime
-    if scheduled_datetime > ret
-      ret = ('December 17th, ' + scheduled_datetime.year.to_s).to_datetime
-    end
+    ret = "May 12th, #{scheduled_datetime.year}".to_datetime
+    ret = "December 17th, #{scheduled_datetime.year}".to_datetime if scheduled_datetime > ret
 
     ret
   end
@@ -31,13 +29,13 @@ class TutoringSession < ApplicationRecord
   def generate_repeating_sessions_until_end_of_semester
     repeat_scheduled_datetime = scheduled_datetime + 1.week
     repeat_end_date = end_of_semester_datetime
-    
-    while repeat_scheduled_datetime < repeat_end_date do
+
+    while repeat_scheduled_datetime < repeat_end_date
       rtsession = TutoringSession.new(scheduled_datetime: repeat_scheduled_datetime)
 
       rtsession.session_status = 'new'
       rtsession.tutor_id = tutor_id
-      rtsession.save()
+      rtsession.save
 
       repeat_scheduled_datetime += 1.week
     end
@@ -47,7 +45,7 @@ class TutoringSession < ApplicationRecord
     repeat_scheduled_datetime = scheduled_datetime + 1.week
     repeat_end_date = end_of_semester_datetime
     repeating_scheduled_datetimes = []
-    while repeat_scheduled_datetime < repeat_end_date do
+    while repeat_scheduled_datetime < repeat_end_date
       repeating_scheduled_datetimes << repeat_scheduled_datetime
       repeat_scheduled_datetime += 1.week
 
@@ -62,19 +60,16 @@ class TutoringSession < ApplicationRecord
     end
   end
 
-
   private
-  
+
   def scheduled_datetime_has_no_overlap
-    if scheduled_datetime == nil
-      return
-    end
-    
+    return if scheduled_datetime.nil?
+
     overlap = TutoringSession
-                .where('scheduled_datetime BETWEEN ? AND ?', scheduled_datetime, duration_datetime)
-                .where('tutor_id = ?', tutor_id)
+              .where('scheduled_datetime BETWEEN ? AND ?', scheduled_datetime, duration_datetime)
+              .where('tutor_id = ?', tutor_id)
     if overlap.exists?
-      errors.add(:scheduled_datetime, "overlaps with one of yours that is currently scheduled")
+      errors.add(:scheduled_datetime, 'overlaps with one of yours that is currently scheduled')
     end
   end
 end
