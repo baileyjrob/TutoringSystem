@@ -1,0 +1,10 @@
+<!-- TODO: Make this render different based on role -->
+
+<%= link_to "Home", root_path %>
+<h1><%= @user.first_name %> <%= @user.last_name %></h1>
+<p>Email: <%= @user.email %></p>
+<p>Major: <%= @user.major %></p>
+
+<br>
+<p>Join a tutoring session:</p>
+<%= button_to "Schedule tutoring session", {:action => 'schedule_student'}, :method => :get %>

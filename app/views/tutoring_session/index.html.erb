@@ -16,27 +16,11 @@
   <div class="row">
     <div class="calendar mb-3">
       <div class="calendar-header">
+        <% @week.each do |date, day| %>
         <div class="col-day col-sun">
-          <p>Sunday</p>
+          <p><%= date.strftime('%A (%-m/%-d)') %></p>
         </div>
-        <div class="col-day col-mon">
-          <p>Monday</p>
-        </div>
-        <div class="col-day col-tue">
-          <p>Tuesday</p>
-        </div>
-        <div class="col-day col-wed">
-          <p>Wednesday</p>
-        </div>
-        <div class="col-day col-thu">
-          <p>Thursday</p>
-        </div>
-        <div class="col-day col-fri">
-          <p>Friday</p>
-        </div>
-        <div class="col-day col-sat">
-          <p>Saturday</p>
-        </div>
+        <% end %>
       </div>
       <div class="calendar-body">
         <% @week.each do |index, day| %>

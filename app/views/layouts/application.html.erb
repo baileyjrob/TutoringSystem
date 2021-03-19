@@ -18,20 +18,7 @@
 
 <body>
 
-  <% if current_user %>
-  Signed in as <%=current_user.email%>
-  <%= link_to 'Sign out', destroy_user_session_path,
-    method: :delete %>
-  <% else %>
-  <%= link_to 'Sign up', new_user_registration_path%>
 
-  <%= link_to 'Sign in', new_user_session_path %>
-  <% end %>
-
-  <div devise notices and allerts>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-  </div>
   <div class="container-fluid bg-light p-0">
     <nav class="navbar navbar-expand-lg navbar-light container">
       <%=link_to "ORSHS Tutoring System", root_path, class: 'navbar-brand' %>
@@ -40,13 +27,38 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <%=link_to "Tutoring Session", tutoring_session_index_path, class: 'nav-link' %>
+            <%=link_to "My Tutoring Schedule", tutoring_session_index_path, class: 'nav-link', text: 'Session Schedule'  %>
           </li>
+        </ul>
+        <ul class="navbar-nav">
+          <% if current_user %>
+          <li class="nav-item">
+            <a href="<%= destroy_user_session_path %>" class="nav-link" data-method="delete" rel="nofollow">
+              <span><%= current_user.email %></span> (Sign out)
+            </a>
+            <%= link_to 'My Account', edit_user_registration_path, class: 'nav-link'  %>
+          </li>
+          <% else %>
+          <li class="nav-item">
+            <%= link_to 'Sign up', new_user_registration_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Sign in', new_user_session_path, class: 'nav-link'  %>
+          </li>
+          <% end %>
         </ul>
       </div>
     </nav>
+  </div>
+  <div class="container" devise notices and allerts>
+    <% if notice %>
+    <p class="notice mb-0"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+    <p class="alert mb-0"><%= alert %></p>
+    <% end %>
   </div>
   <%= yield %>
 </body>
