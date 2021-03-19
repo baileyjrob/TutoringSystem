@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # TODO: Make this a user controller to be more resourceful
 
 class StudentController < ApplicationController
