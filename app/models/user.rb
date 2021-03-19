@@ -15,13 +15,14 @@ class User < ApplicationRecord
 
   validate :email_domain
   def email_domain
-  if email == nil
-    errors.add(:email, "Email missing.")
-  else
-    domain = email.split("@").last
-    if email.present? && ((domain != 'tamu.edu') && (domain != 'spartan-tutoring.com'))
-      errors.add(:email,
-                 'Invalid Domain. Please use your TAMU or Spartan email')
+    if email.nil?
+      errors.add(:email, 'Email missing.')
+    else
+      domain = email.split('@').last
+      if email.present? && ((domain != 'tamu.edu') && (domain != 'spartan-tutoring.com'))
+        errors.add(:email,
+                   'Invalid Domain. Please use your TAMU or Spartan email')
+      end
     end
   end
 end

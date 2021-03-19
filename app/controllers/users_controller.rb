@@ -47,7 +47,7 @@ class UsersController < ApplicationController
 
   def schedule_student
     @user = User.find(params[:id])
-    @sessions = TutoringSession.where("scheduled_datetime > :now", now: Time.now::to_datetime)
+    @sessions = TutoringSession.where('scheduled_datetime > :now', now: Time.zone.now.to_datetime)
                                .order(:scheduled_datetime)
   end
 
@@ -61,6 +61,7 @@ class UsersController < ApplicationController
   end
 
   private
+
   def user_params
     params.require(:user).permit(:first_name, :last_name, :major, :email, :encrypted_password)
   end
