@@ -11,6 +11,7 @@
 admin_role = Role.create(role_name: 'Admin');
 Role.create(role_name: 'Tutor');
 Role.create(role_name: 'Student');
+Role.create(role_name: 'Spartan Tutor');
 
 admin = User.create(first_name: 'Admin', last_name: 'User', password: 'T3st!!a',
                 email: 'admin@tamu.edu')

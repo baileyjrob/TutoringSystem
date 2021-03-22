@@ -6,7 +6,12 @@
 <!-- TODO: Make sure this user is the signed in user so no one can join a session for them -->
 <br>
 <!-- Student role options -->
-<% if @user.roles.find_by(role_name: 'Student') %>
+<% if @user.student? %>
 <p>Join a tutoring session:</p>
 <%= button_to "Schedule tutoring session", {:action => 'schedule_student'}, :method => :get %>
 <% end %>
+<br>
+<p>Student?: <%= @user.student? %></p>
+<p>Tutor?: <%= @user.tutor? %></p>
+<p>Spartan Tutor?: <%= @user.spartan_tutor? %></p>
+<p>Admin?: <%= @user.admin? %></p>
