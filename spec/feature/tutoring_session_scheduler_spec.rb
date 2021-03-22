@@ -4,8 +4,12 @@ require 'rails_helper'
 RSpec.describe TutoringSessionController, type: :feature do
   let(:frozen_time) { '25 May 02:00:00 +0000'.to_datetime }
   let!(:tutor) do
-    User.create(first_name: 'Tutor', last_name: 'User', password: 'T3st!!a',
-                email: 'tutor@tamu.edu')
+    User.create(
+      first_name: 'Tutor',
+      last_name: 'User',
+      password: 'T3st!!a',
+      email: 'tutor@tamu.edu'
+    )
   end
   let(:scheduled_datetime) { '26 May 2021 08:00:00 +0000'.to_datetime }
   let(:beginning_of_week) { Date.today.beginning_of_week }
@@ -15,8 +19,8 @@ RSpec.describe TutoringSessionController, type: :feature do
   before do
     Timecop.freeze(frozen_time)
     User.create(
-      first_name: 'Admin', 
-      last_name: 'User', 
+      first_name: 'Admin',
+      last_name: 'User',
       password: 'T3st!!a',
       email: 'admin@tamu.edu'
     )
@@ -35,28 +39,28 @@ RSpec.describe TutoringSessionController, type: :feature do
       expect(page).to have_content('May 24th, 2021')
     end
 
-    it 'sets start_week cookie' do
-      # expect(get_me_the_cookie('start_week')).to eq(nil)
-      # visit('/tutoring_session')
-      # expect(get_me_the_cookie('start_week')[:value])
-      #   .to eq(beginning_of_week.to_datetime.strftime('%Q'))
-    end
+    # it 'sets start_week cookie' do
+    # expect(get_me_the_cookie('start_week')).to eq(nil)
+    # visit('/tutoring_session')
+    # expect(get_me_the_cookie('start_week')[:value])
+    #   .to eq(beginning_of_week.to_datetime.strftime('%Q'))
+    # end
 
-    it 'increments week on increment cookie' do
-      # visit('/tutoring_session')
-      # expect(page).to have_selector(:link_or_button, '<')
-      # create_cookie('week_offset', '1')
-      # visit('/tutoring_session')
-      # expect(page).to have_content('May 31st, 2021')
-    end
+    # it 'increments week on increment cookie' do
+    # visit('/tutoring_session')
+    # expect(page).to have_selector(:link_or_button, '<')
+    # create_cookie('week_offset', '1')
+    # visit('/tutoring_session')
+    # expect(page).to have_content('May 31st, 2021')
+    # end
 
-    it 'decrements week on decrement cookie' do
-      # visit('/tutoring_session')
-      # expect(page).to have_selector(:link_or_button, '<')
-      # create_cookie('week_offset', '-1')
-      # visit('/tutoring_session')
-      # expect(page).to have_content('May 23rd, 2021')
-    end
+    # it 'decrements week on decrement cookie' do
+    # visit('/tutoring_session')
+    # expect(page).to have_selector(:link_or_button, '<')
+    # create_cookie('week_offset', '-1')
+    # visit('/tutoring_session')
+    # expect(page).to have_content('May 23rd, 2021')
+    # end
 
     it 'increments week on increment click', js: true do
       visit('/tutoring_session')
