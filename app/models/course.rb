@@ -1,4 +1,3 @@
-
 # frozen_string_literal: true
 
 # Courses that are registered into the database

@@ -32,9 +32,18 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <%=link_to "Tutoring Session", tutoring_session_index_path, class: 'nav-link' %>
+            <%=link_to "My Tutoring Schedule", tutoring_session_index_path, class: 'nav-link', text: 'Session Schedule'  %>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <% if current_user %>
+          <li class="nav-item">
+            <a href="<%= destroy_user_session_path %>" class="nav-link" data-method="delete" rel="nofollow">
+              <span><%= current_user.email %></span> (Sign out)
+            </a>
+            <%= link_to 'My Account', edit_user_registration_path, class: 'nav-link'  %>
           </li>
           <% if current_user %>
           <li class="nav-item">
@@ -66,6 +75,14 @@
         </ul>
       </div>
     </nav>
+  </div>
+  <div class="container" devise notices and allerts>
+    <% if notice %>
+    <p class="notice mb-0"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+    <p class="alert mb-0"><%= alert %></p>
+    <% end %>
   </div>
   <%= yield %>
 </body>
