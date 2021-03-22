@@ -11,7 +11,7 @@
 <%
 =end %>
 
-<%=form_tag('index', :method => "get", :controller => 'tutor' ) do %>
+<%=form_tag('tutor_matching', :method => "get", :controller => 'tutor' ) do %>
     <%= label_tag(:filter_major, "Course Department: ") %> 
     <br>
         <%= text_field_tag(:filter_major) %>
@@ -24,7 +24,7 @@
         <%= @noTutors %>
         <br>
         <%= @askRequest %> 
-        <%=form_tag('request_submission', :method => "get", :controller => 'tutor' ) do %>
+        <%=form_tag('course_req_submission', :method => "get", :controller => 'tutor' ) do %>
             <%= label_tag(:requested_course, "Requested Course Department and Number: ") %> 
             <br>
                 <%= text_field_tag(:requested_course) %>
@@ -34,6 +34,7 @@
 
     </p>
 <% else %>
+
     <ul>
     <% @matchingTutors.each do |user| %>
         <% if user.major.nil? == false %>
@@ -43,6 +44,6 @@
             </li>
             <% end %>
         <% end %>
-    </ul>    
+    </ul>  
 
 <%end%>
