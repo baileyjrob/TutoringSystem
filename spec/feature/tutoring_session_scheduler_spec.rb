@@ -11,10 +11,19 @@ RSpec.describe TutoringSessionController, type: :feature do
 
   before do
     Timecop.freeze(frozen_time)
-    User.create(first_name: 'Admin', last_name: 'User', password: 'T3st!!a',
-                email: 'admin@tamu.edu')
-    User.create(first_name: 'Tutor', last_name: 'User', password: 'T3st!!a',
-                email: 'tutor@tamu.edu')
+    User.create(
+      first_name: 'Admin', 
+      last_name: 'User', 
+      password: 'T3st!!a',
+      email: 'admin@tamu.edu'
+    )
+    
+    User.create(
+      first_name: 'Tutor',
+      last_name: 'User', 
+      password: 'T3st!!a',
+      email: 'tutor@tamu.edu'
+    )
 
     visit('/users/sign_in/')
     fill_in 'user_email', with: 'tutor@tamu.edu'
