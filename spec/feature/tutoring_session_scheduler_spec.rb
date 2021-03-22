@@ -7,7 +7,7 @@ RSpec.describe TutoringSessionController, type: :feature do
 
   let(:tutor) { User.where(first_name: 'Tutor', last_name: 'User').first }
   let(:scheduled_datetime) { '26 May 2021 08:00:00 +0000'.to_datetime }
-  let(:beginning_of_week) { Date.today.beginning_of_week(start_day = :sunday) }
+  let(:beginning_of_week) { Date.today.beginning_of_week() }
 
   before do
     Timecop.freeze(frozen_time)
@@ -24,7 +24,7 @@ RSpec.describe TutoringSessionController, type: :feature do
   describe 'GET index' do
     it 'should show schedule at beginning of week (sunday)' do
       visit('/tutoring_session')
-      expect(page).to have_content('May 23rd, 2021')
+      expect(page).to have_content('May 24th, 2021')
     end
 
     it 'sets start_week cookie' do
@@ -39,7 +39,7 @@ RSpec.describe TutoringSessionController, type: :feature do
       expect(page).to have_selector(:link_or_button, '<')
       create_cookie('week_offset', '1')
       visit('/tutoring_session')
-      expect(page).to have_content('May 30th, 2021')
+      expect(page).to have_content('May 31st, 2021')
     end
 
     it 'decrements week on decrement cookie' do
@@ -47,21 +47,21 @@ RSpec.describe TutoringSessionController, type: :feature do
       expect(page).to have_selector(:link_or_button, '<')
       create_cookie('week_offset', '-1')
       visit('/tutoring_session')
-      expect(page).to have_content('May 22nd, 2021')
+      expect(page).to have_content('May 23rd, 2021')
     end
 
     it 'increments week on increment click', js: true do
       visit('/tutoring_session')
       expect(page).to have_selector(:link_or_button, '>')
       find(:link_or_button, '>').click
-      expect(page).to have_content('May 30th, 2021')
+      expect(page).to have_content('May 31st, 2021')
     end
 
     it 'decrements week on decrement click', js: true do
       visit('/tutoring_session')
       expect(page).to have_selector(:link_or_button, '<')
       find(:link_or_button, '<').click
-      expect(page).to have_content('May 22nd, 2021')
+      expect(page).to have_content('May 23rd, 2021')
     end
 
     it 'is able to click on button to create tutoring session' do

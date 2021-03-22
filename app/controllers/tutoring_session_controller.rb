@@ -19,7 +19,7 @@ class TutoringSessionController < ApplicationController
 
       start_week += 1.day # Offset by a day due to how time parses out when converted from cookie
     else
-      start_week = Date.today.beginning_of_week(start_day = :sunday).to_datetime
+      start_week = Date.today.beginning_of_week().to_datetime
       cookies['start_week'] = start_week.strftime('%Q')
     end
 
