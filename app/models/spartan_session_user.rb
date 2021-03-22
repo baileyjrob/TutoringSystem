@@ -1,5 +1,3 @@
-8 lines (7 sloc)  220 Bytes
-
 # frozen_string_literal: true
 
 # User-SpartanSession join table

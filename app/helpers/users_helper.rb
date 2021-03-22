@@ -2,5 +2,4 @@
 
 # Useless for now
 module UsersHelper
-
 end
