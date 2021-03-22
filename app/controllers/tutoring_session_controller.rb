@@ -17,7 +17,6 @@ class TutoringSessionController < ApplicationController
         cookies['start_week'] = start_week.to_datetime.strftime('%Q')
       end
 
-      start_week += 1.day # Offset by a day due to how time parses out when converted from cookie
     else
       start_week = Date.today.beginning_of_week.to_datetime
       cookies['start_week'] = start_week.strftime('%Q')
