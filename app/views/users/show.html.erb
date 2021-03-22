@@ -9,3 +9,7 @@
 <p>Join a tutoring session:</p>
 <%= button_to "Schedule tutoring session", {:action => 'schedule_student'}, :method => :get %>
 <%= button_to "Find a Tutor", {:action => 'tutor_matching'}, :method => :get %>
+<p>Student?: <%= @user.student? %></p>
+<p>Tutor?: <%= @user.tutor? %></p>
+<p>Spartan Tutor?: <%= @user.spartan_tutor? %></p>
+<p>Admin?: <%= @user.admin? %></p>

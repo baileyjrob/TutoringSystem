@@ -32,3 +32,12 @@ role9 = Role.create!(id: 19, role_id: 2)
 TutoringSession.create(id: 1, tutor_id: user2.id, scheduled_datetime: Time.now, completed_datetime: 0, session_status: "")
 TutoringSession.create(id: 2, tutor_id: user3.id, scheduled_datetime: Time.now, completed_datetime: 0, session_status: "")
 =end
+admin_role = Role.create(role_name: 'Admin');
+Role.create(role_name: 'Tutor');
+Role.create(role_name: 'Student');
+Role.create(role_name: 'Spartan Tutor');
+
+admin = User.create(first_name: 'Admin', last_name: 'User', password: 'T3st!!a',
+                email: 'admin@tamu.edu')
+
+admin.roles << admin_role

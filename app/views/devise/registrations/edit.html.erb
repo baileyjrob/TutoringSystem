@@ -1,4 +1,14 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2>Account Details</h2>
+Email: <%=current_user.email%><br/>
+Name: <%=current_user.first_name%> <%=current_user.last_name%><br/>
+Major: <%=current_user.major%><br/>
+Role(s):
+<% @current_user.roles.each do |role| %>
+    <tr>
+      <%= role.role_name %> &ensp;
+    </tr>
+<% end %>
+<h2>Edit Account</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
@@ -36,10 +46,6 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
-  <div class="field">
-    <%= f.label :role %><br />
-    <%= f.collection_select :id, Role.order(:role_name),:id,:role_name, include_blank: true , required: true %>
-  </div>
 
   <div class="field">
     <%= f.label :major %><br />
@@ -58,6 +64,6 @@
 
 <h3>Cancel my account</h3>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure you want to delete your account and all associated data? This action cannot be undone." }, method: :delete %></p>
 
 <%= link_to "Back", :back %>

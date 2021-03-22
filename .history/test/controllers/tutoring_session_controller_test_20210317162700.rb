@@ -3,7 +3,8 @@
 require 'test_helper'
 
 class TutoringSessionControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'should get index' do
+    get tutoring_session_index_url
+    assert_response :success
+  end
 end

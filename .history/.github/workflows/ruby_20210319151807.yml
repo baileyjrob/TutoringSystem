@@ -56,6 +56,5 @@ jobs:
         WITH_COVERAGE: true
         DISABLE_SPRING: 1
       run: |
-        bundle exec rake db:setup
-        yarn
+        bundle exec rake db:schema:load
         bundle exec rspec
