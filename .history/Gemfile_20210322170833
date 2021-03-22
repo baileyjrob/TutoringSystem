@@ -71,7 +71,7 @@ group :test do
   gem 'apparition'
   gem 'show_me_the_cookies'
   gem 'timecop'
-  gem 'database_cleaner-active_record'
+  gem 'database_cleaner'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

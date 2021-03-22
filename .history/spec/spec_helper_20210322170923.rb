@@ -19,8 +19,7 @@ require 'simplecov'
 require 'show_me_the_cookies'
 
 require 'capybara/apparition'
-require 'capybara/rspec'
-Capybara.javascript_driver = :selenium_chrome_headless
+Capybara.javascript_driver = :apparition
 
 SimpleCov.start 'rails' do
   add_filter '/bin/'
@@ -35,6 +34,20 @@ RSpec.configure do |config|
   # assertions if you prefer.
   config.include ShowMeTheCookies, type: :feature
 
+  #Database cleaner
+  config.use_transactional_fixtures = false
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 
   config.expect_with :rspec do |expectations|
     # This option will default to `true` in RSpec 4. It makes the `description`

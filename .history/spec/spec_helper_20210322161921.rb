@@ -19,7 +19,7 @@ require 'simplecov'
 require 'show_me_the_cookies'
 
 require 'capybara/apparition'
-require 'capybara/rspec'
+require 'capybara/rails'
 Capybara.javascript_driver = :selenium_chrome_headless
 
 SimpleCov.start 'rails' do
@@ -34,7 +34,6 @@ RSpec.configure do |config|
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
   config.include ShowMeTheCookies, type: :feature
-
 
   config.expect_with :rspec do |expectations|
     # This option will default to `true` in RSpec 4. It makes the `description`
