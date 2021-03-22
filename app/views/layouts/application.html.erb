@@ -37,6 +37,9 @@
           <li class="nav-item">
             <%=link_to "My Tutoring Schedule", tutoring_session_index_path, class: 'nav-link', text: 'Session Schedule'  %>
           </li>
+          <li class="nav-item">
+            <%=link_to "Users", '/users', class: 'nav-link' %>
+          </li>
         </ul>
         <ul class="navbar-nav">
           <% if current_user %>
