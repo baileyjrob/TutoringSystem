@@ -71,8 +71,8 @@ RSpec.describe TutoringSessionController, type: :feature do
       expect(page).to have_content('Create Tutoring Session')
     end
 
-    it 'is able to see sessions' do
-      tsession = TutoringSession.create(scheduled_datetime: scheduled_datetime)
+    it 'should be able to see sessions' do
+      tsession = TutoringSession.create(scheduled_datetime: scheduled_datetime, tutor_id: tutor.id)
       tsession.users << tutor
 
       visit('/tutoring_session')
@@ -94,21 +94,54 @@ RSpec.describe TutoringSessionController, type: :feature do
       expect(TutoringSession.first.scheduled_datetime).to eq(scheduled_datetime)
     end
 
-    it 'errors on no scheduled date time submission' do
+    it 'should create multiple sessions on form submission with repeat selected' do 
       expect(TutoringSession.all.count).to eq(0)
 
       visit('/tutoring_session/new')
-      fill_in 'tutoring_session_scheduled_datetime', with:
-      find(:link_or_button, 'Save Tutoring session').click
+      fill_in 'tutoring_session_scheduled_datetime', with: scheduled_datetime
+      check 'repeat_session'
+      find(:link_or_button, 'Create Tutoring session').click
+
+      expect(page).to_not have_content('Create Tutoring Session')
+      first_session = TutoringSession.where(scheduled_datetime: scheduled_datetime).first
+      # Calculate how many weeks are between the scheduled date and end of semester, then add 1 for the original week
+      session_count = ((first_session.end_of_semester_datetime.to_time - first_session.scheduled_datetime.to_time) / 1.week).to_i + 1
+      expect(TutoringSession.all.count).to eq(session_count)
+    end  
+
+    it 'should error on no scheduled date time submission' do 
+      expect(TutoringSession.all.count).to eq(0)
+
+      visit('/tutoring_session/new')
+      fill_in 'tutoring_session_scheduled_datetime', with: 
+      find(:link_or_button, 'Create Tutoring session').click
 
       expect(page).to have_content('Create Tutoring Session')
       expect(TutoringSession.all.count).to eq(0)
-    end
+    end  
+    
+    it 'should error on session overlap' do 
+      expect(TutoringSession.all.count).to eq(0)
+
+      visit('/tutoring_session/new')
+      fill_in 'tutoring_session_scheduled_datetime', with: scheduled_datetime
+      find(:link_or_button, 'Create Tutoring session').click
+      
+      expect(TutoringSession.all.count).to eq(1)
+      
+      visit('/tutoring_session/new')
+      fill_in 'tutoring_session_scheduled_datetime', with: scheduled_datetime
+      find(:link_or_button, 'Create Tutoring session').click
+
+      expect(page).to have_content('Create Tutoring Session')
+      expect(page).to have_content('overlaps with one of yours that is currently scheduled')
+      
+    end  
   end
 
   describe 'SHOW' do
-    it 'is able to view session details' do
-      tsession = TutoringSession.create(scheduled_datetime: scheduled_datetime)
+    it 'should be able to view session details' do 
+      tsession = TutoringSession.create(:scheduled_datetime => scheduled_datetime, tutor_id: tutor.id)
       tsession.users << tutor
 
       visit("/tutoring_session/#{tsession.id}")
@@ -116,8 +149,8 @@ RSpec.describe TutoringSessionController, type: :feature do
       expect(page).to have_content('Tutor User')
     end
 
-    it 'is able to delete session', js: true do
-      tsession = TutoringSession.create(scheduled_datetime: scheduled_datetime)
+    it 'should be able to delete session', :js => true do 
+      tsession = TutoringSession.create(:scheduled_datetime => scheduled_datetime, tutor_id: tutor.id)
       tsession.users << tutor
 
       expect(TutoringSession.all.count).to eq(1)
@@ -144,8 +177,8 @@ RSpec.describe TutoringSessionController, type: :feature do
   end
 
   describe 'UPDATE' do
-    it 'is able to edit session details' do
-      tsession = TutoringSession.create(scheduled_datetime: scheduled_datetime)
+    it 'should be able to edit session details' do 
+      tsession = TutoringSession.create(:scheduled_datetime => scheduled_datetime, tutor_id: tutor.id)
       tsession.users << tutor
 
       visit("/tutoring_session/#{tsession.id}")
@@ -160,8 +193,8 @@ RSpec.describe TutoringSessionController, type: :feature do
       expect(TutoringSession.first.scheduled_datetime).to eq((scheduled_datetime + 1.hour))
     end
 
-    it 'errors on missing scheduled_datetime edit session details' do
-      tsession = TutoringSession.create(scheduled_datetime: scheduled_datetime)
+    it 'should error on missing scheduled_datetime edit session details' do 
+      tsession = TutoringSession.create(:scheduled_datetime => scheduled_datetime, tutor_id: tutor.id)
       tsession.users << tutor
 
       visit("/tutoring_session/#{tsession.id}")
