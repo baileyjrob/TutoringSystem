@@ -35,7 +35,8 @@ class TutoringSessionController < ApplicationController
     dates = increments.to_a.map { |increment| start_week + increment.day }
     increments.each do |i|
       @week[dates[i]] = @tsessions
-                        .where('scheduled_datetime BETWEEN ? AND ?', start_week + i.day, start_week + (i + 1).day)
+                        .where('scheduled_datetime BETWEEN ? AND ?',
+                               start_week + i.day, start_week + (i + 1).day)
                         .order('scheduled_datetime asc')
     end
 

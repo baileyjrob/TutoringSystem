@@ -9,7 +9,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 admin_role = Role.create(role_name: 'Admin');
-Role.create(role_name: 'tutor');
+Role.create(role_name: 'Tutor');
+Role.create(role_name: 'Student');
 
 admin = User.create(first_name: 'Admin', last_name: 'User', password: 'T3st!!a',
                 email: 'admin@tamu.edu')

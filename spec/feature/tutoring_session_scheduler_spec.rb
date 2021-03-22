@@ -106,8 +106,10 @@ RSpec.describe TutoringSessionController, type: :feature do
 
       expect(page).not_to have_content('Create Tutoring Session')
       first_session = TutoringSession.where(scheduled_datetime: scheduled_datetime).first
-      # Calculate how many weeks are between the scheduled date and end of semester, then add 1 for the original week
-      session_count = ((first_session.end_of_semester_datetime.to_time - first_session.scheduled_datetime.to_time) / 1.week).to_i + 1
+      # Calculate how many weeks are between the scheduled date and end of semester,
+      # then add 1 for the original week
+      session_count = ((first_session.end_of_semester_datetime.to_time -
+                          first_session.scheduled_datetime.to_time) / 1.week).to_i + 1
       expect(TutoringSession.all.count).to eq(session_count)
     end
 

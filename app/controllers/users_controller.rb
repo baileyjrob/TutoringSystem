@@ -5,12 +5,13 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    if current_user.roles.include?(Role.get_admin_role) || true
+    if current_user.roles.include?(Role.admin_role)
       admin_index
       return
     end
 
-    @users = User.all
+    # TODO: Make view for non admins
+    admin_index
   end
 
   def admin_index
@@ -44,11 +45,13 @@ class UsersController < ApplicationController
   end
 
   def edit
-    if current_user.roles.include?(Role.get_admin_role) || true
+    if current_user.roles.include?(Role.admin_role)
       admin_edit
       return
     end
-    @user = User.find(params[:id])
+
+    # TODO: Make view for non admins
+    admin_edit
   end
 
   def admin_edit
