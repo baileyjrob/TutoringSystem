@@ -19,6 +19,9 @@ RSpec.describe TutoringSessionController, type: :feature do
 
   describe 'SHOW' do
     it 'shows user' do
+      admin = User.where(first_name: 'Admin').first
+      visit("users/#{admin.id}")
+      expect(page).to have_content('Admin User')
     end
   end
 end
