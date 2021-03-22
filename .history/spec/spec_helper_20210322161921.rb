@@ -19,8 +19,8 @@ require 'simplecov'
 require 'show_me_the_cookies'
 
 require 'capybara/apparition'
-require 'capybara/rspec'
-Capybara.javascript_driver = :apparition
+require 'capybara/rails'
+Capybara.javascript_driver = :selenium_chrome_headless
 
 SimpleCov.start 'rails' do
   add_filter '/bin/'
