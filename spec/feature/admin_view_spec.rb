@@ -1,17 +1,23 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 RSpec.describe UsersController, type: :feature do
   let(:frozen_time) { '25 May 02:00:00 +0000'.to_datetime }
-  after { Timecop.return }
-
   let(:admin) { User.where(first_name: 'Tutor', last_name: 'User').first }
   let(:user) { User.where(first_name: 'User2', last_name: 'User').first }
 
+  after { Timecop.return }
+
   before do
     Timecop.freeze(frozen_time)
-    a = User.create(first_name: 'Admin', last_name: 'User', password: 'T3st!!a', email: 'admin@tamu.edu')
-    User.create(first_name: 'User1', last_name: 'User', password: 'T3st!!a', email: 'User1@tamu.edu')
-    User.create(first_name: 'User2', last_name: 'User', password: 'T3st!!a', email: 'User2@tamu.edu')
-    User.create(first_name: 'User3', last_name: 'User', password: 'T3st!!a', email: 'User3@tamu.edu')
+    a = User.create(first_name: 'Admin', last_name: 'User', password: 'T3st!!a',
+                    email: 'admin@tamu.edu')
+    User.create(first_name: 'User1', last_name: 'User', password: 'T3st!!a',
+                email: 'User1@tamu.edu')
+    User.create(first_name: 'User2', last_name: 'User', password: 'T3st!!a',
+                email: 'User2@tamu.edu')
+    User.create(first_name: 'User3', last_name: 'User', password: 'T3st!!a',
+                email: 'User3@tamu.edu')
     ar = Role.create(role_name: 'Admin')
     Role.create(role_name: 'Student')
     a.roles << ar
@@ -24,8 +30,8 @@ RSpec.describe UsersController, type: :feature do
     find(:link_or_button, 'Log in').click
   end
 
-  describe 'GET Index' do 
-    it 'should show all users for admin' do 
+  describe 'GET Index' do
+    it 'shows all users for admin' do
       visit('/users/')
 
       expect(page).to have_content('User1')
@@ -34,7 +40,7 @@ RSpec.describe UsersController, type: :feature do
       expect(page).to have_content('Admin')
     end
 
-    it 'should not show for non admins' do 
+    it 'does not show for non admins' do
       visit('/users/')
       find(:link_or_button, 'admin@tamu.edu (Sign out)').click
 
@@ -43,22 +49,21 @@ RSpec.describe UsersController, type: :feature do
     end
   end
 
-  describe 'GET Edit' do 
-    it 'should be able to click to edit user' do 
+  describe 'GET Edit' do
+    it 'is able to click to edit user' do
       visit('/users/')
-      find(:css, 'a[href="/users/' + user.id.to_s + '/edit"]').click
+      find(:css, "a[href=\"/users/#{user.id}/edit\"]").click
       expect(page).to have_content('Edit User')
     end
-  
-    it 'should change name on proper submission' do 
-      visit('/users/' + user.id.to_s + '/edit')
-      
+
+    it 'changes name on proper submission' do
+      visit("/users/#{user.id}/edit")
+
       fill_in 'user_first_name', with: 'A New User Name'
-      select "Student", :from => "user_id"
+      select 'Student', from: 'user_id'
       find(:link_or_button, 'Update').click
 
       expect(page).to have_content('A New User Name')
     end
   end
 end
-

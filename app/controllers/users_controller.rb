@@ -5,8 +5,8 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    if current_user.roles.include?(Role.get_admin_role()) or true
-      admin_index()
+    if current_user.roles.include?(Role.get_admin_role) || true
+      admin_index
       return
     end
 
@@ -44,8 +44,8 @@ class UsersController < ApplicationController
   end
 
   def edit
-    if current_user.roles.include?(Role.get_admin_role()) or true
-      admin_edit()
+    if current_user.roles.include?(Role.get_admin_role) || true
+      admin_edit
       return
     end
     @user = User.find(params[:id])
@@ -63,7 +63,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to @user
     else
-      edit()
+      edit
     end
   end
 
