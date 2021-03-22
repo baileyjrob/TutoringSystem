@@ -2,11 +2,29 @@
 
 # Primary management class for users
 class UsersController < ApplicationController
+  before_action :authenticate_user!
+
   def index
+    if current_user.roles.include?(Role.get_admin_role()) or true
+      admin_index()
+      return
+    end
+
     @users = User.all
   end
 
+  def admin_index
+    @users = User.all
+
+    render 'admin_index'
+  end
+
   def show
+    @user = User.find(params[:id])
+    @tutoring_sessions = TutoringSession.all
+  end
+
+  def show_admin
     @user = User.find(params[:id])
     @tutoring_sessions = TutoringSession.all
   end
@@ -26,7 +44,17 @@ class UsersController < ApplicationController
   end
 
   def edit
+    if current_user.roles.include?(Role.get_admin_role()) or true
+      admin_edit()
+      return
+    end
     @user = User.find(params[:id])
+  end
+
+  def admin_edit
+    @user = User.find(params[:id])
+
+    render 'admin_edit'
   end
 
   def update
@@ -35,7 +63,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to @user
     else
-      render :edit
+      edit()
     end
   end
 
