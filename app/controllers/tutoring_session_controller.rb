@@ -17,9 +17,8 @@ class TutoringSessionController < ApplicationController
         cookies['start_week'] = start_week.to_datetime.strftime('%Q')
       end
 
-      start_week += 1.day # Offset by a day due to how time parses out when converted from cookie
     else
-      start_week = Date.today.beginning_of_week(start_day = :sunday).to_datetime
+      start_week = Date.today.beginning_of_week.to_datetime
       cookies['start_week'] = start_week.strftime('%Q')
     end
 
@@ -35,7 +34,8 @@ class TutoringSessionController < ApplicationController
     dates = increments.to_a.map { |increment| start_week + increment.day }
     increments.each do |i|
       @week[dates[i]] = @tsessions
-                        .where('scheduled_datetime BETWEEN ? AND ?', start_week + i.day, start_week + (i + 1).day)
+                        .where('scheduled_datetime BETWEEN ? AND ?',
+                               start_week + i.day, start_week + (i + 1).day)
                         .order('scheduled_datetime asc')
     end
 

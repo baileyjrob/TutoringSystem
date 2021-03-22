@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   get '/users/:id/schedule_student', :to => 'users#schedule_student'
   post '/users/:id/schedule_session_student' => 'users#schedule_session_student'
   resources :tutoring_session
-  resources :user
+  resources :users
 end

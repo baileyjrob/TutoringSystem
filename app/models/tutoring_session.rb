@@ -68,8 +68,8 @@ class TutoringSession < ApplicationRecord
     overlap = TutoringSession
               .where('scheduled_datetime BETWEEN ? AND ?', scheduled_datetime, duration_datetime)
               .where('tutor_id = ?', tutor_id)
-    if overlap.exists?
-      errors.add(:scheduled_datetime, 'overlaps with one of yours that is currently scheduled')
-    end
+    return unless overlap.exists?
+
+    errors.add(:scheduled_datetime, 'overlaps with one of yours that is currently scheduled')
   end
 end
