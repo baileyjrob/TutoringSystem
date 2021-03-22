@@ -10,6 +10,8 @@ RSpec.describe UsersController, type: :feature do
 
   before do
     Timecop.freeze(frozen_time)
+    Role.delete_all
+
     a = User.create(first_name: 'Admin', last_name: 'User', password: 'T3st!!a',
                     email: 'admin@tamu.edu')
     User.create(first_name: 'User1', last_name: 'User', password: 'T3st!!a',
@@ -19,6 +21,7 @@ RSpec.describe UsersController, type: :feature do
     User.create(first_name: 'User3', last_name: 'User', password: 'T3st!!a',
                 email: 'User3@tamu.edu')
     ar = Role.create(role_name: 'Admin')
+
     Role.create(role_name: 'Student')
     a.roles << ar
     a.save
