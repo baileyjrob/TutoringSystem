@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       return
     end
     if current_user.roles.include?(Role.student_role)
-      redirect_to '/users/' + current_user.id.to_s
+      redirect_to "/users/#{current_user.id}"
       return
     end
 
