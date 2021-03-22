@@ -9,6 +9,10 @@ class UsersController < ApplicationController
       admin_index
       return
     end
+    if current_user.roles.include?(Role.student_role)
+      redirect_to '/users/' + current_user.id.to_s
+      return
+    end
 
     # TODO: Make view for non admins
     admin_index
