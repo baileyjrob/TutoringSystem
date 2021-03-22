@@ -6,4 +6,12 @@ class Role < ApplicationRecord
   has_many :role_users, dependent: :delete_all
   has_many :users, through: :role_users
   validates :role_name, presence: true
+
+  def self.admin_role
+    Role.find_by('role_name like ?', 'Admin')
+  end
+
+  def to_s
+    role_name
+  end
 end

@@ -118,7 +118,7 @@ def delete_repeating_sessions
       return
     end
 
-    overlap = TutoringSession
+overlap = TutoringSession
                 .where('scheduled_datetime BETWEEN ? AND ?', scheduled_datetime, duration_datetime)
                 .where('tutor_id = ?', tutor_id)
     if overlap.exists?
