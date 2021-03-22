@@ -4,7 +4,7 @@
 class TutoringSessionController < ApplicationController
   before_action :authenticate_user!
 
-  def generate_week
+  def generate_week(start_week)
     @week = {}
 
     # Get all sessions in the week (Might be not needed due to how rails parses queries)
@@ -22,7 +22,7 @@ class TutoringSessionController < ApplicationController
                         .order('scheduled_datetime asc')
     end
   end
-  
+
   def index
     if cookies.key?('start_week')
       week_offset = 0
