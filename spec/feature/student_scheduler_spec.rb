@@ -49,6 +49,11 @@ RSpec.describe 'Student scheduler', type: :feature do
       # Start at user home page
       visit "users/#{user1.id}"
 
+      # Will need to sign in
+      fill_in 'user_email', with: user1.email
+      fill_in 'user_password', with: user1.password
+      find(:link_or_button, 'Log in').click
+
       # Go to scheduling page
       find_button 'Schedule tutoring session'
       click_button 'Schedule tutoring session'
