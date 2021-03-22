@@ -4,6 +4,25 @@
 class TutoringSessionController < ApplicationController
   before_action :authenticate_user!
 
+  def generate_week
+    @week = {}
+
+    # Get all sessions in the week (Might be not needed due to how rails parses queries)
+    @tsessions = TutoringSession
+                 .where('scheduled_datetime BETWEEN ? AND ?', start_week, start_week + 1.week)
+                 .where('tutor_id = ?', current_user.id)
+
+    # Get the sessions on every day and put them into a hash for frontend
+    increments = (0..6)
+    dates = increments.to_a.map { |increment| start_week + increment.day }
+    increments.each do |i|
+      @week[dates[i]] = @tsessions
+                        .where('scheduled_datetime BETWEEN ? AND ?',
+                               start_week + i.day, start_week + (i + 1).day)
+                        .order('scheduled_datetime asc')
+    end
+  end
+  
   def index
     if cookies.key?('start_week')
       week_offset = 0
@@ -21,24 +40,7 @@ class TutoringSessionController < ApplicationController
       start_week = Date.today.beginning_of_week.to_datetime
       cookies['start_week'] = start_week.strftime('%Q')
     end
-
-    @week = {}
-
-    # Get all sessions in the week (Might be not needed due to how rails parses queries)
-    @tsessions = TutoringSession
-                 .where('scheduled_datetime BETWEEN ? AND ?', start_week, start_week + 1.week)
-                 .where('tutor_id = ?', current_user.id)
-
-    # Get the sessions on every day and put them into a hash for frontend
-    increments = (0..6)
-    dates = increments.to_a.map { |increment| start_week + increment.day }
-    increments.each do |i|
-      @week[dates[i]] = @tsessions
-                        .where('scheduled_datetime BETWEEN ? AND ?',
-                               start_week + i.day, start_week + (i + 1).day)
-                        .order('scheduled_datetime asc')
-    end
-
+    generate_week(start_week)
     @start_of_week = start_week.to_date.to_formatted_s(:long_ordinal)
     @end_of_week = (start_week + 6.days).to_date.to_formatted_s(:long_ordinal)
   end
