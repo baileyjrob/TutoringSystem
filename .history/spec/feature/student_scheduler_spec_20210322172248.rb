@@ -22,13 +22,13 @@ RSpec.describe 'Student scheduler', type: :feature do
 
       tsession1 = TutoringSession.create!(id: 1,
                                           tutor_id: user2.id,
-                                          scheduled_datetime: Time.zone.now,
+                                          scheduled_datetime: Time.now,
                                           completed_datetime: nil,
                                           session_status: '')
 
       tsession2 = TutoringSession.create!(id: 2,
                                           tutor_id: user3.id,
-                                          scheduled_datetime: Time.zone.now,
+                                          scheduled_datetime: Time.now,
                                           completed_datetime: nil,
                                           session_status: '')
 
