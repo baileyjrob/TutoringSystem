@@ -13,11 +13,6 @@ RSpec.describe TutoringSessionController, type: :feature do
     Timecop.freeze(frozen_time)
     User.create(first_name: 'Admin', last_name: 'User', password: 'T3st!!a',
                 email: 'admin@tamu.edu')
-    visit('/users/sign_in/')
-    fill_in 'user_email', with: 'admin@tamu.edu'
-    fill_in 'user_password', with: 'T3st!!a'
-
-    find(:link_or_button, 'Log in').click
   end
 
   after { Timecop.return }
@@ -26,12 +21,6 @@ RSpec.describe TutoringSessionController, type: :feature do
     it 'shows user' do
       admin = User.where(first_name: 'Admin').first
       visit("users/#{admin.id}")
-
-      # Log in first
-      fill_in 'user_email', with: admin.email
-      fill_in 'user_password', with: 'T3st!!a'
-      find(:link_or_button, 'Log in').click
-
       expect(page).to have_content('Admin User')
     end
   end

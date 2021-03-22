@@ -4,7 +4,25 @@
 class TutoringSessionController < ApplicationController
   before_action :authenticate_user!
 
-  def generate_week(start_week)
+  def index
+    if cookies.key?('start_week')
+      week_offset = 0
+      start_week = Time.at(cookies['start_week'].to_f / 1000).beginning_of_day
+
+      if cookies.key?('week_offset')
+        week_offset = cookies['week_offset'].to_f * 1.week
+        cookies.delete 'week_offset'
+
+        start_week += week_offset
+        cookies['start_week'] = start_week.to_datetime.strftime('%Q')
+      end
+
+      start_week += 1.day # Offset by a day due to how time parses out when converted from cookie
+    else
+      start_week = Date.today.beginning_of_week.to_datetime
+      cookies['start_week'] = start_week.strftime('%Q')
+    end
+
     @week = {}
 
     # Get all sessions in the week (Might be not needed due to how rails parses queries)
@@ -21,26 +39,7 @@ class TutoringSessionController < ApplicationController
                                start_week + i.day, start_week + (i + 1).day)
                         .order('scheduled_datetime asc')
     end
-  end
 
-  def index
-    if cookies.key?('start_week')
-      week_offset = 0
-      start_week = Time.at(cookies['start_week'].to_f / 1000).beginning_of_day
-
-      if cookies.key?('week_offset')
-        week_offset = cookies['week_offset'].to_f * 1.week
-        cookies.delete 'week_offset'
-
-        start_week += week_offset
-        cookies['start_week'] = start_week.to_datetime.strftime('%Q')
-      end
-
-    else
-      start_week = Date.today.beginning_of_week.to_datetime
-      cookies['start_week'] = start_week.strftime('%Q')
-    end
-    generate_week(start_week)
     @start_of_week = start_week.to_date.to_formatted_s(:long_ordinal)
     @end_of_week = (start_week + 6.days).to_date.to_formatted_s(:long_ordinal)
   end

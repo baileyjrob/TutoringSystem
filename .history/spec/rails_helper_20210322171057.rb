@@ -39,19 +39,18 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  # config.use_transactional_fixtures = true
-  # Database cleaner
+  #Database cleaner
   config.use_transactional_fixtures = false
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
   end
 
-  config.before do
+  config.before(:each) do
     DatabaseCleaner.start
   end
 
-  config.after do
+  config.after(:each) do
     DatabaseCleaner.clean
   end
   # You can uncomment this line to turn off ActiveRecord support entirely.
