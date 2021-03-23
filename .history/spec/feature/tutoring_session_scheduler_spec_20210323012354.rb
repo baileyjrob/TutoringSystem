@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-RSpec.describe TutoringSessionController, type: :feature do
+RSpec.describe TutoringSessionScheduler, type: :feature do
   let(:frozen_time) { '25 May 02:00:00 +0000'.to_datetime }
   let!(:tutor) do
     User.create(
@@ -12,7 +12,13 @@ RSpec.describe TutoringSessionController, type: :feature do
     )
   end
   let(:scheduled_datetime) { '26 May 2021 08:00:00 +0000'.to_datetime }
-  let(:beginning_of_week) { Date.today.beginning_of_week }
+  let(:beginning_of_week) { Time.zone.today.beginning_of_week }
+  let!(:tsession) do
+    tsession = TutoringSession.create(scheduled_datetime: scheduled_datetime,
+                                      tutor_id: tutor.id)
+    tsession.users << tutor
+    return tsession
+  end
 
   after { Timecop.return }
 
@@ -84,9 +90,6 @@ RSpec.describe TutoringSessionController, type: :feature do
     end
 
     it 'is able to see sessions' do
-      tsession = TutoringSession.create(scheduled_datetime: scheduled_datetime, tutor_id: tutor.id)
-      tsession.users << tutor
-
       visit('/tutoring_session')
       expect(page).to have_selector('.tsession')
     end
@@ -153,21 +156,18 @@ RSpec.describe TutoringSessionController, type: :feature do
   end
 
   describe 'SHOW' do
-    it 'is able to view session details' do
-      tsession = TutoringSession.create(scheduled_datetime: scheduled_datetime,
-                                        tutor_id: tutor.id)
-      tsession.users << tutor
+    let(:tsession2) do
+      TutoringSession.create(scheduled_datetime: scheduled_datetime + 1.week,
+                             tutor_id: tutor.id)
+    end
 
+    it 'is able to view session details' do
       visit("/tutoring_session/#{tsession.id}")
       expect(page).to have_content('Session scheduled for May 26th, 2021 at 08:00 AM')
       expect(page).to have_content('Tutor User')
     end
 
     it 'is able to delete session', js: true do
-      tsession = TutoringSession.create(scheduled_datetime: scheduled_datetime,
-                                        tutor_id: tutor.id)
-      tsession.users << tutor
-
       expect(TutoringSession.all.count).to eq(1)
       visit("/tutoring_session/#{tsession.id}")
       accept_confirm do
@@ -178,11 +178,6 @@ RSpec.describe TutoringSessionController, type: :feature do
 
     it 'is able to delete session and any repeating sessions at the same time',
        js: true do
-      tsession = TutoringSession.create(scheduled_datetime: scheduled_datetime,
-                                        tutor_id: tutor.id)
-      tsession.users << tutor
-      tsession2 = TutoringSession.create(scheduled_datetime: scheduled_datetime + 1.week,
-                                         tutor_id: tutor.id)
       tsession2.users << tutor
 
       expect(TutoringSession.all.count).to eq(2)
@@ -195,15 +190,11 @@ RSpec.describe TutoringSessionController, type: :feature do
   end
 
   describe 'UPDATE' do
-    it 'is able to edit session details' do
-      tsession = TutoringSession.create(scheduled_datetime: scheduled_datetime,
-                                        tutor_id: tutor.id)
-      tsession.users << tutor
-
+    before do
       visit("/tutoring_session/#{tsession.id}")
       find(:link_or_button, 'edit').click
-
-      expect(page).to have_content('Edit Tutoring Session')
+    end
+    it 'is able to edit session details' do
       fill_in 'tutoring_session_scheduled_datetime', with: (scheduled_datetime + 1.hour)
       find(:link_or_button, 'Update Tutoring session').click
 
@@ -213,14 +204,6 @@ RSpec.describe TutoringSessionController, type: :feature do
     end
 
     it 'errors on missing scheduled_datetime edit session details' do
-      tsession = TutoringSession.create(scheduled_datetime: scheduled_datetime,
-                                        tutor_id: tutor.id)
-      tsession.users << tutor
-
-      visit("/tutoring_session/#{tsession.id}")
-      find(:link_or_button, 'edit').click
-
-      expect(page).to have_content('Edit Tutoring Session')
       fill_in 'tutoring_session_scheduled_datetime', with: ''
       find(:link_or_button, 'Update Tutoring session').click
       expect(page).to have_content('Edit Tutoring Session')

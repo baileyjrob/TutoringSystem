@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-RSpec.describe TutoringSessionController, type: :feature do
+RSpec.describe TutoringSessionScheduler, type: :feature do
   let(:frozen_time) { '25 May 02:00:00 +0000'.to_datetime }
   let!(:tutor) do
     User.create(
@@ -13,6 +13,10 @@ RSpec.describe TutoringSessionController, type: :feature do
   end
   let(:scheduled_datetime) { '26 May 2021 08:00:00 +0000'.to_datetime }
   let(:beginning_of_week) { Date.today.beginning_of_week }
+  let!(:tsession) do
+      TutoringSession.create(scheduled_datetime: scheduled_datetime,
+                             tutor_id: tutor.id)
+    end
 
   after { Timecop.return }
 
@@ -153,21 +157,22 @@ RSpec.describe TutoringSessionController, type: :feature do
   end
 
   describe 'SHOW' do
-    it 'is able to view session details' do
-      tsession = TutoringSession.create(scheduled_datetime: scheduled_datetime,
-                                        tutor_id: tutor.id)
-      tsession.users << tutor
+    let(:tsession2) do
+      TutoringSession.create(scheduled_datetime: scheduled_datetime + 1.week,
+                             tutor_id: tutor.id)
+    end
 
+    before do
+      tsession.users << tutor
+    end
+
+    it 'is able to view session details' do
       visit("/tutoring_session/#{tsession.id}")
       expect(page).to have_content('Session scheduled for May 26th, 2021 at 08:00 AM')
       expect(page).to have_content('Tutor User')
     end
 
     it 'is able to delete session', js: true do
-      tsession = TutoringSession.create(scheduled_datetime: scheduled_datetime,
-                                        tutor_id: tutor.id)
-      tsession.users << tutor
-
       expect(TutoringSession.all.count).to eq(1)
       visit("/tutoring_session/#{tsession.id}")
       accept_confirm do
@@ -178,11 +183,6 @@ RSpec.describe TutoringSessionController, type: :feature do
 
     it 'is able to delete session and any repeating sessions at the same time',
        js: true do
-      tsession = TutoringSession.create(scheduled_datetime: scheduled_datetime,
-                                        tutor_id: tutor.id)
-      tsession.users << tutor
-      tsession2 = TutoringSession.create(scheduled_datetime: scheduled_datetime + 1.week,
-                                         tutor_id: tutor.id)
       tsession2.users << tutor
 
       expect(TutoringSession.all.count).to eq(2)
