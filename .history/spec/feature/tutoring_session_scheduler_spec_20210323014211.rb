@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-describe TutoringSessionScheduler, type: :feature do
+RSpec.describe TutoringSessionScheduler, type: :feature do
   let(:frozen_time) { '25 May 02:00:00 +0000'.to_datetime }
   let!(:tutor) do
     User.create(
