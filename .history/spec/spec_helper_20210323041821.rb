@@ -19,7 +19,8 @@ require 'simplecov'
 require 'show_me_the_cookies'
 require 'capybara/rspec'
 require 'capybara/apparition'
-Capybara.javascript_driver = ENV.fetch('JAVASCRIPT_DRIVER', :apparition)
+# Capybara.javascript_driver = ENV.fetch('JAVASCRIPT_DRIVER', :apparition)
+Capybara.javascript_driver = :selenium_chrome_headless
 SimpleCov.start 'rails' do
   add_filter '/bin/'
   add_filter '/app/channels/' # Folder never used
