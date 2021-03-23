@@ -19,11 +19,11 @@
         <%= submit_tag("Find") %> 
 <%end%>
 
-<% if @matching_Tutors.present? == false %>
+<% if @matching_tutors.present? == false %>
     <p> 
-        <%= @no_Tutors %>
+        <%= @no_tutors %>
         <br>
-        <%= @ask_Request %> 
+        <%= @ask_request %> 
         <%=form_tag('request_submission', :method => "get", :controller => 'tutor' ) do %>
             <%= label_tag(:requested_course, "Requested Course Department and Number: ") %> 
             <br>
@@ -35,7 +35,7 @@
     </p>
 <% else %>
     <ul>
-    <% @matching_Tutors.each do |user| %>
+    <% @matching_tutors.each do |user| %>
         <% if user.major.nil? == false %>
         <!-- makes sure users with no majors are not displayed -->
             <li>
