@@ -1,81 +1,78 @@
 class UsersController < ApplicationController
-  def index
-    @users = User.all
-  end
-
-  def show
-    @user = User.find(params[:id])
-  end
-
-  def new
-    @user = User.new
-  end
-
-  def create
-    @user = User.new(user_params)
-
-    if @user.save
-      redirect_to @user
-    else
-      render :new
+    def index
+        @users = User.all
     end
-  end
 
-  def edit
-    @user = User.find(params[:id])
-  end
-
-  def show_schedule
-    if user_signed_in?
-      @sessions = current_user.tutoring_sessions
-    else
-      redirect_to new_user_session_path
+    def show
+        @user = User.find(params[:id])
     end
-  end
 
-  def schedule_student
-    @user = User.find(params[:id])
-    @sessions = TutoringSession.where('scheduled_datetime > :now',
-                                      now: Time.zone.now.to_datetime)
-                               .order(:scheduled_datetime)
-  end
-
-  def schedule_session_student
-    user = User.find(params[:id])
-    tutor_session = TutoringSession.find(params[:sessionID])
-  end
-
-  def update
-    @user = User.find(params[:id])
-
-    if @user.update(user_params)
-      redirect_to @user
-    else
-      render :edit
+    def new
+        @user = User.new
     end
-  end
 
-  def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-    redirect_to root_path
-  end
+    def create
+        @user = User.new(user_params)
 
-  def delete_session
-    @user = User.find(current_user.id)
-    @tutor_session = TutoringSession.find(params[:id])
+        if @user.save
+            redirect_to @user
+        else
+            render :new
+        end
+    end
 
-    @user.tutoring_sessions.delete(@tutor_session)
+    def edit
+        @user = User.find(params[:id])
+    end
 
-    redirect_to show_schedule_path
-  end
+    def show_schedule
+     if user_signed_in?
+       @sessions = current_user.tutoring_sessions
+     else
+       redirect_to new_user_session_path
+     end
+    end
 
-  private
+     def schedule_student
+       @user = User.find(params[:id])
+       @sessions = TutoringSession.where('scheduled_datetime > :now', now: Time.zone.now.to_datetime)
+                                  .order(:scheduled_datetime)
+     end
 
-  def user_params
-    params.require(:user).permit(:first_name, :last_name, :major, :email,
-                                 :encrypted_password)
-  end
+     def schedule_session_student
+       user = User.find(params[:id])
+       tutor_session = TutoringSession.find(params[:sessionID])
+     end
+
+    def update
+        @user = User.find(params[:id])
+
+        if @user.update(user_params)
+            redirect_to @user
+        else
+            render :edit
+        end
+    end
+
+    def destroy
+        @user = User.find(params[:id])
+        @user.destroy
+        redirect_to root_path
+    end
+
+    def delete_session
+       @user = User.find(current_user.id)
+       @tutor_session = TutoringSession.find(params[:id])
+
+       @user.tutoring_sessions.delete(@tutor_session)
+
+       redirect_to show_schedule_path
+     end
+
+    private
+        def user_params
+            params.require(:user).permit(:first_name, :last_name, :major, :email, :encrypted_password)
+        end
 end
 
 # t.string "reset_password_token"
