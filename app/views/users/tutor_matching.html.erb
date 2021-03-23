@@ -1,0 +1,49 @@
+<h1>Tutor Matching Page</h1>
+<% 
+=begin %>
+<%= form method = "POST" action="@form_step_2">
+    <select name="" id="">
+        <%= for tutors do |matchingTutor|%>
+            <option value="<%=matchingTutor.id%>"><%=matchingTutor.name%> </option>
+        <%end%>
+    </select>
+
+<%
+=end %>
+
+<%=form_tag('tutor_matching', :method => "get", :controller => 'tutor' ) do %>
+    <%= label_tag(:filter_major, "Course Department: ") %> 
+    <br>
+        <%= text_field_tag(:filter_major) %>
+    <br>
+        <%= submit_tag("Find") %> 
+<%end%>
+
+<% if @matching_tutors.present? == false %>
+    <p> 
+        <%= @no_tutors %>
+        <br>
+        <%= @ask_request %> 
+        <%=form_tag('course_req_submission', :method => "get", :controller => 'tutor' ) do %>
+            <%= label_tag(:requested_course, "Requested Course Department and Number: ") %> 
+            <br>
+                <%= text_field_tag(:requested_course) %>
+            
+                <%= submit_tag("Submit") %> 
+        <%end%>
+
+    </p>
+<% else %>
+
+    <ul>
+    <% @matching_tutors.each do |user| %>
+        <% if user.major.nil? == false %>
+        <!-- makes sure users with no majors are not displayed -->
+            <li>
+                <%= link_to user.first_name.to_s + ' ' + user.last_name.to_s + ' Major: ' + user.major.to_s, user %>
+            </li>
+            <% end %>
+        <% end %>
+    </ul>  
+
+<%end%>
