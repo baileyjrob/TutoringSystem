@@ -9,6 +9,10 @@ class UsersController < ApplicationController
       admin_index
       return
     end
+    if current_user.roles.include?(Role.student_role)
+      redirect_to "/users/#{current_user.id}"
+      return
+    end
 
     # TODO: Make view for non admins
     admin_index
@@ -86,7 +90,8 @@ class UsersController < ApplicationController
 
   def schedule_student
     @user = User.find(params[:id])
-    @sessions = TutoringSession.all
+    @sessions = TutoringSession.where('scheduled_datetime > :now', now: Time.zone.now.to_datetime)
+                               .order(:scheduled_datetime)
   end
 
   def schedule_session_student

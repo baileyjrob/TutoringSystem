@@ -54,6 +54,7 @@ RSpec/ExampleLength:
   Exclude:
     - 'spec/feature/student_scheduler_spec.rb'
     - 'spec/feature/tutoring_session_scheduler_spec.rb'
+    - 'spec/feature/user_login_spec.rb'
 
 # Offense count: 2
 # Configuration parameters: Include, CustomTransform, IgnoreMethods, SpecSuffixOnly.
