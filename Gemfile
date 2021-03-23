@@ -72,6 +72,7 @@ group :test do
   gem 'database_cleaner-active_record'
   gem 'show_me_the_cookies'
   gem 'timecop'
+  gem 'brakeman'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

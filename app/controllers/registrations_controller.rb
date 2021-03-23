@@ -5,14 +5,14 @@ class RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
+  #def new
 
-  # end
+  #end
 
   # POST /resource
-  # def create
+  #def create
   #   super
-  # end
+  #end
 
   # GET /resource/edit
   # def edit
@@ -20,10 +20,10 @@ class RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  # def update
+  #def update
   #   super
 
-  # end
+  #end
 
   # DELETE /resource
   # def destroy
@@ -53,16 +53,16 @@ class RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
-    super(resource)
-    @user = current_user
-    domain = @user.email.split('@').last
-    @role = if domain == 'tamu.edu'
-              Role.where(role_name: 'Student')
-            else
-              Role.where(role_name: 'Spartan Tutor')
-            end
-    @user.roles << @role
-    flash[:notice] = 'Assigned to Student Role.'
+     super(resource)
+     @user = current_user
+     domain = @user.email.split('@').last
+     if (domain == 'tamu.edu')
+       @role = Role.where(:role_name => "Student")
+     else
+      @role = Role.where(:role_name => "Spartan Tutor")
+     end
+     @user.roles << @role
+     flash[:notice] = 'Assigned to Student Role.'
   end
 
   # The path used after sign up for inactive accounts.
