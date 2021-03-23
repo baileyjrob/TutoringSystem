@@ -42,6 +42,11 @@
           <li class="nav-item">
             <%=link_to "Tutoring Session", tutoring_session_index_path, class: 'nav-link' %>
           </li>
+          <li class="nav-item">
+            <%=link_to "Find a Tutor", 'tutor/index', class: 'nav-link', text: 'Tutor Matching'  %>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
           <% if current_user %>
           <li class="nav-item">
             <%= link_to 'My Account', edit_user_registration_path, class: 'nav-link' %>
