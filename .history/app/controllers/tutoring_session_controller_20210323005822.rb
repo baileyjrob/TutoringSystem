@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'tutoring_session_controller_helper'
+require tutoring_session_controller_helper
 # Controls the creation and tracking of tutoring sessions
 class TutoringSessionController < ApplicationController
   before_action :authenticate_user!

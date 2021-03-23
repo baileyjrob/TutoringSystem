@@ -37,6 +37,10 @@ RSpec.describe UsersController, type: :feature do
     it 'shows all users for admin' do
       visit('/users/')
       expect(page).to have_xpath(".//table//tr[@class='userInfo']", count: 4)
+      # expect(page).to have_content('User1')
+      # expect(page).to have_content('User2')
+      # expect(page).to have_content('User3')
+      # expect(page).to have_content('Admin')
     end
 
     it 'does not show for non admins' do
