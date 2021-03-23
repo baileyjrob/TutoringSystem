@@ -16,7 +16,7 @@ class User < ApplicationRecord
   has_many :role_users, dependent: :delete_all
   has_many :roles, through: :role_users
 
-  validates :first_name, :last_name, :email, :password, presence: true
+  validates :first_name, :last_name, :email, presence: true
   validate :email_domain
   def email_domain
     domain = email.split('@').last if email.present?
