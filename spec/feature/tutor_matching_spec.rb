@@ -35,6 +35,9 @@ RSpec.describe 'Tutor Matching', type: :feature do
 
     User.delete_all
   end
+end
+
+RSpec.describe 'Course Request', type: :feature do
 
   before do
     visit('/tutor/index')
