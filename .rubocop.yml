@@ -1,3 +1,5 @@
+inherit_from: .rubocop_todo.yml
+
 require: 
   - rubocop-performance
   - rubocop-rails
@@ -17,6 +19,10 @@ AllCops:
     - 'tmp/**/*'
     - 'vendor/**/*'
     - '.git/**/*'
+    - 'spec/feature/student_scheduler_spec.rb'
+    - 'spec/feature/tutoring_session_scheduler_spec.rb'
+    - 'spec/feature/user_login_spec.rb'
+    - 'spec/feature/users_controller_admin_view_spec.rb'
 Layout/LineLength:
   Max: 100
 Metrics/BlockLength:
