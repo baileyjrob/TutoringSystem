@@ -59,6 +59,11 @@ RSpec.describe 'Student scheduler', type: :feature do
       find(:link_or_button, 'Log in').click
     end
 
+    after do
+      TutoringSession.destroy_all
+      User.destroy_all
+    end
+
     it 'can get to the scheduling page' do
       # Go to scheduling page
       find_button 'Schedule tutoring session'
