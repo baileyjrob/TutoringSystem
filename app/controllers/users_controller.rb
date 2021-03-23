@@ -1,10 +1,37 @@
+# frozen_string_literal: true
+
+# Primary management class for users
 class UsersController < ApplicationController
+  before_action :authenticate_user!
+
   def index
+    if current_user.roles.include?(Role.admin_role)
+      admin_index
+      return
+    end
+    if current_user.roles.include?(Role.student_role)
+      redirect_to "/users/#{current_user.id}"
+      return
+    end
+
+    # TODO: Make view for non admins
+    admin_index
+  end
+
+  def admin_index
     @users = User.all
+
+    render 'admin_index'
   end
 
   def show
     @user = User.find(params[:id])
+    @tutoring_sessions = TutoringSession.all
+  end
+
+  def show_admin
+    @user = User.find(params[:id])
+    @tutoring_sessions = TutoringSession.all
   end
 
   def new
@@ -22,7 +49,35 @@ class UsersController < ApplicationController
   end
 
   def edit
+    if current_user.roles.include?(Role.admin_role)
+      admin_edit
+      return
+    end
+
+    # TODO: Make view for non admins
+    admin_edit
+  end
+
+  def admin_edit
     @user = User.find(params[:id])
+
+    render 'admin_edit'
+  end
+
+  def update
+    @user = User.find(params[:id])
+
+    if @user.update(user_params)
+      redirect_to @user
+    else
+      edit
+    end
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to root_path
   end
 
   def show_schedule
@@ -35,30 +90,17 @@ class UsersController < ApplicationController
 
   def schedule_student
     @user = User.find(params[:id])
-    @sessions = TutoringSession.where('scheduled_datetime > :now',
-                                      now: Time.zone.now.to_datetime)
+    @sessions = TutoringSession.where('scheduled_datetime > :now', now: Time.zone.now.to_datetime)
                                .order(:scheduled_datetime)
   end
 
   def schedule_session_student
     user = User.find(params[:id])
     tutor_session = TutoringSession.find(params[:sessionID])
-  end
 
-  def update
-    @user = User.find(params[:id])
+    tutor_session.users << user
 
-    if @user.update(user_params)
-      redirect_to @user
-    else
-      render :edit
-    end
-  end
-
-  def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-    redirect_to root_path
+    redirect_to "/users/#{params[:id]}"
   end
 
   def delete_session
@@ -73,8 +115,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :major, :email,
-                                 :encrypted_password)
+    params.require(:user).permit(:first_name, :last_name, :major, :email, :encrypted_password)
   end
 end
 
