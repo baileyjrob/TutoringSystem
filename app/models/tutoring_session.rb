@@ -49,21 +49,17 @@ class TutoringSession < ApplicationRecord
 
   def delete_repeating_sessions
     repeat_scheduled_datetime = scheduled_datetime + 1.week
-    repeat_end_date = end_of_semester_datetime
+    # repeat_end_date = end_of_semester_datetime
     repeating_scheduled_datetimes = []
-    while repeat_scheduled_datetime < repeat_end_date
+    while repeat_scheduled_datetime < end_of_semester_datetime
       repeating_scheduled_datetimes << repeat_scheduled_datetime
       repeat_scheduled_datetime += 1.week
-
     end
     rtsessions = TutoringSession
                  .where(scheduled_datetime: repeating_scheduled_datetimes)
                  .where('tutor_id = ?', tutor_id)
 
-    rtsessions.each do |rtsession|
-      rtsession.users.delete_all
-      rtsession.delete
-    end
+    rtsessions.each(&:destroy)
   end
 
   private

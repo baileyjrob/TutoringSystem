@@ -1,0 +1,35 @@
+require: 
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+AllCops:
+  TargetRubyVersion: 2.7.2
+  NewCops: disable
+  Exclude:
+    - 'db/**/*'
+    - 'script/**/*'
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'bin/**/*'
+    - !ruby/regexp /old_and_unused\.rb$/
+    - 'node_modules/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+    - '.git/**/*'
+    - 'spec/support/shared_db_connection.rb'
+Layout/LineLength:
+  Max: 100
+Metrics/BlockLength:
+  Exclude:
+    - config/**/*
+    - spec/**/*
+Style/Documentation:
+  Enabled: false
+Layout/IndentationWidth:
+  Width: 2
+Naming/ClassAndModuleCamelCase:
+  Enabled: true
+Naming/MethodName:
+  Enabled: true
+  EnforcedStyle: snake_case #default
