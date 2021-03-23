@@ -20,7 +20,7 @@ require 'show_me_the_cookies'
 
 require 'capybara/apparition'
 require 'capybara/rspec'
-Capybara.javascript_driver = :apparition
+Capybara.javascript_driver = :apparitions
 
 SimpleCov.start 'rails' do
   add_filter '/bin/'

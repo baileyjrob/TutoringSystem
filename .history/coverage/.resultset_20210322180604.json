@@ -1,7 +1,11 @@
 {
   "RSpec": {
     "coverage": {
+<<<<<<< HEAD
       "C:/Users/Amanda/Desktop/test/app/models/user.rb": {
+=======
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/user.rb": {
+>>>>>>> master
         "lines": [
           null,
           null,
@@ -37,8 +41,11 @@
           null,
           null,
           1,
+<<<<<<< HEAD
           53,
           53,
+=======
+>>>>>>> dev
           0,
           0,
           null,
@@ -56,7 +63,11 @@
           null
         ]
       },
+<<<<<<< HEAD
       "C:/Users/Amanda/Desktop/test/app/models/application_record.rb": {
+=======
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/application_record.rb": {
+>>>>>>> master
         "lines": [
           null,
           null,
@@ -66,7 +77,11 @@
           null
         ]
       },
+<<<<<<< HEAD
       "C:/Users/Amanda/Desktop/test/app/helpers/application_helper.rb": {
+=======
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/helpers/application_helper.rb": {
+>>>>>>> master
         "lines": [
           null,
           null,
@@ -75,7 +90,11 @@
           null
         ]
       },
+<<<<<<< HEAD
       "C:/Users/Amanda/Desktop/test/app/helpers/landing_helper.rb": {
+=======
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/helpers/landing_helper.rb": {
+>>>>>>> master
         "lines": [
           null,
           null,
@@ -84,7 +103,11 @@
           null
         ]
       },
+<<<<<<< HEAD
       "C:/Users/Amanda/Desktop/test/app/helpers/student_helper.rb": {
+=======
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/helpers/student_helper.rb": {
+>>>>>>> master
         "lines": [
           null,
           null,
@@ -93,7 +116,11 @@
           null
         ]
       },
+<<<<<<< HEAD
       "C:/Users/Amanda/Desktop/test/app/helpers/tutoring_session_helper.rb": {
+=======
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/helpers/tutoring_session_helper.rb": {
+>>>>>>> master
         "lines": [
           null,
           null,
@@ -102,7 +129,11 @@
           null
         ]
       },
+<<<<<<< HEAD
       "C:/Users/Amanda/Desktop/test/app/helpers/users_helper.rb": {
+=======
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/helpers/users_helper.rb": {
+>>>>>>> master
         "lines": [
           null,
           null,
@@ -112,7 +143,11 @@
           null
         ]
       },
+<<<<<<< HEAD
       "C:/Users/Amanda/Desktop/test/app/controllers/tutoring_session_controller.rb": {
+=======
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/controllers/tutoring_session_controller.rb": {
+>>>>>>> master
         "lines": [
           null,
           null,
@@ -121,14 +156,21 @@
           1,
           null,
           1,
+<<<<<<< HEAD
 
           14,
+=======
+          12,
+          4,
+          4,
+>>>>>>> master
           null,
           null,
           14,
           null,
           null,
           null,
+<<<<<<< HEAD
           null,
           14,
           112,
@@ -136,10 +178,21 @@
           98,
           null,
           98,
+=======
+          8,
+          8,
+          null,
+          null,
+          12,
+          null,
+          null,
+          12,
+>>>>>>> master
           null,
           null,
           null,
           null,
+<<<<<<< HEAD
           1,
           14,
           4,
@@ -148,11 +201,20 @@
           4,
           4,
           4,
+=======
+          12,
+          96,
+          12,
+          84,
+          null,
+          84,
+>>>>>>> master
           null,
           4,
           4,
           null,
           null,
+<<<<<<< HEAD
           null,
           10,
           10,
@@ -160,6 +222,10 @@
           14,
           14,
           14,
+=======
+          12,
+          12,
+>>>>>>> master
           null,
           null,
           1,
@@ -221,7 +287,11 @@
           null
         ]
       },
+<<<<<<< HEAD
       "C:/Users/Amanda/Desktop/test/app/controllers/application_controller.rb": {
+=======
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/controllers/application_controller.rb": {
+>>>>>>> master
         "lines": [
           null,
           null,
@@ -233,7 +303,15 @@
           1,
           null,
           1,
+<<<<<<< HEAD
+<<<<<<< HEAD
           39,
+=======
+          8,
+>>>>>>> dev
+=======
+          47,
+>>>>>>> master
           null,
           null,
           null,
@@ -241,17 +319,36 @@
           1,
           null,
           1,
+<<<<<<< HEAD
+<<<<<<< HEAD
           39,
           null,
+=======
+          47,
+>>>>>>> master
           null,
           39,
+=======
+          8,
+          null,
+<<<<<<< HEAD
+          null,
+          8,
+>>>>>>> dev
+=======
+          47,
+>>>>>>> master
           null,
           null,
           null,
           null
         ]
       },
+<<<<<<< HEAD
       "C:/Users/Amanda/Desktop/test/app/controllers/users_controller.rb": {
+=======
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/controllers/users_controller.rb": {
+>>>>>>> master
         "lines": [
           null,
           null,
@@ -260,32 +357,18 @@
           1,
           null,
           1,
+<<<<<<< HEAD
           0,
           0,
           0,
+=======
+          3,
+          3,
+          3,
+>>>>>>> master
           null,
           null,
           null,
-          0,
-          null,
-          null,
-          1,
-          0,
-          null,
-          0,
-          null,
-          null,
-          1,
-          0,
-          0,
-          null,
-          null,
-          1,
-          0,
-          0,
-          null,
-          null,
-          1,
           0,
           null,
           null,
@@ -293,6 +376,26 @@
           0,
           null,
           0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          0,
           0,
           null,
           0,
@@ -300,9 +403,15 @@
           null,
           null,
           1,
+<<<<<<< HEAD
           0,
           0,
           0,
+=======
+          2,
+          2,
+          2,
+>>>>>>> master
           null,
           null,
           null,
@@ -358,7 +467,11 @@
           null
         ]
       },
+<<<<<<< HEAD
       "C:/Users/Amanda/Desktop/test/app/models/course.rb": {
+=======
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/course.rb": {
+>>>>>>> master
         "lines": [
           null,
           null,
@@ -376,7 +489,11 @@
           null
         ]
       },
+<<<<<<< HEAD
       "C:/Users/Amanda/Desktop/test/app/models/department.rb": {
+=======
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/department.rb": {
+>>>>>>> master
         "lines": [
           null,
           null,
@@ -390,7 +507,11 @@
           null
         ]
       },
+<<<<<<< HEAD
       "C:/Users/Amanda/Desktop/test/app/models/role.rb": {
+=======
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/role.rb": {
+>>>>>>> master
         "lines": [
           null,
           null,
@@ -406,12 +527,16 @@
           null,
           null,
           1,
-          0,
+          3,
           null,
           null
         ]
       },
+<<<<<<< HEAD
       "C:/Users/Amanda/Desktop/test/app/models/spartan_session.rb": {
+=======
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/spartan_session.rb": {
+>>>>>>> master
         "lines": [
           null,
           null,
@@ -424,7 +549,11 @@
           null
         ]
       },
+<<<<<<< HEAD
       "C:/Users/Amanda/Desktop/test/app/models/tutoring_session.rb": {
+=======
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/tutoring_session.rb": {
+>>>>>>> master
         "lines": [
           null,
           null,
@@ -571,7 +700,11 @@
           null
         ]
       },
+<<<<<<< HEAD
       "C:/Users/Amanda/Desktop/test/app/controllers/student_controller.rb": {
+=======
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/controllers/student_controller.rb": {
+>>>>>>> master
         "lines": [
           null,
           null,
@@ -580,7 +713,11 @@
           1,
           1,
           null,
+<<<<<<< HEAD
           22,
+=======
+          7,
+>>>>>>> dev
           null,
           null,
           1,
@@ -601,6 +738,7 @@
           null
         ]
       },
+<<<<<<< HEAD
       "C:/Users/Amanda/Desktop/test/app/models/tutoring_session_user.rb": {
         "lines": [
           null,
@@ -726,6 +864,9 @@
         }
       },
       "C:/Users/Amanda/Desktop/test/app/models/course_tutoring_session.rb": {
+=======
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/channels/application_cable/channel.rb": {
+>>>>>>> master
         "lines": [
           null,
           null,
@@ -740,7 +881,11 @@
         "branches": {
         }
       },
+<<<<<<< HEAD
       "C:/Users/Amanda/Desktop/test/app/models/course_user.rb": {
+=======
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/channels/application_cable/connection.rb": {
+>>>>>>> master
         "lines": [
           null,
           null,
@@ -787,6 +932,10 @@
         }
       }
     },
+<<<<<<< HEAD
     "timestamp": 1616453077
+=======
+    "timestamp": 1616451267
+>>>>>>> master
   }
 }
