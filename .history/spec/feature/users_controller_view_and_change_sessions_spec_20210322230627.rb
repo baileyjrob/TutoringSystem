@@ -39,7 +39,7 @@ RSpec.describe UsersController, type: :feature do
   end
 
   it 'shows all of user\'s sessions' do
-    expect(page).to have_xpath(".//table//tr[@class='tutoringSession']", count: 3)
+    expect(page).to have_xpath(".//table//tr", count: 3)
   end
 
   it 'properly deletes sessions', js: true do

@@ -6,11 +6,31 @@ RSpec.describe 'Tutor Matching', type: :feature do
     it 'matches tutors using tutor majors' do
       # Create some data
       User.create!(id: 15,
+<<<<<<< HEAD
                    first_name: 'Adam',
                    last_name: 'Doe',
                    major: 'CHEM',
                    email: 'adam@tamu.edu',
                    password: 'T3st!!e')
+      User.create!(id: 16,
+                   first_name: 'Ben',
+                   last_name: 'Doe',
+                   major: 'CHEM',
+                   email: 'ben@tamu.edu',
+                   password: 'T3st!!f')
+      User.create!(id: 17,
+                   first_name: 'Christine',
+                   last_name: 'Doe',
+                   major: 'CHEM',
+                   email: 'christine@tamu.edu',
+                   password: 'T3st!!g')
+=======
+                  first_name: 'Adam',
+                  last_name: 'Doe',
+                  major: 'CHEM',
+                  email: 'adam@tamu.edu',
+                  password: 'T3st!!e')
+>>>>>>> 4695b090b672882afbfe7acb1cebae82f66b4339
       User.create!(id: 18,
                    first_name: 'Dakota',
                    last_name: 'Doe',
