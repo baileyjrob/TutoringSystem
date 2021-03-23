@@ -3,6 +3,7 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations' }
   root 'users#index'
+  post '/users', :to => 'users#index'
   get '/users/index', :to => 'users#index'
   get '/users/schedule', :to => 'users#show_schedule', :as => :show_schedule
   get '/users/:id', :to => 'users#show', :as => :user
