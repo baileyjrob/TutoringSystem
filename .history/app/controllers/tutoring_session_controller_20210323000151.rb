@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require TutoringSessionControllerHelper
 # Controls the creation and tracking of tutoring sessions
 class TutoringSessionController < ApplicationController
   before_action :authenticate_user!
@@ -24,15 +23,23 @@ class TutoringSessionController < ApplicationController
 
   def index
     if cookies.key?('start_week')
-      start_week = timezone_week_start
-      cookie_offset if cookies.key?('week_offset')
+      start_week = Time.zone.at(cookies['start_week'].to_f / 1000).beginning_of_day
+
+      if cookies.key?('week_offset')
+        week_offset = cookies['week_offset'].to_f * 1.week
+        cookies.delete 'week_offset'
+
+        start_week += week_offset
+        cookies['start_week'] = start_week.to_datetime.strftime('%Q')
+      end
+
     else
-      start_week = date_week_start
+      start_week = Date.today.beginning_of_week.to_datetime
       cookies['start_week'] = start_week.strftime('%Q')
     end
     generate_week(start_week)
-    @start_of_week = week_to_string(start_week)
-    @end_of_week = week_to_string(start_week + 6.days)
+    @start_of_week = start_week.to_date.to_formatted_s(:long_ordinal)
+    @end_of_week = (start_week + 6.days).to_date.to_formatted_s(:long_ordinal)
   end
 
   def new
@@ -90,5 +97,11 @@ class TutoringSessionController < ApplicationController
 
   def tsession_params
     params.require(:tutoring_session).permit(:scheduled_datetime)
+  end
+
+  def week_sessions(start_week)
+    TutoringSession
+      .where('scheduled_datetime BETWEEN ? AND ?', start_week, start_week + 1.week)
+      .where('tutor_id = ?', current_user.id)
   end
 end
