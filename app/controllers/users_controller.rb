@@ -80,6 +80,14 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def show_schedule
+    if user_signed_in?
+      @sessions = current_user.tutoring_sessions
+    else
+      redirect_to new_user_session_path
+    end
+  end
+
   def schedule_student
     @user = User.find(params[:id])
     @sessions = TutoringSession.where('scheduled_datetime > :now', now: Time.zone.now.to_datetime)
@@ -93,6 +101,15 @@ class UsersController < ApplicationController
     tutor_session.users << user
 
     redirect_to "/users/#{params[:id]}"
+  end
+
+  def delete_session
+    @user = User.find(current_user.id)
+    @tutor_session = TutoringSession.find(params[:id])
+
+    @user.tutoring_sessions.delete(@tutor_session)
+
+    redirect_to show_schedule_path
   end
 
   private
