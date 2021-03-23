@@ -26,7 +26,7 @@ class TutoringSessionController < ApplicationController
   def index
     if cookies.key?('start_week')
       week_offset = 0
-      start_week = Time.at(cookies['start_week'].to_f / 1000).beginning_of_day
+      start_week = Time.zone.at(cookies['start_week'].to_f / 1000).beginning_of_day
 
       if cookies.key?('week_offset')
         week_offset = cookies['week_offset'].to_f * 1.week
