@@ -45,7 +45,7 @@ RSpec.describe UsersController, type: :feature do
 
     it 'does not show for non admins' do
       visit('/users/')
-      find(:link_or_button, 'Sign out').click
+      find(:link_or_button, 'admin@tamu.edu (Sign out)').click
 
       visit('/users/')
       expect(page).to have_content('You need to sign in or sign up before continuing.')
