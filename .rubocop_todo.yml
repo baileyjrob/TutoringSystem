@@ -22,6 +22,7 @@ Lint/UselessAssignment:
     - 'app/controllers/tutoring_session_controller.rb'
     - 'app/controllers/users_controller.rb'
     - 'app/models/tutoring_session.rb'
+    - 'spec/feature/tutor_matching_spec.rb'
     - 'spec/feature/user_login_spec.rb'
 
 # Offense count: 3
@@ -45,15 +46,30 @@ Metrics/MethodLength:
   Max: 57
 
 # Offense count: 1
+# Configuration parameters: EnforcedStyle, IgnoredPatterns.
+# SupportedStyles: snake_case, camelCase
+Naming/MethodName:
+  Exclude:
+    - 'app/controllers/tutor_controller.rb'
+
+# Offense count: 6
+# Configuration parameters: EnforcedStyle, AllowedIdentifiers.
+# SupportedStyles: snake_case, camelCase
+Naming/VariableName:
+  Exclude:
+    - 'app/controllers/tutor_controller.rb'
+
+# Offense count: 1
 RSpec/EmptyExampleGroup:
   Exclude:
     - 'spec/requests/users_request_spec.rb'
 
-# Offense count: 10
+# Offense count: 11
 # Configuration parameters: Max.
 RSpec/ExampleLength:
   Exclude:
     - 'spec/feature/student_scheduler_spec.rb'
+    - 'spec/feature/tutor_matching_spec.rb'
     - 'spec/feature/tutoring_session_scheduler_spec.rb'
     - 'spec/feature/user_login_spec.rb'
 

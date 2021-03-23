@@ -11,18 +11,6 @@ RSpec.describe 'Tutor Matching', type: :feature do
                   major: 'CHEM',
                   email: 'adam@tamu.edu',
                   password: 'T3st!!e')
-      User.create!(id: 16,
-                  first_name: 'Ben',
-                  last_name: 'Doe',
-                  major: 'CHEM',
-                  email: 'ben@tamu.edu',
-                  password: 'T3st!!f')
-      User.create!(id: 17,
-                  first_name: 'Christine',
-                  last_name: 'Doe',
-                  major: 'CHEM',
-                  email: 'christine@tamu.edu',
-                  password: 'T3st!!g')
       User.create!(id: 18,
                   first_name: 'Dakota',
                   last_name: 'Doe',
