@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-describe TutoringSessionController, type: :feature do
+RSpec.describe TutoringSessionScheduler, type: :feature do
   let(:frozen_time) { '25 May 02:00:00 +0000'.to_datetime }
   let!(:tutor) do
     User.create(
@@ -159,7 +159,7 @@ describe TutoringSessionController, type: :feature do
       tsession.users << tutor
 
       visit("/tutoring_session/#{tsession.id}")
-      expect(page).to have_content('Session scheduled for May 26th, 2021 at 08:00 AM')
+      expect(page).to have_content('Session scheduled  May 26th, 2021 at 08:00 AM')
       expect(page).to have_content('Tutor User')
     end
 
