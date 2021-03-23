@@ -21,6 +21,7 @@ AllCops:
     - 'spec/feature/tutoring_session_scheduler_spec.rb'
     - 'spec/feature/user_login_spec.rb'
     - 'spec/feature/users_controller_admin_view_spec.rb'
+    - 'spec/support/shared_db_connection.rb'
 Layout/LineLength:
   Max: 100
 Metrics/BlockLength:
