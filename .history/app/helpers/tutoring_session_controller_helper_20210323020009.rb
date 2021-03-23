@@ -14,7 +14,6 @@ module TutoringSessionControllerHelper
 
     start_week += week_offset
     cookies['start_week'] = start_week.to_datetime.strftime('%Q')
-    return start_week
   end
 
   def week_to_string(week)
