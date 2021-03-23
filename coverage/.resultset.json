@@ -24,8 +24,8 @@
           1,
           1,
           1,
-          5,
-          5,
+          3,
+          3,
           null,
           0,
           null,
@@ -80,15 +80,6 @@
           null
         ]
       },
-      "/home/savyu/TutoringSystem/app/helpers/student_helper.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          1,
-          null
-        ]
-      },
       "/home/savyu/TutoringSystem/app/helpers/tutor_helper.rb": {
         "lines": [
           null,
@@ -98,15 +89,6 @@
         ]
       },
       "/home/savyu/TutoringSystem/app/helpers/tutoring_session_helper.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          1,
-          null
-        ]
-      },
-      "/home/savyu/TutoringSystem/app/helpers/users_helper.rb": {
         "lines": [
           null,
           null,
@@ -269,38 +251,6 @@
         "branches": {
         }
       },
-      "/home/savyu/TutoringSystem/app/controllers/student_controller.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
       "/home/savyu/TutoringSystem/app/controllers/tutoring_session_controller.rb": {
         "lines": [
           null,
@@ -424,42 +374,6 @@
           0,
           0,
           0,
-          null,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
           0,
           0,
           0,
@@ -472,6 +386,20 @@
           0,
           0,
           null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
           0,
           0,
           null,
@@ -491,8 +419,52 @@
           0,
           0,
           null,
+          null,
           0,
           0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
           0,
           0,
           null,
@@ -520,6 +492,33 @@
         "branches": {
         }
       },
+      "/home/savyu/TutoringSystem/app/jobs/application_job.rb": {
+        "lines": [
+          null,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "/home/savyu/TutoringSystem/app/mailers/application_mailer.rb": {
+        "lines": [
+          null,
+          null,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
       "/home/savyu/TutoringSystem/app/models/course.rb": {
         "lines": [
           null,
@@ -537,7 +536,8 @@
           0,
           0
         ],
-        "branches": {}
+        "branches": {
+        }
       },
       "/home/savyu/TutoringSystem/app/models/course_request.rb": {
         "lines": [
@@ -547,7 +547,8 @@
           0,
           0
         ],
-        "branches": {}
+        "branches": {
+        }
       },
       "/home/savyu/TutoringSystem/app/models/course_tutoring_session.rb": {
         "lines": [
@@ -612,6 +613,10 @@
           null,
           null,
           null,
+          0,
+          null,
+          0,
+          0,
           0,
           null,
           0,
@@ -690,8 +695,6 @@
           0,
           null,
           0,
-          null,
-          0,
           0,
           null,
           null,
@@ -739,62 +742,6 @@
           0,
           0,
           null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
           0,
           0,
           0,
@@ -811,12 +758,13 @@
           0,
           0,
           0,
-          0,
+          null,
           0,
           0,
           0
         ],
-        "branches": {}
+        "branches": {
+        }
       },
       "/home/savyu/TutoringSystem/app/models/tutoring_session_user.rb": {
         "lines": [
@@ -829,9 +777,10 @@
           0,
           0
         ],
-        "branches": {}
+        "branches": {
+        }
       }
     },
-    "timestamp": 1616468582
+    "timestamp": 1616470540
   }
 }
