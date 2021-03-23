@@ -1,15 +1,18 @@
+inherit_from: .rubocop_todo.yml
+
 require: 
   - rubocop-performance
   - rubocop-rails
   - rubocop-rspec
 AllCops:
+  TargetRubyVersion: 2.7.2
   NewCops: disable
   Exclude:
     - 'db/**/*'
     - 'script/**/*'
     - 'bin/**/*'
     - 'config/**/*'
-    - 'script/**/*' 
+    - 'script/**/*'
     - 'bin/**/*'
     - !ruby/regexp /old_and_unused\.rb$/
     - 'node_modules/**/*'
