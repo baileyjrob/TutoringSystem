@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 2021_03_18_210825) do
     t.datetime "session_datetime"
     t.string "semester"
   end
-
+  
   create_table "tutoring_session_users", id: false, force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "tutoring_session_id", null: false

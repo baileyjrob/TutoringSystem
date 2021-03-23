@@ -1,0 +1,25 @@
+<h1>Review Scheduled Sessions</h1>
+<table>
+  <tr>
+    <th>Tutor Name</th>
+    <th>Contact Info</th>
+    <th>Scheduled Datetime</th>
+  </tr>
+  <% @sessions.each do |session| %>
+  <!--
+      TODO: Make sure the date is later than now and that the status is not cancelled
+    -->
+  <tr>
+    <!-- Make a row in the table for each tutoring session. Includes details and leave option -->
+    <% tutor = User.find(session.tutor_id) %>
+    <td><%= tutor.first_name + " " + tutor.last_name %></td>
+    <td><%= tutor.email %></td>
+    <% date = session.scheduled_datetime.localtime.strftime("%B %d at %l:%M %p %Z") %>
+    <td><%= date %></td>
+    <!--
+        TODO: Implement delete button
+      -->
+    <td>Placeholder For Leave Session</td>
+  </tr>
+  <% end %>
+</table>
