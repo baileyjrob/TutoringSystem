@@ -5,25 +5,9 @@ RSpec.describe 'Tutor Matching', type: :feature do
   describe 'tutor matching' do
     it 'matches tutors using tutor majors' do
       # Create some data
-      User.create!(id: 15,
-                   first_name: 'Adam',
-                   last_name: 'Doe',
-                   major: 'CHEM',
-                   email: 'adam@tamu.edu',
-                   password: 'T3st!!e')
-      User.create!(id: 18,
-                   first_name: 'Dakota',
-                   last_name: 'Doe',
-                   major: 'MATH',
-                   email: 'dakota@tamu.edu',
-                   password: 'T3st!!h')
-      User.create!(id: 19,
-                   first_name: 'Ethan',
-                   last_name: 'Doe',
-                   major: 'MATH',
-                   email: 'ethan@tamu.edu',
-                   password: 'T3st!!i')
-
+      User.create!(id: 15, first_name: 'Adam', last_name: 'Doe', major: 'CHEM', email: 'adam@tamu.edu', password: 'T3st!!e')
+      User.create!(id: 18, first_name: 'Dakota', last_name: 'Doe', major: 'MATH', email: 'dakota@tamu.edu', password: 'T3st!!h')
+      
       # Go to tutor matching page
       visit('/tutor/index')
       expect(page).to have_content('Tutor Matching Page')
@@ -35,7 +19,6 @@ RSpec.describe 'Tutor Matching', type: :feature do
 
       # Check what is on the tutor matching page
       expect(page).to have_content('Dakota Doe Major: MATH')
-      expect(page).to have_content('Ethan Doe Major: MATH')
 
       # Enter new department name that does not have available tutors
       fill_in 'filter_major', with: 'ENGR'
