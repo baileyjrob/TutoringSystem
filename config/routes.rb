@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   get 'student/index'
   get 'student/schedule'
   post 'student/schedule' => 'student#schedule_session'
+  get '/users/schedule', :to => 'users#show_schedule', :as => :show_schedule
   get '/users/:id', :to => 'users#show', :as => :user
+  post '/users/:id/delete_session', :to => 'users#delete_session', :as => :delete_session
   get '/users/:id/schedule_student', :to => 'users#schedule_student'
   post '/users/:id/schedule_session_student' => 'users#schedule_session_student'
   #resources :student, only: [:index, :create, :destroy]
