@@ -6,35 +6,35 @@ RSpec.describe 'Tutor Matching', type: :feature do
     it 'matches tutors using tutor majors' do
       # Create some data
       User.create!(id: 15,
-                  first_name: 'Adam',
-                  last_name: 'Doe',
-                  major: 'CHEM',
-                  email: 'adam@tamu.edu',
-                  password: 'T3st!!e')
+                   first_name: 'Adam',
+                   last_name: 'Doe',
+                   major: 'CHEM',
+                   email: 'adam@tamu.edu',
+                   password: 'T3st!!e')
       User.create!(id: 16,
-                  first_name: 'Ben',
-                  last_name: 'Doe',
-                  major: 'CHEM',
-                  email: 'ben@tamu.edu',
-                  password: 'T3st!!f')
+                   first_name: 'Ben',
+                   last_name: 'Doe',
+                   major: 'CHEM',
+                   email: 'ben@tamu.edu',
+                   password: 'T3st!!f')
       User.create!(id: 17,
-                  first_name: 'Christine',
-                  last_name: 'Doe',
-                  major: 'CHEM',
-                  email: 'christine@tamu.edu',
-                  password: 'T3st!!g')
+                   first_name: 'Christine',
+                   last_name: 'Doe',
+                   major: 'CHEM',
+                   email: 'christine@tamu.edu',
+                   password: 'T3st!!g')
       User.create!(id: 18,
-                  first_name: 'Dakota',
-                  last_name: 'Doe',
-                  major: 'MATH',
-                  email: 'dakota@tamu.edu',
-                  password: 'T3st!!h')
+                   first_name: 'Dakota',
+                   last_name: 'Doe',
+                   major: 'MATH',
+                   email: 'dakota@tamu.edu',
+                   password: 'T3st!!h')
       User.create!(id: 19,
-                  first_name: 'Ethan',
-                  last_name: 'Doe',
-                  major: 'MATH',
-                  email: 'ethan@tamu.edu',
-                  password: 'T3st!!i')
+                   first_name: 'Ethan',
+                   last_name: 'Doe',
+                   major: 'MATH',
+                   email: 'ethan@tamu.edu',
+                   password: 'T3st!!i')
 
       # Go to tutor matching page
       visit('/tutor/index')
