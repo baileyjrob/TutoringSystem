@@ -15,5 +15,6 @@ Rails.application.routes.draw do
   resources :tutoring_session
   resources :users
   resources :tutors
+  default_url_options :host => "localhost:3000"
 
 end
