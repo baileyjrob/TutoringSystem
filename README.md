@@ -11,3 +11,4 @@ Main Repo: https://github.tamu.edu/baileyjrob/CSCE_431_Project
 
 Main Heroku site: https://still-meadow-96529.herokuapp.com/
 
+If you want to use mailcatcher, do not add to the gemfile! run 'gem install mailcatcher' then 'mailcatcher' to get started.

@@ -53,7 +53,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
-    super(resource)
+
     @user = current_user
     domain = @user.email.split('@').last
     @role = if domain == 'tamu.edu'
@@ -62,7 +62,7 @@ class RegistrationsController < Devise::RegistrationsController
               Role.where(role_name: 'Spartan Tutor')
             end
     @user.roles << @role
-    flash[:notice] = 'Assigned to Student Role.'
+    user_session
   end
 
   # The path used after sign up for inactive accounts.
