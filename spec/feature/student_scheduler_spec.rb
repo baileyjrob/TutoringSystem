@@ -34,6 +34,12 @@ RSpec.describe 'Student scheduler', type: :feature do
                            password: 'T3st!!d')
       user3.roles << Role.find_by(role_name: 'Tutor')
 
+      user4 = User.create!(first_name: 'James',
+                           last_name: 'Doe',
+                           email: 'james@tamu.edu',
+                           password: 'T3st!!e')
+      user4.roles << Role.find_by(role_name: 'Student')
+
       TutoringSession.create!(id: 1,
                               tutor_id: user2.id,
                               scheduled_datetime: Time.zone.now + 100_000,
@@ -125,6 +131,20 @@ RSpec.describe 'Student scheduler', type: :feature do
       click_link 'Schedule Tutoring Session'
       expect(page).not_to have_button 'Join session', id: join_id
       find_button 'Join session', id: remain_id
+    end
+
+    it 'only schedules sessions for the current user' do
+      visit "/users/4"
+
+      # Go to scheduling page
+      click_link 'Schedule Tutoring Session'
+
+      # Join a session
+      click_button 'Join session', id: join_id
+
+      # Make sure the CURRENT user joined the session
+      tsession = TutoringSession.find(join_id)
+      expect(tsession.users.find_by(id: student_id).blank?).to eq(false)
     end
   end
 end
