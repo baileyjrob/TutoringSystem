@@ -134,7 +134,7 @@ RSpec.describe 'Student scheduler', type: :feature do
     end
 
     it 'only schedules sessions for the current user' do
-      visit "/users/4"
+      visit '/users/4'
 
       # Go to scheduling page
       click_link 'Schedule Tutoring Session'
