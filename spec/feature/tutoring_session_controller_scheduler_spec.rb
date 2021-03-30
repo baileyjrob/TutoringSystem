@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 RSpec.describe TutoringSessionController, type: :feature do
-  let(:frozen_time) { '25 May 02:00:00 +0000'.to_datetime }
+  let(:frozen_time) { '25 May 02:00:00 CDT'.to_datetime }
   let!(:tutor) do
     User.create(
       first_name: 'Tutor',
@@ -19,13 +19,13 @@ RSpec.describe TutoringSessionController, type: :feature do
       email: 'student@tamu.edu'
     )
   end
-  let(:scheduled_datetime) { '26 May 2021 08:00:00 +0000'.to_datetime }
+  let(:scheduled_datetime) { Time.zone.parse('26 May 2021 08:00:00 CDT') }
   let(:beginning_of_week) { Time.zone.today.beginning_of_week }
 
   after { Timecop.return }
 
   before do
-    Timecop.freeze(frozen_time)
+    Timecop.travel(frozen_time)
     User.create(
       first_name: 'Admin',
       last_name: 'User',
@@ -184,8 +184,8 @@ RSpec.describe TutoringSessionController, type: :feature do
 
     it 'is able to delete session and any repeating sessions at the same time',
        js: true do
-      TutoringSession.create(scheduled_datetime: scheduled_datetime,
-                             tutor_id: tutor.id)
+      tsession = TutoringSession.create(scheduled_datetime: scheduled_datetime,
+                                        tutor_id: tutor.id)
       TutoringSession.create(scheduled_datetime: scheduled_datetime + 1.week,
                              tutor_id: tutor.id)
 

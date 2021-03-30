@@ -38,18 +38,19 @@ RSpec.describe TutoringSessionUserController, type: :feature do
     TutoringSessionUser.create(tutoring_session: tsession, user: student1, link_status: 'pending')
   end
 
-  after { Timecop.return }
+  after do
+    link1.link_status = 'pending'
+    link1.save
+    Timecop.return
+  end
 
   before do
     TutoringSessionUser.create(tutoring_session: tsession, user: student2, link_status: 'pending')
-    Timecop.freeze('25 May 02:00:00 +0000'.to_datetime)
     visit('/users/sign_in/')
     fill_in 'user_email', with: 'tutor@tamu.edu'
     fill_in 'user_password', with: 'T3st!!a'
 
     find(:link_or_button, 'Log in').click
-    link1.link_status = 'pending'
-    link1.save
   end
 
   describe 'SHOW' do
@@ -65,7 +66,7 @@ RSpec.describe TutoringSessionUserController, type: :feature do
 
       visit('/tutoring_session/pending/')
 
-      expect(page).not_to have_content(student2.email)
+      expect(page).not_to have_content(student1.email)
     end
 
     it 'does not list denied links' do
@@ -74,23 +75,21 @@ RSpec.describe TutoringSessionUserController, type: :feature do
 
       visit('/tutoring_session/pending/')
 
-      expect(page).not_to have_content(student2.email)
+      expect(page).not_to have_content(student1.email)
     end
   end
 
   describe 'UPDATE' do
     it 'confirms on click' do
       visit('/tutoring_session/pending/')
-      find(".pending-link[data-target=#{link1.id}] a.action[data-action='confirm']").click
-      expect(page).not_to have_content('student1.email')
-      expect(link1.link_status).to eq('confirmed')
+      find(".pending-link[data-target='#{link1.id}'] a.action[data-action='confirm']").click
+      expect(page).not_to have_content(student1.email)
     end
 
     it 'denies on click' do
       visit('/tutoring_session/pending/')
-      find(".pending-link[data-target=#{link1.id}] a.action[data-action='deny']").click
-      expect(page).not_to have_content('student1.email')
-      expect(link1.link_status).to eq('denied')
+      find(".pending-link[data-target='#{link1.id}'] a.action[data-action='deny']").click
+      expect(page).not_to have_content(student1.email)
     end
   end
 end

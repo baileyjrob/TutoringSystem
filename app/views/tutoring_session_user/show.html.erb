@@ -24,8 +24,8 @@
             <td><%= link.user.first_name %> <%= link.user.last_name  %></td>
             <td><%= link.user.email  %></td>
             <td>
-              <a class="text-danger action" data-action="deny" href="<%= "/tutoring_session_user/#{link.id}/confirm" %>"><i class="fas fa-times"></i></a>
-              <a class="text-success action" data-action="confirm" href="<%= "/tutoring_session_user/#{link.id}/deny" %>"><i class="fas fa-check"></i></a>
+              <a class="text-danger action" data-action="deny" href="<%= "/tutoring_session_user/#{link.id}/deny" %>"><i class="fas fa-times"></i></a>
+              <a class="text-success action" data-action="confirm" href="<%= "/tutoring_session_user/#{link.id}/confirm" %>"><i class="fas fa-check"></i></a>
               <% #edit_user_path(user) %>
             </td>
           </tr>
