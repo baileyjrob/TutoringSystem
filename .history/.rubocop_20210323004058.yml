@@ -33,9 +33,3 @@ Naming/ClassAndModuleCamelCase:
 Naming/MethodName:
   Enabled: true
   EnforcedStyle: snake_case #default
-RSpec/MultipleExpectations:
-  Exclude: 
-    - 'spec/feature/*'
-RSpec/ExampleLength:
-  Exclude:
-    - 'spec/feature/*'

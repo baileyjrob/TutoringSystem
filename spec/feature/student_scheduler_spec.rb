@@ -3,7 +3,13 @@
 require 'rails_helper'
 RSpec.describe 'Student scheduler', type: :feature do
   describe 'student scheduler' do
-    it 'schedules a tutoring session' do
+    let(:student_id) { 1 }
+    let(:student_name) { 'John Doe' }
+    let(:join_id) { 1 }
+    let(:remain_id) { 2 }
+    let(:early_id) { 3 }
+
+    before do
       # Create some data
       Role.create!([{ role_name: 'Admin' },
                     { role_name: 'Tutor' },
@@ -28,79 +34,97 @@ RSpec.describe 'Student scheduler', type: :feature do
                            password: 'T3st!!d')
       user3.roles << Role.find_by(role_name: 'Tutor')
 
-      tsession1 = TutoringSession.create!(id: 1,
-                                          tutor_id: user2.id,
-                                          scheduled_datetime: Time.zone.now + 100_000,
-                                          completed_datetime: nil,
-                                          session_status: '')
+      TutoringSession.create!(id: 1,
+                              tutor_id: user2.id,
+                              scheduled_datetime: Time.zone.now + 100_000,
+                              completed_datetime: nil,
+                              session_status: '')
 
-      tsession2 = TutoringSession.create!(id: 2,
-                                          tutor_id: user3.id,
-                                          scheduled_datetime: Time.zone.now + 100_000,
-                                          completed_datetime: nil,
-                                          session_status: '')
+      TutoringSession.create!(id: 2,
+                              tutor_id: user3.id,
+                              scheduled_datetime: Time.zone.now + 100_000,
+                              completed_datetime: nil,
+                              session_status: '')
 
-      tsession3 = TutoringSession.create!(id: 3,
-                                          tutor_id: user3.id,
-                                          scheduled_datetime: Time.zone.now - 1,
-                                          completed_datetime: nil,
-                                          session_status: '')
-
-      # Start at user home page
-      visit "users/#{user1.id}"
+      TutoringSession.create!(id: 3,
+                              tutor_id: user3.id,
+                              scheduled_datetime: Time.zone.now - 1,
+                              completed_datetime: nil,
+                              session_status: '')
 
       # Will need to sign in
+      visit "users/#{user1.id}"
       fill_in 'user_email', with: user1.email
       fill_in 'user_password', with: user1.password
       find(:link_or_button, 'Log in').click
+    end
 
+    after do
+      TutoringSession.destroy_all
+      User.destroy_all
+    end
+
+    it 'can get to the scheduling page' do
       # Go to scheduling page
       find_button 'Schedule tutoring session'
       click_button 'Schedule tutoring session'
       expect(page).to have_content('Student Scheduling Page')
+    end
+
+    it 'can let a user cancel scheduling' do
+      # Start at scheduling page
+      click_button 'Schedule tutoring session'
 
       # Cancel join and then go back and schedule
       find_button 'Cancel'
       click_button 'Cancel'
-      expect(page).to have_content("#{user1.first_name} #{user1.last_name}")
+      expect(page).to have_content(student_name)
+    end
 
-      # Go back to scheduling page
+    it 'can can filter out early time stamps' do
+      # Go to scheduling page
+      click_button 'Schedule tutoring session'
+
+      # Check available sessions
+      find_button 'Join session', id: join_id
+      find_button 'Join session', id: remain_id
+      expect(page).not_to have_button 'Join session', id: early_id
+    end
+
+    it 'returns to the home page after joining a session' do
+      # Go to scheduling page
       click_button 'Schedule tutoring session'
 
       # Join a session
-      find_button 'Join session', id: tsession1.id
-      find_button 'Join session', id: tsession2.id
-      expect(page).not_to have_button 'Join session', id: tsession3.id
-      click_button 'Join session', id: tsession1.id
+      click_button 'Join session', id: join_id
 
       # Expect to be at student index page
-      expect(page).to have_content("#{user1.first_name} #{user1.last_name}")
+      expect(page).to have_content(student_name)
+    end
+
+    it 'can successfully join a session' do
+      # Go to scheduling page
+      click_button 'Schedule tutoring session'
+
+      # Join a session
+      click_button 'Join session', id: join_id
+
+      # Make sure join table worked
+      tsession = TutoringSession.find(join_id)
+      expect(tsession.users.find_by(id: student_id).blank?).to eq(false)
+    end
+
+    it 'prevents users from joining a session they joined previously' do
+      # Go to scheduling page
+      click_button 'Schedule tutoring session'
+
+      # Join a session
+      click_button 'Join session', id: join_id
 
       # Check that the session is no longer joinable
       click_button 'Schedule tutoring session'
-      expect(page).not_to have_button 'Join session', id: tsession1.id
-      find_button 'Join session', id: tsession2.id
-      click_button 'Cancel'
-
-      # Make sure join table worked
-      joined = false
-      TutoringSession.find(tsession1.id).users.each do |user|
-        joined = true if user.id == user1.id
-      end
-      expect(joined).to eq(true)
-
-      # Delete all data created
-      users = User.all
-      users.each do |user|
-        user.roles.destroy_all if user.roles.present?
-      end
-      Role.delete_all
-      sessions = TutoringSession.all
-      sessions.each do |session|
-        session.users.destroy_all if session.users.present?
-      end
-      TutoringSession.delete_all
-      User.destroy_all
+      expect(page).not_to have_button 'Join session', id: join_id
+      find_button 'Join session', id: remain_id
     end
   end
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'tutoring_session_controller_helper'
+require tutoring_session_controller_helper
 # Controls the creation and tracking of tutoring sessions
 class TutoringSessionController < ApplicationController
   before_action :authenticate_user!
@@ -26,7 +26,7 @@ class TutoringSessionController < ApplicationController
   def index
     if cookies.key?('start_week')
       start_week = timezone_week_start
-      start_week = cookie_offset(start_week) if cookies.key?('week_offset')
+      cookie_offset if cookies.key?('week_offset')
     else
       start_week = date_week_start
       cookies['start_week'] = start_week.strftime('%Q')
