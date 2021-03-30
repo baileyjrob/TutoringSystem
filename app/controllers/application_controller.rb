@@ -26,6 +26,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_notifications
-    @notifications = Notification.where(recipient: current_user).unread
+    @notifications = Notification.where(recipient: current_user).unread.select('distinct on (action) *')
   end
 end
