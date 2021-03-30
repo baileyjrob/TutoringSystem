@@ -44,4 +44,5 @@ class User < ApplicationRecord
     @role = Role.where(role_name: 'Student')
     (role_users.find_by role_id: @role, user_id: id) != nil
   end
+
 end
