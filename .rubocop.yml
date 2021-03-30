@@ -39,3 +39,5 @@ RSpec/MultipleExpectations:
 RSpec/ExampleLength:
   Exclude:
     - 'spec/feature/*'
+Layout/EndOfLine:
+   Enabled: False

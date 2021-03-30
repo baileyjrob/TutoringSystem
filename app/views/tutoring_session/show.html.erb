@@ -14,8 +14,8 @@
         Current Users:
       </p>
       <p>
-      <% @tsession.users.each do |user| %>
-        <%= user.first_name %> <%= user.last_name %> 
+      <% @tsession.tutoring_session_users.each do |link| %>
+        <%= link.user.first_name %> <%= link.user.last_name %> | <%= link.link_status %>
       <% end %>
       </p>
       <p class="mt-5"><%= link_to 'edit', edit_tutoring_session_path(@tsession) %> | 

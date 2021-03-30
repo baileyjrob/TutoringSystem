@@ -1,0 +1,62 @@
+<div class="container show-pending">
+  <div class="row">
+    <div class="col-12">
+      <h1>Pending Tutoring Requests</h1>
+      <p>
+        These are students requesting to be tutored in some of your sessions. 
+        Make sure to email them the necessary information before accepting them!
+      </p>
+    </div>
+    <div class="col-12 mt-3">
+      <table class="table" id="users">
+        <thead>
+          <tr>
+            <th scope="col">Session Link</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @pending_links.each do |link| %>
+          <tr class="pending-link" data-target="<%= link.id %>">
+            <td><%= link_to "Session Link", tutoring_session_path(link.tutoring_session), target: '_blank' %> </td>
+            <td><%= link.user.first_name %> <%= link.user.last_name  %></td>
+            <td><%= link.user.email  %></td>
+            <td>
+              <a class="text-danger action" data-action="deny" href="<%= "/tutoring_session_user/#{link.id}/confirm" %>"><i class="fas fa-times"></i></a>
+              <a class="text-success action" data-action="confirm" href="<%= "/tutoring_session_user/#{link.id}/deny" %>"><i class="fas fa-check"></i></a>
+              <% #edit_user_path(user) %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    $(function() {
+      $('#users').DataTable();
+      // $('#users').api().columns().every(function () {
+      //   console.log('test');
+      //   var column = this;
+      //   var select = $('<select class="form-select"><option value=""></option></select>')
+      //     .prependTo($(column.header()))
+      //     .on('change', function() {
+      //       var val = $.fn.dataTable.util.escapeRegex(
+      //         $(this).val()
+      //       );
+
+      //       column
+      //         .search(val ? '^'+val+'$' : '', true, false)
+      //         .draw();
+      //     });
+
+      //   column.data().unique().sort().each(function (d, j) {
+      //     select.append('<option value="'+d+'">'+d+'</option>')
+      //   });
+      // });
+    });
+  </script>
+</div>

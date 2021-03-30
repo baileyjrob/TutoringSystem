@@ -97,8 +97,10 @@ class UsersController < ApplicationController
   def schedule_session_student
     user = User.find(params[:id])
     tutor_session = TutoringSession.find(params[:sessionID])
+    link = TutoringSessionUser.create(tutoring_session: tutor_session, user: user,
+                                      link_status: 'pending')
 
-    tutor_session.users << user
+    tutor_session.tutor.notifications.create(actor: user, action: 'application', notifiable: link)
 
     redirect_to "/users/#{params[:id]}"
   end
