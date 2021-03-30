@@ -6,19 +6,18 @@ module TutoringSessionExportHelper
   def create_csv(start_date, end_date, filepath = 'public/tutoring_hours.csv')
     file = Rails.root.join(filepath)
     table = generate_query(start_date, end_date)
-    headers = %w[Tutor_Name Hours_Worked]
+    headers = ["Tutor_Name","Hours_Worked"]
     write_to_csv(file, table, headers)
   end
 
   private
 
   def generate_query(start_date, end_date)
-    User.joins(:roles, 'LEFT JOIN tutoring_sessions ON tutoring_sessions.tutor_id = users.id')
+    User.joins('LEFT JOIN tutoring_sessions ON tutoring_sessions.tutor_id = users.id')
         .where("(tutoring_sessions.session_status = 'Confirmed' \
-                  OR tutoring_sessions.session_status = 'In-Person' OR \
-                  tutoring_sessions.session_status IS NULL) AND roles.role_name = 'Tutor' AND \
-                  (scheduled_datetime BETWEEN ? AND ? OR scheduled_datetime IS NULL)",
-               start_date, end_date)
+                  OR tutoring_sessions.session_status = 'In-Person') AND \
+                  (tutoring_sessions.scheduled_datetime >= #{start_date.to_date.to_s} \
+                  AND tutoring_sessions.scheduled_datetime < #{end_date.to_date.to_s})")
         .select("users.first_name,\
                   users.last_name,\
                   tutoring_sessions.scheduled_datetime,\
@@ -32,11 +31,7 @@ module TutoringSessionExportHelper
 
   # Returns how long a tutoring session lasted
   def entry_duration(entry)
-    if !entry.completed_datetime.nil?
-      (entry.completed_datetime - entry.scheduled_datetime) / 1.hour
-    else
-      0.0
-    end
+    (entry.scheduled_datetime - entry.complete_datetime) / 1.hour
   end
 
   # Handles the legwork of writing to CSV
@@ -44,7 +39,7 @@ module TutoringSessionExportHelper
   def write_to_csv(file, table, headers)
     hours_worked = 0
     current_tutor = ''
-    CSV.open(file, 'w', write_headers: true, headers: headers) do |writer|
+    CSV.open(file, "w", write_headers: true, headers: headers) do |writer|
       table_iterate(table, writer, hours_worked, current_tutor)
     end
   end
@@ -60,7 +55,5 @@ module TutoringSessionExportHelper
       # Update hours_worked
       hours_worked += entry_duration(entry)
     end
-    # Output final user
-    writer << [current_tutor, hours_worked.to_s] if current_tutor != ''
   end
 end

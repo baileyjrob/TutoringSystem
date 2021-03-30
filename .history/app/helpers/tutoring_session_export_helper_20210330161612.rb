@@ -16,8 +16,9 @@ module TutoringSessionExportHelper
     User.joins(:roles, 'LEFT JOIN tutoring_sessions ON tutoring_sessions.tutor_id = users.id')
         .where("(tutoring_sessions.session_status = 'Confirmed' \
                   OR tutoring_sessions.session_status = 'In-Person' OR \
-                  tutoring_sessions.session_status IS NULL) AND roles.role_name = 'Tutor' AND \
-                  (scheduled_datetime BETWEEN ? AND ? OR scheduled_datetime IS NULL)",
+                  tutoring_sessions.session_status = 'null') AND \
+                  role.role_name = 'Tutor' AND \
+                  scheduled_datetime BETWEEN ? AND ?",
                start_date, end_date)
         .select("users.first_name,\
                   users.last_name,\
@@ -32,10 +33,10 @@ module TutoringSessionExportHelper
 
   # Returns how long a tutoring session lasted
   def entry_duration(entry)
-    if !entry.completed_datetime.nil?
+    if entry.completed_datetime != "null"
       (entry.completed_datetime - entry.scheduled_datetime) / 1.hour
     else
-      0.0
+      return 0
     end
   end
 
