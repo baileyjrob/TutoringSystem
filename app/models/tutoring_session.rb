@@ -10,6 +10,7 @@ class TutoringSession < ApplicationRecord
   has_many :departments, through: :department_tutoring_sessions
   # has_and_belongs_to_many :users
   has_many :tutoring_session_users, dependent: :delete_all
+  has_many :users, through: :tutoring_session_users
 
   validates :scheduled_datetime, presence: true
   validate :scheduled_datetime_has_no_overlap
