@@ -1,0 +1,8 @@
+{
+  "name": "Tutoring Attendance",
+  "description": "Allows students and tutors to manage their sessions",
+  "repository": "https://github.com/baileyjrob/TutoringSystem",
+  "scripts": {
+    "postdeploy": "bundle exec rake db:seed"
+  }
+}
