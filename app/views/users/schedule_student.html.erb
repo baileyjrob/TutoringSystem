@@ -1,33 +1,41 @@
-<h1>Student Scheduling Page</h1>
-<%= button_to "Cancel", {:action => 'show'}, :method => :get %>
+<div class="container">
+  <h1>Join a Tutor Session</h1>
+  <%= button_to "Cancel", {:action => 'show'}, :class => "btn btn-primary", :method => :get %>
 
-<% if @sessions.blank? %>
-<p>There are no available sessions to join.</p>
-<% else %>
-<p>Please select which session you would like to attend.</p>
-<table>
-  <tr>
-    <th>Tutor Name</th>
-    <th>Contact Info</th>
-    <th>Scheduled Datetime</th>
-  </tr>
-  <% @sessions.each do |session| %>
-    <tr>
-      <!-- Make a row in the table for each tutoring session. Includes details and join option -->
-      <% user = User.find(session.tutor_id) %>
-      <td><%= user.first_name + " " + user.last_name %></td>
-      <td><%= user.email %></td>
-      <% date = session.scheduled_datetime.localtime.strftime("%B %d at %l:%M %p %Z") %>
-      <td><%= date %></td>
+  <% if @sessions.blank? %>
+  <p class="mt-4">There are no available sessions to join.</p>
+  <% else %>
+  <p class="mt-4">Please select which session you would like to attend.</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Tutor Name</th>
+        <th scope="col">Contact Info</th>
+        <th scope="col">Scheduled Datetime</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @sessions.each do |session| %>
+        <tr>
+          <!-- Make a row in the table for each tutoring session. Includes details and join option -->
+          <% user = User.find(session.tutor_id) %>
+          <td><%= user.first_name + " " + user.last_name %></td>
+          <td><%= user.email %></td>
+          <% date = session.scheduled_datetime.localtime.strftime("%B %d at %l:%M %p %Z") %>
+          <td><%= date %></td>
 
-      <% if session.users.find_by(id: @user.id).blank? %>
-        <td><%= button_to "Join session", {:action => 'schedule_session_student', :sessionID => session},
-                          :id => session.id, :method => :post %></td>
-      <% else # Disable the button %>
-        <td><%= button_to "Join session", {:action => 'schedule_session_student', :sessionID => session},
-                          :disabled => true, :id => session.id, :method => :post %></td>
+          <% if session.users.find_by(id: @user.id).blank? %>
+            <td><%= button_to "Join session", {:action => 'schedule_session_student', :sessionID => session},
+                              :id => session.id, :class => "btn btn-primary", :method => :post %></td>
+          <% else # Disable the button %>
+            <td><%= button_to "Join session", {:action => 'schedule_session_student', :sessionID => session},
+                              :disabled => true, :id => session.id, :class => "btn btn-secondary",
+                              :method => :post %></td>
+          <% end %>
+        </tr>
       <% end %>
-    </tr>
+    </tbody>
+  </table>
   <% end %>
-</table>
-<%  end %>
+</div>

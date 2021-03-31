@@ -48,15 +48,18 @@
         </ul>
         <ul class="navbar-nav">
           <% if current_user %>
+            <li class="nav-item">
+              <%=link_to "Schedule Tutoring Session", "/users/#{current_user.id}/schedule_student", class: 'nav-link' %>
+            </li>
+          <li class="nav-item">
+            <%= link_to 'My Schedule', show_schedule_path, class: 'nav-link'  %>
+          </li>
           <li class="nav-item">
             <%= link_to 'My Account', edit_user_registration_path, class: 'nav-link' %>
           </li>
           <li class="nav-item">
             <%= link_to 'Sign out', destroy_user_session_path, class: 'nav-link',
             method: :delete %>
-          </li>
-          <li class="nav-item">
-            <%= link_to 'My Schedule', show_schedule_path, class: 'nav-link'  %>
           </li>
           <% else %>
           <li class="nav-item">
