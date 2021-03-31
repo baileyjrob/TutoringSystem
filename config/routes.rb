@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   get 'tutor/index', :to => 'tutor#index'
   get '/users/:id/schedule_student', :to => 'users#schedule_student'
   post '/users/:id/schedule_session_student' => 'users#schedule_session_student'
-  post '/users/check_in_first' => 'users#check_in_first'
-  post '/users/check_in_second' => 'users#check_in_second'
+  post '/spartan_sessions/check_in_first' => 'spartan_sessions#check_in_first'
+  post '/spartan_sessions/check_in_second' => 'spartan_sessions#check_in_second'
   resources :tutoring_session
   resources :users
   resources :tutors

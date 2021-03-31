@@ -3,8 +3,6 @@
 # Primary management class for users
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_first_code, only: [:check_in_first]
-  before_action :check_second_code, only: [:check_in_second]
 
   def index
     if current_user.roles.include?(Role.admin_role)
@@ -107,24 +105,6 @@ class UsersController < ApplicationController
     redirect_to "/users/#{params[:id]}"
   end
 
-  def check_in_first
-    SpartanSessionUser.create(spartan_session_id: params[:sessionID],
-                              user_id: current_user.id,
-                              first_checkin: Time.zone.now)
-
-    redirect_to "/users/#{current_user.id}"
-  end
-
-  def check_in_second
-    ActiveRecord::Base.connection.execute('UPDATE "spartan_session_users"' \
-                                            ' SET "second_checkin" =\'' + Time.zone.now.to_s +
-                                            '\'' \
-                                            'WHERE "user_id" = ' + current_user.id.to_s +
-                                            ' AND "spartan_session_id" = ' + params[:sessionID].to_s)
-
-    redirect_to "/users/#{current_user.id}"
-  end
-
   def delete_session
     @user = User.find(current_user.id)
     @tutor_session = TutoringSession.find(params[:id])
@@ -138,22 +118,6 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :major, :email, :encrypted_password)
-  end
-
-  def check_first_code
-    unless SpartanSession.find(params[:sessionID]).first_code ==
-           params[:spartan_session_user][:code]
-      flash.alert = 'Invalid check in code!'
-      redirect_to "/users/#{current_user.id}"
-    end
-  end
-
-  def check_second_code
-    unless SpartanSession.find(params[:sessionID]).second_code ==
-           params[:spartan_session_user][:code]
-      flash.alert = 'Invalid check in code!'
-      redirect_to "/users/#{current_user.id}"
-    end
   end
 end
 
