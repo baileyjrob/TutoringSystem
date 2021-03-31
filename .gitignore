@@ -44,3 +44,4 @@ coverage/*
 
 # Ignore IDE stuff
 .idea*
+.history/
