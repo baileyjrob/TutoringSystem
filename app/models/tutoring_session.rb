@@ -62,6 +62,14 @@ class TutoringSession < ApplicationRecord
     rtsessions.each(&:destroy)
   end
 
+  def users
+    User.where(id: tutoring_session_users.pluck(:user_id))
+  end
+
+  def tutor
+    User.find_by(id: tutor_id)
+  end
+
   private
 
   def scheduled_datetime_has_no_overlap

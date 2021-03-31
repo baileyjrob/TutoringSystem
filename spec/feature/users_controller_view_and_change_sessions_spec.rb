@@ -22,7 +22,13 @@ RSpec.describe UsersController, type: :feature do
 
   before do
     Timecop.freeze(frozen_time)
-    user.tutoring_sessions << [tutoring_session1, tutoring_session2, tutoring_session3]
+    TutoringSessionUser.create(tutoring_session: tutoring_session1, user: user,
+                               link_status: 'pending')
+    TutoringSessionUser.create(tutoring_session: tutoring_session2, user: user,
+                               link_status: 'pending')
+    TutoringSessionUser.create(tutoring_session: tutoring_session3, user: user,
+                               link_status: 'pending')
+
     visit('/users/sign_in/')
     fill_in 'user_email', with: 'admin@tamu.edu'
     fill_in 'user_password', with: 'T3st!!a'

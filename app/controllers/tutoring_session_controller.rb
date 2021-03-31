@@ -81,8 +81,7 @@ class TutoringSessionController < ApplicationController
 
     @tsession.delete_repeating_sessions if params[:delete_repeating]
 
-    @tsession.users.delete_all
-    @tsession.delete # Destroy deletes all objects attatched to the session as well. Not good
+    @tsession.destroy
 
     redirect_to tutoring_session_index_path, notice: 'Tutoring session deleted.'
   end
