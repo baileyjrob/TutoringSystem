@@ -134,8 +134,3 @@ class UsersController < ApplicationController
     params.require(:user).permit(:first_name, :last_name, :major, :email, :encrypted_password)
   end
 end
-
-# t.string "reset_password_token"
-# t.datetime "reset_password_sent_at"
-# t.datetime "remember_created_at"
-# t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
