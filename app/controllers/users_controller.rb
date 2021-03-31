@@ -87,7 +87,11 @@ class UsersController < ApplicationController
   end
 
   def show_schedule
-    @sessions = current_user.tutoring_sessions
+    if user_signed_in?
+      @sessions = current_user.tutoring_sessions
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def schedule_student
