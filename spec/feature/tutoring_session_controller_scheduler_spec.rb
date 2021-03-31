@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 RSpec.describe TutoringSessionController, type: :feature do
-  let(:frozen_time) { '25 May 02:00:00 +0000'.to_datetime }
+  let(:frozen_time) { '25 May 02:00:00 CDT'.to_datetime }
   let!(:tutor) do
     User.create(
       first_name: 'Tutor',
@@ -11,13 +11,21 @@ RSpec.describe TutoringSessionController, type: :feature do
       email: 'tutor@tamu.edu'
     )
   end
-  let(:scheduled_datetime) { '26 May 2021 08:00:00 +0000'.to_datetime }
+  let!(:student) do
+    User.create(
+      first_name: 'Student',
+      last_name: 'User',
+      password: 'T3st!!a',
+      email: 'student@tamu.edu'
+    )
+  end
+  let(:scheduled_datetime) { Time.zone.parse('26 May 2021 08:00:00 CDT') }
   let(:beginning_of_week) { Time.zone.today.beginning_of_week }
 
   after { Timecop.return }
 
   before do
-    Timecop.freeze(frozen_time)
+    Timecop.travel(frozen_time)
     User.create(
       first_name: 'Admin',
       last_name: 'User',
@@ -84,8 +92,7 @@ RSpec.describe TutoringSessionController, type: :feature do
     end
 
     it 'is able to see sessions' do
-      tsession = TutoringSession.create(scheduled_datetime: scheduled_datetime, tutor_id: tutor.id)
-      tsession.users << tutor
+      TutoringSession.create(scheduled_datetime: scheduled_datetime, tutor_id: tutor.id)
 
       visit('/tutoring_session')
       expect(page).to have_selector('.tsession')
@@ -156,17 +163,16 @@ RSpec.describe TutoringSessionController, type: :feature do
     it 'is able to view session details' do
       tsession = TutoringSession.create(scheduled_datetime: scheduled_datetime,
                                         tutor_id: tutor.id)
-      tsession.users << tutor
+      TutoringSessionUser.create(tutoring_session: tsession, user: student, link_status: 'pending')
 
       visit("/tutoring_session/#{tsession.id}")
       expect(page).to have_content('Session scheduled for May 26th, 2021 at 08:00 AM')
-      expect(page).to have_content('Tutor User')
+      expect(page).to have_content('Student User')
     end
 
     it 'is able to delete session', js: true do
       tsession = TutoringSession.create(scheduled_datetime: scheduled_datetime,
                                         tutor_id: tutor.id)
-      tsession.users << tutor
 
       expect(TutoringSession.all.count).to eq(1)
       visit("/tutoring_session/#{tsession.id}")
@@ -180,10 +186,8 @@ RSpec.describe TutoringSessionController, type: :feature do
        js: true do
       tsession = TutoringSession.create(scheduled_datetime: scheduled_datetime,
                                         tutor_id: tutor.id)
-      tsession.users << tutor
-      tsession2 = TutoringSession.create(scheduled_datetime: scheduled_datetime + 1.week,
-                                         tutor_id: tutor.id)
-      tsession2.users << tutor
+      TutoringSession.create(scheduled_datetime: scheduled_datetime + 1.week,
+                             tutor_id: tutor.id)
 
       expect(TutoringSession.all.count).to eq(2)
       visit("/tutoring_session/#{tsession.id}")
@@ -198,7 +202,7 @@ RSpec.describe TutoringSessionController, type: :feature do
     it 'is able to edit session details' do
       tsession = TutoringSession.create(scheduled_datetime: scheduled_datetime,
                                         tutor_id: tutor.id)
-      tsession.users << tutor
+      TutoringSessionUser.create(tutoring_session: tsession, user: student, link_status: 'pending')
 
       visit("/tutoring_session/#{tsession.id}")
       find(:link_or_button, 'edit').click
@@ -215,7 +219,6 @@ RSpec.describe TutoringSessionController, type: :feature do
     it 'errors on missing scheduled_datetime edit session details' do
       tsession = TutoringSession.create(scheduled_datetime: scheduled_datetime,
                                         tutor_id: tutor.id)
-      tsession.users << tutor
 
       visit("/tutoring_session/#{tsession.id}")
       find(:link_or_button, 'edit').click
