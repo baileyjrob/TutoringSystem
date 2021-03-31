@@ -121,6 +121,21 @@ class UsersController < ApplicationController
     redirect_to show_schedule_path
   end
 
+  # Temporary until emailing is a thing
+  def admin_view_hours
+    if !current_user.roles.include?(Role.admin_role)
+      redirect_to root_path
+      return
+    end
+    include TutoringSessionExportHelper
+    if request.post?
+      @start_date = params[:start_date] 
+      @end_date = params[:end_date] 
+      create_csv(start_date, end_date)
+      @entries = CSV.read('public/tutoring_hours.csv', headers: true)
+    end
+  end
+
   private
 
   def user_params
