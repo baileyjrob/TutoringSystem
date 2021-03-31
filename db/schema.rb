@@ -64,6 +64,11 @@ ActiveRecord::Schema.define(version: 2021_03_31_000526) do
     t.string "role_name"
   end
 
+  create_table "roles_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "role_id", null: false
+  end
+
   create_table "spartan_session_users", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "spartan_session_id", null: false
