@@ -20,10 +20,9 @@ class RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  # def update
-  #   super
-
-  # end
+  #def update
+  #  super
+  #end
 
   # DELETE /resource
   # def destroy
@@ -52,16 +51,7 @@ class RegistrationsController < Devise::RegistrationsController
   # end
 
   # The path used after sign up.
-  def after_sign_up_path_for(resource)
-
-    @user = current_user
-    domain = @user.email.split('@').last
-    @role = if domain == 'tamu.edu'
-              Role.where(role_name: 'Student')
-            else
-              Role.where(role_name: 'Spartan Tutor')
-            end
-    @user.roles << @role
+  def after_sign_up_path_for(_resource)
     user_session
   end
 

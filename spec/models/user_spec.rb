@@ -57,4 +57,22 @@ RSpec.describe User, type: :model do
       expect(user).not_to be_valid
     end
   end
+
+  describe 'Roles' do
+    it 'should have default student role' do
+      role1 = Role.create! role_name: 'Spartan Tutor'
+      role2 = Role.create! role_name: 'Student'
+      user = User.create!(first_name: 'Andrew', last_name: 'last', major: 'CSCE', email: "asdf@tamu.edu", password: "12341234")
+      user.reload
+      user.roles.count.should eq(1)
+    end
+
+    it 'should have default Spartan Tutor role' do
+      role1 = Role.create! role_name: 'Spartan Tutor'
+      role2 = Role.create! role_name: 'Student'
+      user = User.create!(first_name: 'Andrew', last_name: 'last', major: 'CSCE', email: "asdf@spartan-tutoring.com", password: "12341234")
+      user.reload
+      user.roles.count.should eq(1)
+    end
+  end
 end
