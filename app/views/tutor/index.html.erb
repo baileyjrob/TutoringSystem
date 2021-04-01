@@ -1,6 +1,4 @@
 <h1>Tutor Matching Page</h1>
-form_for @create_request, url: '/tutor/index'(@create_request), html: { method: :put } do |f|
-    render 'form', f: 
 
 <%=form_tag('index', :method => "get", :controller => 'tutor' ) do %>
     <%= label_tag(:filter_major, "Course Department: ") %> 
@@ -15,20 +13,13 @@ form_for @create_request, url: '/tutor/index'(@create_request), html: { method: 
         <%= @no_tutors %>
         <br>
         <%= @ask_request %> 
-        <%=form_tag('request_submission', :method => "post", :controller => 'tutor' ) do %>
-            <%= label_tag(:requested_course, "Requested Course Department and Number: ") %> 
-            <br>
-                <%= text_field_tag(:requested_course) %>
-            
-                <%= submit_tag("Submit") %> 
-        <%end%>
-        <%= form_for(@courserequest) do |f| %>
-            <%= f.label :course_name_full %>:
-            <%= f.text_field :course_name_full %> <br/>
+        <%= form_with(model: @current_request, url: '/tutor#request_submission') do |f| %>
+            <%= f.label :department_and_course_number %><br>
+            <%= f.text_field :course_name_full, as: :text, class: "form-control", required: true %>
+        <%= f.submit class: "btn btn-primary float-left" %>
 
-            <%= f.submit %>
-        <% end %>
-        <br>
+        <%end%>
+
 
     </p>
 <% else %>
@@ -44,3 +35,5 @@ form_for @create_request, url: '/tutor/index'(@create_request), html: { method: 
     </ul>    
 
 <%end%>
+
+<%= button_to "See all requests", {:action => 'request_submission'}, :method => :get %>

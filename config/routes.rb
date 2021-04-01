@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   post '/users/:id/delete_session', :to => 'users#delete_session', :as => :delete_session
   get '/users/:id/schedule_student', :to => 'users#schedule_student'
   post '/users/:id/schedule_session_student' => 'users#schedule_session_student'
-  post 'tutor/request_submission', to: 'tutor#request_submission', as: 'submitted_request'
   get 'tutor/index', :to => 'tutor#index'
+  get 'tutor/request_submission', to: 'tutor#request_submission' #, as: :submitted_request
   resources :tutoring_session
   resources :users
   resources :tutor
