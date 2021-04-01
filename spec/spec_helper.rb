@@ -24,7 +24,7 @@ SimpleCov.start 'rails' do
   add_filter '/bin/'
   add_filter '/app/channels/' # Folder never used
   add_filter '/app/jobs/' # Same as above
-  add_filter '/app/mailers/' #Same as above once more
+  add_filter '/app/mailers/' # Same as above once more
   add_filter '/db/'
   add_filter '/spec/' # for rspec
   add_filter '/test/' # for minitest
