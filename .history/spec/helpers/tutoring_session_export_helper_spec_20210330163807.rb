@@ -1,0 +1,57 @@
+# frozen_string_literal: true
+
+require 'rails_helper'
+
+RSpec.describe TutoringSessionExportHelper, type: :helper do
+  let(:tutor) do
+    User.create(
+      first_name: 'Tutor',
+      last_name: 'User',
+      password: 'T3st!!a',
+      email: 'tutor@tamu.edu'
+    )
+  end
+  let(:tutoring_sessions) do
+    [TutoringSession.create(scheduled_datetime: '28 May 2021 08:00:00 +0000'.to_datetime,
+                            completed_datetime: '28 May 2021 09:00:00 +0000'.to_datetime,
+                            session_status: 'Confirmed',
+                            tutor_id: tutor.id),
+     TutoringSession.create(scheduled_datetime: '26 May 2021 08:00:00 +0000'.to_datetime,
+                            completed_datetime: '26 May 2021 09:00:00 +0000'.to_datetime,
+                            session_status: 'Confirmed',
+                            tutor_id: tutor.id),
+     TutoringSession.create(scheduled_datetime: '27 May 2021 08:00:00 +0000'.to_datetime,
+                            completed_datetime: '27 May 2021 09:00:00 +0000'.to_datetime,
+                            session_status: 'Confirmed',
+                            tutor_id: tutor.id)]
+  end
+  let(:start_date) { '19 January 2021 08:00:00 +0000'.to_datetime }
+  let(:end_date) { '30 May 2021 08:00:00 +0000'.to_datetime }
+  # let(:csv_string) { nil }
+
+  # before do
+  #   # Instead of output to file, output to string
+  #   csv_string = nil
+  #   allow(File).to receive(:open) {csv_string = CSV.generate}
+  # end
+  context 'when tutor is indeed a tutor' do
+    let(:tutor_role) {Role.create(role_name: 'Tutor')}
+    it 'adds all completed tutoring hours' do
+      tutor.tutoring_sessions << tutoring_sessions
+      tutor.roles << tutor_role
+      create_csv(start_date, end_date,
+                'spec/helpers/tutoring_hours_spec.csv')
+      csv_table = CSV.read(Rails.root.join('spec/helpers/tutoring_hours_spec.csv'), headers: true)
+      expect([csv_table[0]['Tutor_Name'], csv_table[0]['Hours_Worked']]).to eq(['Tutor User', '3.0'])
+    end
+
+    it 'says zero hours when applicable' do
+      #tutor does not have any tutoring sessions
+      tutor.roles << tutor_role
+      create_csv(start_date, end_date,
+                'spec/helpers/tutoring_hours_spec_2.csv')
+      csv_table = CSV.read(Rails.root.join('spec/helpers/tutoring_hours_spec_2.csv'), headers: true)
+      expect([csv_table[0]['Tutor_Name'], csv_table[0]['Hours_Worked']]).to eq(['Tutor User', '0'])
+    end
+  end
+end

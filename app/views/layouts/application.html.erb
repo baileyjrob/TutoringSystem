@@ -46,9 +46,9 @@
         </ul>
         <ul class="navbar-nav ms-auto">
           <% if current_user %>
-            <li class="nav-item">
-              <%=link_to "Join Tutoring Session", "/users/#{current_user.id}/schedule_student", class: 'nav-link' %>
-            </li>
+          <li class="nav-item">
+            <%=link_to "Join Tutoring Session", "/users/#{current_user.id}/schedule_student", class: 'nav-link' %>
+          </li>
           <li class="nav-item">
             <%= link_to 'My Schedule', show_schedule_path, class: 'nav-link'  %>
           </li>
@@ -59,6 +59,12 @@
             <%= link_to 'Sign out', destroy_user_session_path, class: 'nav-link',
             method: :delete %>
           </li>
+          <!-- TEMPORARY UNTIL EMAIL SET UP -->
+          <% if current_user.roles.include?(Role.admin_role) %>
+          <li class="nav-item">
+            <%= link_to 'Get Tutoring Hours', '/users/admin_view_hours' , class: 'nav-link' %>
+          </li>
+          <% end %>
           <% else %>
           <li class="nav-item">
             <%= link_to 'Sign up', new_user_registration_path, class: 'nav-link'%>
@@ -93,12 +99,13 @@
     </div>
     <div class="notifications">
       <% @notifications.each do |noti| %>
-        <div class="alert alert-warning" >
-          You have pending tutor requests. Check them <a href="<%= "/notifications/#{noti.id}/" %> ">here</a>.
-        </div>
+      <div class="alert alert-warning">
+        You have pending tutor requests. Check them <a href="<%= "/notifications/#{noti.id}/" %> ">here</a>.
+      </div>
       <% end %>
     </div>
   </div>
   <%= yield %>
 </body>
+
 </html>

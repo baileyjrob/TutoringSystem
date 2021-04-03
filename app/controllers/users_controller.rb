@@ -121,6 +121,13 @@ class UsersController < ApplicationController
     redirect_to show_schedule_path
   end
 
+  # Temporary until emailing is a thing
+  def admin_view_hours
+    include AdminViewHoursHelper
+    admin_view_hours_exec
+    @entries = CSV.read('public/tutoring_hours.csv', headers: true)
+  end
+
   private
 
   def user_params
