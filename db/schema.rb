@@ -35,6 +35,17 @@ ActiveRecord::Schema.define(version: 2021_03_31_000526) do
     t.integer "department_id"
   end
 
+  create_table "courses_tutoring_sessions", id: false, force: :cascade do |t|
+    t.bigint "course_id", null: false
+    t.bigint "tutoring_session_id", null: false
+  end
+
+  create_table "courses_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "course_id", null: false
+    t.string "grade_achieved"
+  end
+
   create_table "department_tutoring_sessions", id: false, force: :cascade do |t|
     t.bigint "department_id", null: false
     t.bigint "tutoring_session_id", null: false
@@ -42,6 +53,11 @@ ActiveRecord::Schema.define(version: 2021_03_31_000526) do
 
   create_table "departments", force: :cascade do |t|
     t.string "department_name"
+  end
+
+  create_table "departments_tutoring_sessions", id: false, force: :cascade do |t|
+    t.bigint "department_id", null: false
+    t.bigint "tutoring_session_id", null: false
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -64,6 +80,11 @@ ActiveRecord::Schema.define(version: 2021_03_31_000526) do
     t.string "role_name"
   end
 
+  create_table "roles_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "role_id", null: false
+  end
+
   create_table "spartan_session_users", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "spartan_session_id", null: false
@@ -78,6 +99,13 @@ ActiveRecord::Schema.define(version: 2021_03_31_000526) do
     t.string "second_code"
   end
 
+  create_table "spartan_sessions_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "spartan_session_id", null: false
+    t.datetime "first_checkin"
+    t.datetime "second_checkin"
+  end
+
   create_table "tutoring_session_users", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "tutoring_session_id", null: false
@@ -89,8 +117,16 @@ ActiveRecord::Schema.define(version: 2021_03_31_000526) do
     t.datetime "scheduled_datetime"
     t.datetime "completed_datetime"
     t.string "session_status"
+    t.datetime "session_date"
     t.bigint "tutor_id"
     t.string "semester"
+  end
+
+  create_table "tutoring_sessions_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "tutoring_session_id", null: false
+    t.string "link_status"
+    t.text "student_notes"
   end
 
   create_table "users", force: :cascade do |t|
@@ -112,18 +148,18 @@ ActiveRecord::Schema.define(version: 2021_03_31_000526) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "course_tutoring_sessions", "courses"
-  add_foreign_key "course_tutoring_sessions", "tutoring_sessions"
-  add_foreign_key "course_users", "courses"
-  add_foreign_key "course_users", "users"
   add_foreign_key "courses", "departments"
-  add_foreign_key "department_tutoring_sessions", "departments"
-  add_foreign_key "department_tutoring_sessions", "tutoring_sessions"
-  add_foreign_key "role_users", "roles"
-  add_foreign_key "role_users", "users"
-  add_foreign_key "spartan_session_users", "spartan_sessions"
-  add_foreign_key "spartan_session_users", "users"
-  add_foreign_key "tutoring_session_users", "tutoring_sessions"
-  add_foreign_key "tutoring_session_users", "users"
+  add_foreign_key "courses_tutoring_sessions", "courses"
+  add_foreign_key "courses_tutoring_sessions", "tutoring_sessions"
+  add_foreign_key "courses_users", "courses"
+  add_foreign_key "courses_users", "users"
+  add_foreign_key "departments_tutoring_sessions", "departments"
+  add_foreign_key "departments_tutoring_sessions", "tutoring_sessions"
+  add_foreign_key "roles_users", "roles"
+  add_foreign_key "roles_users", "users"
+  add_foreign_key "spartan_sessions_users", "spartan_sessions"
+  add_foreign_key "spartan_sessions_users", "users"
   add_foreign_key "tutoring_sessions", "users", column: "tutor_id"
+  add_foreign_key "tutoring_sessions_users", "tutoring_sessions"
+  add_foreign_key "tutoring_sessions_users", "users"
 end

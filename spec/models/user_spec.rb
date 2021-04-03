@@ -11,6 +11,8 @@ RSpec.describe User, type: :model do
                         email: 'john@tamu.edu',
                         password: 'abcdef')
 
+  Role.create! role_name: 'Spartan Tutor'
+  Role.create! role_name: 'Student'
   describe 'Validations' do
     it 'is valid with valid attributes' do
       expect(user).to be_valid
@@ -59,18 +61,18 @@ RSpec.describe User, type: :model do
   end
 
   describe 'Roles' do
-    it 'should have default student role' do
-      role1 = Role.create! role_name: 'Spartan Tutor'
-      role2 = Role.create! role_name: 'Student'
-      user = User.create!(first_name: 'Andrew', last_name: 'last', major: 'CSCE', email: "asdf@tamu.edu", password: "12341234")
+    it 'has default student role' do
+      Role.create! role_name: 'Student'
+      user = described_class.create!(first_name: 'Andrew', last_name: 'last', major: 'CSCE',
+                                     email: 'asdf@tamu.edu', password: '12341234')
       user.reload
       user.roles.count.should eq(1)
     end
 
-    it 'should have default Spartan Tutor role' do
-      role1 = Role.create! role_name: 'Spartan Tutor'
-      role2 = Role.create! role_name: 'Student'
-      user = User.create!(first_name: 'Andrew', last_name: 'last', major: 'CSCE', email: "asdf@spartan-tutoring.com", password: "12341234")
+    it 'has default Spartan Tutor role' do
+      Role.create! role_name: 'Spartan Tutor'
+      user = described_class.create!(first_name: 'Andrew', last_name: 'last', major: 'CSCE',
+                                     email: 'asdf@spartan-tutoring.com', password: '12341234')
       user.reload
       user.roles.count.should eq(1)
     end
