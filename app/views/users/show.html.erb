@@ -11,7 +11,7 @@
 
   <div class="row">
     <!-- Spartan tutoring check in -->
-    <% if @user.id == current_user.id and current_user.student? and !@spartan_session.blank? %>
+    <% if @user.id == current_user.id and current_user.roles.include?(Role.student_role) and !@spartan_session.blank? %>
       <h4 class="mt-4 mb-2">Spartan Session</h4>
       <h6 class="mb-2">Start Time: <%= @spartan_session.session_datetime.localtime.strftime("%l:%M %p") %></h6>
       <% if @spartan_session.users.find_by(id: current_user.id).blank? %>
@@ -48,8 +48,8 @@
     <% end %>
   </div>
   <br>
-  <p class="mb-0">Student?: <%= @user.student? %></p>
-  <p class="mb-0">Tutor?: <%= @user.tutor? %></p>
-  <p class="mb-0">Spartan Tutor?: <%= @user.spartan_tutor? %></p>
-  <p class="mb-0">Admin?: <%= @user.admin? %></p>
+  <p class="mb-0">Student?: <%= @user.roles.include?(Role.student_role) %></p>
+  <p class="mb-0">Tutor?: <%= @user.roles.include?(Role.tutor_role) %></p>
+  <p class="mb-0">Spartan Tutor?: <%= @user.roles.include?(Role.spartan_tutor_role) %></p>
+  <p class="mb-0">Admin?: <%= @user.roles.include?(Role.admin_role) %></p>
 </div>

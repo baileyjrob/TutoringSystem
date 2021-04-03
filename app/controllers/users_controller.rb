@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    if current_user.admin?
+    if current_user.roles.include?(Role.admin_role)
       admin_index
     else
       redirect_to "/users/#{current_user.id}"

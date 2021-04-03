@@ -45,24 +45,4 @@ class User < ApplicationRecord
     @role = Role.where(role_name: 'Spartan Tutor')
     roles.push(@role)
   end
-
-  def admin?
-    @role = Role.where(role_name: 'Admin')
-    (role_users.find_by role_id: @role, user_id: id) != nil
-  end
-
-  def tutor?
-    @role = Role.where(role_name: 'Tutor')
-    (role_users.find_by role_id: @role, user_id: id) != nil
-  end
-
-  def spartan_tutor?
-    @role = Role.where(role_name: 'Spartan Tutor')
-    (role_users.find_by role_id: @role, user_id: id) != nil
-  end
-
-  def student?
-    @role = Role.where(role_name: 'Student')
-    (role_users.find_by role_id: @role, user_id: id) != nil
-  end
 end

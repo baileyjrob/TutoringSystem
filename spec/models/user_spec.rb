@@ -58,9 +58,7 @@ RSpec.describe User, type: :model do
       user.email = nil
       expect(user).not_to be_valid
     end
-  end
 
-  describe 'Roles' do
     it 'has default student role' do
       Role.create! role_name: 'Student'
       user = described_class.create!(first_name: 'Andrew', last_name: 'last', major: 'CSCE',
