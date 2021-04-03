@@ -6,4 +6,12 @@ class Notification < ApplicationRecord
   belongs_to :notifiable, polymorphic: true
 
   scope :unread, -> { where(read_at: nil) }
+
+  def self.notify_student_application_for(tutor, actor, link)
+    tutor.notifications.create(
+      actor: actor,
+      action: 'student_application',
+      notifiable: link
+    )
+  end
 end

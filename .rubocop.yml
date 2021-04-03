@@ -35,7 +35,9 @@ Naming/MethodName:
   EnforcedStyle: snake_case #default
 RSpec/MultipleExpectations:
   Exclude: 
-    - 'spec/feature/*'
+    - 'spec/*/*'
 RSpec/ExampleLength:
   Exclude:
-    - 'spec/feature/*'
+    - 'spec/*/*'
+RSpec/MultipleMemoizedHelpers:
+  Enabled: False
