@@ -25,7 +25,8 @@
           <% date = session.scheduled_datetime.localtime.strftime("%B %d at %l:%M %p %Z") %>
           <td><%= date %></td>
 
-          <% if session.users.find_by(id: @user.id).blank? %>
+          <% if session.tutoring_session_users.find_by(id: @user.id).blank? or
+                session.tutoring_session_users.find_by(id: @user.id).link_status == 'denied' %>
             <td><%= button_to "Join session", {:action => 'schedule_session_student', :sessionID => session},
                               :id => session.id, :class => "btn btn-primary", :method => :post %></td>
           <% else # Disable the button %>

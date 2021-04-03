@@ -1,0 +1,10 @@
+Your application to the tutoring session scheduled for <%= @tsession.scheduled_datetime.to_date.to_formatted_s(:long_ordinal) %> at <%= @tsession.scheduled_datetime.strftime("%I:%M %p")  %> has been <%= @link_action %>
+==============
+
+The tutor included the following message:
+<%= @message %>
+
+<% if @link_action.downcase == 'denied' %>
+  The application being denied could have been done for a variety of reasons, from being too full or to the session being canceled.
+  If you think this is an error, you can contact the tutor at <%= @to.email %>.
+<% end %>

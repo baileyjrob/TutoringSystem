@@ -80,16 +80,28 @@ RSpec.describe TutoringSessionUserController, type: :feature do
   end
 
   describe 'UPDATE' do
-    it 'confirms on click' do
+    it 'confirms on click', js: true do
       visit('/tutoring_session/pending/')
-      find(".pending-link[data-target='#{link1.id}'] a.action[data-action='confirm']").click
+      find(".pending-link[data-target='#{link1.id}'] button.action[data-action='Confirm']").click
+      fill_in 'message-text', with: 'TEST'
+      find(:link_or_button, 'Send email').click
       expect(page).not_to have_content(student1.email)
+
+      mail = ActionMailer::Base.deliveries.last
+      expect(mail).not_to eq(nil)
+      expect(mail.to.to_s).to include(student1.email)
     end
 
-    it 'denies on click' do
+    it 'denies on click', js: true do
       visit('/tutoring_session/pending/')
-      find(".pending-link[data-target='#{link1.id}'] a.action[data-action='deny']").click
+      find(".pending-link[data-target='#{link1.id}'] button.action[data-action='Deny']").click
+      fill_in 'message-text', with: 'TEST'
+      find(:link_or_button, 'Send email').click
       expect(page).not_to have_content(student1.email)
+
+      mail = ActionMailer::Base.deliveries.last
+      expect(mail).not_to eq(nil)
+      expect(mail.to.to_s).to include(student1.email)
     end
   end
 end
