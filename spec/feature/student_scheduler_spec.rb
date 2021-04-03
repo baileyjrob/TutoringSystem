@@ -34,6 +34,12 @@ RSpec.describe 'Student scheduler', type: :feature do
                            password: 'T3st!!d')
       user3.roles << Role.find_by(role_name: 'Tutor')
 
+      user4 = User.create!(first_name: 'James',
+                           last_name: 'Doe',
+                           email: 'james@tamu.edu',
+                           password: 'T3st!!e')
+      user4.roles << Role.find_by(role_name: 'Student')
+
       TutoringSession.create!(id: 1,
                               tutor_id: user2.id,
                               scheduled_datetime: Time.zone.now + 100_000,
@@ -66,14 +72,14 @@ RSpec.describe 'Student scheduler', type: :feature do
 
     it 'can get to the scheduling page' do
       # Go to scheduling page
-      find_button 'Schedule tutoring session'
-      click_button 'Schedule tutoring session'
-      expect(page).to have_content('Student Scheduling Page')
+      find_link 'Join Tutoring Session'
+      click_link 'Join Tutoring Session'
+      expect(page).to have_content('Join a Tutor Session')
     end
 
     it 'can let a user cancel scheduling' do
       # Start at scheduling page
-      click_button 'Schedule tutoring session'
+      click_link 'Join Tutoring Session'
 
       # Cancel join and then go back and schedule
       find_button 'Cancel'
@@ -83,7 +89,7 @@ RSpec.describe 'Student scheduler', type: :feature do
 
     it 'can can filter out early time stamps' do
       # Go to scheduling page
-      click_button 'Schedule tutoring session'
+      click_link 'Join Tutoring Session'
 
       # Check available sessions
       find_button 'Join session', id: join_id
@@ -93,7 +99,7 @@ RSpec.describe 'Student scheduler', type: :feature do
 
     it 'returns to the home page after joining a session' do
       # Go to scheduling page
-      click_button 'Schedule tutoring session'
+      click_link 'Join Tutoring Session'
 
       # Join a session
       click_button 'Join session', id: join_id
@@ -104,7 +110,7 @@ RSpec.describe 'Student scheduler', type: :feature do
 
     it 'can successfully join a session' do
       # Go to scheduling page
-      click_button 'Schedule tutoring session'
+      click_link 'Join Tutoring Session'
 
       # Join a session
       click_button 'Join session', id: join_id
@@ -116,15 +122,29 @@ RSpec.describe 'Student scheduler', type: :feature do
 
     it 'prevents users from joining a session they joined previously' do
       # Go to scheduling page
-      click_button 'Schedule tutoring session'
+      click_link 'Join Tutoring Session'
 
       # Join a session
       click_button 'Join session', id: join_id
 
       # Check that the session is no longer joinable
-      click_button 'Schedule tutoring session'
+      click_link 'Join Tutoring Session'
       expect(page).not_to have_button 'Join session', id: join_id
       find_button 'Join session', id: remain_id
+    end
+
+    it 'only schedules sessions for the current user' do
+      visit '/users/4'
+
+      # Go to scheduling page
+      click_link 'Join Tutoring Session'
+
+      # Join a session
+      click_button 'Join session', id: join_id
+
+      # Make sure the CURRENT user joined the session
+      tsession = TutoringSession.find(join_id)
+      expect(tsession.users.find_by(id: student_id).blank?).to eq(false)
     end
   end
 end

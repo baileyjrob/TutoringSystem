@@ -1,9 +1,0 @@
-<%= link_to "Home", root_path %>
-<h1><%= @user.first_name %></h1>
-<p><%= @user.last_name %></p>
-<p><%= @user.email %></p>
-<p><%= @user.major %></p>
-<ul>
-  <li><%= link_to "Edit", edit_book_path(@book) %></li>
-  <li><%= link_to "Delete", book_path(@book), method: :delete %></li>
-</ul>

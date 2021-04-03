@@ -16,6 +16,8 @@ class User < ApplicationRecord
   has_many :role_users, dependent: :delete_all
   has_many :roles, through: :role_users
 
+  has_many :notifications, foreign_key: :recipient_id, dependent: :destroy, inverse_of: false
+
   validates :first_name, :last_name, :email, presence: true
   validate :email_domain
 

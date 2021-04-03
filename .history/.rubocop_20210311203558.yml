@@ -1,8 +1,0 @@
-AllCops:
-  NewCops: disable
-  Exclude:
-    - 'db/**/*'
-    - 'config/**/*'
-    - 'script/**/*'
-    - 'bin/**/*'
-    - !ruby/regexp /old_and_unused\.rb$/

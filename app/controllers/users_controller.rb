@@ -21,8 +21,18 @@ class UsersController < ApplicationController
   end
 
   def show
+    # Get user and tutoring sessions
     @user = User.find(params[:id])
     @tutoring_sessions = TutoringSession.all
+
+    # See if there is a spartan session to check into
+    @spartan_session = SpartanSession.where('session_datetime > :now',
+                                            now: Time.zone.now.to_datetime)
+                                     .and(SpartanSession.where('session_datetime < :endTime',
+                                                               endTime: (Time.zone.now + 7200)
+                                                                          .to_datetime))
+                                     .first
+    @spartan_session_users = SpartanSessionUser.all
   end
 
   def show_admin
@@ -91,8 +101,11 @@ class UsersController < ApplicationController
   def schedule_session_student
     user = User.find(params[:id])
     tutor_session = TutoringSession.find(params[:sessionID])
+    link = TutoringSessionUser.create(tutoring_session: tutor_session, user: user,
+                                      link_status: 'pending')
 
-    tutor_session.users << user
+    tutor_session.tutor.notifications.create(actor: user, action: 'student_application',
+                                             notifiable: link)
 
     redirect_to "/users/#{params[:id]}"
   end
@@ -104,6 +117,13 @@ class UsersController < ApplicationController
     @user.tutoring_sessions.delete(@tutor_session)
 
     redirect_to show_schedule_path
+  end
+
+  # Temporary until emailing is a thing
+  def admin_view_hours
+    include AdminViewHoursHelper
+    admin_view_hours_exec
+    @entries = CSV.read('public/tutoring_hours.csv', headers: true)
   end
 
   private
