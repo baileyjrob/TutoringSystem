@@ -8,7 +8,7 @@ class Role < ApplicationRecord
   validates :role_name, presence: true
 
   def self.admin_role
-    Role.find_by('role_name like ?', 'Admin') 
+    Role.find_by('role_name like ?', 'Admin')
   end
 
   def self.student_role
