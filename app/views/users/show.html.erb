@@ -5,51 +5,55 @@
 <% end %>
 
 <div class="container">
-  <h1 class="mb-0"><%= @user.first_name %> <%= @user.last_name %></h1>
-  <p class="mb-0">Email: <%= @user.email %></p>
-  <p>Major: <%= @user.major %></p>
-
   <div class="row">
-    <!-- Spartan tutoring check in -->
-    <% if @user.id == current_user.id and current_user.student? and !@spartan_session.blank? %>
-      <h4 class="mt-4 mb-2">Spartan Session</h4>
-      <h6 class="mb-2">Start Time: <%= @spartan_session.session_datetime.localtime.strftime("%l:%M %p") %></h6>
-      <% if @spartan_session.users.find_by(id: current_user.id).blank? %>
+    <div class="col-5 mt-5">
+      <h1 class="mb-0"><%= @user.first_name %> <%= @user.last_name %></h1>
+      <p class="mb-0">Email: <%= @user.email %></p>
+      <p>Major: <%= @user.major %></p>
 
-        <%= form_with model: @spartan_session_users, :url => {:action => 'check_in_first',
-                                                              :controller => 'spartan_sessions',
-                                                              :sessionID => @spartan_session.id},
-                      include_id: false do |form| %>
-          <div class="mb-2">
-            <%= form.label :code %><br>
-          </div>
-          <div class="input-group mb-3 w-25">
-            <%= form.text_field :code, class: "form-control" %>
-            <%= form.submit "Check In", class: "btn btn-outline-primary" %>
-          </div>
+      <div class="row">
+        <!-- Spartan tutoring check in -->
+        <% if @user.id == current_user.id and current_user.student? and !@spartan_session.blank? %>
+          <h4 class="mt-4 mb-2">Spartan Session</h4>
+          <h6 class="mb-2">Start Time: <%= @spartan_session.session_datetime.localtime.strftime("%l:%M %p") %></h6>
+          <% if @spartan_session.users.find_by(id: current_user.id).blank? %>
+
+            <%= form_with model: @spartan_session_users, :url => {:action => 'check_in_first',
+                                                                  :controller => 'spartan_sessions',
+                                                                  :sessionID => @spartan_session.id},
+                          include_id: false do |form| %>
+              <div class="mb-2">
+                <%= form.label :code %><br>
+              </div>
+              <div class="input-group mb-3 w-25">
+                <%= form.text_field :code, class: "form-control" %>
+                <%= form.submit "Check In", class: "btn btn-outline-primary" %>
+              </div>
+            <% end %>
+          <% elsif SpartanSessionUser.where(user_id: current_user.id).and(SpartanSessionUser.where(spartan_session_id: @spartan_session.id)).first.second_checkin.nil?
+                    # Provide the second check in button %>
+            <%= form_with model: @spartan_session_users, :url => {:action => 'check_in_second',
+                                                                  :controller => 'spartan_sessions',
+                                                                  :sessionID => @spartan_session.id},
+                          include_id: false do |form| %>
+              <div class="mb-2">
+                <%= form.label :code %><br>
+              </div>
+              <div class="input-group mb-3 w-25">
+                <%= form.text_field :code, class: "form-control" %>
+                <%= form.submit "Check Out", class: "btn btn-outline-primary" %>
+              </div>
+            <% end %>
+          <% else %>
+              <p>You have attended this session.</p>
+          <% end %>
         <% end %>
-      <% elsif SpartanSessionUser.where(user_id: current_user.id).and(SpartanSessionUser.where(spartan_session_id: @spartan_session.id)).first.second_checkin.nil?
-                # Provide the second check in button %>
-        <%= form_with model: @spartan_session_users, :url => {:action => 'check_in_second',
-                                                              :controller => 'spartan_sessions',
-                                                              :sessionID => @spartan_session.id},
-                      include_id: false do |form| %>
-          <div class="mb-2">
-            <%= form.label :code %><br>
-          </div>
-          <div class="input-group mb-3 w-25">
-            <%= form.text_field :code, class: "form-control" %>
-            <%= form.submit "Check Out", class: "btn btn-outline-primary" %>
-          </div>
-        <% end %>
-      <% else %>
-          <p>You have attended this session.</p>
-      <% end %>
-    <% end %>
+      </div>
+      <br>
+      <p class="mb-0">Student?: <%= @user.student? %></p>
+      <p class="mb-0">Tutor?: <%= @user.tutor? %></p>
+      <p class="mb-0">Spartan Tutor?: <%= @user.spartan_tutor? %></p>
+      <p class="mb-0">Admin?: <%= @user.admin? %></p>
+    </div>
   </div>
-  <br>
-  <p class="mb-0">Student?: <%= @user.student? %></p>
-  <p class="mb-0">Tutor?: <%= @user.tutor? %></p>
-  <p class="mb-0">Spartan Tutor?: <%= @user.spartan_tutor? %></p>
-  <p class="mb-0">Admin?: <%= @user.admin? %></p>
 </div>
