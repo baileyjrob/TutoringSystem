@@ -45,4 +45,8 @@ class User < ApplicationRecord
     @role = Role.where(role_name: 'Spartan Tutor')
     roles.push(@role)
   end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end
