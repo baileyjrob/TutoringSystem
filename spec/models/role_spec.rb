@@ -110,5 +110,13 @@ RSpec.describe Role, type: :model do
       user.roles.push(role)
       expect(user.roles.spartan_tutor_role).to be_nil
     end
+
+    it 'returns role_name' do
+      role = described_class.create!(role_name: 'Student')
+      user = User.create(first_name: 'Andrew', last_name: 'last', major: 'CSCE',
+                         email: 'asdf@tamu.edu', password: '12341234')
+      user.roles.push(role)
+      expect(user.roles.student_role.to_s).to eq('Student')
+    end
   end
 end
