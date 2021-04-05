@@ -21,10 +21,9 @@ require 'show_me_the_cookies'
 require 'capybara/rspec'
 require 'capybara/apparition'
 
+Capybara.javascript_driver = :apparition
 # Driver for Bailey, since apparition just doesn't work for me
 # Capybara.javascript_driver = :selenium_chrome_headless
-# ALWAYS uncomment this before pushing, as github works best with this
-Capybara.javascript_driver = :apparition
 
 SimpleCov.start 'rails' do
   add_filter '/bin/'
