@@ -36,3 +36,6 @@ Role.create(role_name: 'Admin');
 Role.create(role_name: 'Tutor');
 Role.create(role_name: 'Student');
 Role.create(role_name: 'Spartan Tutor');
+
+Department.create(department_name: "CSCE");
+Course.create(course_name: "431", department_id: Department.where(department_name: "CSCE"));

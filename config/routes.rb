@@ -16,8 +16,11 @@ Rails.application.routes.draw do
   post '/spartan_sessions/check_in_second' => 'spartan_sessions#check_in_second'
   get '/notifications/:id', :to => 'notification#show'
   get '/tutoring_session/pending', :to => 'tutoring_session_user#show'
-  post '/tutoring_session_user/:id/deny', :to => 'tutoring_session_user#deny_pending_link'
-  post '/tutoring_session_user/:id/confirm', :to => 'tutoring_session_user#confirm_pending_link'
+  get '/tutoring_session_user/:id/deny', :to => 'tutoring_session_user#deny_pending_link'
+  get '/tutoring_session_user/:id/confirm', :to => 'tutoring_session_user#confirm_pending_link'
+  get '/tutor/:id/course_index', :to => 'tutor#course_index'
+  get '/tutor/:id/course_edit', :to => 'tutor#course_edit'
+  get '/tutor/:id/course_new', :to => 'tutor#course_new'
   # TEMP UNTIL EMAIL
   get '/users/admin_view_hours', :to => 'users#admin_view_hours'
   post '/users/admin_view_hours', :to =>'users#admin_view_hours'

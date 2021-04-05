@@ -1,0 +1,26 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1>Tutor Courses Page</h1>
+    </div>
+  </div><div class="row">
+    <div class="col-12 mt-3">
+      <table class="table" id="course_users">
+        <thead>
+          <tr>
+            <th scope="col">Course</th>
+            <th scope="col">department id</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% current_user.courses.each do |course| %>
+          <tr class='userInfo'>
+            <th scope="row"><%= course_users.id %></th>
+            <td><%= course.course_name %></td>
+            <td><%= course.department_id  %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+</div>
