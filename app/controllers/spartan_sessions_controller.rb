@@ -3,6 +3,43 @@
 class SpartanSessionsController < ApplicationController
   before_action :check_first_code, only: [:check_in_first]
   before_action :check_second_code, only: [:check_in_second]
+  before_action :add_user_to_session, only: [:add_user]
+
+  def index
+    @sessions = SpartanSession.all.order(session_datetime: :asc)
+  end
+
+  def show
+    @session = SpartanSession.find(params[:id])
+    @users = @session.users
+  end
+
+  def edit_user
+    @user = User.find(params[:userID])
+    @suser = SpartanSessionUser.where(spartan_session_id: params[:id])
+                               .and(SpartanSessionUser.where(user_id: params[:userID]))
+                               .first
+  end
+
+  def update_attendance
+    SpartanSessionUser.where(spartan_session_id: params[:id])
+                      .and(SpartanSessionUser.where(user_id: params[:user_id]))
+                      .first.update(attendance: params[:attendance_notes])
+
+    redirect_to :spartan_session
+  end
+
+  def add_user
+    SpartanSessionUser.where(spartan_session_id: params[:id])
+                      .and(SpartanSessionUser.where(user_id: @id))
+                      .first.update(attendance: params[:attendance_notes])
+
+    redirect_to :spartan_session
+  end
+
+  def download
+    # TODO: download CSV file
+  end
 
   def check_in_first
     SpartanSessionUser.create(spartan_session_id: params[:sessionID],
@@ -22,6 +59,17 @@ class SpartanSessionsController < ApplicationController
   end
 
   private
+
+  def add_user_to_session
+    user = User.find_by(email: params[:email])
+    session = SpartanSession.find(params[:id])
+
+    # Only add the user if they don't exist already
+    SpartanSession.find(params[:id]).users << user if session.users.find_by(id: user.id).blank?
+
+    # Need user.id to search in spartan session users table
+    @id = user.id
+  end
 
   def check_first_code
     unless SpartanSession.find(params[:sessionID]).first_code ==

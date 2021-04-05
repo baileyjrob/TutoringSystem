@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <div class="col-3 mt-5">
+      <label for="session_filter">Spartan Session Filter</label>
+      <select id="session_filter" class="form-select mt-1">
+        <option value="All">All</option>
+        <option value="Previous">Previous</option>
+        <option value="Upcoming">Upcoming</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 mt-3">
+      <table class="table" id="users">
+        <thead>
+        <tr>
+          <th scope="col">Semester</th>
+          <th scope="col">Date</th>
+          <th scope="col">Time</th>
+          <th scope="col">Check In Code</th>
+          <th scope="col">Check Out Code</th>
+          <th scope="col">View Attendance</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @sessions.each do |session| %>
+          <tr class='userInfo'>
+            <td><%= session.semester %></td>
+            <td><%= session.session_datetime.strftime("%B %d") %></td>
+            <td><%= session.session_datetime.strftime("%l:%M %p %Z") %></td>
+            <td><%= session.first_code  %></td>
+            <td><%= session.second_code  %></td>
+            <td><%= button_to 'View Attendance', {:action => 'show', :id => session.id}, :class => "btn btn-primary", :method => :get %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
