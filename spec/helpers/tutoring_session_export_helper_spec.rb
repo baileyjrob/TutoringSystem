@@ -39,7 +39,10 @@ RSpec.describe TutoringSessionExportHelper, type: :helper do
     before { tutor.roles << Role.create(role_name: 'Tutor') }
 
     it 'adds all completed tutoring hours' do
-      tutor.tutoring_sessions << tutoring_sessions
+      tutoring_sessions.map do |session|
+        TutoringSessionUser.create(tutoring_session: session, user: tutor, link_status: 'confirmed')
+      end
+      # tutor.tutoring_sessions << tutoring_session_users_entries
       create_csv(start_date, end_date, "#{filepath}.csv")
       csv_table = CSV.read(Rails.root.join("#{filepath}.csv"), headers: true)
       expect([csv_table[0]['Tutor_Name'],
