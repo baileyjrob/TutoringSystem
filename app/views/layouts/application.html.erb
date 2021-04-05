@@ -23,13 +23,6 @@
 </head>
 
 <body>
-
-
-
-  <div devise notices and allerts>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-  </div>
   <div class="container-fluid bg-light p-0">
     <nav class="navbar navbar-expand-lg navbar-light container">
       <%=link_to "ORSHS Tutoring System", root_path, class: 'navbar-brand' %>
@@ -45,9 +38,20 @@
           <li class="nav-item">
             <%=link_to "Find a Tutor", '/tutor/index', class: 'nav-link', text: 'Tutor Matching'  %>
           </li>
-        </ul>
-        <ul class="navbar-nav">
           <% if current_user %>
+          <li class="nav-item">
+            <%= link_to 'My Schedule', show_schedule_path, class: 'nav-link'  %>
+          </li>
+          <% end %>
+        </ul>
+        <ul class="navbar-nav ms-auto">
+          <% if current_user %>
+          <li class="nav-item">
+            <%=link_to "Join Tutoring Session", "/users/#{current_user.id}/schedule_student", class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'My Schedule', show_schedule_path, class: 'nav-link'  %>
+          </li>
           <li class="nav-item">
             <%= link_to 'My Account', edit_user_registration_path, class: 'nav-link' %>
           </li>
@@ -55,9 +59,12 @@
             <%= link_to 'Sign out', destroy_user_session_path, class: 'nav-link',
             method: :delete %>
           </li>
+          <!-- TEMPORARY UNTIL EMAIL SET UP -->
+          <% if current_user.roles.include?(Role.admin_role) %>
           <li class="nav-item">
-            <%= link_to 'My Schedule', show_schedule_path, class: 'nav-link'  %>
+            <%= link_to 'Get Tutoring Hours', '/users/admin_view_hours' , class: 'nav-link' %>
           </li>
+          <% end %>
           <% else %>
           <li class="nav-item">
             <%= link_to 'Sign up', new_user_registration_path, class: 'nav-link'%>
@@ -80,6 +87,23 @@
         </ul>
       </div>
     </nav>
+  </div>
+  <div class="container">
+    <div devise notices and allerts>
+      <% if notice %>
+      <div class="notice alert alert-success"><%= notice %></div>
+      <% end %>
+      <% if alert %>
+      <div class="alert alert-warning"><%= alert %></div>
+      <% end %>
+    </div>
+    <div class="notifications">
+      <% @notifications.each do |noti| %>
+      <div class="alert alert-warning">
+        You have pending tutor requests. Check them <a href="<%= "/notifications/#{noti.id}/" %> ">here</a>.
+      </div>
+      <% end %>
+    </div>
   </div>
   <%= yield %>
 </body>

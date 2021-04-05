@@ -16,6 +16,8 @@ class User < ApplicationRecord
   has_many :role_users, dependent: :delete_all
   has_many :roles, through: :role_users
 
+  has_many :notifications, foreign_key: :recipient_id, dependent: :destroy, inverse_of: false
+
   validates :first_name, :last_name, :email, presence: true
   validate :email_domain
   def email_domain
@@ -43,5 +45,9 @@ class User < ApplicationRecord
   def student?
     @role = Role.where(role_name: 'Student')
     (role_users.find_by role_id: @role, user_id: id) != nil
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
   end
 end

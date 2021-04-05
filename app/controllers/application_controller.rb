@@ -4,6 +4,7 @@
 class ApplicationController < ActionController::Base
   # allows sign up to take in name and major and attach it to the user
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_notifications
 
   protected
 
@@ -22,5 +23,10 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update,
                                       keys: %i[email password password_confirmation first_name
                                                last_name major])
+  end
+
+  def set_notifications
+    @notifications = Notification.where(recipient: current_user)
+                                 .unread.select('distinct on (action) *')
   end
 end
