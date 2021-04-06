@@ -34,6 +34,6 @@ RSpec.describe 'Tutor Matching', type: :feature do
       expect(page).to have_content('No Available Tutors')
     end
 
-    User.delete_all
+    User.destroy_all
   end
 end
