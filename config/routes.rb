@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get '/spartan_sessions/:id/edit_user', :to => 'spartan_sessions#edit_user'
   post '/spartan_sessions/:id/update_attendance', :to => 'spartan_sessions#update_attendance'
   post '/spartan_sessions/:id/add_user', :to => 'spartan_sessions#add_user'
+  post '/spartan_sessions/:id/download', :to => 'spartan_sessions#download'
   get '/notifications/:id', :to => 'notification#show'
   get '/tutoring_session/pending', :to => 'tutoring_session_user#show'
   post '/tutoring_session_user/:id/deny', :to => 'tutoring_session_user#deny_pending_link'

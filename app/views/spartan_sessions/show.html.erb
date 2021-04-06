@@ -21,7 +21,7 @@
         </div>
         <!-- Download a CSV file with attendance data -->
         <div class="col d-md-flex justify-content-md-end">
-          <%= button_to 'Download', 'download', :class => "btn btn-primary" %>
+          <%= button_to 'Download', @session.id.to_s + '/download', :id => @session.id, :class => "btn btn-primary" %>
         </div>
       </div>
       <table class="table" id="users">

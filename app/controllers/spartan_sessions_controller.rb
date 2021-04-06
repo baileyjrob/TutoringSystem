@@ -4,6 +4,7 @@ class SpartanSessionsController < ApplicationController
   before_action :check_first_code, only: [:check_in_first]
   before_action :check_second_code, only: [:check_in_second]
   before_action :add_user_to_session, only: [:add_user]
+  before_action :generate_csv, only: [:download]
 
   def index
     @sessions = SpartanSession.all.order(session_datetime: :asc)
@@ -38,7 +39,7 @@ class SpartanSessionsController < ApplicationController
   end
 
   def download
-    # TODO: download CSV file
+    @entries = CSV.read("public/spartan_attendance_#{@time}.csv", headers: true)
   end
 
   def check_in_first
@@ -59,6 +60,24 @@ class SpartanSessionsController < ApplicationController
   end
 
   private
+
+  def generate_time(id)
+    @time = SpartanSession.find(id).session_datetime.localtime.strftime('%Y%m%d_%H%M%S')
+  end
+
+  def generate_csv
+    unless current_user.roles.include?(Role.admin_role)
+      redirect_to root_path
+      return
+    end
+
+    # include SpartanSessionExportHelper
+    return unless request.post?
+
+    # Pass in params to create the CSV
+    generate_time(params[:id])
+    SpartanSessionExportHelper.create_csv(params[:id], @time)
+  end
 
   def add_user_to_session
     user = User.find_by(email: params[:email])
