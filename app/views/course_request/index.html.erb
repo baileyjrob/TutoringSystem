@@ -1,6 +1,6 @@
 <h1>Tutor Matching Page</h1>
 
-<%=form_tag('index', :method => "get", :controller => 'tutor' ) do %>
+<%=form_tag('index', :method => "get", :controller => 'course_request' ) do %>
     <%= label_tag(:filter_major, "Course Department: ") %> 
     <br>
         <%= text_field_tag(:filter_major) %>
@@ -13,19 +13,7 @@
         <%= @no_tutors %>
         <br>
         <%= @ask_request %> 
-        <%= form_for(@current_request) do |f| %>
-            <div class= "field">
-            <%= f.label :Department_and_course_number %><br>
-            <%= f.text_field :course_name_full %>
-            </div>
-
-            <div class= "actions">
-            <%= f.submit %>
-            </div>
-            <br>
-        <%end%>
-
-
+        <%= button_to "See all requests", {:action => 'new'}, :method => :get %>
 
     </p>
 <% else %>
@@ -42,4 +30,3 @@
 
 <%end%>
 
-<%= button_to "See all requests", {:action => 'request_submission'}, :method => :get %>

@@ -8,10 +8,12 @@ class TutorController < ApplicationController
     @matching_tutors = @tutors.where(major: params[:filter_major])
     @no_tutors = '<b> No Available Tutors </b>'.html_safe
     @avail_tutors = '<b> Available Tutors </b>'.html_safe
+    @ask_request = ' Would you like to submit a request for a course? '.html_safe
+    @request_successful = 'Request Recieved '.html_safe
 
     # TODO: use roles to filter tutors out
     @current_request = CourseRequest.new
-    @course_requests = CourseRequest.all
+    @all_requests = CourseRequest.all
   end
 
   def matching_tutors
@@ -20,6 +22,7 @@ class TutorController < ApplicationController
   
   end
   
+
   def request_submission
     @all_requests = CourseRequest.all
     @ask_request = ' Would you like to submit a request for a course? '.html_safe
@@ -34,14 +37,16 @@ class TutorController < ApplicationController
   def create
 
     @current_request = CourseRequest.new(params[:course_request_params])
-
-    if @current_request.save
+    @current_request = CourseRequest.create(params[:course_name_full])
+    redirect_to '/tutor/request_submission', notice: 'Request submitted. Have a nice day!'
+    
+    #if @current_request.save
       #@submitted_request = params[:requested_course]
    
       #@current_request.user_id = current_user.id
       #@current_request.course_name_full = params[:requested_course]
-      redirect_to '/tutor/request_submission', notice: 'Request submitted. Have a nice day!'
-    end
+     # redirect_to '/tutor/request_submission', notice: 'Request submitted. Have a nice day!'
+    #end
 
   end
 
@@ -51,7 +56,7 @@ class TutorController < ApplicationController
 
   private
     def course_request_params
-      params.require(:tutor).permit(:user_id, :course_name_full)
+      params.require(:tutor).permit(:course_name_full)
     end
  
 end

@@ -1,0 +1,20 @@
+<p>
+    <b> Request Page </b>
+
+    <%= form_with(model: @crequest, url: 'new') do |f| %>
+        <div class= "field">
+        <%= f.label :Department_and_course_number %><br>
+        <%= f.text_field :course_name_full, class: "form-control", required: true %>
+        </div>
+
+        <%= f.submit class: "btn btn-primary float-left" %>
+        <br>
+
+    <%end%>
+
+    <%= @all_requests.inspect %> </br>
+    <%= button_to 'Clear All Requests', delete_all_request_path, data: {confirm: "Are you sure?"} %>
+    <%= button_to "Return to Tutor Matching", {:action => 'index'}, :method => :get %>
+</p>
+
+
