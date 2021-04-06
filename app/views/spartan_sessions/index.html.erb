@@ -30,7 +30,8 @@
             <td><%= session.session_datetime.strftime("%l:%M %p %Z") %></td>
             <td><%= session.first_code  %></td>
             <td><%= session.second_code  %></td>
-            <td><%= button_to 'View Attendance', {:action => 'show', :id => session.id}, :class => "btn btn-primary", :method => :get %></td>
+            <td><%= button_to 'View Attendance', {:action => 'show', :id => session.id},
+                              :class => "btn btn-primary", :id => session.id, :method => :get %></td>
           </tr>
         <% end %>
         </tbody>

@@ -62,13 +62,18 @@ class SpartanSessionsController < ApplicationController
 
   def add_user_to_session
     user = User.find_by(email: params[:email])
-    session = SpartanSession.find(params[:id])
 
-    # Only add the user if they don't exist already
-    SpartanSession.find(params[:id]).users << user if session.users.find_by(id: user.id).blank?
+    if user.nil? || user.blank?
+      redirect_to :spartan_session, alert: 'Invalid email input!'
+    else
+      session = SpartanSession.find(params[:id])
 
-    # Need user.id to search in spartan session users table
-    @id = user.id
+      # Only add the user if they don't exist already
+      session.users << user unless session.users.exists?(user.id)
+
+      # Need user.id to search in spartan session users table
+      @id = user.id
+    end
   end
 
   def check_first_code

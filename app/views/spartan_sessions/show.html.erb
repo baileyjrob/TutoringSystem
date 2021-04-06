@@ -59,7 +59,8 @@
             <td><%= suser.second_checkin.localtime.strftime("%B %d %Y at %l:%M %p") %></td>
           <% end %>
           <td><%= suser.attendance %></td>
-          <td><%= button_to 'Edit Notes', {:action => 'edit_user', :userID => user.id}, :class => "btn btn-primary" %></td>
+          <td><%= button_to 'Edit Notes', {:action => 'edit_user', :userID => user.id},
+                            :class => "btn btn-primary", :id => user.id %></td>
         </tr>
       <% end %>
       </tbody>
