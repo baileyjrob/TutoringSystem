@@ -20,6 +20,8 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, :email, presence: true
   validate :email_domain
+
+  before_destroy :remove_tutored, prepend: true
   def email_domain
     domain = email.split('@').last if email.present?
     return unless email.present? && domain != 'tamu.edu' && domain != 'spartan-tutoring.com'
@@ -49,5 +51,22 @@ class User < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def sessions_tutoring
+    return unless tutor?
+
+    User.joins('RIGHT JOIN tutoring_sessions ON tutoring_sessions.tutor_id = users.id')
+        .where('users.id = ?', id)
+        .select('tutoring_sessions.id')
+  end
+
+  def remove_tutored
+    sessions = sessions_tutoring
+    return if sessions.nil?
+
+    sessions.each do |session|
+      TutoringSession.find(session.id).destroy
+    end
   end
 end
