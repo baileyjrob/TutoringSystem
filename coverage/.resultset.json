@@ -1,0 +1,1442 @@
+{
+  "RSpec": {
+    "coverage": {
+<<<<<<< Updated upstream
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/user.rb": {
+=======
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/user.rb": {
+>>>>>>> Stashed changes
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+<<<<<<< Updated upstream
+          144,
+          144,
+=======
+          169,
+          169,
+>>>>>>> Stashed changes
+          null,
+          1,
+          null,
+          null,
+          1,
+<<<<<<< Updated upstream
+          63,
+          63,
+          null,
+          null,
+          1,
+          63,
+          63,
+          null,
+          null,
+          1,
+          63,
+          63,
+          null,
+          null,
+          1,
+          124,
+          124,
+          null,
+          null,
+          1,
+          20,
+=======
+          118,
+          118,
+          null,
+          null,
+          1,
+          118,
+          118,
+          null,
+          null,
+          1,
+          118,
+          118,
+          null,
+          null,
+          1,
+          234,
+          234,
+>>>>>>> Stashed changes
+          null,
+          null
+        ]
+      },
+<<<<<<< Updated upstream
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/application_record.rb": {
+=======
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/application_record.rb": {
+>>>>>>> Stashed changes
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+<<<<<<< Updated upstream
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/helpers/admin_view_hours_helper.rb": {
+=======
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/helpers/admin_view_hours_helper.rb": {
+>>>>>>> Stashed changes
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null
+        ]
+      },
+<<<<<<< Updated upstream
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/helpers/application_helper.rb": {
+=======
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/helpers/application_helper.rb": {
+>>>>>>> Stashed changes
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+<<<<<<< Updated upstream
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/helpers/landing_helper.rb": {
+=======
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/helpers/landing_helper.rb": {
+>>>>>>> Stashed changes
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+<<<<<<< Updated upstream
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/helpers/tutor_helper.rb": {
+=======
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/helpers/tutor_helper.rb": {
+>>>>>>> Stashed changes
+        "lines": [
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+<<<<<<< Updated upstream
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/helpers/tutoring_session_controller_helper.rb": {
+=======
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/helpers/tutoring_session_controller_helper.rb": {
+>>>>>>> Stashed changes
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+<<<<<<< Updated upstream
+          13,
+=======
+          14,
+>>>>>>> Stashed changes
+          null,
+          null,
+          null,
+          null,
+          1,
+          4,
+          4,
+          null,
+          4,
+          4,
+          4,
+          null,
+          null,
+          1,
+<<<<<<< Updated upstream
+          26,
+=======
+          28,
+>>>>>>> Stashed changes
+          null,
+          null,
+          1,
+          4,
+          null,
+          null,
+          1,
+<<<<<<< Updated upstream
+          9,
+=======
+          10,
+>>>>>>> Stashed changes
+          null,
+          null
+        ]
+      },
+<<<<<<< Updated upstream
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/helpers/tutoring_session_export_helper.rb": {
+=======
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/helpers/tutoring_session_export_helper.rb": {
+>>>>>>> Stashed changes
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+<<<<<<< Updated upstream
+          3,
+          3,
+          3,
+          3,
+=======
+          2,
+          2,
+          2,
+          2,
+>>>>>>> Stashed changes
+          null,
+          null,
+          1,
+          null,
+          1,
+<<<<<<< Updated upstream
+          3,
+=======
+          2,
+>>>>>>> Stashed changes
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+<<<<<<< Updated upstream
+          6,
+=======
+          2,
+>>>>>>> Stashed changes
+          null,
+          null,
+          null,
+          1,
+<<<<<<< Updated upstream
+          4,
+          3,
+          null,
+          1,
+          null,
+=======
+          1,
+          0,
+          null,
+          1,
+>>>>>>> Stashed changes
+          null,
+          null,
+          null,
+          null,
+<<<<<<< Updated upstream
+          1,
+          3,
+          3,
+          3,
+          3,
+          null,
+          null,
+          null,
+          1,
+          3,
+          null,
+          4,
+=======
+          null,
+          1,
+          2,
+>>>>>>> Stashed changes
+          2,
+          2,
+          2,
+          null,
+          null,
+<<<<<<< Updated upstream
+          4,
+          null,
+          null,
+          3,
+          null,
+          null
+        ]
+      },
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/helpers/user_controller_helper.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          4,
+          null,
+          null,
+          1,
+          4,
+          4,
+          4,
+          null,
+          4,
+=======
+          null,
+          1,
+          2,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          null,
+          2,
+>>>>>>> Stashed changes
+          null,
+          null
+        ]
+      },
+<<<<<<< Updated upstream
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/controllers/users_controller.rb": {
+=======
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/controllers/users_controller.rb": {
+>>>>>>> Stashed changes
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+<<<<<<< Updated upstream
+          1,
+          null,
+          1,
+          29,
+          7,
+          7,
+=======
+          null,
+          1,
+          40,
+          18,
+          18,
+>>>>>>> Stashed changes
+          null,
+          null,
+          null,
+          22,
+          null,
+          null,
+          1,
+<<<<<<< Updated upstream
+          7,
+          null,
+          7,
+=======
+          18,
+          null,
+          18,
+>>>>>>> Stashed changes
+          null,
+          null,
+          1,
+          null,
+<<<<<<< Updated upstream
+          63,
+          63,
+          null,
+          null,
+          63,
+          null,
+          null,
+          63,
+          null,
+          null,
+          63,
+=======
+          118,
+          118,
+          null,
+          null,
+          118,
+          null,
+          null,
+          118,
+          null,
+          null,
+          118,
+>>>>>>> Stashed changes
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          1,
+          2,
+          2,
+          2,
+          null,
+          null,
+          null,
+          0,
+          null,
+          null,
+          1,
+          2,
+          null,
+          2,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
+          1,
+          4,
+          4,
+          null,
+          0,
+          null,
+          null,
+          null,
+          1,
+          8,
+          8,
+          null,
+          null,
+          null,
+          1,
+          4,
+          4,
+<<<<<<< Updated upstream
+          null,
+          4,
+          null,
+          4,
+          null,
+=======
+          4,
+          null,
+          null,
+          4,
+          null,
+          null,
+>>>>>>> Stashed changes
+          4,
+          null,
+          null,
+          1,
+          2,
+          2,
+          null,
+          2,
+          null,
+          2,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+<<<<<<< Updated upstream
+          null
+        ]
+      },
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/controllers/application_controller.rb": {
+=======
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/controllers/application_controller.rb": {
+>>>>>>> Stashed changes
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+<<<<<<< Updated upstream
+          86,
+=======
+          140,
+>>>>>>> Stashed changes
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+<<<<<<< Updated upstream
+          86,
+          null,
+          null,
+          86,
+=======
+          140,
+          null,
+          null,
+          140,
+>>>>>>> Stashed changes
+          null,
+          null,
+          null,
+          null,
+          1,
+<<<<<<< Updated upstream
+          286,
+=======
+          489,
+>>>>>>> Stashed changes
+          null,
+          null,
+          null
+        ]
+      },
+<<<<<<< Updated upstream
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/controllers/tutoring_session_controller.rb": {
+=======
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/controllers/tutoring_session_controller.rb": {
+>>>>>>> Stashed changes
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+<<<<<<< Updated upstream
+          13,
+          null,
+          null,
+          13,
+          null,
+          null,
+          13,
+          104,
+          13,
+          91,
+          null,
+          91,
+=======
+          14,
+          null,
+          null,
+          14,
+          null,
+          null,
+          14,
+          112,
+          14,
+          98,
+          null,
+          98,
+>>>>>>> Stashed changes
+          null,
+          null,
+          null,
+          null,
+          1,
+<<<<<<< Updated upstream
+          13,
+          4,
+          4,
+          null,
+          9,
+          9,
+          null,
+          13,
+          13,
+          13,
+=======
+          14,
+          4,
+          4,
+          null,
+          10,
+          10,
+          null,
+          14,
+          14,
+          14,
+>>>>>>> Stashed changes
+          null,
+          null,
+          1,
+          6,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null,
+          1,
+          2,
+          null,
+          2,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          null,
+          5,
+          5,
+          null,
+          5,
+          5,
+          null,
+          5,
+          3,
+          null,
+          3,
+          null,
+          null,
+          2,
+          null,
+          null,
+          null,
+          1,
+          6,
+          null,
+          null,
+          1,
+          2,
+          null,
+          2,
+          null,
+          2,
+          null,
+          2,
+          null,
+          null,
+          1,
+          null,
+          1,
+          7,
+          null,
+          null
+        ]
+      },
+<<<<<<< Updated upstream
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/controllers/tutoring_session_user_controller.rb": {
+=======
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/controllers/tutoring_session_user_controller.rb": {
+>>>>>>> Stashed changes
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          7,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+<<<<<<< Updated upstream
+          0,
+          null,
+          null,
+          1,
+          1,
+          null,
+=======
+>>>>>>> Stashed changes
+          1,
+          null,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+<<<<<<< Updated upstream
+          0,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          1,
+          null,
+          1,
+          2,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+=======
+          1,
+          null,
+          1,
+>>>>>>> Stashed changes
+          null,
+          null
+        ]
+      },
+<<<<<<< Updated upstream
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/course_request.rb": {
+=======
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/course_request.rb": {
+>>>>>>> Stashed changes
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+<<<<<<< Updated upstream
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/course.rb": {
+=======
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/course.rb": {
+>>>>>>> Stashed changes
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+<<<<<<< Updated upstream
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/department.rb": {
+=======
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/department.rb": {
+>>>>>>> Stashed changes
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+<<<<<<< Updated upstream
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/notification.rb": {
+=======
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/notification.rb": {
+>>>>>>> Stashed changes
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+<<<<<<< Updated upstream
+          287,
+          null,
+          1,
+          4,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/role.rb": {
+=======
+          490,
+          null
+        ]
+      },
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/role.rb": {
+>>>>>>> Stashed changes
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+<<<<<<< Updated upstream
+          151,
+=======
+          263,
+>>>>>>> Stashed changes
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+<<<<<<< Updated upstream
+          7,
+=======
+          40,
+>>>>>>> Stashed changes
+          null,
+          null
+        ]
+      },
+<<<<<<< Updated upstream
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/spartan_session.rb": {
+=======
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/spartan_session.rb": {
+>>>>>>> Stashed changes
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+<<<<<<< Updated upstream
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/tutoring_session.rb": {
+=======
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/tutoring_session.rb": {
+>>>>>>> Stashed changes
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+<<<<<<< Updated upstream
+          85,
+=======
+          81,
+>>>>>>> Stashed changes
+          null,
+          null,
+          null,
+          1,
+          6,
+          null,
+          null,
+          1,
+          32,
+          32,
+          null,
+          32,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          29,
+          null,
+          29,
+          29,
+          29,
+          null,
+          29,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          29,
+          29,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+<<<<<<< Updated upstream
+          null,
+          null,
+          null,
+          null,
+          1,
+          10,
+=======
+          1,
+          19,
+          null,
+          null,
+          1,
+          4,
+>>>>>>> Stashed changes
+          null,
+          null,
+          1,
+          null,
+          1,
+<<<<<<< Updated upstream
+          90,
+          81,
+          null,
+          80,
+          null,
+          null,
+          80,
+=======
+          86,
+          77,
+          null,
+          76,
+          null,
+          null,
+          76,
+>>>>>>> Stashed changes
+          null,
+          1,
+          null,
+          null
+        ]
+      },
+<<<<<<< Updated upstream
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/tutoring_session_user.rb": {
+=======
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/tutoring_session_user.rb": {
+>>>>>>> Stashed changes
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+<<<<<<< Updated upstream
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/controllers/tutor_controller.rb": {
+=======
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/controllers/tutor_controller.rb": {
+>>>>>>> Stashed changes
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          11,
+          11,
+          11,
+          11,
+          11,
+          null,
+          11,
+          null,
+          null,
+          11,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+<<<<<<< Updated upstream
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/role_user.rb": {
+=======
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/role_user.rb": {
+>>>>>>> Stashed changes
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+<<<<<<< Updated upstream
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/spartan_session_user.rb": {
+=======
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/spartan_session_user.rb": {
+>>>>>>> Stashed changes
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+<<<<<<< Updated upstream
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/course_user.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/controllers/spartan_sessions_controller.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          6,
+          null,
+          null,
+          null,
+          6,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null,
+          2,
+          null,
+          2,
+=======
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/controllers/spartan_sessions_controller.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          13,
+          null,
+          null,
+          1,
+          17,
+          17,
+          null,
+          null,
+          1,
+          4,
+          4,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          3,
+          null,
+          null,
+          null,
+          3,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          17,
+          null,
+          null,
+          null,
+          17,
+          null,
+          null,
+          1,
+          13,
+          null,
+          null,
+          13,
+          null,
+          13,
+>>>>>>> Stashed changes
+          null,
+          null,
+          1,
+          null,
+          1,
+<<<<<<< Updated upstream
+          7,
+=======
+          4,
+          null,
+          4,
+          1,
+          null,
+          3,
+          null,
+          null,
+          3,
+          null,
+          null,
+          3,
+          null,
+          null,
+          null,
+          1,
+          18,
+>>>>>>> Stashed changes
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+<<<<<<< Updated upstream
+          3,
+=======
+          14,
+>>>>>>> Stashed changes
+          null,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+<<<<<<< Updated upstream
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/course_tutoring_session.rb": {
+=======
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/course_user.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/course_tutoring_session.rb": {
+>>>>>>> Stashed changes
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+<<<<<<< Updated upstream
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/department_tutoring_session.rb": {
+=======
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/department_tutoring_session.rb": {
+>>>>>>> Stashed changes
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+<<<<<<< Updated upstream
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/controllers/notification_controller.rb": {
+=======
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/controllers/notification_controller.rb": {
+>>>>>>> Stashed changes
+        "lines": [
+          null,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+<<<<<<< Updated upstream
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/controllers/registrations_controller.rb": {
+=======
+      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/controllers/registrations_controller.rb": {
+>>>>>>> Stashed changes
+        "lines": [
+          null,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0
+        ],
+        "branches": {
+        }
+      }
+    },
+<<<<<<< Updated upstream
+    "timestamp": 1617664722
+=======
+    "timestamp": 1617697767
+>>>>>>> Stashed changes
+  }
+}

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 # Primary management class for users
+require 'user_controller_helper'
 class UsersController < ApplicationController
   before_action :authenticate_user!
 
@@ -102,12 +103,11 @@ class UsersController < ApplicationController
 
   def schedule_session_student
     user = User.find(params[:id])
-    tutor_session = TutoringSession.find(params[:sessionID])
-    link = TutoringSessionUser.create(tutoring_session: tutor_session, user: user,
-                                      link_status: 'pending')
+    tutoring_session = TutoringSession.find(params[:sessionID])
 
-    tutor_session.tutor.notifications.create(actor: user, action: 'student_application',
-                                             notifiable: link)
+    helpers.pending_mail_with(tutoring_session.tutor, user).link_pending_email.deliver_now
+
+    helpers.create_or_update_link_for(user, tutoring_session)
 
     redirect_to "/users/#{params[:id]}"
   end
@@ -134,8 +134,3 @@ class UsersController < ApplicationController
     params.require(:user).permit(:first_name, :last_name, :major, :email, :encrypted_password)
   end
 end
-
-# t.string "reset_password_token"
-# t.datetime "reset_password_sent_at"
-# t.datetime "remember_created_at"
-# t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

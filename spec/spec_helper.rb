@@ -17,9 +17,14 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'simplecov'
 require 'show_me_the_cookies'
+# Necessary on Bailey's tests, feel free to comment out before pushing
 require 'capybara/rspec'
 require 'capybara/apparition'
-Capybara.javascript_driver = ENV.fetch('JAVASCRIPT_DRIVER', :apparition)
+
+Capybara.javascript_driver = :apparition
+# Driver for Bailey, since apparition just doesn't work for me
+# Capybara.javascript_driver = :selenium_chrome_headless
+
 SimpleCov.start 'rails' do
   add_filter '/bin/'
   add_filter '/app/channels/' # Folder never used
