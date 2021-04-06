@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-5 mt-5">
       <h1>Join a Tutor Session</h1>
-      <%= button_to "Cancel", {:action => 'show'}, :class => "btn btn-primary", :method => :get %>
+      <%= button_to "Cancel", {:action => 'index'}, :class => "btn btn-primary", :method => :get %>
 
       <% if @sessions.blank? %>
         <p class="mt-4">There are no available sessions to join.</p>
