@@ -8,7 +8,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   # has_and_belongs_to_many :tutoring_sessions
   has_many :tutoring_session_users, dependent: :delete_all
-  has_many :tutoring_sessions, through: :tutoring_session_users
+  has_many :tutoring_sessions, through: :tutoring_session_users do
+    def push(tsessions, link_status, user)
+      tsessions.map do |session|
+        TutoringSessionUser.create(tutoring_session: session, user: user, link_status: link_status)
+      end
+    end
+  end
   # has_and_belongs_to_many :courses
   has_many :course_users, dependent: :delete_all
   has_many :courses, through: :course_users
@@ -18,10 +24,10 @@ class User < ApplicationRecord
 
   has_many :notifications, foreign_key: :recipient_id, dependent: :destroy, inverse_of: false
 
+  has_many :sessions_tutoring, :class_name => 'TutoringSession', :foreign_key => 'tutor_id', dependent: :destroy
+
   validates :first_name, :last_name, :email, presence: true
   validate :email_domain
-
-  before_destroy :remove_tutored, prepend: true
   def email_domain
     domain = email.split('@').last if email.present?
     return unless email.present? && domain != 'tamu.edu' && domain != 'spartan-tutoring.com'
@@ -51,22 +57,5 @@ class User < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name}"
-  end
-
-  def sessions_tutoring
-    return unless tutor?
-
-    User.joins('RIGHT JOIN tutoring_sessions ON tutoring_sessions.tutor_id = users.id')
-        .where('users.id = ?', id)
-        .select('tutoring_sessions.id')
-  end
-
-  def remove_tutored
-    sessions = sessions_tutoring
-    return if sessions.nil?
-
-    sessions.each do |session|
-      TutoringSession.find(session.id).destroy
-    end
   end
 end
