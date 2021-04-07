@@ -2,7 +2,6 @@
 
 require 'active_support/core_ext'
 module SelectDateHelper
-  
   # By default, select_date fields are borderline impossible to test with spec.
   # Each unit being a separate attribute with separate formatting makes it
   # ridiculously hard to fill out elements. This service handles that for

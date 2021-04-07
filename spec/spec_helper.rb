@@ -23,7 +23,7 @@ require 'capybara/apparition'
 
 Capybara.javascript_driver = :apparition
 # Driver for Bailey, since apparition just doesn't work for me
-# Capybara.javascript_driver = :selenium_chrome_headless
+Capybara.javascript_driver = :selenium_chrome_headless
 
 SimpleCov.start 'rails' do
   add_filter '/bin/'
