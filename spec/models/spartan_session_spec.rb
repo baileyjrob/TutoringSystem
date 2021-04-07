@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'rails_helper'
+
 RSpec.describe SpartanSession, type: :model do
   subject(:spartan_session) do
     described_class.new(session_datetime: DateTime.now,
