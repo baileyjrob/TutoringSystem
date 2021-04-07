@@ -2,15 +2,14 @@
 
 require 'active_support/core_ext'
 module SelectDateHelper
-  # def select_date(date, options = {})
-  #   field = options[:from]
-  #   base_id = find(:xpath, ".//label[contains(.,'#{field}')]")[:for]
-  #   year, month, day = date.split(',')
-  #   select year,  :from => "#{base_id}_1i"
-  #   select month, :from => "#{base_id}_2i"
-  #   select day,   :from => "#{base_id}_3i"
-  # end
+  
+  # By default, select_date fields are borderline impossible to test with spec.
+  # Each unit being a separate attribute with separate formatting makes it
+  # ridiculously hard to fill out elements. This service handles that for
+  # you.
 
+  # If view looks like select_date(prefix: 'start_time')
+  # Then on spec, use select_date(desired_start_time, from: 'start_time')
   def select_date(date, options = {})
     date = date.to_date if date.instance_of? DateTime
     field = options[:from]
