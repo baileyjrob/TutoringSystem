@@ -39,7 +39,9 @@ class SpartanSessionsController < ApplicationController
   end
 
   def download
-    @entries = CSV.read("public/spartan_attendance_#{@time}.csv", headers: true)
+    csv = CSV.read("public/spartan_attendance_#{@time}.csv", headers: true)
+    send_data csv, type: 'text/csv; charset=utf-8; header=present',
+                   disposition: "attachment; filename=public/spartan_attendance_#{@time}.csv"
   end
 
   def check_in_first
