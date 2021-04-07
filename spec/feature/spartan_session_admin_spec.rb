@@ -77,6 +77,20 @@ RSpec.describe 'Admins', type: :feature do
     find_button 'View Attendance', id: 1
   end
 
+  describe 'can download an attendance report' do
+    before do
+      # Get to spartan session attendance viewing page
+      click_link 'View Spartan Sessions'
+      click_button 'View Attendance', id: 2
+    end
+
+    it 'successfully' do
+      click_button 'Download'
+      expect(page).to have_content 'Time_In_Session'
+    end
+
+  end
+
   describe 'can view a session\'s attendance' do
     before do
       # Get to spartan session attendance viewing page
