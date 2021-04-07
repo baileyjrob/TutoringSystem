@@ -77,7 +77,6 @@ RSpec.describe User, type: :model do
                                              tutor_id: user.id)
       user.destroy
       expect(TutoringSession.exists?(tutor_session.id)).to be false
-      # expect(tutor_session).not_to exist
     end
   end
 end

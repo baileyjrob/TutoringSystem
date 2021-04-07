@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-
 RSpec.describe TutoringSessionExportHelper, type: :helper do
   filepath = 'spec/helpers/tutoring_hours_spec'
   let(:tutor) do
@@ -39,7 +38,7 @@ RSpec.describe TutoringSessionExportHelper, type: :helper do
     before { tutor.roles << Role.create(role_name: 'Tutor') }
 
     it 'adds all completed tutoring hours' do
-      tutor.tutoring_sessions << tutoring_sessions
+      tutor.tutoring_sessions.push(tutoring_sessions, 'confirmed', tutor)
       create_csv(start_date, end_date, "#{filepath}.csv")
       csv_table = CSV.read(Rails.root.join("#{filepath}.csv"), headers: true)
       expect([csv_table[0]['Tutor_Name'],
@@ -60,6 +59,28 @@ RSpec.describe TutoringSessionExportHelper, type: :helper do
       create_csv(start_date, end_date, "#{filepath}_3.csv")
       csv_table = CSV.read(Rails.root.join("#{filepath}_3.csv"), headers: true)
       expect(csv_table[0]).to be_nil
+    end
+  end
+
+  describe 'emailing' do
+    it 'sends emails' do
+      mail_csv(start_date, end_date, "#{filepath}.csv")
+      expect(ActionMailer::Base.deliveries.count).to eq(1)
+    end
+
+    it 'emails with correct text' do
+      mail_csv(start_date, end_date, "#{filepath}.csv")
+      expect(ActionMailer::Base.deliveries[0].body.encoded)
+        .to include('Thank you for using our service. '\
+        'Your request has been rendered in a CSV and attached to this email.')
+    end
+
+    it 'attaches correct CSV' do
+      mail_csv(start_date, end_date, "#{filepath}.csv")
+      expect(ActionMailer::Base.deliveries[0].attachments[0].body.encoded.delete("\r")).to eq <<~CSV
+        Tutor_Name,Hours_Worked
+        Tutor User,3.0
+      CSV
     end
   end
 end

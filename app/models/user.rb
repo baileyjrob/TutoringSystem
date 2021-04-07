@@ -24,7 +24,8 @@ class User < ApplicationRecord
 
   has_many :notifications, foreign_key: :recipient_id, dependent: :destroy, inverse_of: false
 
-  has_many :sessions_tutoring, :class_name => 'TutoringSession', :foreign_key => 'tutor_id', dependent: :destroy
+  has_many :sessions_tutoring, class_name: 'TutoringSession', foreign_key: 'tutor_id',
+                               dependent: :destroy, inverse_of: :tutor
 
   validates :first_name, :last_name, :email, presence: true
   validate :email_domain
