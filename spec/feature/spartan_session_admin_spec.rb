@@ -77,6 +77,15 @@ RSpec.describe 'Admins', type: :feature do
     find_button 'View Attendance', id: 1
   end
 
+  it 'are the only ones who can download the csv file' do
+    click_link 'View Spartan Sessions'
+    click_button 'View Attendance', id: 2
+    User.find(2).roles << Role.find_by(role_name: 'Student')
+    User.find(2).roles.delete(Role.find_by(role_name: 'Admin'))
+    click_button 'Download'
+    expect(page).to have_content 'Admin Doe'
+  end
+
   describe 'can download an attendance report' do
     before do
       # Get to spartan session attendance viewing page
