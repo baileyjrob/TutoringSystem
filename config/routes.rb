@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   get '/users/index', :to => 'users#index'
   post '/users', :to => 'users#index'
   get '/users/schedule', :to => 'users#show_schedule', :as => :show_schedule
+  # TEMP UNTIL EMAIL
+  get '/users/admin_view_hours', :to => 'users#admin_view_hours'
+  post '/users/admin_view_hours', :to =>'users#output_admin_view_hours'
+  #END TEMP
   get '/users/:id', :to => 'users#show', :as => :user
   post '/users/:id/delete_session', :to => 'users#delete_session', :as => :delete_session
   get 'tutor/request_submission'
@@ -18,10 +22,6 @@ Rails.application.routes.draw do
   get '/tutoring_session/pending', :to => 'tutoring_session_user#show'
   post '/tutoring_session_user/:id/deny', :to => 'tutoring_session_user#deny_pending_link'
   post '/tutoring_session_user/:id/confirm', :to => 'tutoring_session_user#confirm_pending_link'
-  # TEMP UNTIL EMAIL
-  get '/users/admin_view_hours', :to => 'users#admin_view_hours'
-  post '/users/admin_view_hours', :to =>'users#admin_view_hours'
-  #END TEMP
   resources :tutoring_session
 
   resources :users

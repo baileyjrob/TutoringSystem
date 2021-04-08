@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
+require 'rails_helper'
+
 RSpec.describe TutoringSession, type: :model do
-  subject(:tutoring_session) { described_class.new(scheduled_datetime: DateTime.now) }
+  let(:tutoring_session) { described_class.new(scheduled_datetime: frozen_time) }
 
   let(:frozen_time) { '25 May 02:00:00 CDT'.to_datetime }
 

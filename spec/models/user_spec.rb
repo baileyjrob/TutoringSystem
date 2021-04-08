@@ -3,13 +3,14 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  user =
+  let(:user) do
     described_class.new(id: 0,
                         first_name: 'John',
                         last_name: 'Doe',
                         major: 'CSCE',
                         email: 'john@tamu.edu',
                         password: 'abcdef')
+  end
 
   Role.create! role_name: 'Spartan Tutor'
   Role.create! role_name: 'Student'
@@ -18,43 +19,45 @@ RSpec.describe User, type: :model do
       expect(user).to be_valid
     end
 
-    it 'is valid with a spartan email' do
+    it 'with a spartan email' do
       user.email = 'john@spartan-tutoring.com'
       expect(user).to be_valid
     end
 
-    it 'is valid without a major' do
+    it 'without a major' do
       user.major = nil
       expect(user).to be_valid
     end
+  end
 
-    it 'is not valid without a first name' do
+  describe 'is not valid' do
+    it 'without a first name' do
       user.first_name = nil
       expect(user).not_to be_valid
     end
 
-    it 'is not valid without a last name' do
+    it 'without a last name' do
       user.last_name = nil
       expect(user).not_to be_valid
     end
 
-    it 'is not valid without a password' do
+    it 'without a password' do
       user.password = nil
       expect(user).not_to be_valid
     end
 
-    it 'is not valid with a short password' do
+    it 'with a short password' do
       user.password = 'abc'
       expect(user).not_to be_valid
       user.password = 'abcdef'
     end
 
-    it 'is not valid with a bad email' do
+    it 'with a bad email' do
       user.email = 'something@something.com'
       expect(user).not_to be_valid
     end
 
-    it 'is not valid without an email' do
+    it 'without an email' do
       user.email = nil
       expect(user).not_to be_valid
     end
@@ -73,6 +76,25 @@ RSpec.describe User, type: :model do
                                      email: 'asdf@spartan-tutoring.com', password: '12341234')
       user.reload
       user.roles.count.should eq(1)
+    end
+  end
+
+  describe 'database' do
+    let(:user) do
+      described_class.create(first_name: 'John',
+                             last_name: 'Doe',
+                             major: 'CSCE',
+                             email: 'john@tamu.edu',
+                             password: 'abcdef')
+    end
+
+    it 'deletes tutoring sessions it teaches' do
+      Role.create(role_name: 'Tutor')
+      user.roles << Role.find_by(role_name: 'Tutor')
+      tutor_session = TutoringSession.create(scheduled_datetime: Time.zone.today.to_datetime,
+                                             tutor_id: user.id)
+      user.destroy
+      expect(TutoringSession.exists?(tutor_session.id)).to be false
     end
   end
 end

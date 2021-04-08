@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
-# Primary management class for users
 require 'user_controller_helper'
+require 'admin_view_hours_helper'
+# Primary management class for users
 class UsersController < ApplicationController
+  include AdminViewHoursHelper
   before_action :authenticate_user!
 
   def index
@@ -119,11 +121,13 @@ class UsersController < ApplicationController
     redirect_to show_schedule_path
   end
 
-  # Temporary until emailing is a thing
   def admin_view_hours
-    include AdminViewHoursHelper
-    admin_view_hours_exec
-    @entries = CSV.read('public/tutoring_hours.csv', headers: true)
+    admin_view_hours_prep
+  end
+
+  def output_admin_view_hours
+    admin_view_hours_exec(params)
+    redirect_to root_path
   end
 
   private
@@ -133,8 +137,3 @@ class UsersController < ApplicationController
                                  role_ids: [])
   end
 end
-
-# t.string "reset_password_token"
-# t.datetime "reset_password_sent_at"
-# t.datetime "remember_created_at"
-# t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
