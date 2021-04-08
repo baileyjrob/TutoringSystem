@@ -1,12 +1,16 @@
 <div class="container">
   <div class="row">
-    <div class="col-3 mt-5">
+    <div class="col-3 mt-4">
       <label for="session_filter">Spartan Session Filter</label>
       <select id="session_filter" class="form-select mt-1">
         <option value="All">All</option>
         <option value="Previous">Previous</option>
         <option value="Upcoming">Upcoming</option>
       </select>
+    </div>
+    <div class="col d-md-flex justify-content-md-end mt-5">
+      <td><%= button_to 'New Spartan Session', {:action => 'new'},
+                        :class => "btn btn-primary", :method => :get %></td>
     </div>
   </div>
   <div class="row">
@@ -20,6 +24,8 @@
           <th scope="col">Check In Code</th>
           <th scope="col">Check Out Code</th>
           <th scope="col">View Attendance</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
         </tr>
         </thead>
         <tbody>
@@ -32,6 +38,10 @@
             <td><%= session.second_code  %></td>
             <td><%= button_to 'View Attendance', {:action => 'show', :id => session.id},
                               :class => "btn btn-primary", :id => session.id, :method => :get %></td>
+            <td><%= button_to 'Edit', {:action => 'edit', :id => session.id},
+                              :class => "btn btn-primary", :id => session.id, :method => :get %></td>
+            <td><%= button_to 'Delete', {:action => 'delete', :id => session.id},
+                              :class => "btn btn-primary", :id => session.id %></td>
           </tr>
         <% end %>
         </tbody>

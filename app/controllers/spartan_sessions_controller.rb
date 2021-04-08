@@ -10,6 +10,27 @@ class SpartanSessionsController < ApplicationController
     @sessions = SpartanSession.all.order(session_datetime: :asc)
   end
 
+  def new; end
+
+  def create
+    SpartanSessionsHelper.create(params)
+    redirect_to '/spartan_sessions/index', notice: 'Successfully created spartan session'
+  end
+
+  def edit
+    @spartan_session = SpartanSession.find(params[:id])
+  end
+
+  def update
+    SpartanSessionsHelper.update(params)
+    redirect_to '/spartan_sessions/index', notice: 'Successfully updated spartan session'
+  end
+
+  def delete
+    SpartanSession.find(params[:id]).destroy
+    redirect_to '/spartan_sessions/index', notice: 'Successfully deleted spartan session'
+  end
+
   def show
     @session = SpartanSession.find(params[:id])
     @users = @session.users

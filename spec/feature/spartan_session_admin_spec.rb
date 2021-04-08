@@ -88,7 +88,6 @@ RSpec.describe 'Admins', type: :feature do
       click_button 'Download'
       expect(page).to have_content 'Time_In_Session'
     end
-
   end
 
   describe 'can view a session\'s attendance' do
