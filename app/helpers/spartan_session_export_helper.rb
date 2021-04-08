@@ -39,11 +39,13 @@ module SpartanSessionExportHelper
 
   def table_iterate(users, session_id, writer)
     users.each do |user|
+      # Fill in headers
       session_user = SpartanSessionUser.find_by(spartan_session_id: session_id, user_id: user.id)
       time = find_duration(session_user.first_checkin, session_user.second_checkin)
       first = get_time(session_user.first_checkin)
       second = get_time(session_user.second_checkin)
 
+      # Write to csv
       writer << [user.first_name, user.last_name, user.email, first, second, time,
                  session_user.attendance]
     end

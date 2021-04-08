@@ -52,6 +52,7 @@ class SpartanSessionsController < ApplicationController
   end
 
   def add_user
+    # Update the attendance notes
     SpartanSessionUser.where(spartan_session_id: params[:id])
                       .and(SpartanSessionUser.where(user_id: @id))
                       .first.update(attendance: params[:attendance_notes])
@@ -89,12 +90,12 @@ class SpartanSessionsController < ApplicationController
   end
 
   def generate_csv
+    # Make sure the user is an admin
     unless current_user.roles.include?(Role.admin_role)
       redirect_to root_path
       return
     end
 
-    # include SpartanSessionExportHelper
     return unless request.post?
 
     # Pass in params to create the CSV
@@ -105,6 +106,7 @@ class SpartanSessionsController < ApplicationController
   def add_user_to_session
     user = User.find_by(email: params[:email])
 
+    # Need to be able to find a user
     if user.nil? || user.blank?
       redirect_to :spartan_session, alert: 'Invalid email input!'
     else
@@ -119,6 +121,7 @@ class SpartanSessionsController < ApplicationController
   end
 
   def check_first_code
+    # Code must match
     unless SpartanSession.find(params[:sessionID]).first_code ==
            params[:spartan_session_user][:code]
       flash.alert = 'Invalid check in code!'
@@ -127,6 +130,7 @@ class SpartanSessionsController < ApplicationController
   end
 
   def check_second_code
+    # Code must match
     unless SpartanSession.find(params[:sessionID]).second_code ==
            params[:spartan_session_user][:code]
       flash.alert = 'Invalid check in code!'
