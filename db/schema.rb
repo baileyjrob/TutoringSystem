@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_31_030000) do
+ActiveRecord::Schema.define(version: 2021_03_31_000526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,17 @@ ActiveRecord::Schema.define(version: 2021_03_31_030000) do
     t.string "department_name"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.integer "recipient_id"
+    t.integer "actor_id"
+    t.datetime "read_at"
+    t.string "action"
+    t.integer "notifiable_id"
+    t.string "notifiable_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "role_users", id: false, force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "role_id", null: false
@@ -62,7 +73,7 @@ ActiveRecord::Schema.define(version: 2021_03_31_030000) do
     t.string "role_name"
   end
 
-  create_table "spartan_session_users", id: false, force: :cascade do |t|
+  create_table "spartan_session_users", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "spartan_session_id", null: false
     t.datetime "first_checkin"
@@ -72,9 +83,11 @@ ActiveRecord::Schema.define(version: 2021_03_31_030000) do
   create_table "spartan_sessions", force: :cascade do |t|
     t.datetime "session_datetime"
     t.string "semester"
+    t.string "first_code"
+    t.string "second_code"
   end
 
-  create_table "tutoring_session_users", id: false, force: :cascade do |t|
+  create_table "tutoring_session_users", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "tutoring_session_id", null: false
     t.string "link_status"

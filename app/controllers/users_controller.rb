@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 # Primary management class for users
+require 'user_controller_helper'
 class UsersController < ApplicationController
   before_action :authenticate_user!
 
@@ -21,8 +22,18 @@ class UsersController < ApplicationController
   end
 
   def show
+    # Get user and tutoring sessions
     @user = User.find(params[:id])
     @tutoring_sessions = TutoringSession.all
+
+    # See if there is a spartan session to check into
+    @spartan_session = SpartanSession.where('session_datetime > :now',
+                                            now: Time.zone.now.to_datetime)
+                                     .and(SpartanSession.where('session_datetime < :endTime',
+                                                               endTime: (Time.zone.now + 7200)
+                                                                          .to_datetime))
+                                     .first
+    @spartan_session_users = SpartanSessionUser.all
   end
 
   def show_admin
@@ -92,9 +103,11 @@ class UsersController < ApplicationController
 
   def schedule_session_student
     user = User.find(params[:id])
-    tutor_session = TutoringSession.find(params[:sessionID])
+    tutoring_session = TutoringSession.find(params[:sessionID])
 
-    tutor_session.users << user
+    helpers.pending_mail_with(tutoring_session.tutor, user).link_pending_email.deliver_now
+
+    helpers.create_or_update_link_for(user, tutoring_session)
 
     redirect_to "/users/#{params[:id]}"
   end
@@ -108,14 +121,16 @@ class UsersController < ApplicationController
     redirect_to show_schedule_path
   end
 
+  # Temporary until emailing is a thing
+  def admin_view_hours
+    include AdminViewHoursHelper
+    admin_view_hours_exec
+    @entries = CSV.read('public/tutoring_hours.csv', headers: true)
+  end
+
   private
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :major, :email, :encrypted_password)
   end
 end
-
-# t.string "reset_password_token"
-# t.datetime "reset_password_sent_at"
-# t.datetime "remember_created_at"
-# t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
