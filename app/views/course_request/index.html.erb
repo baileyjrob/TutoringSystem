@@ -1,6 +1,5 @@
-<h1>Tutor Matching Page</h1>
-
-<%=form_tag('index', :method => "get", :controller => 'course_request' ) do %>
+<h1> Tutor Matching Page </h1>
+<%=form_tag('/course_request', :method => "get", :controller => 'course_request' ) do %>
     <%= label_tag(:filter_major, "Course Department: ") %> 
     <br>
         <%= text_field_tag(:filter_major) %>
@@ -13,7 +12,6 @@
         <%= @no_tutors %>
         <br>
         <%= @ask_request %> 
-        <%= button_to "See all requests", {:action => 'new'}, :method => :get %>
 
     </p>
 <% else %>
@@ -21,12 +19,24 @@
     <% @matching_tutors.each do |user| %>
         <% if user.major.nil? == false %>
         <!-- makes sure users with no majors are not displayed -->
-            <li>
-                <%= link_to user.first_name.to_s + ' ' + user.last_name.to_s + ' Major: ' + user.major.to_s, user %>
-            </li>
+            <% if user.roles.include?(Role.tutor_role) %>
+                <!-- only displays tutors -->
+                    <li>
+                        <%= link_to user.first_name.to_s + ' ' + user.last_name.to_s + ' Major: ' + user.major.to_s, user %>
+                    </li>
+                <% end %>
             <% end %>
         <% end %>
     </ul>    
 
 <%end%>
-
+<ul>
+  <% @course_requests.each do |crequest| %>
+    <li>
+      <a href="<%= course_request_path(crequest) %>">
+        <%= crequest.course_name_full  %>
+      </a>
+    </li>
+  <% end %>
+</ul>
+<%= button_to "Submit a request", {:action => 'new'}, :method => :get %>

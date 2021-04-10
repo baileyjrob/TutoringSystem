@@ -12,10 +12,10 @@ Rails.application.routes.draw do
   get '/users/:id/schedule_student', :to => 'users#schedule_student'
   post '/users/:id/schedule_session_student' => 'users#schedule_session_student'
   get 'tutor/index', :to => 'tutor#index'
-  get 'tutor/request_submission', to: 'tutor#request_submission' #, as: :submitted_request
-  get '/course_request/index', :to => 'course_request#index'
-  get 'course_request/:id', :to => 'course_request#show', :as => :request
-  post '/course_request/new', :to => 'course_request#new'
+  get 'tutor/request_submission', to: 'tutor#request_submission' 
+  get '/course_request', :to => 'course_request#index'
+  get '/course_request/new', :to => 'course_request#new'
+  get '/course_request/:id', :to => 'course_request#show'
   post '/course_request/delete_all_request', :to => 'course_request#delete_all_request', :as => :delete_all_request
 
   post '/spartan_sessions/check_in_first' => 'spartan_sessions#check_in_first'

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#CourseRequest - User join table
+# CourseRequest - User join table
 class CourseRequestUser < ApplicationRecord
   belongs_to :user
   belongs_to :course_request

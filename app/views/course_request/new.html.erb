@@ -1,18 +1,27 @@
 <p>
     <b> Request Page </b>
 
-    <%= form_with(model: @crequest, url: 'new') do |f| %>
-        <div class= "field">
-        <%= f.label :Department_and_course_number %><br>
-        <%= f.text_field :course_name_full, class: "form-control", required: true %>
-        </div>
+    <%= form_with model: @crequest, url: course_request_index_path do |f| %>
+        <% if @crequest.errors.any? %>
+        <ul>
+            <% @crequest.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+        </ul>
+        <% end %>
 
-        <%= f.submit class: "btn btn-primary float-left" %>
-        <br>
+        <div class= "field">
+            <%= f.label :course_name_full %><br>
+            <%= f.text_field :course_name_full, class: "form-control", required: true %>
+        </div>
+        
+        <div>
+            <%= f.submit class: "btn btn-primary float-left" %>
+            <br>
+        </div>
 
     <%end%>
 
-    <%= @all_requests.inspect %> </br>
     <%= button_to 'Clear All Requests', delete_all_request_path, data: {confirm: "Are you sure?"} %>
     <%= button_to "Return to Tutor Matching", {:action => 'index'}, :method => :get %>
 </p>

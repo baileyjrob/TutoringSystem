@@ -15,7 +15,7 @@ class User < ApplicationRecord
   # has_and_belongs_to_many :roles
   has_many :role_users, dependent: :delete_all
   has_many :roles, through: :role_users
-  #has_and_belongs_to_many :course_requests
+  # has_and_belongs_to_many :course_requests
   has_many :course_request_users, dependent: :delete_all
   has_many :course_requests, through: :course_request_users
 
