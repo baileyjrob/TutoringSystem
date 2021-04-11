@@ -34,8 +34,11 @@
         </div>
 
         <div class="field">
-          <%= f.label :role %><br />
-          <%= f.collection_select :id, Role.order(:role_name),:id,:role_name, {include_blank: true}, {required: true, class: "form-select"} %>
+          <% Role.all.each do |role| %>
+            <%= check_box_tag "user[role_ids][]", role.id, @user.role_ids.include?(role.id) %>
+            <%= role.role_name %>
+            <br />
+          <% end %>
         </div>
 
         <div class="field">

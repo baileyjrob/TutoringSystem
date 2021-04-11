@@ -12,8 +12,8 @@ RSpec.describe User, type: :model do
                         password: 'abcdef')
   end
 
-  describe 'is valid' do
-    it 'with valid attributes' do
+  describe 'Validations' do
+    it 'is valid with valid attributes' do
       expect(user).to be_valid
     end
 
@@ -58,6 +58,50 @@ RSpec.describe User, type: :model do
     it 'without an email' do
       user.email = nil
       expect(user).not_to be_valid
+    end
+
+    it 'has default student role' do
+      Role.create! role_name: 'Student'
+      user = described_class.create!(first_name: 'Andrew', last_name: 'last', major: 'CSCE',
+                                     email: 'asdf@tamu.edu', password: '12341234')
+      user.reload
+      user.roles.count.should eq(1)
+    end
+
+    it 'has default Spartan Tutor role' do
+      Role.create! role_name: 'Spartan Tutor'
+      user = described_class.create!(first_name: 'Andrew', last_name: 'last', major: 'CSCE',
+                                     email: 'asdf@spartan-tutoring.com', password: '12341234')
+      user.reload
+      user.roles.count.should eq(1)
+    end
+
+    it 'returns false if not an admin' do
+      expect(user).not_to be_admin
+    end
+
+    it 'returns true if a student' do
+      Role.create! role_name: 'Student'
+      user = described_class.create!(first_name: 'Andrew', last_name: 'last', major: 'CSCE',
+                                     email: 'asdf@tamu.edu', password: '12341234')
+      user.reload
+      expect(user).to be_student
+    end
+
+    it 'returns true if a spartan tutor' do
+      Role.create! role_name: 'Spartan Tutor'
+      user = described_class.create!(first_name: 'Andrew', last_name: 'last', major: 'CSCE',
+                                     email: 'asdf@spartan-tutoring.com', password: '12341234')
+      user.reload
+      expect(user).to be_spartan_tutor
+    end
+
+    it 'returns false if not a tutor' do
+      Role.create! role_name: 'Student'
+      user = described_class.create!(first_name: 'Andrew', last_name: 'last', major: 'CSCE',
+                                     email: 'asdf@tamu.edu', password: '12341234')
+      user.reload
+      expect(user).not_to be_tutor
     end
   end
 
