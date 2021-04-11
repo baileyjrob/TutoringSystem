@@ -4,8 +4,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:user) do
-    user =
-      described_class.new(id: 0,
+    described_class.new(id: 0,
                           first_name: 'John',
                           last_name: 'Doe',
                           major: 'CSCE',
