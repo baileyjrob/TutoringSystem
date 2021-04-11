@@ -36,4 +36,52 @@ module AdminViewHoursHelper
     Date.civil(params[:end_time][:year].to_i, params[:end_time][:month].to_i,
                params[:end_time][:day].to_i)
   end
+
+  ###############################################################################
+
+  def tutor_hours
+    today = Time.zone.today
+    if today.month < 6
+      start_date = Date.parse("Jan 1 #{today.year}")
+      end_date = Date.parse("Jun 1 #{today.year}")
+    else
+      start_date = Date.parse("Aug 1 #{today.year}")
+      end_date = Date.parse("Dec 31 #{today.year}")
+    end
+    table = generate_tutor_query(start_date, end_date)
+    tutor_table_iterate(table)
+  end
+
+  private
+
+  def generate_tutor_query(start_date, end_date)
+    User.joins('LEFT JOIN tutoring_sessions ON tutoring_sessions.tutor_id = users.id')
+        .where("(tutoring_sessions.session_status = 'Confirmed' \
+                  OR tutoring_sessions.session_status = 'In-Person' OR \
+                  tutoring_sessions.session_status IS NULL) AND users.id = ? AND \
+                  (scheduled_datetime BETWEEN ? AND ? OR scheduled_datetime IS NULL)",
+               current_user.id, start_date, end_date)
+        .select("users.first_name,\
+                  users.last_name,\
+                  tutoring_sessions.scheduled_datetime,\
+                  tutoring_sessions.completed_datetime")
+  end
+
+  # Returns how long a tutoring session lasted
+  def entry_duration(entry)
+    if !entry.completed_datetime.nil?
+      (entry.completed_datetime - entry.scheduled_datetime) / 1.hour
+    else
+      0.0
+    end
+  end
+
+  def tutor_table_iterate(table)
+    hours_worked = 0
+    table.each do |entry|
+      # Update hours_worked
+      hours_worked += entry_duration(entry)
+    end
+    hours_worked
+  end
 end

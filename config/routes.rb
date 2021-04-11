@@ -6,10 +6,8 @@ Rails.application.routes.draw do
   get '/users/index', :to => 'users#index'
   post '/users', :to => 'users#index'
   get '/users/schedule', :to => 'users#show_schedule', :as => :show_schedule
-  # TEMP UNTIL EMAIL
   get '/users/admin_view_hours', :to => 'users#admin_view_hours'
   post '/users/admin_view_hours', :to =>'users#output_admin_view_hours'
-  #END TEMP
   get '/users/:id', :to => 'users#show', :as => :user
   post '/users/:id/delete_session', :to => 'users#delete_session', :as => :delete_session
   get 'tutor/request_submission'
