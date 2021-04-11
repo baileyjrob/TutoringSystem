@@ -1,23 +1,42 @@
-<h1>Review Scheduled Sessions</h1>
-<table>
-  <tr>
-    <th>Tutor Name</th>
-    <th>Contact Info</th>
-    <th>Scheduled Datetime</th>
-    <th>Leave Session</th>
-  </tr>
-  <!--
-      TODO: Make sure the date is later than now and that the status is not cancelled
-    -->
-  <% @sessions.each do |session| %>
-  <tr class="tutoringSession">
-    <!-- Make a row in the table for each tutoring session. Includes details and leave option -->
-    <% tutor = User.find(session.tutor_id) %>
-    <td><%= tutor.first_name + " " + tutor.last_name %></td>
-    <td><%= tutor.email %></td>
-    <% date = session.scheduled_datetime.localtime.strftime("%B %d at %l:%M %p %Z") %>
-    <td><%= date %></td>
-    <td><%= button_to 'Leave Session', delete_session_path(session), data: {confirm: "Are you sure?"} %></td>
-  </tr>
-  <% end %>
-</table>
+<div class="container">
+  <div class="row mt-2">
+    <div class="col-12">
+      <h1>Review Scheduled Sessions</h1>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-12">
+      <table class="table" id="schedule">
+        <thead>
+          <tr>
+            <th scope="col">Tutor Name</th>
+            <th scope="col">Contact Info</th>
+            <th scope="col">Scheduled Datetime</th>
+            <th scope="col">Leave Session</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!--
+              TODO: Make sure the date is later than now and that the status is not cancelled
+            -->
+          <% @sessions.each do |session| %>
+          <tr class="tutoringSession">
+            <!-- Make a row in the table for each tutoring session. Includes details and leave option -->
+            <% tutor = User.find(session.tutor_id) %>
+            <td><%= tutor.first_name + " " + tutor.last_name %></td>
+            <td><%= tutor.email %></td>
+            <% date = session.scheduled_datetime.localtime.strftime("%B %d at %l:%M %p %Z") %>
+            <td><%= date %></td>
+            <td><%= button_to 'Leave Session', delete_session_path(session), data: {confirm: "Are you sure?"}, class: "btn btn-primary" %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script>
+  $(function() {
+    $('#schedule').DataTable();
+  });
+  </script>
+</div>
