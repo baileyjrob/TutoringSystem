@@ -22,7 +22,7 @@
                 <% @matching_tutors.each do |user| %>
                     <% if user.major.nil? == false %>
                     <!-- makes sure users with no majors are not displayed -->
-                        <% if user.roles.include?(Role.tutor_role) %>
+                        <% if user.roles.include?(Role.tutor_role) %>z
                             <!-- only displays tutors -->
                                 <li>
                                     <%= link_to user.first_name.to_s + ' ' + user.last_name.to_s + ' Major: ' + user.major.to_s, user %>
