@@ -3,13 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-<<<<<<< Updated upstream
-  let(:user) do
-=======
   Role.create! role_name: 'Spartan Tutor'
   Role.create! role_name: 'Student'
   user =
->>>>>>> Stashed changes
     described_class.new(id: 0,
                         first_name: 'John',
                         last_name: 'Doe',
