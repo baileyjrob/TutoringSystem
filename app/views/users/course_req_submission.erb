@@ -1,9 +1,19 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Request Page</h1>
+        </div>
+        <div class="col-12 mt-3">
+            <p>Request submitted! Thank you!</p>
+        </div>
+    </div>
+    <div class="row">
+        <%= button_to "Return to Tutor Matching", {:action => 'tutor_matching'}, :method => :get class="btn btn-primary" %>
+    </div>
+</div>
 <p>
-    <b> Request Page </b>
     <br>
-    <b1> Request submitted! Thank you!</b1>
-    <br>
-    <%= button_to "Return to Tutor Matching", {:action => 'tutor_matching'}, :method => :get %>
 </p>
 #TODO print requests in the future
 
+</div>
