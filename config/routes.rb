@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'courses/new'
+  get 'courses/edit'
+  get 'courses/show'
+  get 'courses/index'
   devise_for :users, controllers: { registrations: 'registrations' }
   root 'users#index'
   get '/users/index', :to => 'users#index'
