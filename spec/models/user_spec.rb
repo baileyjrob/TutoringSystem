@@ -3,7 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+<<<<<<< Updated upstream
   let(:user) do
+=======
+  Role.create! role_name: 'Spartan Tutor'
+  Role.create! role_name: 'Student'
+  user =
+>>>>>>> Stashed changes
     described_class.new(id: 0,
                         first_name: 'John',
                         last_name: 'Doe',
@@ -12,8 +18,7 @@ RSpec.describe User, type: :model do
                         password: 'abcdef')
   end
 
-  Role.create! role_name: 'Spartan Tutor'
-  Role.create! role_name: 'Student'
+
   describe 'Validations' do
     it 'is valid with valid attributes' do
       expect(user).to be_valid
@@ -76,6 +81,34 @@ RSpec.describe User, type: :model do
                                      email: 'asdf@spartan-tutoring.com', password: '12341234')
       user.reload
       user.roles.count.should eq(1)
+    end
+
+    it 'returns false if not an admin' do
+      expect(user.admin?).to be_falsey
+    end
+
+    it 'returns true if a student' do
+      Role.create! role_name: 'Student'
+      user = described_class.create!(first_name: 'Andrew', last_name: 'last', major: 'CSCE',
+                                     email: 'asdf@tamu.edu', password: '12341234')
+      user.reload
+      expect(user.student?).to be_truthy
+    end
+
+    it 'returns true if a spartan tutor' do
+      Role.create! role_name: 'Spartan Tutor'
+      user = described_class.create!(first_name: 'Andrew', last_name: 'last', major: 'CSCE',
+                                     email: 'asdf@spartan-tutoring.com', password: '12341234')
+      user.reload
+      expect(user.spartan_tutor?).to be_truthy
+    end
+
+    it 'returns false if not a tutor' do
+      Role.create! role_name: 'Student'
+      user = described_class.create!(first_name: 'Andrew', last_name: 'last', major: 'CSCE',
+                                     email: 'asdf@tamu.edu', password: '12341234')
+      user.reload
+      expect(user.tutor?).to be_falsey
     end
   end
 

@@ -55,6 +55,22 @@ class User < ApplicationRecord
     roles.push(@role)
   end
 
+  def admin?
+    roles.admin_role != nil
+  end
+
+  def student?
+    roles.student_role != nil
+  end
+
+  def tutor?
+    roles.tutor_role != nil
+  end
+
+  def spartan_tutor?
+    roles.spartan_tutor_role != nil
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end
