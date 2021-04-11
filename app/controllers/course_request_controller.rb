@@ -49,7 +49,8 @@ class CourseRequestController < ApplicationController
     @course_requests = CourseRequest.all
     @tutors = User.all # .roles.include?(Role.tutor_role)
     # @tutors = @tutors.include?(Role.tutor_role)
-    @matching_tutors = @tutors.where(major: params[:filter_major])
+    # @matching_tutors = @tutors.where(include?(Role.tutor_role))
+    @matching_tutors = @matching_tutors.where(major: params[:filter_major])
     @no_tutors = '<b> No Available Tutors </b>'.html_safe
     @avail_tutors = '<b> Available Tutors </b>'.html_safe
   end

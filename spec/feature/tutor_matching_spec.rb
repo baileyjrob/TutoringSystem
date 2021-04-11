@@ -42,7 +42,7 @@ RSpec.describe 'Tutor Matching', type: :feature do
     end
   end
 
-  describe 'Available tutor matching' do
+  describe 'Non tutors do not show up' do
     it 'makes sure no students pop up in a tutor search' do
       fill_in 'filter_major', with: 'MATH'
       find_button 'Find'
