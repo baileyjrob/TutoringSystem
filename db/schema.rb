@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2021_04_11_033550) do
     t.bigint "spartan_session_id", null: false
     t.datetime "first_checkin"
     t.datetime "second_checkin"
+    t.string "attendance"
   end
 
   create_table "spartan_sessions", force: :cascade do |t|

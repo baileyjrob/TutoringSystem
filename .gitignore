@@ -47,4 +47,4 @@ yarn-debug.log*
 .history/
 
 # Ignore test output
-/spec/helpers/tutoring_hours_spec*.csv
+/spec/helpers/*.csv
