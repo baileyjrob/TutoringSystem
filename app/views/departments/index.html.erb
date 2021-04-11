@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 mt-3">
+      <table class="table" id="courses">
+        <thead>
+          <tr>
+            <th scope="col">Department id</th>
+            <th scope="col">Department name</th>
+            <th scope="col">Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @departments.each do |department| %>
+          <tr class='userInfo'>
+            <th scope="row"><%= department.id %></th>
+            <td><%= department.department_name  %></td>
+            <td><a href="<%= departments_edit_path(department) %>"><i class="far fa-edit"></i></a></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>

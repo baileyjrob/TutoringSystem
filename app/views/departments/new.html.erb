@@ -1,9 +1,8 @@
-
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <h1>New Tutor Courses Page</h1>
-      <%= form_for(Department.new) do |f| %>
+      <h1>New Department Page</h1>
+      <%= form_for(departments_new_path) do |f| %>
 
         <div class="field">
           <%= f.label :department_name %>
@@ -11,7 +10,7 @@
         </div>
 
         <div class="actions">
-          <%= c.submit "New", class: 'btn btn-primary mt-2' %>
+          <%= f.submit "New", class: 'btn btn-primary mt-2' %>
         </div>
 
       <% end %>

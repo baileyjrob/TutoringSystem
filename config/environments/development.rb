@@ -49,13 +49,13 @@ Rails.application.configure do
   :user_name            =>'ORSHSTutoring@gmail.com',
   :password             => 'CSCE431Project!',
   :authentication       => 'plain',
-}
+  }
 
   # For mailcatcher
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = { :address => '127.0.0.1', :port => 1025 }
-  config.action_mailer.default_url_options = { :host => "127.0.0.1:3000" }
-  config.action_mailer.perform_caching = false
+  #config.action_mailer.delivery_method = :smtp
+  #config.action_mailer.smtp_settings = { :address => '127.0.0.1', :port => 1025 }
+  #config.action_mailer.default_url_options = { :host => "127.0.0.1:3000" }
+  #config.action_mailer.perform_caching = false
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

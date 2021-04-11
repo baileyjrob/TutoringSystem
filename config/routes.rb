@@ -1,10 +1,27 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+<<<<<<< Updated upstream
   get 'courses/new'
   get 'courses/edit'
   get 'courses/show'
   get 'courses/index'
+=======
+  get 'departments/new'
+  get 'departments/index'
+  get 'departments/show'
+  get 'departments/edit'
+  get 'departments/create'
+  get 'departments/delete'
+  get 'departments/destroy'
+  get 'courses/new'
+  get 'courses/index'
+  get 'courses/show'
+  get 'courses/edit'
+  get 'courses/create'
+  get 'courses/delete'
+  get 'courses/destroy'
+>>>>>>> Stashed changes
   devise_for :users, controllers: { registrations: 'registrations' }
   root 'users#index'
   get '/users/index', :to => 'users#index'
