@@ -16,20 +16,20 @@ Rails.application.routes.draw do
   get 'tutor/index', :to => 'tutor#index'
   get '/users/:id/schedule_student', :to => 'users#schedule_student'
   post '/users/:id/schedule_session_student' => 'users#schedule_session_student'
+  
   post '/spartan_sessions/check_in_first' => 'spartan_sessions#check_in_first'
   post '/spartan_sessions/check_in_second' => 'spartan_sessions#check_in_second'
   get '/spartan_sessions/index', :to => 'spartan_sessions#index'
-  get '/spartan_sessions/new', :to => 'spartan_sessions#new'
-  get '/spartan_sessions/:id', :to => 'spartan_sessions#show', :as => :spartan_session
+  post '/spartan_sessions/create', :to => 'spartan_sessions#create'
   post '/spartan_sessions/:id/edit_user', :to => 'spartan_sessions#edit_user'
   get '/spartan_sessions/:id/edit_user', :to => 'spartan_sessions#edit_user'
   post '/spartan_sessions/:id/update_attendance', :to => 'spartan_sessions#update_attendance'
   post '/spartan_sessions/:id/add_user', :to => 'spartan_sessions#add_user'
   post '/spartan_sessions/:id/download', :to => 'spartan_sessions#download'
-  post '/spartan_sessions/create', :to => 'spartan_sessions#create'
-  get '/spartan_sessions/:id/edit', :to => 'spartan_sessions#edit'
   post '/spartan_sessions/:id/update', :to => 'spartan_sessions#update'
   post '/spartan_sessions/:id/delete', :to => 'spartan_sessions#delete'
+  resources :spartan_sessions
+
   get '/notifications/:id', :to => 'notification#show'
   get '/tutoring_session/pending', :to => 'tutoring_session_user#show'
   post '/tutoring_session_user/:id/deny', :to => 'tutoring_session_user#deny_pending_link'
