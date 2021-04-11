@@ -5,11 +5,11 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   let(:user) do
     described_class.new(id: 0,
-                          first_name: 'John',
-                          last_name: 'Doe',
-                          major: 'CSCE',
-                          email: 'john@tamu.edu',
-                          password: 'abcdef')
+                        first_name: 'John',
+                        last_name: 'Doe',
+                        major: 'CSCE',
+                        email: 'john@tamu.edu',
+                        password: 'abcdef')
   end
 
   describe 'Validations' do
