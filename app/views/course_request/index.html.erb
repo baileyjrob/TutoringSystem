@@ -4,10 +4,11 @@
         <h1> Tutor Matching Page </h1>
             <%=form_tag('/course_request', :method => "get", :controller => 'course_request' ) do %>
                 <%= label_tag(:filter_major, "Course Department: ") %> 
-                <br>
+                <div class="mb-3">
                     <%= text_field_tag(:filter_major) %>
-                <br>
+                    <br><br>
                     <%= submit_tag("Find") %> 
+                </div>
             <%end%>
 
             <% if @matching_tutors.present? == false %>
@@ -19,6 +20,7 @@
                 </p>
             <% else %>
                 <ul>
+                <!-- how are we connecting the tutoring sessions to tutors? -->
                 <% @matching_tutors.each do |user| %>
                     <% if user.major.nil? == false %>
                     <!-- makes sure users with no majors are not displayed -->
@@ -33,6 +35,7 @@
                 </ul>    
 
             <%end%>
+            <!-- course requests shown here temporarily for tests -->
             <ul>
             <% @course_requests.each do |crequest| %>
                 <li>
