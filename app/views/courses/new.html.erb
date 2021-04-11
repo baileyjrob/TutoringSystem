@@ -1,16 +1,14 @@
-<<<<<<< Updated upstream
-<h1>Courses#new</h1>
-<p>Find me in app/views/courses/new.html.erb</p>
-=======
+
 <div class="container">
   <div class="row">
     <div class="col-12">
       <h1>New Course Page</h1>
-      <%= form_for(Course.new) do |f| %>
+      <p><%= button_to "Add Department", departments_new_path  %></p>
+      <%= form_for courses_new_path do |f| %>
 
         <div class="field">
           <%= f.label :department_id %>
-          <%= f.select(:department_id, Department.all.collect {|c| [ c.department_name, c.id ] }, { include_blank: true }) %>
+          <%= f.select(:department_id, Departments.all.collect {|c| [ c.department_name, c.id ] }, { include_blank: true }) %>
         </div>
 
         <div class="field">
@@ -19,11 +17,10 @@
         </div>
 
         <div class="actions">
-          <%= c.submit "New", class: 'btn btn-primary mt-2' %>
+          <%= f.submit "New", class: 'btn btn-primary mt-2' %>
         </div>
-
+        <%= link_to "Back", :back %>
       <% end %>
     </div>
   </div>
 </div>
->>>>>>> Stashed changes

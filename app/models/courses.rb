@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Courses that are registered into the database
-class Course < ApplicationRecord
+class Courses < ApplicationRecord
   # has_and_belongs_to_many :users
   has_many :course_users, dependent: :delete_all
   has_many :users, through: :course_users

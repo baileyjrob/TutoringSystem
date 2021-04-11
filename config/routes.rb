@@ -1,27 +1,15 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-<<<<<<< Updated upstream
-  get 'courses/new'
-  get 'courses/edit'
-  get 'courses/show'
-  get 'courses/index'
-=======
-  get 'departments/new'
-  get 'departments/index'
-  get 'departments/show'
-  get 'departments/edit'
-  get 'departments/create'
-  get 'departments/delete'
-  get 'departments/destroy'
+  get 'departments/new', :to => 'departments#new'
+  get 'departments/index', :to => 'departments#index'
+  get 'departments/:id/show', :to => 'departments#show'
+  get 'departments/:id/edit', :to => 'departments#edit'
+  post 'departments/create', :to => 'departments#create'
   get 'courses/new'
   get 'courses/index'
   get 'courses/show'
   get 'courses/edit'
-  get 'courses/create'
-  get 'courses/delete'
-  get 'courses/destroy'
->>>>>>> Stashed changes
   devise_for :users, controllers: { registrations: 'registrations' }
   root 'users#index'
   get '/users/index', :to => 'users#index'
@@ -42,6 +30,7 @@ Rails.application.routes.draw do
   get '/tutor/:id/course_index', :to => 'tutor#course_index'
   get '/tutor/:id/course_edit', :to => 'tutor#course_edit'
   get '/tutor/:id/course_new', :to => 'tutor#course_new'
+  get '/tutor/:id/edit', :to => 'tutor#edit'
   # TEMP UNTIL EMAIL
   get '/users/admin_view_hours', :to => 'users#admin_view_hours'
   post '/users/admin_view_hours', :to =>'users#admin_view_hours'
@@ -49,7 +38,11 @@ Rails.application.routes.draw do
   resources :tutoring_session
 
   resources :users
-  resources :tutors
+  resources :tutor do
+    member do
+      post :edit
+    end
+  end
   default_url_options :host => "localhost:3000"
 
 end

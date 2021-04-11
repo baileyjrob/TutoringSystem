@@ -1,21 +1,31 @@
 # frozen_string_literal: true
 
 class DepartmentsController < ApplicationController
-  def new; end
+  def new
+    @department = Departments.new
+  end
 
   def index
-    @departments = Department.all
+    @departments = Departments.all
   end
 
   def show
-    @department = Department.find(params[:id])
+    @department = Departments.find(params[:id])
   end
 
-  def edit; end
+  def edit
+    if !current_user.roles.include?(Role.admin_role) &&
+       !current_user.roles.include?(Role.tutor_role)
+      redirect_to "/users/#{current_user.id}"
+    end
+  end
 
-  def create; end
-
-  def delete; end
-
-  def destroy; end
+  def create
+    @department = Departments.new(params[:departments])
+    if @department.save
+      flash[:success] = 'department saved!'
+    else
+      flash[:alert] = 'department not saved!'
+    end
+  end
 end

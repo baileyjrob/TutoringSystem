@@ -35,7 +35,6 @@
           <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
           <%= f.password_field :password, class: "form-control", autocomplete: "new-password" %>
           <% if @minimum_password_length %>
-            <br />
             <em><%= @minimum_password_length %> characters minimum</em>
           <% end %>
         </div>
@@ -48,6 +47,16 @@
         <div class="field">
           <%= f.label :major %><br />
           <%= f.text_field :major, autocomplete: "MAJR", class: "form-control", required: false %>
+        </div>
+
+        <div class="field">
+          <%= f.label :MU %><br />
+          <%= f.text_field :mu, autocomplete: "1 BDE", required: false %>
+        </div>
+
+        <div class="field">
+          <%= f.label :outfit %><br />
+          <%= f.text_field :outfit, autocomplete: "B1", required: false %>
         </div>
 
         <div class="field">
@@ -66,6 +75,24 @@
       <p><%= button_to "Cancel account", registration_path(@user), data: { confirm: "Are you sure?" }, class: 'btn btn-danger', method: :delete %></p>
 
       <%= link_to "Back", :back %>
+
+      <h3>Courses you can tutor in:</h3>
+      <table class="table" id="course_users">
+        <thead>
+          <tr>
+            <th scope="col">Department</th>
+            <th scope="col">Course</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @user.courses.each do |course| %>
+          <tr class='userInfo'>
+            <td><%= Department.where(id: course.department_id).department_name  %></td>
+            <td><%= course.course_name %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
