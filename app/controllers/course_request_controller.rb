@@ -47,12 +47,20 @@ class CourseRequestController < ApplicationController
   #     end
   def index
     @course_requests = CourseRequest.all
+    @tutor_count = -1
     @tutors = User.all
-    # .roles.include?(Role.tutor_role)
-    # @tutors = @tutors.include?(Role.tutor_role)
-    # @matching_tutors = @tutors.where(include?(Role.tutor_role))
     @matching_tutors = @tutors.where(major: params[:filter_major])
-    # would change tutors to matching tutors
+   
+    if (params.has_key?(:filter_major))
+      @tutor_count = 0
+    end
+
+     # checks roles of a user one at a time
+    @matching_tutors.each do |user|
+      if user.roles.include?(Role.tutor_role)
+        @tutor_count = @tutor_count.to_i + 1
+      end
+    end
     @no_tutors = '<b> No Available Tutors </b>'.html_safe
     @avail_tutors = '<b> Available Tutors </b>'.html_safe
   end
@@ -69,7 +77,7 @@ class CourseRequestController < ApplicationController
     @crequest = CourseRequest.new(course_request_params)
 
     if @crequest.save
-      redirect_to '/course_request'
+      redirect_to '/course_request', notice: 'Request successfully saved.'
     else
       render :new
     end
@@ -85,4 +93,5 @@ class CourseRequestController < ApplicationController
   def course_request_params
     params.require(:course_request).permit(:course_name_full)
   end
+
 end

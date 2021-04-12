@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Course Request', type: :feature do
+RSpec.describe 'Course Request', :no_auth, type: :feature do
   before do
     # Create some data
     user1 = User.create!(id: 16, first_name: 'Ben', last_name: 'Doe', major: 'CHEM',
@@ -23,6 +23,7 @@ RSpec.describe 'Course Request', type: :feature do
     it 'tries to submit a course' do
       fill_in 'course_request_course_name_full', with: 'PHIL 101'
       find(:link_or_button, 'Create Course request').click
+      visit('/course_request')
       expect(page).to have_content('PHIL 101')
     end
   end

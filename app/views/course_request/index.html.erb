@@ -1,51 +1,72 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-        <h1> Tutor Matching Page </h1>
+    <h1>Tutor Matching Page</h1>
             <%=form_tag('/course_request', :method => "get", :controller => 'course_request' ) do %>
                 <%= label_tag(:filter_major, "Course Department: ") %> 
                 <div class="mb-3">
-                    <%= text_field_tag(:filter_major) %>
+                    <%= text_field_tag(:filter_major, "", :class => 'form-control', :required => true) %>
                     <br><br>
-                    <%= submit_tag("Find") %> 
+                    <%= submit_tag("Find", :class => "btn btn-primary float-left") %> 
                 </div>
             <%end%>
-
-            <% if @matching_tutors.present? == false %>
+            <% if @tutor_count == 0 %>
                 <p> 
                     <%= @no_tutors %>
                     <br>
                     <%= @ask_request %> 
 
                 </p>
+            <% elsif @tutor_count == -1 %>
+                <!-- this is a placeholder when no search has been initiated -->
             <% else %>
-                <ul>
-                <!-- how are we connecting the tutoring sessions to tutors? -->
-                <% @matching_tutors.each do |user| %>
-                    <% if user.major.nil? == false %>
-                    <!-- makes sure users with no majors are not displayed -->
-                        <% if user.roles.include?(Role.tutor_role) %>z
-                            <!-- only displays tutors -->
-                                <li>
-                                    <%= link_to user.first_name.to_s + ' ' + user.last_name.to_s + ' Major: ' + user.major.to_s, user %>
-                                </li>
-                            <% end %>
-                        <% end %>
-                    <% end %>
-                </ul>    
-
+                <div class="row">
+                    <div class="col-12 mt-3">
+                        <table class = "table" id= "tutors">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Tutor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <!-- how are we connecting the tutoring sessions to tutors? -->
+                            <% @matching_tutors.each do |user| %>
+                                <% if user.major.nil? == false %>
+                                <!-- makes sure users with no majors are not displayed -->
+                                    <% if user.roles.include?(Role.tutor_role) %>
+                                        <!-- only displays tutors -->
+                                            <tr>
+                                                <th scope="row"><%= link_to user.first_name.to_s + ' ' + user.last_name.to_s + ' Major: ' + user.major.to_s, user %></th>
+                                            </tr>
+                                        <% end %>
+                                    <% end %>
+                                <% end %>  
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             <%end%>
-            <!-- course requests shown here temporarily for tests -->
-            <ul>
-            <% @course_requests.each do |crequest| %>
-                <li>
-                <a href="<%= course_request_path(crequest) %>">
-                    <%= crequest.course_name_full  %>
-                </a>
-                </li>
-            <% end %>
-            </ul>
-            <%= button_to "Submit a request", {:action => 'new'}, :method => :get %>
+            <!-- course requests shown here temporarily for tests -->            
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <table class = "table" id= "requests">
+                        <thead>
+                            <tr>
+                                <th scope="col">Current Requests</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% @course_requests.each do |crequest| %>
+                                <tr>
+                                    <th scope="row"><%= link_to crequest.course_name_full.to_s  %></th>
+                                </tr>
+                            <% end %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <%= button_to "Submit a request", {:action => 'new'}, :method => :get, :class => "btn btn-primary float-left"  %>
         </div>
     </div>
 </div>

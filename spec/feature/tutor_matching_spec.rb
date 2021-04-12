@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-RSpec.describe 'Tutor Matching', type: :feature do
+RSpec.describe 'Tutor Matching', :no_auth, type: :feature do
   before do
     # Create some data
     tutor_role = Role.create(role_name: 'Tutor')
@@ -57,7 +57,7 @@ RSpec.describe 'Tutor Matching', type: :feature do
       fill_in 'filter_major', with: 'CHEM'
       find_button 'Find'
       click_button 'Find'
-      expect(page).not_to have_content('Ben Doe Major: CHEM')
+      expect(page).to have_content('No Available Tutors')
     end
 
     User.destroy_all
