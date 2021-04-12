@@ -57,9 +57,8 @@ RSpec.describe UsersController, type: :feature do
 
     it 'changes name on proper submission' do
       visit("/users/#{user.id}/edit")
-
       fill_in 'user_first_name', with: 'A New User Name'
-      select 'Student', from: 'user_id'
+      find(:css, "#user_role_ids_[value='#{Role.find_by(role_name: 'Student').id}']").set(true)
       find(:link_or_button, 'Update').click
 
       expect(page).to have_content('A New User Name')

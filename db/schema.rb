@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2021_04_11_033550) do
     t.bigint "tutoring_session_id", null: false
   end
 
-  create_table "course_users", force: :cascade do |t|
+  create_table "course_users", id: false, force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "course_id", null: false
     t.string "grade_achieved"
@@ -106,10 +106,12 @@ ActiveRecord::Schema.define(version: 2021_04_11_033550) do
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.integer "failed_attempts", default: 0, null: false
+    t.string "unlock_token"
+    t.datetime "locked_at"
     t.string "unconfirmed_email"
     t.string "mu"
     t.string "outfit"
-    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
