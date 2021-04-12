@@ -1,15 +1,21 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'departments/new', :to => 'departments#new'
-  get 'departments/index', :to => 'departments#index'
-  get 'departments/:id/show', :to => 'departments#show'
-  get 'departments/:id/edit', :to => 'departments#edit'
-  post 'departments/create', :to => 'departments#create'
+  get 'departments/new'
+  post 'departments/create'
+  get 'departments/edit'
+  get 'departments/show'
+  get 'departments/index'
+  get 'departments/delete'
+  get 'departments/destroy'
   get 'courses/new'
-  get 'courses/index'
-  get 'courses/show'
+  post 'courses/create'
   get 'courses/edit'
+  get 'courses/show'
+  get 'courses/index'
+  get 'courses/delete'
+  get 'courses/destroy'
+  post '/tutor/:id/edit', :to => 'tutor#edit'
   devise_for :users, controllers: { registrations: 'registrations' }
   root 'users#index'
   get '/users/index', :to => 'users#index'

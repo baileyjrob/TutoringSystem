@@ -1,12 +1,6 @@
-# frozen_string_literal: true
-
 class CoursesController < ApplicationController
   def new
-    if !current_user.roles.include?(Role.admin_role) &&
-       !current_user.roles.include?(Role.tutor_role)
-      redirect_to "/users/#{current_user.id}"
-    end
-    @course = Courses.new
+    @course = Course.new
   end
 
   def edit
@@ -17,19 +11,25 @@ class CoursesController < ApplicationController
   end
 
   def index
-    @courses = Courses.all
+    @courses = Course.all
   end
 
   def show
-    @course = Courses.find(params[:id])
+    @course = Course.find(params[:id])
   end
 
   def create
-    @course = Courses.new(course_params)
+    @course = Course.new(params[:courses])
     if @course.save
       flash[:success] = 'course saved!'
     else
       flash[:alert] = 'course not saved!'
     end
+  end
+
+  def delete
+  end
+
+  def destroy
   end
 end

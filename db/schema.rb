@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2021_04_11_033551) do
     t.bigint "tutoring_session_id", null: false
   end
 
-  create_table "course_users", force: :cascade do |t|
+  create_table "course_users", id: false, force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "course_id", null: false
     t.string "grade_achieved"

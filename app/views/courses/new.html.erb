@@ -4,7 +4,7 @@
     <div class="col-12">
       <h1>New Course Page</h1>
       <p><%= button_to "Add Department", departments_new_path  %></p>
-      <%= form_for courses_new_path do |f| %>
+      <%= form_for courses_create_path do |f| %>
 
         <div class="field">
           <%= f.label :department_id %>
