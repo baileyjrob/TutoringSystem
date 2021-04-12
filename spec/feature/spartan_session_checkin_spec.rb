@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Users trying to', type: :feature do
+RSpec.describe 'Users trying to', :no_auth, type: :feature do
   let(:first_code) { 'asdasd' }
   let(:second_code) { '123123' }
 

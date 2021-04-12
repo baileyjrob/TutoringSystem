@@ -42,52 +42,106 @@ describe 'view tutoring hours', type: :feature do
   let(:end_date) { '30 May 2021 08:00:00 +0000'.to_datetime }
 
   before do
-    visit('/users/sign_in/')
-    fill_in 'user_email', with: admin.email
-    fill_in 'user_password', with: 'T3st!!a'
-    find(:link_or_button, 'Log in').click
-    visit('/users/admin_view_hours')
+    Timecop.freeze('29 May 02:00:00 +0000'.to_datetime)
   end
 
-  context 'with proper time input' do
+  after do
+    Timecop.return
+  end
+
+  describe 'using admin function' do
     before do
-      select_date(start_date, from: 'start_time')
-      select_date(end_date, from: 'end_time')
-      tutor.tutoring_sessions.push(tutoring_sessions, 'confirmed', tutor)
+      visit('/users/sign_in/')
+      fill_in 'user_email', with: admin.email
+      fill_in 'user_password', with: 'T3st!!a'
+      find(:link_or_button, 'Log in').click
+      visit('/users/admin_view_hours')
     end
 
-    it 'creates a correct CSV file' do
-      find(:link_or_button, 'Search').click
-      csv_table = CSV.read(Rails.root.join('public/tutoring_hours.csv'), headers: true)
-      expect([csv_table[0]['Tutor_Name'],
-              csv_table[0]['Hours_Worked']]).to eq(['Tutor User', '3.0'])
+    context 'with proper time input' do
+      before do
+        select_date(start_date, from: 'start_time')
+        select_date(end_date, from: 'end_time')
+        tutor.tutoring_sessions.push(tutoring_sessions, 'confirmed', tutor)
+      end
+
+      it 'creates a correct CSV file' do
+        find(:link_or_button, 'Search').click
+        csv_table = CSV.read(Rails.root.join('public/tutoring_hours.csv'), headers: true)
+        expect([csv_table[0]['Tutor_Name'],
+                csv_table[0]['Hours_Worked']]).to eq(['Tutor User', '3.0'])
+      end
+
+      it 'sends an email' do
+        expect { find(:link_or_button, 'Search').click }.to change {
+                                                              ActionMailer::Base.deliveries.count
+                                                            }.by(1)
+      end
+
+      it 'email has correct data' do
+        find(:link_or_button, 'Search').click
+        expect(ActionMailer::Base.deliveries[0].attachments[0]
+          .body.encoded.delete("\r")).to eq <<~CSV
+            Tutor_Name,Hours_Worked
+            Tutor User,3.0
+          CSV
+      end
     end
 
-    it 'sends an email' do
-      expect { find(:link_or_button, 'Search').click }.to change {
-                                                            ActionMailer::Base.deliveries.count
-                                                          }.by(1)
-    end
+    context 'with improper time input' do
+      before do
+        select_date(start_date, from: 'end_time')
+        select_date(end_date, from: 'start_time')
+      end
 
-    it 'email has correct data' do
-      find(:link_or_button, 'Search').click
-      expect(ActionMailer::Base.deliveries[0].attachments[0].body.encoded.delete("\r")).to eq <<~CSV
-        Tutor_Name,Hours_Worked
-        Tutor User,3.0
-      CSV
+      it 'does not sends an email' do
+        expect { find(:link_or_button, 'Search').click }.to change {
+                                                              ActionMailer::Base.deliveries.count
+                                                            }.by(0)
+      end
     end
   end
 
-  context 'with improper time input' do
-    before do
-      select_date(start_date, from: 'end_time')
-      select_date(end_date, from: 'start_time')
+  describe 'on show page' do
+    context 'when user is non-tutor' do
+      before do
+        visit('/users/sign_in/')
+        fill_in 'user_email', with: admin.email
+        fill_in 'user_password', with: 'T3st!!a'
+        find(:link_or_button, 'Log in').click
+        visit("/users/#{admin.id}")
+      end
+
+      it 'does not have the hour field' do
+        expect(page).not_to have_content('Hours Tutored This Semester:')
+      end
     end
 
-    it 'does not sends an email' do
-      expect { find(:link_or_button, 'Search').click }.to change {
-                                                            ActionMailer::Base.deliveries.count
-                                                          }.by(0)
+    context 'when user is tutor' do
+      before do
+        visit('/users/sign_in/')
+        fill_in 'user_email', with: tutor.email
+        fill_in 'user_password', with: 'T3st!!a'
+        find(:link_or_button, 'Log in').click
+      end
+
+      it 'has tutor field' do
+        visit("/users/#{tutor.id}")
+        expect(page).to have_content('Hours Tutored This Semester:')
+      end
+
+      it 'correctly tracks number of hours' do
+        visit("/users/#{tutor.id}")
+        expect(page).to have_content('Hours Tutored This Semester: 3.0')
+      end
+
+      it 'displays 0 if tutor has no hours logged' do
+        tutoring_sessions.each do |session|
+          session.update(tutor_id: nil)
+        end
+        visit("/users/#{tutor.id}")
+        expect(page).to have_content('0.0')
+      end
     end
   end
 end
