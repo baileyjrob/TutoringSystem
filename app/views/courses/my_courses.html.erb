@@ -2,9 +2,8 @@
 <div class="container">
   <div class="row">
     <div class="col-12 mt-3">
-      <p><%= button_to "Create New Course", courses_new_path  %></p>
+      <p><%= button_to "Create New Course", new_courses_path  %></p>
       <p><%= button_to "Add Existing Course", edit_tutor_path(current_user) %>.
-      <td><a href="<%= courses_new_path %>"><i class="far fa-edit"></i></a></td>
       <table class="table" id="courses">
         <thead>
           <tr>

@@ -77,4 +77,10 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :major, :mu,
+                                 :outfit, :email, :encrypted_password,
+                                 role_ids: [], course_ids: [])
+  end
 end

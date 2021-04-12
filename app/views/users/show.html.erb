@@ -54,10 +54,12 @@
       <% end %>
     </div>
     <br>
-    <p class="mb-0">Student?: <%= @user.student? %></p>
-    <p class="mb-0">Tutor?: <%= @user.tutor? %></p>
-    <p class="mb-0">Spartan Tutor?: <%= @user.spartan_tutor? %></p>
-    <p class="mb-0">Admin?: <%= @user.admin? %></p>
+    <p> Role(s):
+    <% @current_user.roles.each do |role| %>
+        <tr>
+          <%= role.role_name %> &ensp;
+        </tr>
+    <% end %> </p>
   </div>
   <br>
 

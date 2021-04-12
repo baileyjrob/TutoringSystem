@@ -21,7 +21,7 @@ class DepartmentsController < ApplicationController
   end
 
   def create
-    @department = Department.new(params[:departments])
+    @department = Department.new(department_params)
     if @department.save
       flash[:success] = 'department saved!'
       redirect_to @department
@@ -33,4 +33,8 @@ class DepartmentsController < ApplicationController
   def delete; end
 
   def destroy; end
+
+  def department_params
+    params.require(:department).permit(:department_name, course_ids: [])
+  end
 end

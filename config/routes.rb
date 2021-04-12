@@ -1,21 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'courses/my_courses'
-  get 'departments/new'
-  post 'departments/create'
-  get 'departments/edit'
-  get 'departments/show'
-  get 'departments/index'
-  get 'departments/delete'
-  get 'departments/destroy'
-  get 'courses/new'
-  post 'courses/create'
-  get 'courses/edit'
-  get 'courses/show'
-  get 'courses/index'
-  get 'courses/delete'
-  get 'courses/destroy'
+  get '/courses/index', :to => 'courses#index'
+  post '/courses', :to => 'courses#index'
   post '/tutor/:id/edit', :to => 'tutor#edit'
   devise_for :users, controllers: { registrations: 'registrations' }
   root 'users#index'
@@ -56,17 +43,16 @@ Rails.application.routes.draw do
   get '/tutor/:id/course_edit', :to => 'tutor#course_edit'
   get '/tutor/:id/course_new', :to => 'tutor#course_new'
   get '/tutor/:id/edit', :to => 'tutor#edit'
+  get '/tutor/:id/show', :to => 'tutor#show'
   # TEMP UNTIL EMAIL
   get '/users/admin_view_hours', :to => 'users#admin_view_hours'
   post '/users/admin_view_hours', :to =>'users#admin_view_hours'
   #END TEMP
   resources :tutoring_session
   resources :users
-  resources :tutor do
-    member do
-      post :edit
-    end
-  end
+  resources :tutor
+  resources :departments
+  resources :courses
   default_url_options :host => "localhost:3000"
 
 end

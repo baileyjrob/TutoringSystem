@@ -2,18 +2,31 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <h1>Tutor Courses Page</h1>
-      <h2>These are Tutors have made an A or B in this class, and therefore are qualified to offer tutoring for</h2>
+      <h1><%=Department.find_by(id: @course.department_id).department_name %> <%=@course.course_name %> Course Page</h1>
+      <h3>Tutors that have made an A or B in this class</h3>
     </div>
   </div><div class="row">
     <div class="col-12 mt-3">
-      <table class="table" id="course_users">
+      <table class="table" id="users">
+        <thead>
+          <tr>
+            <th scope="col">User ID</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Email</th>
+            <th scope="col">Grade Achieved</th>
+            <th scope="col">Show</th>
+          </tr>
+        </thead>
         <tbody>
-          <% current_user.courses.each do |course| %>
+          <% @users.each do |user| %>
           <tr class='userInfo'>
-            <th scope="row"><%= course_users.id %></th>
-            <td><%= Department.where(id: course.department_id).department_name  %></td>
-            <td><%= course.course_name %></td>
+            <th scope="row"><%= user.id %></th>
+            <td><%= user.first_name %></td>
+            <td><%= user.last_name  %></td>
+            <td><%= user.email  %></td>
+            <td><%= user.course.first.grade_achieved  %></td>
+            <td><a href="<%= show_user_path(user) %>"><i class="far fa-show"></i></a></td>
           </tr>
           <% end %>
         </tbody>

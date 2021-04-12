@@ -18,12 +18,14 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
+    @users = @course.users
   end
 
   def create
-    @course = Course.new(params[:courses])
+    @course = Course.new(course_params)
     if @course.save
       flash[:success] = 'course saved!'
+      redirect_to @course
     else
       flash[:alert] = 'course not saved!'
     end
@@ -34,4 +36,8 @@ class CoursesController < ApplicationController
   def destroy; end
 
   def my_courses; end
+
+  def course_params
+    params.require(:course).permit(:course_name, :department_id, user_ids: [])
+  end
 end
