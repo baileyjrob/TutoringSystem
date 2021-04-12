@@ -32,4 +32,7 @@ class CoursesController < ApplicationController
 
   def destroy
   end
+
+  def my_courses
+  end
 end

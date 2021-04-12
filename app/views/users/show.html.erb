@@ -61,8 +61,7 @@
     </thead>
     <% @user.courses.each do |c| %>
     <tr class='userInfo'>
-      <th scope="row"><%= course_users.id %></th>
-      <td><%= Departments.where(id: c.department_id).department_name  %></td>
+      <td><%= Department.find_by(id: c.department_id).department_name  %></td>
       <td><%= c.course_name %></td>
     </tr>
     <% end %>

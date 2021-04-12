@@ -2,15 +2,18 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <h1>Edit Tutor Courses Page</h1>
+      <h1>Add Course to your Profile</h1>
       <%= form_for(edit_tutor_path(current_user)) do |f| %>
 
       <div class="field">
-        <% Courses.all.each do |c| %>
-          <%= c.course_name %>
+        <% Course.all.each do |course| %>
+          <%= check_box_tag "user[course_ids][]", course.id, @user.course_ids.include?(course.id) %>
+          <%= Department.find_by(id: course.department_id).department_name %>
+          <%= course.course_name %>
           <br />
         <% end %>
       </div>
+
 
       <div class="actions">
         <%= f.submit "Update", class: 'btn btn-primary mt-2' %>

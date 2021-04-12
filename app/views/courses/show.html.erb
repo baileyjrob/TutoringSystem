@@ -12,7 +12,7 @@
           <% current_user.courses.each do |course| %>
           <tr class='userInfo'>
             <th scope="row"><%= course_users.id %></th>
-            <td><%= Departments.where(id: course.department_id).department_name  %></td>
+            <td><%= Department.where(id: course.department_id).department_name  %></td>
             <td><%= course.course_name %></td>
           </tr>
           <% end %>

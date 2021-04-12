@@ -13,7 +13,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @courses.each do |course| %>
+          <% current_user.courses.each do |course| %>
           <tr class='userInfo'>
             <td><%= Department.find_by(id: course.department_id).department_name %></td>
             <td><%= course.course_name  %></td>

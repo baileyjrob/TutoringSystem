@@ -8,7 +8,7 @@
 
         <div class="field">
           <%= f.label :department_id %>
-          <%= f.select(:department_id, Departments.all.collect {|c| [ c.department_name, c.id ] }, { include_blank: true }) %>
+          <%= f.select(:department_id, Department.all.collect {|c| [ c.department_name, c.id ] }, { include_blank: true }) %>
         </div>
 
         <div class="field">

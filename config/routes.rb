@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'courses/my_courses'
   get 'departments/new'
   post 'departments/create'
   get 'departments/edit'
