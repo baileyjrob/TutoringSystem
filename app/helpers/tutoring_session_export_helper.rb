@@ -16,16 +16,25 @@ module TutoringSessionExportHelper
   end
 
   def mail_csv(start_date, end_date, filepath)
+    code = code_check(filepath)
     if Rails.env.test?
-      HourCheckMailer.with(begin: start_date, end: end_date, filepath: filepath,
+      HourCheckMailer.with(begin: start_date, end: end_date, code: code,
                            email: 'admin@tamu.edu').hours_email.deliver_now
     else
       HourCheckMailer.with(begin: start_date, end: end_date,
-                           filepath: filepath).hours_email.deliver_later
+                           code: code).hours_email.deliver_later
     end
   end
 
   private
+
+  def code_check(filepath)
+    code = 0
+    code = 3 unless filepath.at(/.*_3.csv/).nil?
+    code = 2 unless filepath.at(/.*_2.csv/).nil?
+    code = 1 unless filepath.at(/.*spec.csv/).nil?
+    code
+  end
 
   def generate_query(start_date, end_date)
     User.joins(:roles, 'LEFT JOIN tutoring_sessions ON tutoring_sessions.tutor_id = users.id')

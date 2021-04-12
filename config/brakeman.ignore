@@ -1,0 +1,26 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "File Access",
+      "warning_code": 16,
+      "fingerprint": "8fdc5062b9d498a7ad262d6c0685317dcfe3d460d0a3b351cc792f0e4eab6f84",
+      "check_name": "FileAccess",
+      "message": "Parameter value used in file name",
+      "file": "app/mailers/hour_check_mailer.rb",
+      "line": 11,
+      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
+      "code": "File.read(code_parse(params[:code]))",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "HourCheckMailer",
+        "method": "hours_email"
+      },
+      "user_input": "params[:code]",
+      "confidence": "Weak",
+      "note": "Not only is the parametrization purely internal, and doesn't involve any user input, but the program also chooses between only four pre-determined files and will only write anything meaningful if all checks prior have been passed. Deletion isn't a concert either since this file is temporary anyway, so it doesn't matter if a preexisting version gets deleted. In short: there is no conceivable way this is ACTUALLY a security risk"
+    }
+  ],
+  "updated": "2021-04-11 20:07:58 -0500",
+  "brakeman_version": "5.0.0"
+}
