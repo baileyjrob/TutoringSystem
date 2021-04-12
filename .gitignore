@@ -45,6 +45,7 @@ yarn-debug.log*
 .idea*
 
 .history/
+/public/*.csv
 
 # Ignore test output
 /spec/helpers/*.csv

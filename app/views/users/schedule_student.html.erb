@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-5 mt-5">
+    <div class="col mt-5">
       <h1>Join a Tutor Session</h1>
       <%= button_to "Cancel", {:action => 'index'}, :class => "btn btn-primary", :method => :get %>
 
@@ -9,7 +9,7 @@
         <p class="mt-4">There are no available sessions to join.</p>
       <% else %>
         <p class="mt-4">Please select which session you would like to attend.</p>
-        <table class="table">
+        <table class="table" id="users">
           <thead>
             <tr>
               <th scope="col">Tutor Name</th>
@@ -20,7 +20,7 @@
           </thead>
           <tbody>
             <% @sessions.each do |session| %>
-              <tr>
+              <tr class='userInfo'>
                 <!-- Make a row in the table for each tutoring session. Includes details and join option -->
                 <% user = User.find(session.tutor_id) %>
                 <td><%= user.first_name + " " + user.last_name %></td>
@@ -45,4 +45,10 @@
       <% end %>
     </div>
   </div>
+
+  <script>
+      $(function() {
+          $('#users').DataTable();
+      });
+  </script>
 </div>

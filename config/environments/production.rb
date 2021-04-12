@@ -70,7 +70,6 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   #for mailcatcher gem
   config.action_mailer.delivery_method = :smtp
-  #config.action_mailer.smtp_settings = { :address => '127.0.0.1', :port => 1025 }
   config.action_mailer.default_url_options = { host: "tutoring-session-staging-2.herokuapp.com" }
 
   config.action_mailer.smtp_settings = {
