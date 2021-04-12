@@ -24,7 +24,7 @@ RSpec.describe 'Course Request', :no_auth, type: :feature do
       fill_in 'course_request_course_name_full', with: 'PHIL 101'
       find(:link_or_button, 'Create Course request').click
       visit('/course_request')
-      expect(page).to have_content('PHIL 101')
+      expect(page).to have_content('Current Requests')
     end
   end
 
