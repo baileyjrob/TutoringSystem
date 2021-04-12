@@ -30,6 +30,3 @@ admin_role = Role.create(role_name: 'Admin');
 tutor_role = Role.create(role_name: 'Tutor');
 Role.create(role_name: 'Student');
 Role.create(role_name: 'Spartan Tutor');
-
-Department.create(department_name: "CSCE");
-Course.create(course_name: "431", department_id: Department.find_by(department_name: "CSCE").id);
