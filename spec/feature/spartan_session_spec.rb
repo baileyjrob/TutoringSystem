@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Users', type: :feature do
+RSpec.describe 'Users', :no_auth, type: :feature do
   before do
     # Create some data
     Role.create!([{ role_name: 'Admin' },

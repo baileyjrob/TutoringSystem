@@ -17,11 +17,11 @@ module TutoringSessionExportHelper
 
   def mail_csv(start_date, end_date, filepath)
     if Rails.env.test?
-      HourCheckMailer.with(begin: start_date, end: end_date, filepath: filepath,
-                           email: 'admin@tamu.edu').hours_email.deliver_now
+      HourCheckMailer.hours_email(start_date, end_date, filepath,
+                                  'admin@tamu.edu').deliver_now
     else
-      HourCheckMailer.with(begin: start_date, end: end_date,
-                           filepath: filepath).hours_email.deliver_later
+      HourCheckMailer.hours_email(start_date, end_date,
+                                  filepath).deliver_later
     end
   end
 
