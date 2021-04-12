@@ -1,0 +1,24 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 mt-3">
+      <p><%= button_to "Create New Course", new_courses_path  %></p>
+      <p><%= button_to "Add Existing Course", edit_tutor_path(current_user) %>.
+      <table class="table" id="courses">
+        <thead>
+          <tr>
+            <th scope="col">Department</th>
+            <th scope="col">Course</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% current_user.courses.each do |course| %>
+          <tr class='userInfo'>
+            <td><%= Department.find_by(id: course.department_id).department_name %></td>
+            <td><%= course.course_name  %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>

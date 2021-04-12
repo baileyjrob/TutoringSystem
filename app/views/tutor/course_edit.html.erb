@@ -1,0 +1,23 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1>Edit Tutor Courses Page</h1>
+      <%= form_for(@user) do |f| %>
+
+      <div class="field">
+        <% Courses.all.each do |course| %>
+          <%= check_box_tag "user[course_ids][]", course.id, @user.course_ids.include?(course.id) %>
+          <%= course.course_name %>
+          <br />
+        <% end %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Update", class: 'btn btn-primary mt-2' %>
+      </div>
+
+      <%end%>
+    </div>
+  </div>
+</div>

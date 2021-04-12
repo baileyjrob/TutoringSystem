@@ -33,15 +33,17 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
+          <% if current_user %>
           <li class="nav-item">
             <%=link_to "Tutoring Session", tutoring_session_index_path, class: 'nav-link' %>
           </li>
           <li class="nav-item">
-            <%=link_to "Find a Tutor", '/course_request', class: 'nav-link', text: 'Tutor Matching'  %>
+            <%=link_to "Find a Tutor", '/tutor/index', class: 'nav-link', text: 'Tutor Matching'  %>
           </li>
-          <% if current_user %>
+          <% end %>
+          <% if current_user.roles.include?(Role.tutor_role) %>
           <li class="nav-item">
-            <%= link_to 'My Schedule', show_schedule_path, class: 'nav-link'  %>
+            <%=link_to "My Courses", tutor_path(current_user), class: 'nav-link' %>
           </li>
           <% end %>
         </ul>
@@ -60,9 +62,6 @@
           <% if current_user.roles.include?(Role.admin_role) %>
           <li class="nav-item">
             <%= link_to 'Get Tutoring Hours', '/users/admin_view_hours' , class: 'nav-link' %>
-          </li>
-          <li class="nav-item">
-            <%=link_to "View Spartan Sessions", "/spartan_sessions/index", class: 'nav-link' %>
           </li>
           <% end %>
           <% else %>

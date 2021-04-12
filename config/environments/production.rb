@@ -66,14 +66,20 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { :host => 'tutoring-session-staging.herokuapp.com' }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  #for mailcatcher gem
+  config.action_mailer.delivery_method = :smtp
+  #config.action_mailer.smtp_settings = { :address => '127.0.0.1', :port => 1025 }
+  config.action_mailer.default_url_options = { host: "tutoring-session-staging-2.herokuapp.com" }
 
-config.action_mailer.delivery_method = :smtp
-config.action_mailer.smtp_settings = {
-  :address => "127.0.0.1",
-  :port    => 25,
-  :domain  => 'yourdomain.com'
-}
+  config.action_mailer.smtp_settings = {
+  :address              => "smtp.gmail.com",
+  :port                 => 587,
+  :user_name            =>'ORSHSTutoring@gmail.com',
+  :password             => 'CSCE431Project!',
+  :authentication       => 'plain',
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
