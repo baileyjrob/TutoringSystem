@@ -50,19 +50,11 @@ class CourseRequestController < ApplicationController
     @tutor_count = -1
     @tutors = User.all
     @matching_tutors = @tutors.where(major: params[:filter_major])
-   
-    if (params.has_key?(:filter_major))
-      @tutor_count = 0
-    end
-
-     # checks roles of a user one at a time
+    @tutor_count = 0 if params.key?(:filter_major)
     @matching_tutors.each do |user|
-      if user.roles.include?(Role.tutor_role)
-        @tutor_count = @tutor_count.to_i + 1
-      end
+      @tutor_count = @tutor_count.to_i + 1 if user.roles.include?(Role.tutor_role)
     end
     @no_tutors = '<b> No Available Tutors </b>'.html_safe
-    @avail_tutors = '<b> Available Tutors </b>'.html_safe
   end
 
   def show
@@ -93,5 +85,4 @@ class CourseRequestController < ApplicationController
   def course_request_params
     params.require(:course_request).permit(:course_name_full)
   end
-
 end
