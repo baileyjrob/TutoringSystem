@@ -20,7 +20,7 @@ RSpec.describe Role, type: :model do
       user = User.create(first_name: 'Andrew', last_name: 'last', major: 'CSCE',
                          email: 'asdf@tamu.edu', password: '12341234')
       user.roles.push(role)
-      expect(user.roles.admin_role).should be_truthy
+      expect(user.roles.admin_role).to be_truthy
     end
 
     it 'returns not nil if user has admin role' do
@@ -68,7 +68,7 @@ RSpec.describe Role, type: :model do
       user = User.create(first_name: 'Andrew', last_name: 'last', major: 'CSCE',
                          email: 'asdf@tamu.edu', password: '12341234')
       user.roles.push(role)
-      expect(user.roles.tutor_role).should be_truthy
+      expect(user.roles.tutor_role).to be_truthy
     end
 
     it 'returns not nil if user has tutor role' do
@@ -92,7 +92,7 @@ RSpec.describe Role, type: :model do
       user = User.create(first_name: 'Andrew', last_name: 'last', major: 'CSCE',
                          email: 'asdf@spartan-tutoring.com', password: '12341234')
       user.roles.push(role)
-      expect(user.roles.spartan_tutor_role).should be_truthy
+      expect(user.roles.spartan_tutor_role).to be_truthy
     end
 
     it 'returns not nil if user has spartan tutor role' do
