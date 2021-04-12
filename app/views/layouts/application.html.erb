@@ -40,7 +40,7 @@
             <%=link_to "Find a Tutor", '/tutor/index', class: 'nav-link', text: 'Tutor Matching'  %>
           </li>
           <% end %>
-          <% if current_user.roles.include?(Role.tutor_role) %>
+          <% if current_user && current_user.roles.include?(Role.tutor_role) %>
           <li class="nav-item">
             <%=link_to "My Courses", tutor_path(current_user), class: 'nav-link' %>
           </li>
@@ -58,7 +58,7 @@
             <%= link_to 'My Account', edit_user_registration_path, class: 'nav-link' %>
           </li>
           <!-- TEMPORARY UNTIL EMAIL SET UP -->
-          <% if current_user.roles.include?(Role.admin_role) %>
+          <% if current_user && current_user.roles.include?(Role.admin_role) %>
           <li class="nav-item">
             <%= link_to 'Get Tutoring Hours', '/users/admin_view_hours' , class: 'nav-link' %>
           </li>
