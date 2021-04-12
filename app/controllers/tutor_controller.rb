@@ -26,11 +26,11 @@ class TutorController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
-    render tutor_path
+    flash[:success] = 'course(s) saved!' if @user.update(user_params)
+    redirect_to edit_tutor_path(@user.id)
   end
 
   def user_params
-    params.require(:tutor).permit(course_ids: [])
+    params.require(:user).permit(course_ids: [])
   end
 end

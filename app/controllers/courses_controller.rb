@@ -22,9 +22,8 @@ class CoursesController < ApplicationController
     @course = Course.new(course_params)
     if @course.save
       flash[:success] = 'course saved!'
-      redirect_to tutor_path
+      redirect_to edit_tutor_path(current_user.id)
     else
-      redirect_to tutor_path
       flash[:alert] = 'course not saved!'
     end
   end
@@ -36,6 +35,6 @@ class CoursesController < ApplicationController
   def my_courses; end
 
   def course_params
-    params.require(:courses).permit(:course_name, :department_id)
+    params.require(:course).permit(:course_name, :department_id)
   end
 end

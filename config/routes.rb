@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get '/courses/index', :to => 'courses#index'
-  post '/courses', :to => 'courses#index'
-  post '/tutor/:id/edit', :to => 'tutor#edit'
+  post '/courses', :to => 'courses#create'
+  post '/tutor/:id/edit', :to => 'tutor#update'
   devise_for :users, controllers: { registrations: 'registrations' }
   root 'users#index'
   get '/users/index', :to => 'users#index'
@@ -47,6 +46,8 @@ Rails.application.routes.draw do
   # TEMP UNTIL EMAIL
   get '/users/admin_view_hours', :to => 'users#admin_view_hours'
   post '/users/admin_view_hours', :to =>'users#admin_view_hours'
+  get '/courses/new', :to => 'courses#new'
+
   #END TEMP
   resources :tutoring_session
   resources :users
