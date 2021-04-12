@@ -31,5 +31,5 @@ tutor_role = Role.create(role_name: 'Tutor');
 Role.create(role_name: 'Student');
 Role.create(role_name: 'Spartan Tutor');
 
-# user5.roles << tutor_role
-# user8.roles << tutor_role
+Department.create(department_name: "CSCE");
+Course.create(course_name: "431", department_id: Department.find_by(department_name: "CSCE").id);
