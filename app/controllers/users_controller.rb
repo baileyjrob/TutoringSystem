@@ -29,10 +29,10 @@ class UsersController < ApplicationController
     @tutoring_sessions = TutoringSession.all
 
     # See if there is a spartan session to check into
-    @spartan_session = SpartanSession.where('session_datetime > :now',
+    @spartan_session = SpartanSession.where('session_datetime < :now',
                                             now: Time.zone.now.to_datetime)
-                                     .and(SpartanSession.where('session_datetime < :endTime',
-                                                               endTime: (Time.zone.now + 7200)
+                                     .and(SpartanSession.where('session_datetime > :startTime',
+                                                               startTime: (Time.zone.now - 7200)
                                                                           .to_datetime))
                                      .first
     @spartan_session_users = SpartanSessionUser.all

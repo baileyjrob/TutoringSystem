@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Admins', type: :feature do
+RSpec.describe 'Admins', :no_auth, type: :feature do
   before do
     # Create some data
     Role.create!([{ role_name: 'Admin' },
@@ -28,15 +28,15 @@ RSpec.describe 'Admins', type: :feature do
                          password: 'T3st!!b')
     user3.roles << Role.find_by(role_name: 'Student')
 
-    SpartanSession.create(session_datetime: Time.zone.now - 6000,
+    SpartanSession.create(session_datetime: Time.zone.now + 6000,
                           first_code: 'asdasd',
                           second_code: '123123')
 
-    session = SpartanSession.create(session_datetime: Time.zone.now + 6000,
+    session = SpartanSession.create(session_datetime: Time.zone.now - 6000,
                                     first_code: 'asdasd',
                                     second_code: '123123')
 
-    SpartanSession.create(session_datetime: Time.zone.now + 8400,
+    SpartanSession.create(session_datetime: Time.zone.now - 8400,
                           first_code: 'asdasd',
                           second_code: '123123')
 
