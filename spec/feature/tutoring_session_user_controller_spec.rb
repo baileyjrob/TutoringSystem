@@ -86,7 +86,7 @@ RSpec.describe TutoringSessionUserController, type: :feature do
       fill_in 'message-text', with: 'TEST'
       find(:link_or_button, 'Send email').click
       expect(page).not_to have_content(student1.email)
-
+      sleep 1
       mail = ActionMailer::Base.deliveries.last
       expect(mail).not_to eq(nil)
       expect(mail.to.to_s).to include(student1.email)
@@ -98,7 +98,7 @@ RSpec.describe TutoringSessionUserController, type: :feature do
       fill_in 'message-text', with: 'TEST'
       find(:link_or_button, 'Send email').click
       expect(page).not_to have_content(student1.email)
-
+      sleep 1
       mail = ActionMailer::Base.deliveries.last
       expect(mail).not_to eq(nil)
       expect(mail.to.to_s).to include(student1.email)
