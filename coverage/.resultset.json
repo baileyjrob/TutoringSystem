@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/user.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/user.rb": {
         "lines": [
           null,
           null,
@@ -28,52 +28,55 @@
           1,
           null,
           1,
-          null,
-          1,
-          null,
-          null,
-          1,
           1,
           null,
           1,
           null,
           1,
-          229,
-          229,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          237,
+          237,
           null,
           1,
           null,
           null,
           1,
-          213,
-          213,
+          221,
+          221,
           null,
-          207,
-          207,
+          215,
+          215,
           null,
           null,
           1,
-          213,
-          213,
+          221,
+          221,
           null,
           6,
           6,
           null,
           null,
           1,
-          145,
+          157,
           null,
           null,
           1,
-          287,
+          311,
           null,
           null,
           1,
-          289,
+          313,
           null,
           null,
           1,
-          145,
+          157,
           null,
           null,
           1,
@@ -82,7 +85,7 @@
           null
         ]
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/application_record.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/application_record.rb": {
         "lines": [
           null,
           null,
@@ -92,7 +95,7 @@
           null
         ]
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/helpers/admin_view_hours_helper.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/helpers/admin_view_hours_helper.rb": {
         "lines": [
           null,
           null,
@@ -183,7 +186,7 @@
           null
         ]
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/helpers/tutoring_session_export_helper.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/helpers/tutoring_session_export_helper.rb": {
         "lines": [
           null,
           null,
@@ -268,7 +271,7 @@
           null
         ]
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/helpers/application_helper.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/helpers/application_helper.rb": {
         "lines": [
           null,
           null,
@@ -277,7 +280,15 @@
           null
         ]
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/helpers/landing_helper.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/helpers/course_request_helper.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/helpers/landing_helper.rb": {
         "lines": [
           null,
           null,
@@ -286,7 +297,7 @@
           null
         ]
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/helpers/spartan_session_export_helper.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/helpers/spartan_session_export_helper.rb": {
         "lines": [
           null,
           null,
@@ -343,7 +354,7 @@
           null
         ]
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/helpers/spartan_sessions_helper.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/helpers/spartan_sessions_helper.rb": {
         "lines": [
           null,
           null,
@@ -367,7 +378,7 @@
           null
         ]
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/helpers/tutor_helper.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/helpers/tutor_helper.rb": {
         "lines": [
           null,
           null,
@@ -375,7 +386,7 @@
           null
         ]
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/helpers/tutoring_session_controller_helper.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/helpers/tutoring_session_controller_helper.rb": {
         "lines": [
           null,
           null,
@@ -383,7 +394,7 @@
           1,
           null,
           1,
-          14,
+          13,
           null,
           null,
           null,
@@ -399,7 +410,7 @@
           null,
           null,
           1,
-          28,
+          26,
           null,
           null,
           null,
@@ -408,12 +419,12 @@
           null,
           null,
           1,
-          10,
+          9,
           null,
           null
         ]
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/helpers/user_controller_helper.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/helpers/user_controller_helper.rb": {
         "lines": [
           null,
           null,
@@ -432,7 +443,7 @@
           null
         ]
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/controllers/users_controller.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/controllers/users_controller.rb": {
         "lines": [
           null,
           null,
@@ -461,31 +472,35 @@
           null,
           1,
           null,
-          144,
-          144,
+          156,
+          156,
           null,
           null,
-          144,
+          156,
           null,
           null,
-          144,
+          156,
           null,
           null,
-          144,
-          null,
-          null,
-          1,
-          0,
-          0,
-          null,
-          null,
-          1,
-          0,
+          156,
           null,
           null,
           1,
           0,
           0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
           null,
           null,
           1,
@@ -571,7 +586,7 @@
           null
         ]
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/controllers/application_controller.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/controllers/application_controller.rb": {
         "lines": [
           null,
           null,
@@ -584,7 +599,7 @@
           1,
           null,
           1,
-          182,
+          195,
           null,
           null,
           null,
@@ -592,22 +607,33 @@
           1,
           null,
           1,
-          182,
+          195,
           null,
           null,
-          182,
+          195,
           null,
           null,
           null,
           null,
           1,
-          631,
+          660,
           null,
           null,
           null
         ]
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/controllers/tutoring_session_controller.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/course_request.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/controllers/tutoring_session_controller.rb": {
         "lines": [
           null,
           null,
@@ -618,34 +644,34 @@
           1,
           null,
           1,
-          14,
+          13,
           null,
           null,
-          14,
+          13,
           null,
           null,
-          14,
-          112,
-          14,
-          98,
+          13,
+          104,
+          13,
+          91,
           null,
-          98,
+          91,
           null,
           null,
           null,
           null,
           1,
           null,
-          14,
+          13,
           4,
           4,
           null,
-          10,
-          10,
+          9,
+          9,
           null,
-          14,
-          14,
-          14,
+          13,
+          13,
+          13,
           null,
           null,
           1,
@@ -706,7 +732,7 @@
           null
         ]
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/controllers/tutoring_session_user_controller.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/controllers/tutoring_session_user_controller.rb": {
         "lines": [
           null,
           null,
@@ -761,25 +787,10 @@
           null
         ]
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/course_request.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/course_request_user.rb": {
         "lines": [
           null,
           null,
-          1,
-          1,
-          null
-        ]
-      },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/course.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          1,
-          null,
-          1,
-          1,
-          1,
           null,
           1,
           1,
@@ -788,7 +799,25 @@
           null
         ]
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/department.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/course.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/department.rb": {
         "lines": [
           null,
           null,
@@ -802,7 +831,7 @@
           null
         ]
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/notification.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/notification.rb": {
         "lines": [
           null,
           null,
@@ -811,7 +840,7 @@
           1,
           1,
           null,
-          632,
+          661,
           null,
           1,
           4,
@@ -823,7 +852,7 @@
           null
         ]
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/role.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/role.rb": {
         "lines": [
           null,
           null,
@@ -835,19 +864,19 @@
           1,
           null,
           1,
-          506,
+          540,
           null,
           null,
           1,
-          291,
+          315,
           null,
           null,
           1,
-          292,
+          325,
           null,
           null,
           1,
-          148,
+          160,
           null,
           null,
           1,
@@ -856,7 +885,7 @@
           null
         ]
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/spartan_session.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/spartan_session.rb": {
         "lines": [
           null,
           null,
@@ -871,7 +900,7 @@
           null
         ]
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/tutoring_session.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/tutoring_session.rb": {
         "lines": [
           null,
           null,
@@ -963,7 +992,7 @@
           null
         ]
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/tutoring_session_user.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/tutoring_session_user.rb": {
         "lines": [
           null,
           null,
@@ -978,29 +1007,7 @@
           null
         ]
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/controllers/tutor_controller.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          1,
-          11,
-          11,
-          11,
-          11,
-          11,
-          null,
-          11,
-          null,
-          null,
-          11,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/role_user.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/role_user.rb": {
         "lines": [
           null,
           null,
@@ -1012,7 +1019,7 @@
           null
         ]
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/spartan_session_user.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/spartan_session_user.rb": {
         "lines": [
           null,
           null,
@@ -1024,7 +1031,99 @@
           null
         ]
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/controllers/spartan_sessions_controller.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/controllers/course_request_controller.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          5,
+          null,
+          9,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null,
+          1,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null
+        ]
+      },
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/controllers/spartan_sessions_controller.rb": {
         "lines": [
           null,
           null,
@@ -1168,7 +1267,7 @@
           null
         ]
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/course_user.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/course_user.rb": {
         "lines": [
           null,
           null,
@@ -1180,7 +1279,7 @@
           null
         ]
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/course_tutoring_session.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/course_tutoring_session.rb": {
         "lines": [
           null,
           null,
@@ -1192,7 +1291,7 @@
           null
         ]
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/models/department_tutoring_session.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/models/department_tutoring_session.rb": {
         "lines": [
           null,
           null,
@@ -1204,7 +1303,7 @@
           null
         ]
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/controllers/confirmation_controller.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/controllers/confirmations_controller.rb": {
         "lines": [
           null,
           null,
@@ -1219,7 +1318,7 @@
         "branches": {
         }
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/controllers/notification_controller.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/controllers/notification_controller.rb": {
         "lines": [
           null,
           null,
@@ -1251,7 +1350,7 @@
         "branches": {
         }
       },
-      "/home/frosty/dev/college/CSCE431/CSCE_431_Project/app/controllers/registrations_controller.rb": {
+      "C:/Users/baile/OneDrive/Desktop/CSCE_431/CSCE_431_Project/attendance/app/controllers/registrations_controller.rb": {
         "lines": [
           null,
           null,
@@ -1320,6 +1419,6 @@
         }
       }
     },
-    "timestamp": 1618197567
+    "timestamp": 1618204487
   }
 }
