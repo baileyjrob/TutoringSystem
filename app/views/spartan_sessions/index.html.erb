@@ -1,14 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-3 mt-4">
-      <label for="session_filter">Spartan Session Filter</label>
-      <select id="session_filter" class="form-select mt-1">
-        <option value="All">All</option>
-        <option value="Previous">Previous</option>
-        <option value="Upcoming">Upcoming</option>
-      </select>
-    </div>
-    <div class="col d-md-flex justify-content-md-end mt-5">
+    <div class="col mt-5">
       <td><%= button_to 'New Spartan Session', {:action => 'new'},
                         :class => "btn btn-primary", :method => :get %></td>
     </div>
@@ -48,4 +40,10 @@
       </table>
     </div>
   </div>
+
+  <script>
+      $(function() {
+          $('#users').DataTable();
+      });
+  </script>
 </div>
