@@ -14,6 +14,9 @@ class HourCheckMailer < ApplicationMailer
 
   private
 
+  # Parses the code input by the hour_checker into a file destination
+  # This helps make sure that a malicious user can't just insert any 
+  # filepath and gain access to whatever they want. 
   def code_parse(code)
     case code.to_i
     when 0

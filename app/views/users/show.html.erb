@@ -9,7 +9,7 @@
     <h1 class="mb-0"><%= @user.first_name %> <%= @user.last_name %></h1>
     <p class="mb-0">Email: <%= @user.email %></p>
     <p class="mb-0">Major: <%= @user.major %></p>
-    <% if current_user.tutor? %>
+    <% if @user.tutor? %>
     <p class="mb-0">Hours Tutored This Semester: <%= tutor_hours() %></p>
     <% end %>
 
