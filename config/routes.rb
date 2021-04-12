@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
   post '/courses', :to => 'courses#create'
+  get '/courses/index', :to => 'courses#index'
   post '/tutor/:id/edit', :to => 'tutor#update'
   devise_for :users, controllers: { registrations: 'registrations' }
   root 'users#index'

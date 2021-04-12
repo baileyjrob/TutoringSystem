@@ -25,8 +25,8 @@
             <td><%= user.first_name %></td>
             <td><%= user.last_name  %></td>
             <td><%= user.email  %></td>
-            <td><%= user.course.first.grade_achieved  %></td>
-            <td><a href="<%= show_user_path(user) %>"><i class="far fa-show"></i></a></td>
+            <td><%= CourseUser.find_by(course_id: @course.id, user_id: user.id).grade_achieved  %></td>
+            <td><a href="<%= user_path(user) %>"><i class="far fa-edit"></i></a></td>
           </tr>
           <% end %>
         </tbody>
