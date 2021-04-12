@@ -35,9 +35,7 @@ Rails.application.routes.draw do
   get '/tutoring_session/pending', :to => 'tutoring_session_user#show'
   get '/tutoring_session_user/:id/deny', :to => 'tutoring_session_user#deny_pending_link'
   get '/tutoring_session_user/:id/confirm', :to => 'tutoring_session_user#confirm_pending_link'
-  get '/tutor/:id/course_index', :to => 'tutor#course_index'
   get '/tutor/:id/course_edit', :to => 'tutor#course_edit'
-  get '/tutor/:id/course_new', :to => 'tutor#course_new'
   get '/tutor/:id/edit', :to => 'tutor#edit'
   get '/tutor/:id/show', :to => 'tutor#show'
   # TEMP UNTIL EMAIL
