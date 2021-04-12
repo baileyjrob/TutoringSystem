@@ -42,7 +42,7 @@
           <% end %>
           <% if current_user.roles.include?(Role.tutor_role) %>
           <li class="nav-item">
-            <%=link_to "My Courses", '/tutor/show', class: 'nav-link' %>
+            <%=link_to "My Courses", tutor_path(current_user), class: 'nav-link' %>
           </li>
           <% end %>
         </ul>

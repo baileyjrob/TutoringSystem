@@ -7,7 +7,7 @@
 
       <div class="field">
         <% Course.all.each do |course| %>
-          <%= check_box_tag "user[course_ids][]", course.id, @user.course_ids.include?(course.id) %>
+          <%= check_box_tag "user[course_ids][]", course.id, @user.courses.include?(course) %>
           <%= Department.find_by(id: course.department_id).department_name %>
           <%= course.course_name %>
           <br />

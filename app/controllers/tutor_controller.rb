@@ -16,9 +16,8 @@ class TutorController < ApplicationController
     # TODO: use roles to filter tutors out
   end
 
-  def edit_tutor_path
-    @user = current_user
-    # @user = User.find(params[:id])
+  def edit
+    @user = User.find(params[:id])
   end
 
   def show

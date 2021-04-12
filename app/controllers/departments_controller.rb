@@ -24,7 +24,7 @@ class DepartmentsController < ApplicationController
     @department = Department.new(department_params)
     if @department.save
       flash[:success] = 'department saved!'
-      redirect_to @department
+      redirect_to new_course_path
     else
       flash[:alert] = 'department not saved!'
     end

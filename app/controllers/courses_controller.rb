@@ -10,6 +10,7 @@ class CoursesController < ApplicationController
        !current_user.roles.include?(Role.tutor_role)
       redirect_to "/users/#{current_user.id}"
     end
+    @course = Course.find(params[:id])
   end
 
   def index

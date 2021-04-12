@@ -2,8 +2,8 @@
 <div class="container">
   <div class="row">
     <div class="col-12 mt-3">
-      <p><%= button_to "Create New Course", new_courses_path  %></p>
-      <p><%= button_to "Add Existing Course", edit_tutor_path(@user) %>.
+      <p><%= link_to "Create New Course", new_course_path  %></p>
+      <p><%= link_to "Add Existing Course", edit_tutor_path(@user) %>.
       <table class="table" id="courses">
         <thead>
           <tr>
