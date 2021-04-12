@@ -26,6 +26,12 @@ class UsersController < ApplicationController
   def show
     # Get user and tutoring sessions
     @user = User.find(params[:id])
+    # Permissions Check
+    unless @user == current_user || current_user.admin?
+      redirect_to "/users/#{current_user.id}"
+      return
+    end
+
     @tutoring_sessions = TutoringSession.all
 
     # See if there is a spartan session to check into
@@ -39,6 +45,10 @@ class UsersController < ApplicationController
   end
 
   def show_admin
+    unless current_user.admin?
+      redirect_to "/users/#{current_user.id}"
+      return
+    end
     @user = User.find(params[:id])
     @tutoring_sessions = TutoringSession.all
   end
@@ -97,12 +107,20 @@ class UsersController < ApplicationController
 
   def schedule_student
     @user = User.find(params[:id])
+    unless @user == current_user || current_user.admin?
+      redirect_to "/users/#{current_user.id}"
+      return
+    end
     @sessions = TutoringSession.where('scheduled_datetime > :now', now: Time.zone.now.to_datetime)
                                .order(:scheduled_datetime)
   end
 
   def schedule_session_student
     user = User.find(params[:id])
+    unless user == current_user || current_user.admin?
+      redirect_to "/users/#{current_user.id}"
+      return
+    end
     tutoring_session = TutoringSession.find(params[:sessionID])
 
     helpers.pending_mail_with(tutoring_session.tutor, user).link_pending_email.deliver_now
@@ -114,6 +132,10 @@ class UsersController < ApplicationController
 
   def delete_session
     @user = User.find(current_user.id)
+    unless @user == current_user || current_user.admin?
+      redirect_to "/users/#{current_user.id}"
+      return
+    end
     @tutor_session = TutoringSession.find(params[:id])
 
     @user.tutoring_sessions.delete(@tutor_session)
