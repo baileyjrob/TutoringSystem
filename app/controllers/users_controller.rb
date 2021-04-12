@@ -10,11 +10,11 @@ class UsersController < ApplicationController
   def index
     if current_user.roles.include?(Role.admin_role)
       admin_index
-      return
+    else
+      redirect_to "/users/#{current_user.id}"
     end
 
-    # Go to user home page
-    redirect_to "/users/#{current_user.id}"
+    # TODO: Make view for non admins
   end
 
   def admin_index
@@ -49,7 +49,6 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
     if @user.save
       redirect_to @user
     else
@@ -64,7 +63,7 @@ class UsersController < ApplicationController
     end
 
     # TODO: Make view for non admins
-    admin_edit
+    redirect_to edit_user_registration_path
   end
 
   def admin_edit
@@ -75,7 +74,6 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-
     if @user.update(user_params)
       redirect_to @user
     else
@@ -135,6 +133,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :major, :email, :encrypted_password)
+    params.require(:user).permit(:first_name, :last_name, :major, :email, :encrypted_password,
+                                 role_ids: [])
   end
 end

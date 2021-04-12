@@ -19,6 +19,10 @@ class Role < ApplicationRecord
     Role.find_by('role_name like ?', 'Tutor')
   end
 
+  def self.spartan_tutor_role
+    Role.find_by('role_name like ?', 'Spartan Tutor')
+  end
+
   def to_s
     role_name
   end

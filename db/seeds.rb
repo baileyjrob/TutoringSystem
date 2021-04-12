@@ -30,9 +30,5 @@ tutor_role = Role.create(role_name: 'Tutor');
 Role.create(role_name: 'Student');
 Role.create(role_name: 'Spartan Tutor');
 
-admin = User.create(first_name: 'Admin', last_name: 'User', password: 'T3st!!a',
-                email: 'admin@tamu.edu')
-
-admin.roles << admin_role
 user5.roles << tutor_role
 user8.roles << tutor_role
