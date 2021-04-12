@@ -28,6 +28,9 @@ module TutoringSessionExportHelper
 
   private
 
+  # Converts incoming filepath into code representing one of four predetermined files
+  # This way, a malicious user can't put any-old file into the parameters and
+  # get access to it
   def code_check(filepath)
     code = 0
     code = 3 unless filepath.at(/.*_3.csv/).nil?
