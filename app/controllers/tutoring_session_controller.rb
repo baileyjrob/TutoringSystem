@@ -24,6 +24,7 @@ class TutoringSessionController < ApplicationController
   end
 
   def index
+    # If the user has visited this before, get the cookie we put in
     if cookies.key?('start_week')
       start_week = timezone_week_start
       start_week = cookie_offset(start_week) if cookies.key?('week_offset')

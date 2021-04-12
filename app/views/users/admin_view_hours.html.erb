@@ -1,40 +1,11 @@
-<div class="field">
-  <%= f.label :start %><br />
-  <%= f.datetime_select('start', 'date', :order => [:month, :day, :year, :hour,:minute]) %>
-  <%= f.label :end %><br />
-  <%= f.datetime_select('end', 'date', :order => [:month, :day, :year, :hour,:minute]) %>
+<%= form_tag('/users/admin_view_hours') do%>
+<div class="mb-3">
+  <%= label :start_time, "Start Time:"%><br>
+  <%= select_date(Date.today, prefix: 'start_time', required: true)%>
 </div>
-<%= form_tag(controller: "users", action: "admin_view_hours", method: "post") do |f|%>
-<%= f.label_tag :start_time, "Start Time:" %>
-<%= f.datetime_field :start_time %>
-<%= f.label_tag :end_time, "End Time:" %>
-<%= f.datetime_field :end_time %>
-<%= f.submit_tag "Search" %>
+<div class="mb-3">
+  <%= label :end_time, "End Time:" %><br>
+  <%= select_date(Date.today, prefix: 'end_time', required: true) %>
+</div>
+<%= submit_tag "Search" %>
 <% end %>
-<div class="container">
-  <div class="row">
-    <div class="col-12 mt-3">
-      <table class="table" id="users">
-        <thead>
-          <tr>
-            <th scope="col">User ID</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Email</th>
-            <th scope="col">Role</th>
-            <th scope="col">Edit</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @entires.each do |entries| %>
-          <tr class='userInfo'>
-            <th scope="row"><%= user.id %></th>
-            <td><%= entries["Tutor_Name"] %></td>
-            <td><%= entries["Hours_Worked"]  %></td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>

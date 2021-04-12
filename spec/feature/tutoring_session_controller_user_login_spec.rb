@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-RSpec.describe TutoringSessionController, type: :feature do
+RSpec.describe TutoringSessionController, :no_auth, type: :feature do
   let(:frozen_time) { '25 May 02:00:00 +0000'.to_datetime }
   let(:tutor) do
     User.new(first_name: 'Tutor', last_name: 'User', password: 'T3st!!a', email: 'tutor@tamu.edu')

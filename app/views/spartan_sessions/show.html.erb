@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="row">
+    <div class="col-5 mt-5">
+      <%= button_to 'Back', 'index', :class => "btn btn-primary", :method => :get %>
+    </div>
+    <div class="col-5 mt-4">
+      <h1 class="mb-0">Spartan Session</h1>
+      <h3 class="mb-3">Occurred <%= @session.session_datetime.localtime.strftime("%B %d %Y at %l:%M %p") %></h3>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <!-- See if anyone has attended this session -->
+    <% if @users.blank? %>
+      <div class="row">
+        <p>No one has attended this session.</p>
+      </div>
+    <% else %>
+      <div class="row">
+        <div class="col">
+          <h4 class="mb-1">Attendance</h4>
+        </div>
+        <!-- Download a CSV file with attendance data -->
+        <div class="col d-md-flex justify-content-md-end">
+          <%= button_to 'Download', @session.id.to_s + '/download', :id => @session.id, :class => "btn btn-primary" %>
+        </div>
+      </div>
+      <table class="table" id="users">
+      <thead>
+      <tr>
+        <th scope="col">User ID</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Email</th>
+        <th scope="col">Check In</th>
+        <th scope="col">Check Out</th>
+        <th scope="col">Attendance Notes</th>
+        <th scope="col">Edit Notes</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <!-- View each user that has attended -->
+      <% @users.each do |user| %>
+        <% suser = SpartanSessionUser.where(:spartan_session_id => @session.id)
+          .and(SpartanSessionUser.where(:user_id => user.id)).first %>
+        <tr class='userInfo'>
+          <th scope="row"><%= user.id %></th>
+          <td><%= user.first_name %></td>
+          <td><%= user.last_name %></td>
+          <td><%= user.email %></td>
+          <% if suser.first_checkin.nil? %>
+            <td></td>
+          <% else %>
+            <td><%= suser.first_checkin.localtime.strftime("%B %d %Y at %l:%M %p") %></td>
+          <% end %>
+          <% if suser.second_checkin.nil? %>
+            <td></td>
+          <% else %>
+            <td><%= suser.second_checkin.localtime.strftime("%B %d %Y at %l:%M %p") %></td>
+          <% end %>
+          <td><%= suser.attendance %></td>
+          <td><%= button_to 'Edit Notes', {:action => 'edit_user', :userID => user.id},
+                            :class => "btn btn-primary", :id => user.id %></td>
+        </tr>
+      <% end %>
+      </tbody>
+      </table>
+    <% end %>
+
+    <!-- Give user option to add more people by email with attendance notes -->
+    <h4 class="mb-1">Need to add someone?</h4>
+    <%= form_with model: @spartan_session_users, :url => {:action => 'add_user', id: @session.id},
+                  :class => 'form-inline',
+                  include_id: false do |form| %>
+      <div class="row">
+        <div class="col">
+          <div class="input-group">
+            <%= form.label :email, :class => "input-group-text" %>
+            <%= form.text_field :email, :class => "form-control" %>
+            <%= form.label :attendance_notes, :class => "input-group-text" %>
+            <%= form.text_field :attendance_notes, :class => "form-control" %>
+            <%= form.submit "Add User", class: "btn btn-outline-primary" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

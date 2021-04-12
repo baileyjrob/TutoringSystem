@@ -3,11 +3,26 @@
 require 'csv'
 
 module TutoringSessionExportHelper
+  def acquire_hours(start_date, end_date, filepath = 'public/tutoring_hours.csv')
+    create_csv(start_date, end_date, filepath)
+    mail_csv(start_date, end_date, filepath)
+  end
+
   def create_csv(start_date, end_date, filepath = 'public/tutoring_hours.csv')
     file = Rails.root.join(filepath)
     table = generate_query(start_date, end_date)
     headers = %w[Tutor_Name Hours_Worked]
     write_to_csv(file, table, headers)
+  end
+
+  def mail_csv(start_date, end_date, filepath)
+    if Rails.env.test?
+      HourCheckMailer.hours_email(start_date, end_date, filepath,
+                                  'admin@tamu.edu').deliver_now
+    else
+      HourCheckMailer.hours_email(start_date, end_date,
+                                  filepath).deliver_later
+    end
   end
 
   private

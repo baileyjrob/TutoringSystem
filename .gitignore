@@ -40,7 +40,6 @@ yarn-debug.log*
 .yarn-integrity
 /config/local_env.yml
 /.env
-/coverage/
 
 # Ignore IDE stuff
 .idea*
@@ -48,4 +47,4 @@ yarn-debug.log*
 .history/
 
 # Ignore test output
-/spec/helpers/tutoring_hours_spec*.csv
+/spec/helpers/*.csv

@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
-# Primary management class for users
 require 'user_controller_helper'
+require 'admin_view_hours_helper'
+# Primary management class for users
 class UsersController < ApplicationController
+  include AdminViewHoursHelper
   before_action :authenticate_user!
 
   def index
@@ -27,10 +29,10 @@ class UsersController < ApplicationController
     @tutoring_sessions = TutoringSession.all
 
     # See if there is a spartan session to check into
-    @spartan_session = SpartanSession.where('session_datetime > :now',
+    @spartan_session = SpartanSession.where('session_datetime < :now',
                                             now: Time.zone.now.to_datetime)
-                                     .and(SpartanSession.where('session_datetime < :endTime',
-                                                               endTime: (Time.zone.now + 7200)
+                                     .and(SpartanSession.where('session_datetime > :startTime',
+                                                               startTime: (Time.zone.now - 7200)
                                                                           .to_datetime))
                                      .first
     @spartan_session_users = SpartanSessionUser.all
@@ -119,11 +121,13 @@ class UsersController < ApplicationController
     redirect_to show_schedule_path
   end
 
-  # Temporary until emailing is a thing
   def admin_view_hours
-    include AdminViewHoursHelper
-    admin_view_hours_exec
-    @entries = CSV.read('public/tutoring_hours.csv', headers: true)
+    admin_view_hours_prep
+  end
+
+  def output_admin_view_hours
+    admin_view_hours_exec(params)
+    redirect_to root_path
   end
 
   private

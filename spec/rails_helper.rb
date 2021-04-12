@@ -9,6 +9,7 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 require 'rspec/rails'
 require 'devise'
 require 'support/controller_helpers'
+require 'support/no_auth'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -48,6 +49,9 @@ RSpec.configure do |config|
   # config.use_transactional_fixtures = true
   # Database cleaner
   config.use_transactional_fixtures = false
+
+  # Allows specs to not require authentication
+  config.include(NoAuth, :no_auth)
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
