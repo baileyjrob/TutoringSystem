@@ -14,10 +14,7 @@ class DepartmentsController < ApplicationController
   end
 
   def edit
-    if !current_user.roles.include?(Role.admin_role) &&
-       !current_user.roles.include?(Role.tutor_role)
-      redirect_to "/users/#{current_user.id}"
-    end
+    @department = Department.find(params[:id])
   end
 
   def create

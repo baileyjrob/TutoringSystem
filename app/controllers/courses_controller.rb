@@ -6,10 +6,6 @@ class CoursesController < ApplicationController
   end
 
   def edit
-    if !current_user.roles.include?(Role.admin_role) &&
-       !current_user.roles.include?(Role.tutor_role)
-      redirect_to "/users/#{current_user.id}"
-    end
     @course = Course.find(params[:id])
   end
 
@@ -26,8 +22,9 @@ class CoursesController < ApplicationController
     @course = Course.new(course_params)
     if @course.save
       flash[:success] = 'course saved!'
-      redirect_to @course
+      redirect_to tutor_path
     else
+      redirect_to tutor_path
       flash[:alert] = 'course not saved!'
     end
   end
@@ -39,6 +36,6 @@ class CoursesController < ApplicationController
   def my_courses; end
 
   def course_params
-    params.require(:course).permit(:course_name, :department_id, user_ids: [])
+    params.require(:courses).permit(:course_name, :department_id)
   end
 end
