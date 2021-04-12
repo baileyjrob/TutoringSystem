@@ -12,6 +12,8 @@ class TutoringSession < ApplicationRecord
   has_many :tutoring_session_users, dependent: :delete_all
   has_many :users, through: :tutoring_session_users
 
+  belongs_to :tutor, class_name: 'User', inverse_of: :sessions_tutoring, optional: true
+
   validates :scheduled_datetime, presence: true
   validate :scheduled_datetime_has_no_overlap
 

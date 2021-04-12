@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Users trying to', type: :feature do
+RSpec.describe 'Users trying to', :no_auth, type: :feature do
   let(:first_code) { 'asdasd' }
   let(:second_code) { '123123' }
 
@@ -19,7 +19,7 @@ RSpec.describe 'Users trying to', type: :feature do
                          password: 'T3st!!b')
     user1.roles << Role.find_by(role_name: 'Student')
 
-    SpartanSession.create(session_datetime: Time.zone.now + 6000,
+    SpartanSession.create(session_datetime: Time.zone.now - 6000,
                           first_code: 'asdasd',
                           second_code: '123123')
 

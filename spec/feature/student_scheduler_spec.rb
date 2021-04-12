@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-RSpec.describe 'Student scheduler', type: :feature do
+RSpec.describe 'Student scheduler', :no_auth, type: :feature do
   describe 'student scheduler' do
     let(:student_id) { 1 }
     let(:student_name) { 'John Doe' }

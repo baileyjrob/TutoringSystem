@@ -7,7 +7,7 @@ class NotificationController < ApplicationController
     notification.save
 
     if notification.notifiable_type == 'TutoringSessionUser'
-      tutoring_session_user_notification
+      tutoring_session_user_notification # redirect when given a TutoringSessionUser Noti
       return
     end
 
