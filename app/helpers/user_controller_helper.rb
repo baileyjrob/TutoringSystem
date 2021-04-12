@@ -12,4 +12,12 @@ module UserControllerHelper
 
     Notification.notify_student_application_for(tutoring_session.tutor, user, link)
   end
+
+  def bounce
+    redirect_to "/users/#{current_user.id}"
+  end
+
+  def bounce_unless_ad_or_match(user)
+    bounce and return unless user == current_user || current_user.admin?
+  end
 end

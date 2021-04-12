@@ -1,15 +1,17 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-RSpec.describe TutoringSessionController, type: :feature do
+RSpec.describe TutoringSessionController, :no_auth, type: :feature do
   let(:frozen_time) { '25 May 02:00:00 CDT'.to_datetime }
   let!(:tutor) do
-    User.create(
+    user = User.create(
       first_name: 'Tutor',
       last_name: 'User',
       password: 'T3st!!a',
       email: 'tutor@tamu.edu'
     )
+    user.roles << Role.create(role_name: 'Tutor')
+    return user
   end
   let!(:student) do
     User.create(

@@ -65,7 +65,7 @@ RSpec.describe User, type: :model do
       user = described_class.create!(first_name: 'Andrew', last_name: 'last', major: 'CSCE',
                                      email: 'asdf@tamu.edu', password: '12341234')
       user.reload
-      user.roles.count.to eq(1)
+      expect(user.roles.count).to eq(1)
     end
 
     it 'has default Spartan Tutor role' do
@@ -73,7 +73,7 @@ RSpec.describe User, type: :model do
       user = described_class.create!(first_name: 'Andrew', last_name: 'last', major: 'CSCE',
                                      email: 'asdf@spartan-tutoring.com', password: '12341234')
       user.reload
-      user.roles.count.to eq(1)
+      expect(user.roles.count).to eq(1)
     end
 
     it 'returns false if not an admin' do
