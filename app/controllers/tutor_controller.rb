@@ -18,7 +18,6 @@ class TutorController < ApplicationController
 
   def edit_tutor_path
     @user = current_user
-    #@user = User.find(params[:id])
+    # @user = User.find(params[:id])
   end
-
 end

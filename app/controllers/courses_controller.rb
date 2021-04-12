@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CoursesController < ApplicationController
   def new
     @course = Course.new
@@ -27,12 +29,9 @@ class CoursesController < ApplicationController
     end
   end
 
-  def delete
-  end
+  def delete; end
 
-  def destroy
-  end
+  def destroy; end
 
-  def my_courses
-  end
+  def my_courses; end
 end
