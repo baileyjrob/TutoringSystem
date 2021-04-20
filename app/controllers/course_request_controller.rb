@@ -55,6 +55,9 @@ class CourseRequestController < ApplicationController
       @tutor_count = @tutor_count.to_i + 1 if user.roles.include?(Role.tutor_role)
     end
     @no_tutors = '<b> No Available Tutors </b>'.html_safe
+    
+    @sessions = TutoringSession.where('scheduled_datetime > :now', now: Time.zone.now.to_datetime)
+                               .order(:scheduled_datetime)
   end
 
   def show
