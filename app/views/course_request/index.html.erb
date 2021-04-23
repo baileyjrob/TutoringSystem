@@ -12,7 +12,10 @@
             <%end%>
             <% if @tutor_count == 0 %>
                 <p> 
-                    <h3>No Available Tutors</h3>
+                    <%= @no_tutors %>
+                    <br>
+                    <%= @ask_request %> 
+
                 </p>
             <% elsif @tutor_count == -1 %>
                 <!-- this is a placeholder when no search has been initiated -->
@@ -22,54 +25,18 @@
                         <table class = "table" id= "tutors">
                             <thead>
                                 <tr>
-                                    <th scope="col"><h4>Tutor Name</h4></th>
-                                    <th scope="col"><h4>Contact Info</h4></th>
+                                    <th scope="col">Tutors</th>
                                 </tr>
                             </thead>
                             <tbody>
+                            <!-- how are we connecting the tutoring sessions to tutors? -->
                             <% @matching_tutors.each do |user| %>
                                 <% if user.major.nil? == false %>
                                 <!-- makes sure users with no majors are not displayed -->
-                                    <% if user.tutor? %>
+                                    <% if user.roles.include?(Role.tutor_role) %>
                                         <!-- only displays tutors -->
                                             <tr>
-                                                <td><%= user.first_name + " " + user.last_name %></td>
-                                                <td><%= user.email %></td>
-                                                <% if @sessions.blank? %>
-                                                <p class="mt-4">There are no available sessions to join.</p>
-                                              <% else %>
-                                                <p class="mt-4">Please select which session you would like to attend.</p>
-                                                <table class="table" id="users">
-                                                  <thead>
-                                                    <tr>
-                                                      <th scope="col">Scheduled Datetime</th>
-                                                      <th scope="col"></th>
-                                                    </tr>
-                                                  </thead>
-                                                  <tbody>
-                                                    <% @sessions.each do |session| %>
-                                                        <% if user.id == session.tutor_id %>
-                                                            <tr class='userInfo'>
-                                                                <!-- Make a row in the table for each tutoring session. Includes details and join option -->
-                                                                <% date = session.scheduled_datetime.localtime.strftime("%B %d at %l:%M %p %Z") %>
-                                                                <td><%= date %></td>
-                                                
-                                                                <!-- Tutoring session should not be associated with the user -->
-                                                                <% if session.tutoring_session_users.find_by(id: user.id).blank? or
-                                                                    session.tutoring_session_users.find_by(id: user.id).link_status == 'denied' %>
-                                                                <td><%= button_to "Join session", {:action => 'schedule_session_student_cr', :sessionID => session},
-                                                                                    :id => session.id, :class => "btn btn-primary", :method => :post %></td>
-                                                                <% else # Disable the button %>
-                                                                <td><%= button_to "Join session", {:action => 'schedule_session_student_cr', :sessionID => session},
-                                                                                    :disabled => true, :id => session.id, :class => "btn btn-secondary",
-                                                                                    :method => :post %></td>
-                                                                <% end %>
-                                                            </tr>
-                                                        <% end %>
-                                                    <% end %>
-                                                  </tbody>
-                                                </table>
-                                              <% end %>
+                                                <th scope="row"><%= link_to user.first_name.to_s + ' ' + user.last_name.to_s + ' Major: ' + user.major.to_s, user %></th>
                                             </tr>
                                         <% end %>
                                     <% end %>
@@ -91,7 +58,7 @@
                         <tbody>
                             <% @course_requests.each do |crequest| %>
                                 <tr>
-                                    <th scope="row"><%= link_to crequest.course_name_full  %></th>
+                                    <th scope="row"><%= link_to crequest.course_name_full.  %></th>
                                 </tr>
                             <% end %>
                         </tbody>
