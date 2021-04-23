@@ -7,7 +7,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
+=begin
 User.create!(id: 0, first_name: 'Admin', last_name: 'User', email: "admin@tamu.edu", password: "T3st!!a")
 
 User.create!(first_name: "John", last_name: "Doe", email: "john@tamu.edu", password: "T3st!!b")
@@ -27,12 +27,12 @@ TutoringSession.create(id: 2, tutor_id: user3.id, scheduled_datetime: Time.now, 
 TutoringSession.create(id: 3, tutor_id: user5.id, scheduled_datetime: Time.now + 1.days, completed_datetime: 0, session_status: "")
 TutoringSession.create(id: 4, tutor_id: user8.id, scheduled_datetime: Time.now + 1.days, completed_datetime: 0, session_status: "")
 TutoringSession.create(id: 5, tutor_id: user8.id, scheduled_datetime: Time.now + 2.days, completed_datetime: 0, session_status: "")
-
+=end
 
 admin_role = Role.create(role_name: 'Admin');
 tutor_role = Role.create(role_name: 'Tutor');
 Role.create(role_name: 'Student');
 Role.create(role_name: 'Spartan Tutor');
 
- user5.roles << tutor_role
- user8.roles << tutor_role
+ #user5.roles << tutor_role
+ #user8.roles << tutor_role
