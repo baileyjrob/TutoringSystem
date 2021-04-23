@@ -55,6 +55,7 @@ RSpec.describe 'Tutor Matching', :no_auth, type: :feature do
       click_button 'Find'
       expect(page).to have_content('Scheduled Datetime')
     end
+
   end
 
   describe 'Non tutors do not show up' do
