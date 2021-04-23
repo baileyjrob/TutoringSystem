@@ -13,6 +13,12 @@ RSpec.describe 'Tutor Matching', :no_auth, type: :feature do
                          email: 'christine@tamu.edu', password: 'T3st!!g')
     tutor1 = User.create!(id: 18, first_name: 'Dakota', last_name: 'Doe', major: 'MATH',
                           email: 'dakota@tamu.edu', password: 'T3st!!h')
+
+    TutoringSession.create(id: 1, tutor_id: tutor1.id, scheduled_datetime: Time.zone.now + 1.day,
+                           completed_datetime: 0, session_status: '')
+    TutoringSession.create(id: 2, tutor_id: tutor1.id, scheduled_datetime: Time.zone.now + 2.days,
+                           completed_datetime: 0, session_status: '')
+
     tutor1.roles << tutor_role
     user1.roles << student_role
     user2.roles << student_role
@@ -38,8 +44,18 @@ RSpec.describe 'Tutor Matching', :no_auth, type: :feature do
       fill_in 'filter_major', with: 'MATH'
       find_button 'Find'
       click_button 'Find'
-      expect(page).to have_content('Dakota Doe Major: MATH')
+      expect(page).to have_content('Dakota Doe')
     end
+  end
+
+  describe 'Display Tutor session information' do
+    it 'shows sessions held by the tutors in the next two weeks' do
+      fill_in 'filter_major', with: 'MATH'
+      find_button 'Find'
+      click_button 'Find'
+      expect(page).to have_content('Scheduled Datetime')
+    end
+
   end
 
   describe 'Non tutors do not show up' do
@@ -47,7 +63,7 @@ RSpec.describe 'Tutor Matching', :no_auth, type: :feature do
       fill_in 'filter_major', with: 'MATH'
       find_button 'Find'
       click_button 'Find'
-      expect(page).not_to have_content('Christine Doe Major: MATH')
+      expect(page).not_to have_content('Christine Doe')
     end
   end
 
@@ -61,5 +77,6 @@ RSpec.describe 'Tutor Matching', :no_auth, type: :feature do
     end
 
     User.destroy_all
+    TutoringSession.destroy_all
   end
 end
