@@ -24,31 +24,29 @@ class TutoringSessionController < ApplicationController
   end
 
   def index
-    redirect_to "/users/#{current_user.id}" and return unless current_user.tutor?
-
-    determine_start
-    generate_week(@start_week)
-    @start_of_week = week_to_string(@start_week)
-    @end_of_week = week_to_string(@start_week + 6.days)
+    # If the user has visited this before, get the cookie we put in
+    if cookies.key?('start_week')
+      start_week = timezone_week_start
+      start_week = cookie_offset(start_week) if cookies.key?('week_offset')
+    else
+      start_week = date_week_start
+      cookies['start_week'] = start_week.strftime('%Q')
+    end
+    generate_week(start_week)
+    @start_of_week = week_to_string(start_week)
+    @end_of_week = week_to_string(start_week + 6.days)
   end
 
   def new
     @tsession = TutoringSession.new
-    redirect_to "/users/#{current_user.id}" unless current_user.tutor?
   end
 
   def edit
     @tsession = TutoringSession.find(params[:id])
-    return if current_user.tutor? && current_user.sessions_tutoring.include?(@tsession)
-
-    redirect_to "/users/#{current_user.id}"
   end
 
   def update
     @tsession = TutoringSession.find(params[:id])
-    unless current_user.tutor? && current_user.sessions_tutoring.include?(@tsession)
-      redirect_to "/users/#{current_user.id}" and return
-    end
 
     if @tsession.update(tsession_params)
       redirect_to @tsession, notice: 'Tutoring session created.'
@@ -58,11 +56,12 @@ class TutoringSessionController < ApplicationController
   end
 
   def create
-    redirect_to "/users/#{current_user.id}" and return unless current_user.tutor?
-
     # Creates the new session, then adds the tutor to the session
     repeat = params[:repeat]
-    create_setup
+    @tsession = TutoringSession.new(tsession_params)
+
+    @tsession.session_status = 'new'
+    @tsession.tutor_id = current_user.id
 
     if @tsession.save
       @tsession.generate_repeating_sessions_until_end_of_semester if repeat['session'].to_i == 1
@@ -76,14 +75,10 @@ class TutoringSessionController < ApplicationController
 
   def show
     @tsession = TutoringSession.find(params[:id])
-    return if tutor_session_admin_check
-
-    redirect_to "/users/#{current_user.id}"
   end
 
   def destroy
     @tsession = TutoringSession.find(params[:id])
-    redirect_to "/users/#{current_user.id}" and return unless tutor_session_admin_check
 
     @tsession.delete_repeating_sessions if params[:delete_repeating]
 
@@ -96,28 +91,5 @@ class TutoringSessionController < ApplicationController
 
   def tsession_params
     params.require(:tutoring_session).permit(:scheduled_datetime)
-  end
-
-  def determine_start
-    # If the user has visited this before, get the cookie we put in
-    if cookies.key?('start_week')
-      @start_week = timezone_week_start
-      @start_week = cookie_offset(@start_week) if cookies.key?('week_offset')
-    else
-      @start_week = date_week_start
-      cookies['start_week'] = @start_week.strftime('%Q')
-    end
-  end
-
-  def tutor_session_admin_check
-    prop_tutor = (current_user.tutor? && current_user.sessions_tutoring.include?(@tsession))
-    prop_tutor || current_user.admin?
-  end
-
-  def create_setup
-    @tsession = TutoringSession.new(tsession_params)
-
-    @tsession.session_status = 'new'
-    @tsession.tutor_id = current_user.id
   end
 end

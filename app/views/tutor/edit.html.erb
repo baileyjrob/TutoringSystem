@@ -1,0 +1,25 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1>Add Course to your Profile</h1>
+      <%= form_for(edit_tutor_path(current_user)) do |f| %>
+
+      <div class="field">
+        <% Course.all.each do |course| %>
+          <%= check_box_tag "user[course_ids][]", course.id, @user.courses.include?(course) %>
+          <%= Department.find_by(id: course.department_id).department_name %>
+          <%= course.course_name %>
+          <br />
+        <% end %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Update", class: 'btn btn-primary mt-2' %>
+      </div>
+
+      <%end%>
+      <%= link_to "Back", :back %>
+    </div>
+  </div>
+</div>

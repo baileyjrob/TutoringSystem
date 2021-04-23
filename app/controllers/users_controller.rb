@@ -5,13 +5,16 @@ require 'admin_view_hours_helper'
 # Primary management class for users
 class UsersController < ApplicationController
   include AdminViewHoursHelper
-  include UserControllerHelper
   before_action :authenticate_user!
 
   def index
-    bounce and return unless current_user.roles.include?(Role.admin_role)
+    if current_user.roles.include?(Role.admin_role)
+      admin_index
+    else
+      redirect_to "/users/#{current_user.id}"
+    end
 
-    admin_index
+    # TODO: Make view for non admins
   end
 
   def admin_index
@@ -23,19 +26,19 @@ class UsersController < ApplicationController
   def show
     # Get user and tutoring sessions
     @user = User.find(params[:id])
-    # Permissions Check
-    bounce_unless_ad_or_match(@user)
-
     @tutoring_sessions = TutoringSession.all
 
     # See if there is a spartan session to check into
-    show_spart_sess
+    @spartan_session = SpartanSession.where('session_datetime < :now',
+                                            now: Time.zone.now.to_datetime)
+                                     .and(SpartanSession.where('session_datetime > :startTime',
+                                                               startTime: (Time.zone.now - 7200)
+                                                                          .to_datetime))
+                                     .first
     @spartan_session_users = SpartanSessionUser.all
   end
 
   def show_admin
-    bounce and return unless current_user.admin?
-
     @user = User.find(params[:id])
     @tutoring_sessions = TutoringSession.all
   end
@@ -46,15 +49,21 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    redirect_to @user and return if @user.save
-
-    render :new
+    if @user.save
+      redirect_to @user
+    else
+      render :new
+    end
   end
 
   def edit
-    redirect_to edit_user_registration_path and return unless current_user.admin?
+    if current_user.roles.include?(Role.admin_role)
+      admin_edit
+      return
+    end
 
-    admin_edit
+    # TODO: Make view for non admins
+    redirect_to edit_user_registration_path
   end
 
   def admin_edit
@@ -65,9 +74,11 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    redirect_to @user and return if @user.update(user_params)
-
-    edit
+    if @user.update(user_params)
+      redirect_to @user
+    else
+      edit
+    end
   end
 
   def destroy
@@ -77,34 +88,32 @@ class UsersController < ApplicationController
   end
 
   def show_schedule
-    redirect_to new_user_session_path and return unless user_signed_in?
-
-    @sessions = current_user.tutoring_sessions
+    if user_signed_in?
+      @sessions = current_user.tutoring_sessions
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def schedule_student
     @user = User.find(params[:id])
-    bounce_unless_ad_or_match(@user)
-
     @sessions = TutoringSession.where('scheduled_datetime > :now', now: Time.zone.now.to_datetime)
                                .order(:scheduled_datetime)
   end
 
   def schedule_session_student
     user = User.find(params[:id])
-    bounce and return unless user == current_user || current_user.admin?
-
     tutoring_session = TutoringSession.find(params[:sessionID])
 
-    schedule_use_helpers(tutoring_session, user)
+    helpers.pending_mail_with(tutoring_session.tutor, user).link_pending_email.deliver_now
+
+    helpers.create_or_update_link_for(user, tutoring_session)
 
     redirect_to "/users/#{params[:id]}"
   end
 
   def delete_session
     @user = User.find(current_user.id)
-    bounce_unless_ad_or_match(@user)
-
     @tutor_session = TutoringSession.find(params[:id])
 
     @user.tutoring_sessions.delete(@tutor_session)
@@ -124,22 +133,8 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :major, :email, :encrypted_password,
-                                 role_ids: [])
-  end
-
-  def show_spart_sess
-    @spartan_session = SpartanSession.where('session_datetime < :now',
-                                            now: Time.zone.now.to_datetime)
-                                     .and(SpartanSession.where('session_datetime > :startTime',
-                                                               startTime: (Time.zone.now - 7200)
-                                                                          .to_datetime))
-                                     .first
-  end
-
-  def schedule_use_helpers(tutoring_session, user)
-    helpers.pending_mail_with(tutoring_session.tutor, user).link_pending_email.deliver_now
-
-    helpers.create_or_update_link_for(user, tutoring_session)
+    params.require(:user).permit(:first_name, :last_name, :major, :mu,
+                                 :outfit, :email, :encrypted_password,
+                                 role_ids: [], course_ids: [])
   end
 end
