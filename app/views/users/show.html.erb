@@ -20,7 +20,9 @@
       <% if @user.id == current_user.id and current_user.student? and !@spartan_session.blank? %>
         <% @spartan_session.each do |session| %>
           <h6 class="mt-2 mb-2"><u><%= session.course %></u></h6>
-          <h6 class="mb-2">Start Time: <%= session.session_datetime.localtime.strftime("%l:%M %p") %></h6>
+          <h6 class="mb-2">Start Time: <%= session.session_datetime.localtime
+                                                  .in_time_zone("Central Time (US & Canada)")
+                                                  .strftime("%l:%M %p") %></h6>
           <% if session.users.find_by(id: current_user.id).blank? %>
 
           <%= form_with model: @spartan_session_users, :url => {:action => 'check_in_first',

@@ -13,11 +13,15 @@
       <% if @suser.first_checkin.nil? %>
         <p>This person never checked in.</p>
       <% else %>
-        <p class="mb-0">Check In: <%= @suser.first_checkin.localtime.strftime("%B %d %Y at %l:%M %p") %></p>
+        <p class="mb-0">Check In: <%= @suser.first_checkin.localtime
+                                            .in_time_zone("Central Time (US & Canada)")
+                                            .strftime("%B %d %Y at %l:%M %p") %></p>
         <% if @suser.second_checkin.nil? %>
           <p>This person never checked out.</p>
         <% else %>
-          <p>Check Out: <%= @suser.second_checkin.localtime.strftime("%B %d %Y at %l:%M %p") %></p>
+          <p>Check Out: <%= @suser.second_checkin.localtime
+                                  .in_time_zone("Central Time (US & Canada)")
+                                  .strftime("%B %d %Y at %l:%M %p") %></p>
         <% end %>
       <% end %>
 
