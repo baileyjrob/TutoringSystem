@@ -124,8 +124,9 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :major, :email, :encrypted_password,
-                                 role_ids: [])
+    params.require(:user).permit(:first_name, :last_name, :major, :mu,
+                                 :outfit, :email, :encrypted_password,
+                                 role_ids: [], course_ids: [])
   end
 
   def show_spart_sess

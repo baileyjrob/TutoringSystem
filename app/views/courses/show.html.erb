@@ -1,0 +1,59 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1><%=Department.find_by(id: @course.department_id).department_name %> <%=@course.course_name %> Course Page</h1>
+      <h3>Tutors that have made an A or B in this class</h3>
+    </div>
+  </div><div class="row">
+    <div class="col-12 mt-3">
+      <table class="table" id="users">
+        <thead>
+          <tr>
+            <th scope="col">User ID</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Email</th>
+            <th scope="col">Grade Achieved</th>
+            <th scope="col">Show</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+          <tr class='userInfo'>
+            <th scope="row"><%= user.id %></th>
+            <td><%= user.first_name %></td>
+            <td><%= user.last_name  %></td>
+            <td><%= user.email  %></td>
+            <td><%= CourseUser.find_by(course_id: @course.id, user_id: user.id).grade_achieved  %></td>
+            <td><a href="<%= user_path(user) %>"><i class="far fa-edit"></i></a></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <script>
+        $(function() {
+          $('#users').DataTable();
+          // $('#users').api().columns().every(function () {
+          //   console.log('test');
+          //   var column = this;
+          //   var select = $('<select class="form-select"><option value=""></option></select>')
+          //     .prependTo($(column.header()))
+          //     .on('change', function() {
+          //       var val = $.fn.dataTable.util.escapeRegex(
+          //         $(this).val()
+          //       );
+
+          //       column
+          //         .search(val ? '^'+val+'$' : '', true, false)
+          //         .draw();
+          //     });
+
+          //   column.data().unique().sort().each(function (d, j) {
+          //     select.append('<option value="'+d+'">'+d+'</option>')
+          //   });
+          // });
+        });
+      </script>
+</div>
