@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   post '/users/:id/schedule_session_student' => 'users#schedule_session_student'
 
   post '/course_request/delete_all_request', :to => 'course_request#delete_all_request', :as => :delete_all_request
-
+  post '/course_request/schedule_session_student_cr', :to => 'course_request#schedule_session_student_cr', :as => :schedule_session_student_cr
 
   post '/spartan_sessions/check_in_first' => 'spartan_sessions#check_in_first'
   post '/spartan_sessions/check_in_second' => 'spartan_sessions#check_in_second'
