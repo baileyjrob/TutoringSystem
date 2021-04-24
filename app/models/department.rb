@@ -7,4 +7,7 @@ class Department < ApplicationRecord
   has_many :department_tutoring_sessions, dependent: :delete_all
   has_many :tutoring_sessions, through: :department_tutoring_sessions
   validates :department_name, presence: true
+  validates :department_name, uniqueness: { message: lambda { |_x, y|
+                                                       "#{y[:value]} already exists."
+                                                     } }
 end

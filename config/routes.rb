@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-
+  post '/courses', :to => 'courses#create'
+  get '/courses/index', :to => 'courses#index'
+  get '/departments/index', :to => 'departments#index'
+  post '/tutor/:id/edit', :to => 'tutor#update'
   devise_for :users, controllers: { registrations: 'registrations' }
   root 'users#index'
   get '/users/index', :to => 'users#index'
@@ -31,11 +34,22 @@ Rails.application.routes.draw do
 
   get '/notifications/:id', :to => 'notification#show'
   get '/tutoring_session/pending', :to => 'tutoring_session_user#show'
-  post '/tutoring_session_user/:id/deny', :to => 'tutoring_session_user#deny_pending_link'
-  post '/tutoring_session_user/:id/confirm', :to => 'tutoring_session_user#confirm_pending_link'
+  get '/tutoring_session_user/:id/deny', :to => 'tutoring_session_user#deny_pending_link'
+  get '/tutoring_session_user/:id/confirm', :to => 'tutoring_session_user#confirm_pending_link'
+  get '/tutor/:id/course_edit', :to => 'tutor#course_edit'
+  get '/tutor/:id/edit', :to => 'tutor#edit'
+  get '/tutor/:id/show', :to => 'tutor#show'
+  # TEMP UNTIL EMAIL
+  get '/users/admin_view_hours', :to => 'users#admin_view_hours'
+  post '/users/admin_view_hours', :to =>'users#admin_view_hours'
+  get '/courses/new', :to => 'courses#new'
+
+  #END TEMP
   resources :tutoring_session
   resources :users
-  resources :course_request
+  resources :tutor
+  resources :departments
+  resources :courses
   default_url_options :host => "localhost:3000"
 
 end

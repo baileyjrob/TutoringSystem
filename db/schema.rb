@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_11_033550) do
+ActiveRecord::Schema.define(version: 2021_04_24_075032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2021_04_11_033550) do
     t.bigint "tutoring_session_id", null: false
   end
 
-  create_table "course_users", id: false, force: :cascade do |t|
+  create_table "course_users", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "course_id", null: false
     t.string "grade_achieved"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 2021_04_11_033550) do
   create_table "courses", force: :cascade do |t|
     t.string "course_name"
     t.integer "department_id"
+    t.index ["course_name", "department_id"], name: "index_courses_on_course_name_and_department_id", unique: true
   end
 
   create_table "department_tutoring_sessions", id: false, force: :cascade do |t|
@@ -51,6 +52,7 @@ ActiveRecord::Schema.define(version: 2021_04_11_033550) do
 
   create_table "departments", force: :cascade do |t|
     t.string "department_name"
+    t.index ["department_name"], name: "index_departments_on_department_name", unique: true
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -108,10 +110,6 @@ ActiveRecord::Schema.define(version: 2021_04_11_033550) do
     t.string "last_name"
     t.string "major"
     t.string "email"
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
@@ -121,6 +119,10 @@ ActiveRecord::Schema.define(version: 2021_04_11_033550) do
     t.string "unconfirmed_email"
     t.string "mu"
     t.string "outfit"
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

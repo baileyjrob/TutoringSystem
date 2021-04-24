@@ -49,7 +49,7 @@ Rails.application.configure do
   :user_name            =>'ORSHSTutoring@gmail.com',
   :password             => 'CSCE431Project!',
   :authentication       => 'plain',
-}
+  }
 
   # For mailcatcher
   #config.action_mailer.delivery_method = :smtp

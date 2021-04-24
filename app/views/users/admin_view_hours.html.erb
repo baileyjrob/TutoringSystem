@@ -1,11 +1,17 @@
-<%= form_tag('/users/admin_view_hours') do%>
-<div class="mb-3">
-  <%= label :start_time, "Start Time:"%><br>
-  <%= select_date(Date.today, prefix: 'start_time', required: true)%>
+<div class="container">
+  <div class="row mt-2">
+    <div class="col-12">
+      <%= form_tag('/users/admin_view_hours') do%>
+      <div class="mb-3">
+        <%= label :start_time, "Start Time:"%><br>
+        <%= select_date(Date.today, prefix: 'start_time', required: true)%>
+      </div>
+      <div class="mb-3">
+        <%= label :end_time, "End Time:" %><br>
+        <%= select_date(Date.today, prefix: 'end_time', required: true) %>
+      </div>
+      <%= submit_tag "Search" %>
+      <% end %>
+    </div>
+  </div>
 </div>
-<div class="mb-3">
-  <%= label :end_time, "End Time:" %><br>
-  <%= select_date(Date.today, prefix: 'end_time', required: true) %>
-</div>
-<%= submit_tag "Search" %>
-<% end %>
