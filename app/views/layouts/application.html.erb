@@ -32,15 +32,11 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav ms-auto">
           <% if current_user %>
           <li class="nav-item">
             <%=link_to "Find a Tutor", '/tutor/index', class: 'nav-link', text: 'Tutor Matching'  %>
           </li>
-          <% end %>
-        </ul>
-        <ul class="navbar-nav ms-auto">
-          <% if current_user %>
           <li class="nav-item">
             <%=link_to "Join Tutoring Session", "/users/#{current_user.id}/schedule_student", class: 'nav-link' %>
           </li>
@@ -58,7 +54,7 @@
               </a>
 
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" <%=link_to "Tutor Calendar", tutoring_session_index_path, class: 'nav-link' %>></a></li>
+                <li><a class="dropdown-item" <%=link_to "Tutor Calendar", tutoring_session_index_path, class: 'nav-link' %></a></li>
                 <li><a class="dropdown-item" <%=link_to "My Courses", tutor_path(current_user), class: 'nav-link' %></a></li>
               </ul>
             </div>
