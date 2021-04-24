@@ -7,7 +7,7 @@
           <%= f.label :scheduled_datetime %><br>
           <%= f.datetime_field  :scheduled_datetime, class: "form-control", required: true %>
         </div>
-        <%=link_to "Cancel", tutoring_session_path(@tsession), class: 'btn btn-danger' %>  
+        <%=link_to "Cancel", tutoring_session_path(@tsession), class: 'btn btn-danger' %>
         <%= f.submit class: "btn btn-primary float-right" %>
       <% end %>
     </div>

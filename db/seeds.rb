@@ -28,5 +28,5 @@ TutoringSession.create(id: 2, tutor_id: user3.id, scheduled_datetime: Time.now, 
 
 admin_role = Role.create(role_name: 'Admin');
 tutor_role = Role.create(role_name: 'Tutor');
-Role.create(role_name: 'Student');
-Role.create(role_name: 'Spartan Tutor');
+student_role = Role.create(role_name: 'Student');
+spartan_tutor_role = Role.create(role_name: 'Spartan Tutor');

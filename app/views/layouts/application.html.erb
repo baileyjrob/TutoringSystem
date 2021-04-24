@@ -35,15 +35,10 @@
         <ul class="navbar-nav">
           <% if current_user %>
           <li class="nav-item">
-            <%=link_to "Tutoring Session", tutoring_session_index_path, class: 'nav-link' %>
+            <%=link_to "Tutor Calendar", tutoring_session_index_path, class: 'nav-link' %>
           </li>
           <li class="nav-item">
             <%=link_to "Find a Tutor", '/tutor/index', class: 'nav-link', text: 'Tutor Matching'  %>
-          </li>
-          <% end %>
-          <% if current_user && current_user.roles.include?(Role.tutor_role) %>
-          <li class="nav-item">
-            <%=link_to "My Courses", tutor_path(current_user), class: 'nav-link' %>
           </li>
           <% end %>
         </ul>
@@ -58,10 +53,35 @@
           <li class="nav-item">
             <%= link_to 'My Account', edit_user_registration_path, class: 'nav-link' %>
           </li>
+          <% if current_user && current_user.roles.include?(Role.tutor_role) %>
+          <li class="nav-item">
+            <div class="dropdown">
+              <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                Tutor Pages
+              </a>
+
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" <%=link_to "Tutor Calendar", tutoring_session_index_path, class: 'nav-link' %>></a></li>
+                <li><a class="dropdown-item" <%=link_to "My Courses", tutor_path(current_user), class: 'nav-link' %></a></li>
+              </ul>
+            </div>
+          </li>
+          <% end %>
+
           <!-- TEMPORARY UNTIL EMAIL SET UP -->
           <% if current_user && current_user.roles.include?(Role.admin_role) %>
           <li class="nav-item">
-            <%= link_to 'Get Tutoring Hours', '/users/admin_view_hours' , class: 'nav-link' %>
+            <div class="dropdown">
+              <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                Admin Pages
+              </a>
+
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" <%= link_to 'Get Tutoring Hours', '/users/admin_view_hours' , class: 'nav-link' %></a></li>
+                <li><a class="dropdown-item" <%= link_to 'Department Index', '/departments/index' , class: 'nav-link' %></a></li>
+                <li><a class="dropdown-item" <%= link_to 'Course Index', '/courses/index' , class: 'nav-link' %></a></li>
+              </ul>
+            </div>
           </li>
           <% end %>
           <% else %>
