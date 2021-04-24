@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_11_033551) do
+ActiveRecord::Schema.define(version: 2021_04_24_075032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 2021_04_11_033551) do
   create_table "courses", force: :cascade do |t|
     t.string "course_name"
     t.integer "department_id"
+    t.index ["course_name", "department_id"], name: "index_courses_on_course_name_and_department_id", unique: true
   end
 
   create_table "department_tutoring_sessions", id: false, force: :cascade do |t|
@@ -51,6 +52,7 @@ ActiveRecord::Schema.define(version: 2021_04_11_033551) do
 
   create_table "departments", force: :cascade do |t|
     t.string "department_name"
+    t.index ["department_name"], name: "index_departments_on_department_name", unique: true
   end
 
   create_table "notifications", force: :cascade do |t|
