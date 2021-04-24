@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_24_075032) do
+ActiveRecord::Schema.define(version: 2021_04_24_182101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 2021_04_24_075032) do
     t.string "semester"
     t.string "first_code"
     t.string "second_code"
+    t.string "course"
   end
 
   create_table "tutoring_session_users", force: :cascade do |t|
@@ -110,6 +111,10 @@ ActiveRecord::Schema.define(version: 2021_04_24_075032) do
     t.string "last_name"
     t.string "major"
     t.string "email"
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
@@ -119,10 +124,6 @@ ActiveRecord::Schema.define(version: 2021_04_24_075032) do
     t.string "unconfirmed_email"
     t.string "mu"
     t.string "outfit"
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
