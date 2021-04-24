@@ -23,7 +23,8 @@ RSpec.describe 'Users', :no_auth, type: :feature do
     find(:link_or_button, 'Log in').click
 
     # Go to spartan sessions page
-    click_link 'View Spartan Sessions'
+    click_link 'Admin Pages'
+    click_link 'Spartan Session Index'
   end
 
   describe 'can access the spartan session creation page' do
@@ -73,7 +74,8 @@ RSpec.describe 'Users', :no_auth, type: :feature do
                             second_code: '123123')
 
       # Go to spartan sessions page
-      click_link 'View Spartan Sessions'
+      click_link 'Admin Pages'
+      click_link 'Spartan Session Index'
     end
 
     it 'by reaching the edit page' do

@@ -71,14 +71,16 @@ RSpec.describe 'Admins', :no_auth, type: :feature do
   end
 
   it 'can access the spartan sessions list page' do
-    find_link 'View Spartan Sessions'
-    click_link 'View Spartan Sessions'
+    click_link 'Admin Pages'
+    find_link 'Spartan Session Index'
+    click_link 'Spartan Session Index'
     expect(page).to have_content 'asdasd'
     find_button 'View Attendance', id: 1
   end
 
   it 'are the only ones who can download the csv file' do
-    click_link 'View Spartan Sessions'
+    click_link 'Admin Pages'
+    click_link 'Spartan Session Index'
     click_button 'View Attendance', id: 2
     User.find(2).roles << Role.find_by(role_name: 'Student')
     User.find(2).roles.delete(Role.find_by(role_name: 'Admin'))
@@ -89,7 +91,8 @@ RSpec.describe 'Admins', :no_auth, type: :feature do
   describe 'can download an attendance report' do
     before do
       # Get to spartan session attendance viewing page
-      click_link 'View Spartan Sessions'
+      click_link 'Admin Pages'
+      click_link 'Spartan Session Index'
       click_button 'View Attendance', id: 2
     end
 
@@ -102,7 +105,8 @@ RSpec.describe 'Admins', :no_auth, type: :feature do
   describe 'can view a session\'s attendance' do
     before do
       # Get to spartan session attendance viewing page
-      click_link 'View Spartan Sessions'
+      click_link 'Admin Pages'
+      click_link 'Spartan Session Index'
       click_button 'View Attendance', id: 2
     end
 
@@ -153,7 +157,8 @@ RSpec.describe 'Admins', :no_auth, type: :feature do
   describe 'can edit a user\'s attendance status' do
     before do
       # Get to spartan session attendance viewing page
-      click_link 'View Spartan Sessions'
+      click_link 'Admin Pages'
+      click_link 'Spartan Session Index'
       click_button 'View Attendance', id: 2
 
       # Go to user's update page
@@ -176,7 +181,8 @@ RSpec.describe 'Admins', :no_auth, type: :feature do
   describe 'can see the current attendance status' do
     before do
       # Get to spartan session attendance viewing page
-      click_link 'View Spartan Sessions'
+      click_link 'Admin Pages'
+      click_link 'Spartan Session Index'
       click_button 'View Attendance', id: 2
 
       # Add user with custom attendance status
