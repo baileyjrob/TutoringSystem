@@ -135,7 +135,6 @@ class UsersController < ApplicationController
                                      .and(SpartanSession.where('session_datetime > :startTime',
                                                                startTime: (Time.zone.now - 7200)
                                                                           .to_datetime))
-                                     .first
   end
 
   def schedule_use_helpers(tutoring_session, user)
