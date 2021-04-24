@@ -24,8 +24,8 @@
         <% @sessions.each do |session| %>
           <tr class='userInfo'>
             <td><%= session.semester %></td>
-            <td><%= session.session_datetime.strftime("%B %d") %></td>
-            <td><%= session.session_datetime.strftime("%l:%M %p %Z") %></td>
+            <td><%= session.session_datetime.localtime.strftime("%B %d") %></td>
+            <td><%= session.session_datetime.localtime.strftime("%l:%M %p %Z") %></td>
             <td><%= session.first_code  %></td>
             <td><%= session.second_code  %></td>
             <td><%= button_to 'View Attendance', {:action => 'show', :id => session.id},
