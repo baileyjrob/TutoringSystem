@@ -20,6 +20,7 @@
               TODO: Make sure the date is later than now and that the status is not cancelled
             -->
           <% @sessions.each do |session| %>
+          <% if session.link_status != 'denied' %>
           <tr class="tutoringSession">
             <!-- Make a row in the table for each tutoring session. Includes details and leave option -->
             <% tutor = User.find(session.tutor_id) %>
@@ -29,6 +30,7 @@
             <td><%= date %></td>
             <td><%= button_to 'Leave Session', delete_session_path(session), data: {confirm: "Are you sure?"}, class: "btn btn-primary" %></td>
           </tr>
+          <% end %>
           <% end %>
         </tbody>
       </table>
