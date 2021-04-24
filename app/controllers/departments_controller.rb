@@ -11,6 +11,7 @@ class DepartmentsController < ApplicationController
 
   def show
     @department = Department.find(params[:id])
+    @courses = @department.courses
   end
 
   def edit
@@ -23,7 +24,8 @@ class DepartmentsController < ApplicationController
       flash[:success] = 'department saved!'
       redirect_to new_course_path
     else
-      flash[:alert] = 'department not saved!'
+      flash[:alert] = @department.errors
+      redirect_to new_department_path
     end
   end
 

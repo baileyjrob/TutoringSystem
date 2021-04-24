@@ -1,23 +1,59 @@
-<div class="container">
-  <div class="row">
-    <div class="col-12 mt-3">
-      <table class="table" id="courses">
-        <thead>
-          <tr>
-            <th scope="col">Department id</th>
-            <th scope="col">Department name</th>
-            <th scope="col">Edit</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @departments.each do |department| %>
-          <tr class='userInfo'>
-            <th scope="row"><%= department.id %></th>
-            <td><%= department.department_name  %></td>
-            <td><a href="<%= departments_edit_path(department) %>"><i class="far fa-edit"></i></a></td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12 mt-3">
+        <h2> Department Index </h2>
+      </div>
     </div>
   </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12 mt-3">
+        <p><%= link_to "Create New Department", new_department_path  %></p>
+
+        <table class="table" id="departments">
+          <thead>
+            <tr>
+              <th scope="col">Department id</th>
+              <th scope="col">Department name</th>
+              <th scope="col">View</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @departments.each do |department| %>
+            <tr class='userInfo'>
+              <th scope="row"><%= department.id %></th>
+              <td><%= department.department_name  %></td>
+              <td><a href="<%= departments_path(department) %>"><i class="far fa-edit"></i></a></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+      <script>
+        $(function() {
+          $('#departments').DataTable();
+          // $('#departments').api().columns().every(function () {
+          //   console.log('test');
+          //   var column = this;
+          //   var select = $('<select class="form-select"><option value=""></option></select>')
+          //     .prependTo($(column.header()))
+          //     .on('change', function() {
+          //       var val = $.fn.dataTable.util.escapeRegex(
+          //         $(this).val()
+          //       );
+
+          //       column
+          //         .search(val ? '^'+val+'$' : '', true, false)
+          //         .draw();
+          //     });
+
+          //   column.data().unique().sort().each(function (d, j) {
+          //     select.append('<option value="'+d+'">'+d+'</option>')
+          //   });
+          // });
+        });
+      </script>
+    </div>

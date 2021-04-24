@@ -95,4 +95,29 @@
       </table>
     </div>
   </div>
+
+  <script>
+    $(function() {
+      $('#course_users').DataTable();
+      // $('#course_users').api().columns().every(function () {
+      //   console.log('test');
+      //   var column = this;
+      //   var select = $('<select class="form-select"><option value=""></option></select>')
+      //     .prependTo($(column.header()))
+      //     .on('change', function() {
+      //       var val = $.fn.dataTable.util.escapeRegex(
+      //         $(this).val()
+      //       );
+
+      //       column
+      //         .search(val ? '^'+val+'$' : '', true, false)
+      //         .draw();
+      //     });
+
+      //   column.data().unique().sort().each(function (d, j) {
+      //     select.append('<option value="'+d+'">'+d+'</option>')
+      //   });
+      // });
+    });
+  </script>
 </div>

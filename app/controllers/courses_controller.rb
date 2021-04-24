@@ -24,15 +24,14 @@ class CoursesController < ApplicationController
       flash[:success] = 'course saved!'
       redirect_to edit_tutor_path(current_user.id)
     else
-      flash[:alert] = 'course not saved!'
+      flash[:alert] = @course.errors
+      redirect_to new_course_path
     end
   end
 
   def delete; end
 
   def destroy; end
-
-  def my_courses; end
 
   def course_params
     params.require(:course).permit(:course_name, :department_id)

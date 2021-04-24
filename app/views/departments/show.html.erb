@@ -1,22 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 mt-3">
+      <h2> <%= @department.department_name %> Courses Index </h2>
+    </div>
+  </div>
+</div>
 
 <div class="container">
   <div class="row">
     <div class="col-12 mt-3">
       <p><%= link_to "Create New Course", new_course_path  %></p>
-      <p><%= link_to "Add/Remove Existing Course", edit_tutor_path(@user) %>.
-        <h2> My Courses </h2>
+
       <table class="table" id="courses">
         <thead>
           <tr>
             <th scope="col">Department</th>
             <th scope="col">Course</th>
+            <th scope="col">Number of Tutors</th>
+            <th scope="col">View</th>
           </tr>
         </thead>
         <tbody>
-          <% @user.courses.each do |course| %>
-          <tr class='userInfo'>
-            <td><%= Department.find_by(id: course.department_id).department_name %></td>
+          <% @courses.each do |course| %>
+          <tr class='courseInfo'>
+            <td><%= @department.department_name %></td>
             <td><%= course.course_name  %></td>
+            <td><%= course.users.count  %></td>
+            <td><a href="<%= course_path(course) %>"><i class="far fa-edit"></i></a></td>
           </tr>
           <% end %>
         </tbody>
