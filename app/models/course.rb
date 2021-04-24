@@ -11,4 +11,9 @@ class Course < ApplicationRecord
   has_many :tutoring_sessions, through: :course_tutoring_sessions
   validates :course_name, presence: true
   validates :department_id, presence: true
+  validates :course_name, uniqueness: { scope:
+    :department_id, message: lambda { |_x, y|
+                               "#{y[:value]}
+    already edists for this deparment."
+                             } }
 end

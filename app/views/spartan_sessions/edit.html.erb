@@ -10,6 +10,8 @@
       <h1 class="mt-3">Update Spartan Session</h1>
       <%= form_with model: @spartan_session, url: 'update', method: :post do |form| %>
       <div class="mb-3">
+        <%= form.label :course %>
+        <%= form.text_field  :course, value: @spartan_session.course, class: "form-control" %>
         <%= form.label :semester %>
         <%= form.text_field  :semester, value: @spartan_session.semester, class: "form-control" %>
         <%= form.label :session_datetime %><br>
