@@ -16,11 +16,10 @@
 
     <div class="row">
       <!-- Spartan tutoring check in -->
-      <h2 class="mt-4">Spartan Sessions:</h2>
+      <h3 class="mt-4">Spartan Sessions:</h3>
       <% if @user.id == current_user.id and current_user.student? and !@spartan_session.blank? %>
         <% @spartan_session.each do |session| %>
-          <h4 class="mt-4 mb-2">Spartan Session</h4>
-          <h6 class="mb-2"><%= session.course %></h6>
+          <h6 class="mt-2 mb-2"><u><%= session.course %></u></h6>
           <h6 class="mb-2">Start Time: <%= session.session_datetime.localtime.strftime("%l:%M %p") %></h6>
           <% if session.users.find_by(id: current_user.id).blank? %>
 
