@@ -50,6 +50,7 @@ Rails.application.routes.draw do
   resources :tutor
   resources :departments
   resources :courses
+  resources :course_request
   default_url_options :host => "localhost:3000"
 
 end
