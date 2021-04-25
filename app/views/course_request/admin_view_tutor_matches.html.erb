@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row mt-2">
+    <div class="col-12">
+      <h1>Review Scheduled Sessions</h1>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-12">
+      <table class="table" id="tutor_matches">
+        <thead>
+          <tr>
+            <th scope="col">Student Name</th>
+            <th scope="col">Tutor Name</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Scheduled Datetime</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @students.each do |student| %>
+            <% student_sessions = student.tutoring_sessions %>
+            <% if student_sessions.nil? %>
+                <tr>
+                <td><%= student.first_name + " " + student.last_name + " has not joined any tutoring sessions" %></td>
+                </tr>
+            <!-- no sessions scheduled, do not display -->
+            <% else %>
+                <% student_sessions.each do |session| %>
+                    <tr class="tutoringSession">
+                        <td><%= student.first_name + " " + student.last_name %></td>
+                        <% tutor = User.find(session.tutor_id) %>
+                        <td><%= tutor.first_name + " " + tutor.last_name %></td>
+                        <td><%=tutor.major%></td>
+                        <% date = session.scheduled_datetime.localtime.strftime("%B %d at %l:%M %p %Z") %>
+                        <td><%= date %></td>    
+                    </tr>
+                <% end %>
+            <% end %>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script>
+  $(function() {
+    $('#tutor_matches').DataTable();
+  });
+  </script>
+</div>
