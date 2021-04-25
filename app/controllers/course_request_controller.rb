@@ -8,7 +8,7 @@ class CourseRequestController < ApplicationController
     @course_requests = CourseRequest.all
     @tutor_count = -1
     @tutors = User.all
-    @matching_tutors = @tutors.where(major: params[:filter_major]) 
+    @matching_tutors = @tutors.where(major: params[:filter_major])
     @tutor_count = 0 if params.key?(:filter_major)
     @matching_tutors.each do |user|
       @tutor_count = @tutor_count.to_i + 1 if user.tutor?
