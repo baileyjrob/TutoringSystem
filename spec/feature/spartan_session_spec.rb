@@ -23,7 +23,8 @@ RSpec.describe 'Users', :no_auth, type: :feature do
     find(:link_or_button, 'Log in').click
 
     # Go to spartan sessions page
-    click_link 'View Spartan Sessions'
+    click_link 'Admin Pages'
+    click_link 'Spartan Session Index'
   end
 
   describe 'can access the spartan session creation page' do
@@ -43,6 +44,7 @@ RSpec.describe 'Users', :no_auth, type: :feature do
     end
 
     it 'to create a session and return to list page' do
+      fill_in 'course', with: 'CSCE 431'
       fill_in 'semester', with: 'TEST'
       fill_in 'session_datetime', with: time.strftime('%Y-%m-%dT%T')
       fill_in 'check_in_code', with: 'asd'
@@ -52,12 +54,14 @@ RSpec.describe 'Users', :no_auth, type: :feature do
     end
 
     it 'to create a session successfully' do
+      fill_in 'course', with: 'CSCE 431'
       fill_in 'semester', with: 'TEST'
       fill_in 'session_datetime', with: time.strftime('%Y-%m-%dT%T')
       fill_in 'check_in_code', with: 'asd'
       fill_in 'check_out_code', with: '123'
       click_button 'Save'
-      expect(SpartanSession.find_by(semester: 'TEST', first_code: 'asd',
+      expect(SpartanSession.find_by(course: 'CSCE 431', semester: 'TEST',
+                                    first_code: 'asd',
                                     second_code: '123')).to be_valid
     end
   end
@@ -67,13 +71,15 @@ RSpec.describe 'Users', :no_auth, type: :feature do
 
     before do
       SpartanSession.create(id: 1,
+                            course: 'CSCE 431',
                             semester: 'TEST',
                             session_datetime: time,
                             first_code: 'asdasd',
                             second_code: '123123')
 
       # Go to spartan sessions page
-      click_link 'View Spartan Sessions'
+      click_link 'Admin Pages'
+      click_link 'Spartan Session Index'
     end
 
     it 'by reaching the edit page' do
@@ -83,6 +89,7 @@ RSpec.describe 'Users', :no_auth, type: :feature do
 
     it 'in the edit page where it maintains its values' do
       click_button 'Edit'
+      expect(find_field('Course').value).to eq 'CSCE 431'
       expect(find_field('Semester').value).to eq 'TEST'
       expect(find_field('Check in code').value).to eq 'asdasd'
       expect(find_field('Check out code').value).to eq '123123'
