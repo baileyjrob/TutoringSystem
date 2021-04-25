@@ -15,10 +15,12 @@ Rails.application.routes.draw do
   post '/users/:id/delete_session', :to => 'users#delete_session', :as => :delete_session
   get '/users/:id/schedule_student', :to => 'users#schedule_student'
   post '/users/:id/schedule_session_student' => 'users#schedule_session_student'
+  post '/users/:id/admin_view_tutor_matches' => 'users#admin_view_tutor_matches'
 
   post '/course_request/delete_all_request', :to => 'course_request#delete_all_request', :as => :delete_all_request
   post '/course_request/schedule_session_student_cr', :to => 'course_request#schedule_session_student_cr', :as => :schedule_session_student_cr
-
+  get '/course_request/admin_view_course_requests', :to => 'course_request#admin_view_course_requests'
+  
   post '/spartan_sessions/check_in_first' => 'spartan_sessions#check_in_first'
   post '/spartan_sessions/check_in_second' => 'spartan_sessions#check_in_second'
   get '/spartan_sessions/index', :to => 'spartan_sessions#index'
