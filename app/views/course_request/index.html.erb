@@ -79,26 +79,6 @@
                     </div>
                 </div>
             <%end%>
-            <!-- course requests shown here temporarily for tests -->            
-            <div class="row">
-                <div class="col-12 mt-3">
-                    <table class = "table" id= "requests">
-                        <thead>
-                            <tr>
-                                <th scope="col">Current Requests</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% @course_requests.each do |crequest| %>
-                                <tr>
-                                    <th scope="row"><%= link_to crequest.course_name_full  %></th>
-                                </tr>
-                            <% end %>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            
             <%= button_to "Submit a request", {:action => 'new'}, :method => :get, :class => "btn btn-primary float-left"  %>
         </div>
     </div>
