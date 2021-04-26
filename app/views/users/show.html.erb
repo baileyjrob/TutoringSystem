@@ -9,7 +9,7 @@
   <td><%= button_to "Edit My Account", edit_user_registration_path, :class => "button", :method => :get  %></td>
   <p class="mb-0">Email: <%= @user.email %></p>
   <p class="mb-0">Major: <%= @user.major %></p>
-  <p class="mb-0">MU: <%= @user.mu %></p>
+  <p class="mb-0">Major Unit: <%= @user.mu %></p>
   <p class="mb-0">Outfit: <%= @user.outfit %></p>
   <% if @user.tutor? %>
   <p class="mb-0">Hours Tutored This Semester: <%= tutor_hours() %></p>
