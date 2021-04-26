@@ -44,7 +44,7 @@
             <%= link_to 'My Schedule', show_schedule_path, class: 'nav-link'  %>
           </li>
           <li class="nav-item">
-            <%= link_to 'My Account', edit_user_registration_path, class: 'nav-link' %>
+            <%= link_to 'My Account', user_path(current_user), class: 'nav-link' %>
           </li>
           <% if current_user && current_user.roles.include?(Role.tutor_role) %>
           <li class="nav-item">
@@ -56,6 +56,7 @@
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <li><a class="dropdown-item" <%=link_to "Tutor Calendar", tutoring_session_index_path, class: 'nav-link' %></a></li>
                 <li><a class="dropdown-item" <%=link_to "My Courses", tutor_path(current_user), class: 'nav-link' %></a></li>
+                <li><a class="dropdown-item"   <%=link_to "Pending Tutoring Requests", "/tutoring_session/pending", class: 'nav-link' %></a></li>
               </ul>
             </div>
           </li>
@@ -70,10 +71,12 @@
               </a>
 
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" <%= link_to 'Spartan Session Index', '/spartan_sessions' , class: 'nav-link' %></a></li>
                 <li><a class="dropdown-item" <%= link_to 'Get Tutoring Hours', '/users/admin_view_hours' , class: 'nav-link' %></a></li>
+                <li><a class="dropdown-item" <%= link_to 'Spartan Session Index', '/spartan_sessions' , class: 'nav-link' %></a></li>
                 <li><a class="dropdown-item" <%= link_to 'Department Index', '/departments/index' , class: 'nav-link' %></a></li>
                 <li><a class="dropdown-item" <%= link_to 'Course Index', '/courses/index' , class: 'nav-link' %></a></li>
+                <li><a class="dropdown-item" <%= link_to 'See Tutor Matches', '/course_request/admin_view_tutor_matches' , class: 'nav-link' %></a></li>
+                <li><a class="dropdown-item" <%= link_to 'See Course Requests', '/course_request/admin_view_course_requests' , class: 'nav-link' %></a></li>
               </ul>
             </div>
           </li>
