@@ -4,6 +4,8 @@ require 'tutoring_session_controller_helper'
 # Controls the creation and tracking of tutoring sessions
 class TutoringSessionController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_tutor_role
+
   include TutoringSessionControllerHelper
 
   def generate_week(start_week)
@@ -24,8 +26,6 @@ class TutoringSessionController < ApplicationController
   end
 
   def index
-    redirect_to "/users/#{current_user.id}" and return unless current_user.tutor?
-
     determine_start
     generate_week(@start_week)
     @start_of_week = week_to_string(@start_week)
@@ -58,17 +58,11 @@ class TutoringSessionController < ApplicationController
   end
 
   def create
-    redirect_to "/users/#{current_user.id}" and return unless current_user.tutor?
-
-    # Creates the new session, then adds the tutor to the session
     repeat = params[:repeat]
     create_setup
-
     if @tsession.save
       @tsession.generate_repeating_sessions_until_end_of_semester if repeat['session'].to_i == 1
-
       redirect_to tutoring_session_index_path, notice: 'Tutoring session created.'
-
     else
       render 'new'
     end
@@ -102,7 +96,7 @@ class TutoringSessionController < ApplicationController
     # If the user has visited this before, get the cookie we put in
     if cookies.key?('start_week')
       @start_week = timezone_week_start
-      @start_week = cookie_offset(@start_week) if cookies.key?('week_offset')
+      @start_week = cookies.key?('week_offset') ? cookie_offset(@start_week) : @start_week + 1.day
     else
       @start_week = date_week_start
       cookies['start_week'] = @start_week.strftime('%Q')
@@ -119,5 +113,12 @@ class TutoringSessionController < ApplicationController
 
     @tsession.session_status = 'new'
     @tsession.tutor_id = current_user.id
+
+    local_time = Time.zone.local(params[:tutoring_session][:scheduled_datetime])
+    params[:scheduled_datetime] = Time.zone.local_to_utc(local_time)
+  end
+
+  def check_tutor_role
+    redirect_to "/users/#{current_user.id}" and return unless current_user.tutor?
   end
 end
