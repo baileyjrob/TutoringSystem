@@ -37,8 +37,8 @@ Rails.application.routes.draw do
 
   get '/notifications/:id', :to => 'notification#show'
   get '/tutoring_session/pending', :to => 'tutoring_session_user#show'
-  get '/tutoring_session_user/:id/deny', :to => 'tutoring_session_user#deny_pending_link'
-  get '/tutoring_session_user/:id/confirm', :to => 'tutoring_session_user#confirm_pending_link'
+  post '/tutoring_session_user/:id/deny', :to => 'tutoring_session_user#deny_pending_link'
+  post '/tutoring_session_user/:id/confirm', :to => 'tutoring_session_user#confirm_pending_link'
   get '/tutor/:id/course_edit', :to => 'tutor#course_edit'
   get '/tutor/:id/edit', :to => 'tutor#edit'
   get '/tutor/:id/show', :to => 'tutor#show'
