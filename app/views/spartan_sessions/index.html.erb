@@ -26,8 +26,12 @@
           <tr class='userInfo'>
             <td><%= session.course %></td>
             <td><%= session.semester %></td>
-            <td><%= session.session_datetime.localtime.strftime("%B %d") %></td>
-            <td><%= session.session_datetime.localtime.strftime("%l:%M %p %Z") %></td>
+            <td><%= session.session_datetime.localtime
+                                            .in_time_zone("Central Time (US & Canada)")
+                                            .strftime("%B %d") %></td>
+            <td><%= session.session_datetime.localtime
+                                            .in_time_zone("Central Time (US & Canada)")
+                                            .strftime("%l:%M %p %Z") %></td>
             <td><%= session.first_code  %></td>
             <td><%= session.second_code  %></td>
             <td><%= button_to 'View Attendance', {:action => 'show', :id => session.id},

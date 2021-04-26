@@ -16,7 +16,9 @@
         <%= form.text_field  :semester, value: @spartan_session.semester, class: "form-control" %>
         <%= form.label :session_datetime %><br>
         <%= form.datetime_field  :session_datetime,
-                                   value: @spartan_session.session_datetime.strftime('%Y-%m-%dT%T'),
+                                   value: @spartan_session.session_datetime
+                                                          .in_time_zone("Central Time (US & Canada)")
+                                                          .strftime('%Y-%m-%dT%T'),
                                    class: "form-control", required: true %>
         <%= form.label :check_in_code %>
         <%= form.text_field :check_in_code, value: @spartan_session.first_code, class: "form-control", required: true %>

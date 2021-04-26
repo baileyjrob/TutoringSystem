@@ -6,6 +6,7 @@ RSpec.describe 'Tutor Matching', :no_auth, type: :feature do
     # Create some data
     tutor_role = Role.create(role_name: 'Tutor')
     student_role = Role.create(role_name: 'Student')
+    admin_role = Role.create(role_name: 'Admin')
 
     user1 = User.create!(id: 16, first_name: 'Ben', last_name: 'Doe', major: 'CHEM',
                          email: 'ben@tamu.edu', password: 'T3st!!f')
@@ -20,7 +21,7 @@ RSpec.describe 'Tutor Matching', :no_auth, type: :feature do
                            completed_datetime: 0, session_status: '')
 
     tutor1.roles << tutor_role
-    user1.roles << student_role
+    user1.roles << admin_role
     user2.roles << student_role
 
     # Signing in
@@ -29,6 +30,10 @@ RSpec.describe 'Tutor Matching', :no_auth, type: :feature do
     fill_in 'user_password', with: user1.password
     find(:link_or_button, 'Log in').click
     visit "/users/#{user1.id}"
+
+    # Join a session
+    click_link 'Join Tutoring Session'
+    click_button 'Join session', id: 1
 
     # go to tutor matching page
     visit('/course_request')
@@ -74,8 +79,17 @@ RSpec.describe 'Tutor Matching', :no_auth, type: :feature do
       click_button 'Find'
       expect(page).to have_content('No Available Tutors')
     end
-
-    User.destroy_all
-    TutoringSession.destroy_all
   end
+
+  describe 'admin view of tutor matching' do
+    it 'checks student tutor matches' do
+      find(:link_or_button, 'Admin Pages').click
+      find(:link_or_button, 'See Tutor Matches').click
+      expect(page).to have_content('Dakota Doe')
+    end
+  end
+
+  User.destroy_all
+  TutoringSession.destroy_all
+  Role.destroy_all
 end

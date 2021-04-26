@@ -27,7 +27,7 @@ class CourseRequestController < ApplicationController
   end
 
   def show
-    @crequest = CourseRequest.find(params[:id])
+    @course_requests = CourseRequest.all
   end
 
   def new
@@ -46,7 +46,11 @@ class CourseRequestController < ApplicationController
 
   def delete_all_request
     CourseRequest.delete_all
-    redirect_to '/course_request', notice: 'Cleared all requests.'
+    redirect_to '/course_request/admin_view_course_requests', notice: 'Cleared all requests.'
+  end
+
+  def admin_view_course_requests
+    @course_requests = CourseRequest.all
   end
 
   # getting links for tutoring sessions, obtained from user_controller
@@ -64,6 +68,10 @@ class CourseRequestController < ApplicationController
     helpers.pending_mail_with(tutoring_session.tutor, user).link_pending_email.deliver_now
 
     helpers.create_or_update_link_for(user, tutoring_session)
+  end
+
+  def admin_view_tutor_matches
+    @students = User.all
   end
 
   private
