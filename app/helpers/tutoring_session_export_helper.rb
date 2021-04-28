@@ -21,7 +21,7 @@ module TutoringSessionExportHelper
                                   'admin@tamu.edu').deliver_now
     else
       HourCheckMailer.hours_email(start_date, end_date,
-                                  filepath, current_user.email).deliver_later
+                                  filepath, current_user.email).deliver_now
     end
   end
 
