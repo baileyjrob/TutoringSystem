@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   post '/course_request/schedule_session_student_cr', :to => 'course_request#schedule_session_student_cr', :as => :schedule_session_student_cr
   get '/course_request/admin_view_course_requests', :to => 'course_request#admin_view_course_requests'
   get '/course_request/admin_view_tutor_matches', :to => 'course_request#admin_view_tutor_matches'
-
+  get '/course_request/tutor_match_by_course', :to => 'course_request#tutor_match_by_course'
   
   post '/spartan_sessions/check_in_first' => 'spartan_sessions#check_in_first'
   post '/spartan_sessions/check_in_second' => 'spartan_sessions#check_in_second'

@@ -1,9 +1,3 @@
-<% flash.each do |type, msg| %>
-<div class="alert alert-info">
-  <%= msg %>
-</div>
-<% end %>
-
 <div class="container">
   <h1 class="mb-0"><%= @user.first_name %> <%= @user.last_name %></h1>
   <% if current_user == @user %>
@@ -17,105 +11,86 @@
   <p class="mb-0">Hours Tutored This Semester: <%= tutor_hours() %></p>
   <% end %>
 
-    <div class="row">
-      <% if @user.id == current_user.id and current_user.student? %>
-        <!-- Spartan tutoring check in -->
-        <h3 class="mt-4">Spartan Sessions:</h3>
-        <% if !@spartan_session.blank? %>
-          <% @spartan_session.each do |session| %>
-            <h6 class="mt-2 mb-2"><u><%= session.course %></u></h6>
-            <h6 class="mb-2">Start Time: <%= session.session_datetime.localtime
+  <div class="row">
+    <% if @user.id == current_user.id and current_user.student? %>
+    <!-- Spartan tutoring check in -->
+    <h3 class="mt-4">Spartan Sessions:</h3>
+    <% if !@spartan_session.blank? %>
+    <% @spartan_session.each do |session| %>
+    <h6 class="mt-2 mb-2"><u><%= session.course %></u></h6>
+    <h6 class="mb-2">Start Time: <%= session.session_datetime.localtime
                                                     .in_time_zone("Central Time (US & Canada)")
                                                     .strftime("%l:%M %p") %></h6>
-            <% if session.users.find_by(id: current_user.id).blank? %>
+    <% if session.users.find_by(id: current_user.id).blank? %>
 
-            <%= form_with model: @spartan_session_users, :url => {:action => 'check_in_first',
+    <%= form_with model: @spartan_session_users, :url => {:action => 'check_in_first',
                                                                       :controller => 'spartan_sessions',
                                                                       :sessionID => session.id},
                               include_id: false do |form| %>
-            <div class="mb-2">
-              <%= form.label :code %><br>
-            </div>
-            <div class="input-group mb-3 w-25">
-              <%= form.text_field :code, class: "form-control" %>
-              <%= form.submit "Check In", class: "btn btn-outline-primary" %>
+    <div class="mb-2">
+      <%= form.label :code %><br>
+    </div>
+    <div class="input-group mb-3 w-25">
+      <%= form.text_field :code, class: "form-control" %>
+      <%= form.submit "Check In", class: "btn btn-outline-primary" %>
 
-            </div>
-            <% end %>
-            <% elsif SpartanSessionUser.where(user_id: current_user.id).and(SpartanSessionUser.where(spartan_session_id: session.id)).first.second_checkin.nil?
+    </div>
+    <% end %>
+    <% elsif SpartanSessionUser.where(user_id: current_user.id).and(SpartanSessionUser.where(spartan_session_id: session.id)).first.second_checkin.nil?
                         # Provide the second check in button %>
-              <%= form_with model: @spartan_session_users, :url => {:action => 'check_in_second',
+    <%= form_with model: @spartan_session_users, :url => {:action => 'check_in_second',
                                                                         :controller => 'spartan_sessions',
                                                                         :sessionID => session.id},
                                 include_id: false do |form| %>
-              <div class="mb-2">
-                <%= form.label :code %><br>
-              </div>
-              <div class="input-group mb-3 w-25">
-                <%= form.text_field :code, class: "form-control" %>
-                <%= form.submit "Check Out", class: "btn btn-outline-primary" %>
-              </div>
-              <% end %>
-            <% else %>
-              <p>You have attended this session.</p>
-            <% end %>
-          <% end %>
-        <% elsif @spartan_session.blank? %>
-          <p>No spartan sessions to join.</p>
-        <% end %>
-      <% end %>
+    <div class="mb-2">
+      <%= form.label :code %><br>
     </div>
-    <br>
-    <p> Role(s):
-    <% @current_user.roles.each do |role| %>
-        <tr>
-          <%= role.role_name %> &ensp;
-        </tr>
-    <% end %> </p>
-    <br/>
-
-    <h3>Courses this user can tutor in:</h3>
-    <table class="table" id="course_users">
-      <thead>
-        <tr>
-          <th scope="col">Department</th>
-          <th scope="col">Course</th>
-        </tr>
-      </thead>
-      <% @user.courses.each do |c| %>
-      <tr class='userInfo'>
-        <td><%= Department.find_by(id: c.department_id).department_name  %></td>
-        <td><%= c.course_name %></td>
-      </tr>
-      <% end %>
-    </table>
+    <div class="input-group mb-3 w-25">
+      <%= form.text_field :code, class: "form-control" %>
+      <%= form.submit "Check Out", class: "btn btn-outline-primary" %>
+    </div>
+    <% end %>
+    <% else %>
+    <p>You have attended this session.</p>
+    <% end %>
+    <% end %>
+    <% elsif @spartan_session.blank? %>
+    <p>No spartan sessions to join.</p>
+    <% end %>
+    <% end %>
   </div>
+  <br>
+  <p> Role(s):
+    <% @current_user.roles.each do |role| %>
+    <tr>
+      <%= role.role_name %> &ensp;
+    </tr>
+    <% end %> </p>
+  <br />
+
+  <h3>Courses this user can tutor in:</h3>
+  <table class="table" id="course_users">
+    <thead>
+      <tr>
+        <th scope="col">Department</th>
+        <th scope="col">Course</th>
+      </tr>
+    </thead>
+    <% @user.courses.each do |c| %>
+    <tr class='userInfo'>
+      <td><%= Department.find_by(id: c.department_id).department_name  %></td>
+      <td><%= c.course_name %></td>
+    </tr>
+    <% end %>
+  </table>
+</div>
 
 
-  <script>
-    $(function() {
-      $('#course_users').DataTable();
-      // $('#course_users').api().columns().every(function () {
-      //   console.log('test');
-      //   var column = this;
-      //   var select = $('<select class="form-select"><option value=""></option></select>')
-      //     .prependTo($(column.header()))
-      //     .on('change', function() {
-      //       var val = $.fn.dataTable.util.escapeRegex(
-      //         $(this).val()
-      //       );
-
-      //       column
-      //         .search(val ? '^'+val+'$' : '', true, false)
-      //         .draw();
-      //     });
-
-      //   column.data().unique().sort().each(function (d, j) {
-      //     select.append('<option value="'+d+'">'+d+'</option>')
-      //   });
-      // });
-    });
-  </script>
+<script>
+  $(function() {
+    $('#course_users').DataTable();
+  });
+</script>
 
 
 
