@@ -7,7 +7,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
+=begin
 User.create!(id: 0, first_name: 'Admin', last_name: 'User', email: "admin@tamu.edu", password: "T3st!!a")
 
 User.create!(first_name: "John", last_name: "Doe", email: "john@tamu.edu", password: "T3st!!b")
@@ -26,25 +26,9 @@ TutoringSession.create(id: 2, tutor_id: user3.id, scheduled_datetime: Time.now, 
 TutoringSession.create(id: 3, tutor_id: user5.id, scheduled_datetime: Time.now + 1.days, completed_datetime: 0, session_status: "")
 TutoringSession.create(id: 4, tutor_id: user8.id, scheduled_datetime: Time.now + 1.days, completed_datetime: 0, session_status: "")
 TutoringSession.create(id: 5, tutor_id: user8.id, scheduled_datetime: Time.now + 2.days, completed_datetime: 0, session_status: "")
-
-me = User.create!(id: 20, first_name: 'Savannah', last_name: 'Yu', major: 'CECN', email: "savyu@tamu.edu", password: "Test!1")
-
-math = Department.create(id: 1, department_name: 'MATH')
-chem = Department.create(id: 2, department_name: 'CHEM')
-math1 = Course.create(id: 1, department_id: math.id, course_name: '151')
-math2 = Course.create(id: 2, department_id: math.id, course_name: '251')
-chem1 = Course.create(id: 3, department_id: chem.id, course_name: '117')
+=end 
 
 admin_role = Role.create(role_name: 'Admin');
 tutor_role = Role.create(role_name: 'Tutor');
 student_role = Role.create(role_name: 'Student');
 spartan_tutor_role = Role.create(role_name: 'Spartan Tutor');
-
-me.roles << admin_role
-me.roles << tutor_role
-user5.roles << tutor_role
-user8.roles << tutor_role
-user5.courses << chem1
-user5.courses << math1
-user8.courses << math1
-user8.courses << math2
