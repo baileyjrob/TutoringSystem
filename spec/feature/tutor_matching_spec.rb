@@ -5,24 +5,25 @@ RSpec.describe 'Tutor Matching', :no_auth, type: :feature do
   before do
     # Create some data
     tutor_role = Role.create(role_name: 'Tutor')
-    student_role = Role.create(role_name: 'Student')
     admin_role = Role.create(role_name: 'Admin')
 
-    user1 = User.create!(id: 16, first_name: 'Ben', last_name: 'Doe', major: 'CHEM',
-                         email: 'ben@tamu.edu', password: 'T3st!!f')
-    user2 = User.create!(id: 17, first_name: 'Christine', last_name: 'Doe', major: 'MATH',
+    user1 = User.create!(id: 17, first_name: 'Christine', last_name: 'Doe', major: 'MATH',
                          email: 'christine@tamu.edu', password: 'T3st!!g')
     tutor1 = User.create!(id: 18, first_name: 'Dakota', last_name: 'Doe', major: 'MATH',
                           email: 'dakota@tamu.edu', password: 'T3st!!h')
+    tutor2 = User.create!(id: 16, first_name: 'Ben', last_name: 'Doe', major: 'CHEM',
+                          email: 'ben@tamu.edu', password: 'T3st!!f')
 
     TutoringSession.create(id: 1, tutor_id: tutor1.id, scheduled_datetime: Time.zone.now + 1.day,
                            completed_datetime: 0, session_status: '')
     TutoringSession.create(id: 2, tutor_id: tutor1.id, scheduled_datetime: Time.zone.now + 2.days,
                            completed_datetime: 0, session_status: '')
+    TutoringSession.create(id: 3, tutor_id: tutor2.id, scheduled_datetime: Time.zone.now + 1.day,
+                           completed_datetime: 0, session_status: '')
 
-    tutor1.roles << tutor_role
     user1.roles << admin_role
-    user2.roles << student_role
+    tutor1.roles << tutor_role
+    tutor2.roles << tutor_role
 
     # Signing in
     visit "users/#{user1.id}"
@@ -32,7 +33,7 @@ RSpec.describe 'Tutor Matching', :no_auth, type: :feature do
     visit "/users/#{user1.id}"
 
     # Join a session
-    click_link 'Join Tutoring Session'
+    find(:link_or_button, 'Join Tutoring Session').click
     click_button 'Join session', id: 1
 
     # go to tutor matching page
@@ -68,16 +69,6 @@ RSpec.describe 'Tutor Matching', :no_auth, type: :feature do
       find_button 'Find'
       click_button 'Find'
       expect(page).not_to have_content('Christine Doe')
-    end
-  end
-
-  # Make sure Ben doesn't show up
-  describe 'No available tutor matching' do
-    it 'tries to find a tutor' do
-      fill_in 'filter_major', with: 'CHEM'
-      find_button 'Find'
-      click_button 'Find'
-      expect(page).to have_content('No Available Tutors')
     end
   end
 
