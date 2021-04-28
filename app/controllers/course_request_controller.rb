@@ -6,18 +6,23 @@ class CourseRequestController < ApplicationController
 
   def index
     @course_requests = CourseRequest.all
-    @tutor_count = -1
     @tutors = User.all
-    @matching_tutors = @tutors.where(major: params[:filter_major])
-    @tutor_count = 0 if params.key?(:filter_major)
-    @matching_tutors.each do |user|
-      @tutor_count = @tutor_count.to_i + 1 if user.tutor?
+    if params.key?(:filter_major)
+      @matching_tutors = @tutors.where(major: params[:filter_major].upcase)
     end
     session_timeframe
   end
 
+  def tutor_match_by_course
+    @tutors = User.all
+    @courses = Course.all
+    @course = @courses.where(department_id: params[:department_id])
+    @course = @course.where(course_name: params[:course_name])
+    session_timeframe
+  end
+
   def session_timeframe
-    # set a two week range for what tutoring sessions students pull up
+    # set a two week range for what tutoring sessions students can pull up
     @sessions = TutoringSession.where('scheduled_datetime > :now',
                                       now: Time.zone.now.to_datetime)
                                .order(:scheduled_datetime)
@@ -36,7 +41,7 @@ class CourseRequestController < ApplicationController
 
   def create
     @crequest = CourseRequest.new(course_request_params)
-
+    @crequest.user_id = current_user.id
     if @crequest.save
       redirect_to '/course_request', notice: 'Request successfully saved.'
     else
