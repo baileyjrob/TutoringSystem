@@ -20,10 +20,17 @@ RSpec.describe 'Tutor Matching', :no_auth, type: :feature do
                            completed_datetime: 0, session_status: '')
     TutoringSession.create(id: 3, tutor_id: tutor2.id, scheduled_datetime: Time.zone.now + 1.day,
                            completed_datetime: 0, session_status: '')
+    math = Department.create(id: 1, department_name: 'MATH')
+    chem = Department.create(id: 2, department_name: 'CHEM')
+    math1 = Course.create(id: 1, department_id: math.id, course_name: '151')
+    chem1 = Course.create(id: 3, department_id: chem.id, course_name: '117')
 
     user1.roles << admin_role
     tutor1.roles << tutor_role
     tutor2.roles << tutor_role
+    tutor2.courses << chem1
+    tutor2.courses << math1
+    tutor1.courses << math1
 
     # Signing in
     visit "users/#{user1.id}"
@@ -33,42 +40,39 @@ RSpec.describe 'Tutor Matching', :no_auth, type: :feature do
     visit "/users/#{user1.id}"
 
     # Join a session
-    find(:link_or_button, 'Join Tutoring Session').click
+    click_link 'Join Tutoring Session'
     click_button 'Join session', id: 1
 
-    # go to tutor matching page
+    # go to tutor match by course page
     visit('/course_request')
+    find(:link_or_button, 'Search by Specific Class').click
   end
 
   it 'visits tutor matching page' do
-    expect(page).to have_content('Tutor Matching Page')
+    expect(page).to have_content('Find a Tutor by Course')
   end
 
   # Dakota is a tutor, Christine is not, Christine should not be here
-  describe 'Available tutor matching' do
-    it 'matches tutors using tutor majors' do
-      fill_in 'filter_major', with: 'MATH'
-      find_button 'Find'
-      click_button 'Find'
+  describe 'Tutor match by course' do
+    it 'can search by department and course number' do
+      find('#department_id').find(:xpath, 'option[1]').select_option
+      fill_in 'course_name', with: '151'
+      find(:link_or_button, 'Find').click
       expect(page).to have_content('Dakota Doe')
     end
-  end
 
-  describe 'Display Tutor session information' do
-    it 'shows sessions held by the tutors in the next two weeks' do
-      fill_in 'filter_major', with: 'MATH'
-      find_button 'Find'
-      click_button 'Find'
-      expect(page).to have_content('Scheduled Datetime')
+    it 'makes sure only tutors with a different major can pop up' do
+      find('#department_id').find(:xpath, 'option[1]').select_option
+      fill_in 'course_name', with: '151'
+      find(:link_or_button, 'Find').click
+      expect(page).to have_content('Ben Doe')
     end
-  end
 
-  describe 'Non tutors do not show up' do
-    it 'makes sure no students pop up in a tutor search' do
-      fill_in 'filter_major', with: 'MATH'
-      find_button 'Find'
-      click_button 'Find'
-      expect(page).not_to have_content('Christine Doe')
+    it 'makes sure only tutors can\'t show up in classes they don\'t tutor' do
+      find('#department_id').find(:xpath, 'option[2]').select_option
+      fill_in 'course_name', with: '117'
+      find(:link_or_button, 'Find').click
+      expect(page).not_to have_content('Dakota Doe')
     end
   end
 
