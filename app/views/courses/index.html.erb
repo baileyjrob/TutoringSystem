@@ -18,6 +18,7 @@
             <th scope="col">Course</th>
             <th scope="col">Number of Tutors</th>
             <th scope="col">View</th>
+            <th scope="col">Requires Spartan</th>
           </tr>
         </thead>
         <tbody>
@@ -27,6 +28,7 @@
             <td><%= course.course_name  %></td>
             <td><%= course.users.count  %></td>
             <td><a href="<%= course_path(course) %>"><i class="far fa-edit"></i></a></td>
+            <td><%= course.spartan</td>
           </tr>
           <% end %>
         </tbody>

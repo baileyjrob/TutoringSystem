@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_27_210322) do
+ActiveRecord::Schema.define(version: 2021_04_29_180357) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2021_04_27_210322) do
   create_table "courses", force: :cascade do |t|
     t.string "course_name"
     t.integer "department_id"
+    t.boolean "spartan", default: false
     t.index ["course_name", "department_id"], name: "index_courses_on_course_name_and_department_id", unique: true
   end
 
