@@ -12,7 +12,8 @@
             <th scope="col">Tutor Name</th>
             <th scope="col">Contact Info</th>
             <th scope="col">Scheduled Datetime</th>
-            <th scope="col">Leave Session</th>
+            <th scope="col">Status</th>
+            <th scope="col">Cancel Session</th>
           </tr>
         </thead>
         <tbody>
@@ -27,7 +28,8 @@
             <td><%= tutor.email %></td>
             <% date = session.scheduled_datetime.localtime.strftime("%B %d at %l:%M %p %Z") %>
             <td><%= date %></td>
-            <td><%= button_to 'Leave Session', delete_session_path(session), data: {confirm: "Are you sure?"}, class: "btn btn-primary" %></td>
+            <td><%= get_status(session) %></td>
+            <td><%= button_to 'Cancel Session', delete_session_path(session), data: {confirm: "Are you sure?"}, class: "btn btn-primary" %></td>
           </tr>
           <% end %>
         </tbody>

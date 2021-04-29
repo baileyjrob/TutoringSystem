@@ -22,4 +22,11 @@ module UserControllerHelper
   def bounce_unless_ad_or_match(user)
     bounce and return unless user == current_user || current_user.admin?
   end
+
+  def get_status(session)
+    sess = TutoringSessionUser.where('tutoring_session_id = ?', session.id).first
+    return nil if sess.nil?
+
+    sess.link_status
+  end
 end

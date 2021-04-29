@@ -20,7 +20,7 @@
             <%= submit_tag "Find", class: 'btn btn-primary mt-2' %>
         </div>
 
-        <% end %>        
+        <% end %>
             <div class="row">
                 <div class="col-12 mt-3">
                     <table class = "table" id= "tutors">
@@ -53,7 +53,7 @@
                                                 <!-- Make a row in the table for each tutoring session. Includes details and join option -->
                                                 <% date = session.scheduled_datetime.in_time_zone("Central Time (US & Canada)").strftime("%B %d at %l:%M %p %Z") %>
                                                 <td><%= date %></td>
-                                
+
                                                 <!-- Tutoring session should not be associated with the user -->
                                                 <% if session.tutoring_session_users.find_by(id: user.id).blank? or
                                                     session.tutoring_session_users.find_by(id: user.id).link_status == 'denied' %>
@@ -70,7 +70,7 @@
                                     <% end %>
                                 <% end %>
                             <% end %>
-                            
+
                         </tbody>
                     </table>
                 </div>
@@ -78,7 +78,35 @@
             <br>
             <h6>Can't find the class you're looking for?</h6>
             <%= button_to "Submit a request", {:action => 'new'}, :method => :get, :class => "btn btn-primary float-left"  %>
+            <h6>Looking for the Spartan Tutoring schedule?</h6>
+            <%= link_to "Spartan Tutoring Calendar", "https://www.spartan-tutoring.com/calendar", :target => "_blank", :class => "btn btn-primary float-left"   %>
+        </div>
         </div>
     </div>
-</div>
 
+    <script>
+      $(function() {
+        $('#tutors').DataTable();
+        // $('#tutors').api().columns().every(function () {
+        //   console.log('test');
+        //   var column = this;
+        //   var select = $('<select class="form-select"><option value=""></option></select>')
+        //     .prependTo($(column.header()))
+        //     .on('change', function() {
+        //       var val = $.fn.dataTable.util.escapeRegex(
+        //         $(this).val()
+        //       );
+
+        //       column
+        //         .search(val ? '^'+val+'$' : '', true, false)
+        //         .draw();
+        //     });
+
+        //   column.data().unique().sort().each(function (d, j) {
+        //     select.append('<option value="'+d+'">'+d+'</option>')
+        //   });
+        // });
+      });
+    </script>
+
+</div>
