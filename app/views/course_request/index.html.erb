@@ -1,67 +1,67 @@
 <div class="container">
-    <div class="row">
-        <div class="col-12">
-        <h1>Tutor Matching Page</h1>
-            <%= button_to "Search by Specific Class", {:action => 'tutor_match_by_course'}, :method => :get, :class => "btn btn-primary float-left"  %> 
-                <%=form_tag('/course_request', :method => "get", :controller => 'course_request' ) do %>
-                    <%= label_tag(:filter_major, "Course Department: ") %> 
-                    <div class="mb-3">
-                        <%= text_field_tag(:filter_major, "", :class => 'form-control',  :required => true) %>
-                        <br><br>
-                        <%= submit_tag("Find", :class => "btn btn-primary float-left") %> 
-                    </div>
-                <%end%>
-                <table class="table" id="tutors">
-                <thead>
-                    <tr>
-                        <th scope="col">Tutor Name</th>
-                        <th scope="col">Contact Info</th>
-                        <th scope="col">Scheduled Datetime</th>
-                        <th scope="col">Session Link</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% if @matching_tutors.nil? == false %>
-                        <% @matching_tutors.each do |user| %>
-                            <% if user.major.nil? == false %>
-                                <!-- makes sure users with no majors are not displayed -->
-                                <% if user.tutor? %>
-                                    <!-- only displays tutors -->
-                                    <% @sessions.each do |session| %>
-                                        <tr class= tutorInfo>
-                                            <% if user.id == session.tutor_id %>
-                                                <tr class='tutorInfo'>
-                                                    <td><%=user.first_name + " " + user.last_name%></td>
-                                                    <td><%=user.email%></td>
-                                                    
-                                                    <!-- Make a row in the table for each tutoring session. Includes details and join option -->
-                                                    <% date = session.scheduled_datetime.in_time_zone("Central Time (US & Canada)").strftime("%B %d at %l:%M %p %Z") %>
-                                                    <td><%= date %></td>
-                                    
-                                                    <!-- Tutoring session should not be associated with the user -->
-                                                    <% if session.tutoring_session_users.find_by(id: user.id).blank? or
+  <div class="row">
+    <div class="col-12">
+      <h1>Tutor Matching Page</h1>
+      <%= button_to "Search by Specific Class", {:action => 'tutor_match_by_course'}, :method => :get, :class => "btn btn-primary float-left"  %>
+      <%=form_tag('/course_request', :method => "get", :controller => 'course_request' ) do %>
+      <%= label_tag(:filter_major, "Course Department: ") %>
+      <div class="mb-3">
+        <%= text_field_tag(:filter_major, "", :class => 'form-control',  :required => true) %>
+        <br><br>
+        <%= submit_tag("Find", :class => "btn btn-primary float-left") %>
+      </div>
+      <%end%>
+      <table class="table" id="tutors">
+        <thead>
+          <tr>
+            <th scope="col">Tutor Name</th>
+            <th scope="col">Contact Info</th>
+            <th scope="col">Scheduled Datetime</th>
+            <th scope="col">Session Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @matching_tutors.nil? == false %>
+          <% @matching_tutors.each do |user| %>
+          <% if user.major.nil? == false %>
+          <!-- makes sure users with no majors are not displayed -->
+          <% if user.tutor? %>
+          <!-- only displays tutors -->
+          <% @sessions.each do |session| %>
+          <tr class=tutorInfo>
+            <% if user.id == session.tutor_id %>
+          <tr class='tutorInfo'>
+            <td><%=user.first_name + " " + user.last_name%></td>
+            <td><%=user.email%></td>
+
+            <!-- Make a row in the table for each tutoring session. Includes details and join option -->
+            <% date = session.scheduled_datetime.in_time_zone("Central Time (US & Canada)").strftime("%B %d at %l:%M %p %Z") %>
+            <td><%= date %></td>
+
+            <!-- Tutoring session should not be associated with the user -->
+            <% if session.tutoring_session_users.find_by(id: user.id).blank? or
                                                         session.tutoring_session_users.find_by(id: user.id).link_status == 'denied' %>
-                                                    <td><%= button_to "Join session", {:action => 'schedule_session_student_cr', :sessionID => session},
+            <td><%= button_to "Join session", {:action => 'schedule_session_student_cr', :sessionID => session},
                                                                         :id => session.id, :class => "btn btn-primary", :method => :post %></td>
-                                                    <% else  %>
-                                                    <!-- Disable the button -->
-                                                    <td><%= button_to "Join session", {:action => 'schedule_session_student_cr', :sessionID => session},
+            <% else  %>
+            <!-- Disable the button -->
+            <td><%= button_to "Join session", {:action => 'schedule_session_student_cr', :sessionID => session},
                                                                         :disabled => true, :id => session.id, :class => "btn btn-secondary",
                                                                         :method => :post %></td>
-                                                    <% end %>
-                                                </tr>
-                                            <% end %>
-                                        </tr>
-                                    <% end %>
-                                <% end %>
-                            <% end %>  
-                        <% end %>
-                    <% end %>
-                </tbody>                        
-                </table>
-            <br>
-            <h6>Can't find the class you're looking for?</h6>
-            <%= button_to "Submit a request", {:action => 'new'}, :method => :get, :class => "btn btn-primary float-left"  %>
-        </div>
+            <% end %>
+          </tr>
+          <% end %>
+          </tr>
+          <% end %>
+          <% end %>
+          <% end %>
+          <% end %>
+          <% end %>
+        </tbody>
+      </table>
+      <br>
+      <h6>Can't find the class you're looking for?</h6>
+      <%= button_to "Submit a request", {:action => 'new'}, :method => :get, :class => "btn btn-primary float-left"  %>
     </div>
+  </div>
 </div>
