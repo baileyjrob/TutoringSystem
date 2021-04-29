@@ -14,7 +14,7 @@ First, make sure you have bundler and yarn installed.
 
 ```bash
 gem install bundler
-yarn set version berry
+yarn set version 1.22.10
 ```
 
 Once this has been installed, the first step is to setup all dependencies that the code requires.
