@@ -22,6 +22,9 @@ module UserControllerHelper
   end
 
   def get_status(session)
-    TutoringSessionUser.where('tutoring_session_id = ?', session.id).first.link_status
+    sess = TutoringSessionUser.where('tutoring_session_id = ?', session.id).first
+    return nil if sess.nil?
+
+    link_status
   end
 end
