@@ -1,6 +1,8 @@
 <div class="container">
   <h1 class="mb-0"><%= @user.first_name %> <%= @user.last_name %></h1>
+  <% if current_user == @user %>
   <td><%= button_to "Edit My Account", edit_user_registration_path, :class => "button", :method => :get  %></td>
+  <% end %>
   <p class="mb-0">Email: <%= @user.email %></p>
   <p class="mb-0">Major: <%= @user.major %></p>
   <p class="mb-0">Major Unit: <%= @user.mu %></p>
