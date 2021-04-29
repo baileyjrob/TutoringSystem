@@ -109,7 +109,7 @@ class UsersController < ApplicationController
 
     @user.tutoring_sessions.delete(@tutor_session)
 
-    redirect_to show_schedule_path, notice: "Session Cancelled"
+    redirect_to show_schedule_path, notice: 'Session Cancelled'
   end
 
   def admin_view_hours
