@@ -53,4 +53,10 @@ RSpec.describe UsersController, type: :feature do
     within(tr) { accept_confirm { find(:link_or_button, 'Leave Session').click } }
     expect(page).not_to have_content('May 26')
   end
+
+  it 'displays confirm message upon deletion', js: true do
+    tr = find(:xpath, "//td[contains(text(),'May 27')]//parent::tr[1]")
+    within(tr) { accept_confirm { find(:link_or_button, 'Leave Session').click } }
+    expect(page).to have_content('Session Cancelled')
+  end
 end
