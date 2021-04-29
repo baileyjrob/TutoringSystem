@@ -143,4 +143,8 @@ class UsersController < ApplicationController
 
     helpers.create_or_update_link_for(user, tutoring_session)
   end
+
+  def help
+    render 'help'
+  end
 end
