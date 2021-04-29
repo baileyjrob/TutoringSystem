@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   include AdminViewHoursHelper
   include UserControllerHelper
   before_action :authenticate_user!
+  skip_before_action :authenticate_user!, only: [:help]
 
   def index
     bounce and return unless current_user.roles.include?(Role.admin_role)

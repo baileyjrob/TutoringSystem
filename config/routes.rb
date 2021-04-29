@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get '/users/help', :to => 'users#help'
   post '/courses', :to => 'courses#create'
   get '/courses/index', :to => 'courses#index'
   get '/departments/index', :to => 'departments#index'
@@ -15,13 +16,13 @@ Rails.application.routes.draw do
   post '/users/:id/delete_session', :to => 'users#delete_session', :as => :delete_session
   get '/users/:id/schedule_student', :to => 'users#schedule_student'
   post '/users/:id/schedule_session_student' => 'users#schedule_session_student'
- 
+
   post '/course_request/delete_all_request', :to => 'course_request#delete_all_request', :as => :delete_all_request
   post '/course_request/schedule_session_student_cr', :to => 'course_request#schedule_session_student_cr', :as => :schedule_session_student_cr
   get '/course_request/admin_view_course_requests', :to => 'course_request#admin_view_course_requests'
   get '/course_request/admin_view_tutor_matches', :to => 'course_request#admin_view_tutor_matches'
   get '/course_request/tutor_match_by_course', :to => 'course_request#tutor_match_by_course'
-  
+
   post '/spartan_sessions/check_in_first' => 'spartan_sessions#check_in_first'
   post '/spartan_sessions/check_in_second' => 'spartan_sessions#check_in_second'
   get '/spartan_sessions/index', :to => 'spartan_sessions#index'
@@ -46,6 +47,7 @@ Rails.application.routes.draw do
   get '/users/admin_view_hours', :to => 'users#admin_view_hours'
   post '/users/admin_view_hours', :to =>'users#admin_view_hours'
   get '/courses/new', :to => 'courses#new'
+
 
   #END TEMP
   resources :tutoring_session
