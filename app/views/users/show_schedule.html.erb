@@ -28,7 +28,7 @@
             <td><%= tutor.email %></td>
             <% date = session.scheduled_datetime.localtime.strftime("%B %d at %l:%M %p %Z") %>
             <td><%= date %></td>
-            <td><%= session.session_status %></td>
+            <td><%= get_status(session) %></td>
             <td><%= button_to 'Leave Session', delete_session_path(session), data: {confirm: "Are you sure?"}, class: "btn btn-primary" %></td>
           </tr>
           <% end %>
