@@ -25,6 +25,6 @@ module UserControllerHelper
     sess = TutoringSessionUser.where('tutoring_session_id = ?', session.id).first
     return nil if sess.nil?
 
-    link_status
+    sess.link_status
   end
 end
