@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="mb-4 mt-3">Request Confirmation Page</h1>
+
+      <%=form_tag('/course_request/session_confirmation', :method => "get", :controller => 'course_request' ) do %>
+        <div class="mb-3">
+            <%= label_tag(:session_course, "Tutored Course: ") %> 
+            <%= text_field_tag(:session_course, "", :class => 'form-control',  :required => true) %>
+            
+            <%= label_tag(:student_notes, "Notes: ") %> 
+            <%= text_area_tag(:student_notes, "", :class => 'form-control', :required => false) %>
+            <br><br>
+            <%= submit_tag("Confirm", :class => "btn btn-primary float-left") %> 
+        </div>
+      <%end%>
+      <%= button_to "Return to Tutor Matching", {:action => 'index'}, :method => :get,  class: "btn btn-primary float-left" %>
+    </div>
+  </div>
+</div>

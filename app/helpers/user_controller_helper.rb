@@ -5,9 +5,11 @@ module UserControllerHelper
     TutoringSessionMailer.with(to: tutor, student: student)
   end
 
-  def create_or_update_link_for(user, tutoring_session)
+  def create_or_update_link_for(user, tutoring_session, session_course, student_notes)
     link = TutoringSessionUser.find_or_create_by(tutoring_session: tutoring_session, user: user)
     link.link_status = 'pending'
+    link.session_course = session_course
+    link.student_notes = student_notes if student_notes.nil? == false
     link.save
 
     Notification.notify_student_application_for(tutoring_session.tutor, user, link)

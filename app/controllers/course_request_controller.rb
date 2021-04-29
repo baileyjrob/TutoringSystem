@@ -58,21 +58,26 @@ class CourseRequestController < ApplicationController
     @course_requests = CourseRequest.all
   end
 
+  def session_confirmation
+    student = current_user
+    selected_session = TutoringSession.find(params[:sessionID])
+    session_course = params[:session_course]
+    student_notes = params[:student_notes]
+    schedule_session_student_cr(selected_session, student, session_course, student_notes) if session_course.nil? == false
+  end
+
   # getting links for tutoring sessions, obtained from user_controller
-  def schedule_session_student_cr
-    user = current_user
-
-    tutoring_session = TutoringSession.find(params[:sessionID])
-
-    schedule_use_helpers(tutoring_session, user)
+  def schedule_session_student_cr(tutoring_session, user, session_course, student_notes)
+  
+    schedule_use_helpers(tutoring_session, user, session_course, student_notes)
 
     redirect_to "/users/#{params[:id]}"
   end
 
-  def schedule_use_helpers(tutoring_session, user)
+  def schedule_use_helpers(tutoring_session, user, session_course, student_notes)
     helpers.pending_mail_with(tutoring_session.tutor, user).link_pending_email.deliver_now
 
-    helpers.create_or_update_link_for(user, tutoring_session)
+    helpers.create_or_update_link_for(user, tutoring_session, session_course, student_notes)
   end
 
   def admin_view_tutor_matches
