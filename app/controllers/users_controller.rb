@@ -7,7 +7,6 @@ class UsersController < ApplicationController
   include AdminViewHoursHelper
   include UserControllerHelper
   before_action :authenticate_user!
-  skip_before_action :authenticate_user!, only: [:help]
 
   def index
     bounce and return unless current_user.roles.include?(Role.admin_role)
@@ -86,7 +85,6 @@ class UsersController < ApplicationController
   def schedule_student
     @user = User.find(params[:id])
     bounce_unless_ad_or_match(@user)
-
     @sessions = TutoringSession.where('scheduled_datetime > :now', now: Time.zone.now.to_datetime)
                                .order(:scheduled_datetime)
   end
@@ -96,7 +94,6 @@ class UsersController < ApplicationController
     bounce and return unless user == current_user || current_user.admin?
 
     tutoring_session = TutoringSession.find(params[:sessionID])
-
     schedule_use_helpers(tutoring_session, user)
 
     redirect_to "/users/#{params[:id]}"
@@ -142,9 +139,5 @@ class UsersController < ApplicationController
     helpers.pending_mail_with(tutoring_session.tutor, user).link_pending_email.deliver_now
 
     helpers.create_or_update_link_for(user, tutoring_session)
-  end
-
-  def help
-    render 'help'
   end
 end

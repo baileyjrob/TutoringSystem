@@ -1,0 +1,332 @@
+<div class="container">
+  <div class="row mt-2 ">
+    <div class="col-12">
+      <h1> Help Page </h1>
+      <br/>
+      <div class="row mt-2 border border-3">
+        <h2> For All Users: </h2>
+        <div class="col-12">
+          <div class="p-3 mb-2 bg-secondary text-white rounded">
+            <h4>Note: The "navigation bar" is the light grey bar that stretches across the top of the web page </h4>
+          </div>
+          <div class="p-3 mb-2 bg-secondary text-white rounded">
+            <h4>How to create an account: </h4>
+            <p>1. At the log in page click the link that says ”Sign Up” or click the "sign up" button in the navigation bar <br/>
+               2. Put in your information (make sure to use you TAMU email) <br/>
+               3. Click “Sign Up” <br/>
+               4. Check your email for cornfirmation instructions <br/>
+               5. after you click the link in your email, your account is now registered!
+             </p>
+          </div>
+          <div class="p-3 mb-2 bg-secondary text-white rounded">
+            <h4>How to log in: </h4>
+            <p>1. Click “Sign In” tab in the navigation bar if you aren’t already at the log in page <br/>
+               2. Enter your email and password <br/>
+               3. Click the button that says “Log in”
+             </p>
+          </div>
+          <div class="p-3 mb-2 bg-secondary text-white rounded">
+            <h4>How to log out: </h4>
+            <p>Click the button in the navigation bar that says “Sign out”</p>
+          </div>
+          <div class="p-3 mb-2 bg-secondary text-white rounded">
+            <h4>How to return to the home page: </h4>
+            <p>Click "OR Tutoring" in the navigation bar </p>
+          </div>
+          <div class="p-3 mb-2 bg-secondary text-white rounded">
+            <h4>How to edit your account: </h4>
+            <p>1. Click “My Account” in the navigation bar <br/>
+               2. Click “edit my account” <br/>
+               3. Change desired information <br/>
+               4. Click “Update” to save changes (“Back” will discard changes)
+             </p>
+          </div>
+          <div class="p-3 mb-2 bg-secondary text-white rounded">
+            <h4>How to delete your account forever: </h4>
+            <p>1. Click “My Account” in the navigation bar <br/>
+               2. Click “Cancel account” <br/>
+               Note: By canceling your account, you will erase all of your tutoring data and may not receive credit for attendance;
+             </p>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <div class="row mt-2 border border-3">
+        <h2> For Students: </h2>
+        <% if !current_user %>
+          <p class="mb-0"> Log in to see more information </p>
+        <% else %>
+        <div class="col-12">
+          <div class="p-3 mb-2 bg-secondary text-white rounded">
+            <h4>How to confirm your attendance for a Spartan Tutoring Session: </h4>
+            <p>1. When a spartan session starts, check your home page or the “My Account” page and find the session you are attending. <br/>
+               2. Upon arriving to the session, you should be given a check-in code. To check in type in the check-in code provided and click “Check In” <br/>
+               3. At the end of the session, you will be given a check-out code. To check out type in the check-out code provided and click “Check Out” <br/>
+               4. If it says you’ve attended the session then you have successfully checked in and out of the session. <br/>
+               Note: Checking in will become available 10 minutes before the session starts and check-out will be available up to two hours after the start of a session.
+             </p>
+          </div>
+          <div class="p-3 mb-2 bg-secondary text-white rounded">
+            <h4>How to find a tutor by course: </h4>
+            <p>1. Click “Find a Tutor” in the navigation bar <br/>
+               2. Click “Search by specific class”  <br/>
+               3. Select the course department (e.g. MATH) <br/>
+               4. Enter the Course name (e.g. 101) <br/>
+               5. Click “Find” <br/>
+               Note: If no available tutors exist then you might need to make a course request for the department and/or course or try searching for a tutor by major.
+             </p>
+          </div>
+          <div class="p-3 mb-2 bg-secondary text-white rounded">
+            <h4>How to find a tutor by Major: </h4>
+            <p>1. Click “Find a Tutor” in the navigation bar <br/>
+               2. Type course department (e.g. MATH) <br/>
+               3. Click “Find” <br/>
+               Note: If no available tutors exist then you might need to make a course request for the department and/or course
+             </p>
+          </div>
+          <div class="p-3 mb-2 bg-secondary text-white rounded">
+            <h4>How to view upcomming sessions you've scheduled: </h4>
+            <p>Click “My Schedule”</p>
+          </div>
+          <div class="p-3 mb-2 bg-secondary text-white rounded">
+            <h4>How to cancel a tutoring session: </h4>
+            <p>1. Click “My Schedule” in the navigation bar <br/>
+               2. Find the session to cancel and click “Cancel Session”
+            </p>
+          </div>
+          <div class="p-3 mb-2 bg-secondary text-white rounded">
+            <h4>How to Request tutoring if you are unable to find a tutor: </h4>
+            <p>1. Click “Find a Tutor” in the navigation bar <br/>
+               2. Click “Submit a request” <br/>
+               3. Enter the course details <br/>
+               4. Click “Create Course request” (clicking “Return to Tutor Matching” will return you to finding a tutor and will cancel your request) <br/>
+               Note: Monitor your email after submitting a request as you may be matched with a tutor.
+             </p>
+          </div>
+        </div>
+        <% end %>
+      </div>
+      <br/>
+      <div class="row mt-2 border border-3">
+      <h2> For Tutors: </h2>
+      <% if !current_user %>
+        <p class="mb-0"> Log in to see more information </p>
+      <% elsif !current_user.tutor? %>
+        <p class="mb-0"> You are not currently a tutor in the system. If you think you should be, contact an OR officer. </p>
+      <% else %>
+      <div class="col-12">
+        <div class="p-3 mb-2 bg-secondary text-white rounded">
+          <h4>How to create a tutoring session (This will allow students to sign up to receive tutoring from you): </h4>
+          <p>1. Under “Tutor Pages” click “Tutor Calendar” in the navigation bar <br/>
+             2. Scroll down and click “Add Session” at the bottom of the page <br/>
+             3. Chose the start date and time yoou would like to offer tutoring (default duration is 1 hour) <br/>
+             4. If you want to repeat this time every week until the end of the semester, check the “Repeat…” before you click create. <br/>
+             5. Click “Create Tutoring session” (“Cancel” will discard creation)
+           </p>
+        </div>
+        <div class="p-3 mb-2 bg-secondary text-white rounded">
+          <h4>How to edit a tutoring session  </h4>
+          <p>1. Under “Tutor Pages” click “Tutor Calendar” in the navigation bar <br/>
+             2. Navigate through the calendar to find the session of choice <br/>
+             3. Click on the tutoring session <br/>
+             4. Click “edit” <br/>
+             Note: If someone has signed up for the session, they will apear under "Current Users." You should inform these students of changes you make. <br/>
+             5. Click “Update Tutoring session” (“Cancel” will discard changes)
+           </p>
+        </div>
+        <div class="p-3 mb-2 bg-secondary text-white rounded">
+          <h4>How to view a tutoring session  </h4>
+          <p>1. Under “Tutor Pages” click “Tutor Calendar” in the navigation bar <br/>
+             2. Navigate through the calendar to find the session of choice <br/>
+             3. Click on the tutoring session
+           </p>
+        </div>
+        <div class="p-3 mb-2 bg-secondary text-white rounded">
+          <h4>How to edit a tutoring session  </h4>
+          <p>1. Under “Tutor Pages” click “Tutor Calendar” in the navigation bar <br/>
+             2. Navigate through the calendar to find the session of choice <br/>
+             3. Click on the tutoring session <br/>
+             4. Click “delete” <br/>
+             Note: To delete all repeating sessions click “delete self and following repeats”
+           </p>
+        </div>
+        <div class="p-3 mb-2 bg-secondary text-white rounded">
+          <h4>How to manage users attending a tutoring session:  </h4>
+          <p>1. If you have a new request there will be a banner message notifying you on the home page <br/>
+              - Click “here” on the banner message <br/>
+             2. Otherwise you can check your email for a link to manage the attending users <br/>
+             3. Click the “Session Link” for each user to see which session they are trying to attend <br/>
+             4. Click the X to deny the user or click the check to accept the user <br/>
+             5. Fill in the message field to notify them of your decision <br/>
+             6. Click “Send email”
+           </p>
+        </div>
+        <div class="p-3 mb-2 bg-secondary text-white rounded">
+          <h4>How to add classes you are eligible to tutor in:  </h4>
+          <p>Note: you are eligible to tutor in a course if you have earned an A or B in the course. <br/>
+             1. Under “Tutor Pages” click “My Courses” in the navigation bar <br/>
+             2. Click “Add/Remove Existing Course” <br/>
+             3. Search for the class you wish to add, separating the department and course number with a space (e.g. “MATH 101”) <br/>
+             4. If the course appears in the table, check the box. You can search for more courses, and then click “update” <br/>
+             5. If you do not see the course you want to add, see “How to create a new course”
+           </p>
+        </div>
+        <div class="p-3 mb-2 bg-secondary text-white rounded">
+          <h4>How to create a new course:  </h4>
+          <p>1. Under “Tutor Pages” click “My Courses” in the navigation bar <br/>
+             2. Click “Create New Course” <br/>
+             3. Select the department of the course (e.g. “MATH”) <br/>
+             4. Enter the course number (e.g. “101”) <br/>
+             5. If you do not see the department of the course you want to add, see “How to create a new department”
+           </p>
+        </div>
+        <div class="p-3 mb-2 bg-secondary text-white rounded">
+          <h4>How to create a new department:  </h4>
+          <p>1. Under “Tutor Pages” click “My Courses” in the navigation bar <br/>
+             2. Click “Create New Course” <br/>
+             3. Click “Create New Department” <br/>
+             4. Type the department of the department (e.g. “MATH”) <br/>
+             5. Click “Create”
+           </p>
+        </div>
+      </div>
+      <% end %>
+      </div>
+      <br/>
+        <div class="row mt-2 border border-3">
+          <h2> For Admins: </h2>
+        <% if !current_user %>
+          <p class="mb-0"> Log in to see more information </p>
+        <% elsif !current_user.admin? %>
+          <p class="mb-0"> You are not currently an admin in the system. If you think you should be, contact an OR officer. </p>
+        <% else %>
+        <div class="col-12">
+          <div class="p-3 mb-2 bg-secondary text-white rounded">
+            <h4> About the Admin Home Page</h4>
+            <p>At the home page you can view all users. Here you can click the edit icon to edit their account. <br/>
+            You can then click “Update” to save the changes. You can also click “Cancel account” to delete the account.  <br/>
+            This account will no longer exist, nor will any of their associated data (like attendance or tutor hours). <br/>
+            <br/>
+            Note: Deletions cannot be undone. Make sure important data has been exported before deleting any objects.</p>
+          </div>
+          <div class="p-3 mb-2 bg-secondary text-white rounded">
+            <h4>How to get the tutoring hours for users:  </h4>
+            <p>1. Under “Admin Pages” click “Get Tutoring Hours“ in the navigation bar <br/>
+               2. Choose a range of dates to get data between <br/>
+               3. Click “Submit” <br/>
+               4. An email will be sent to you with a CSV file showing hours tutored for users in that timeframe
+             </p>
+          </div>
+          <div class="p-3 mb-2 bg-secondary text-white rounded">
+            <h4>How to create a Spartan Tutoring session:  </h4>
+            <p>1. Under “Admin Pages” click “Spartan Session Index“ in the navigation bar <br/>
+               2. Click the button “New Spartan Session” <br/>
+               3. Fill out information for the session <br/>
+                - The course indicates the subject to be covered in the session and will display to users checking in. <br/>
+                - The check in code is what users will use to check into the session <br/>
+                - The check out code is what users will use when they leave the session <br/>
+               4. Click the button “Save” to create the new session (“Cancel” will not create the session)
+             </p>
+          </div>
+          <div class="p-3 mb-2 bg-secondary text-white rounded">
+            <h4>How to delete a Spartan Tutoring session:  </h4>
+            <p>1. Under “Admin Pages” click “Spartan Session Index“ in the navigation bar <br/>
+               2. For the spartan session of choice press the button that says “Delete” <br/>
+               Note: deleting a session will discard attendance data and cannot be undone.
+             </p>
+          </div>
+          <div class="p-3 mb-2 bg-secondary text-white rounded">
+            <h4>How to create a Spartan Tutoring session:  </h4>
+            <p>1. Under “Admin Pages” click “Spartan Session Index“ in the navigation bar <br/>
+               2. For the spartan session of choice press the button that says “Edit” <br/>
+               3. Change any info you want <br/>
+               4. Click “Update Spartan session” to update its information (“Cancel will discard changes”)
+             </p>
+          </div>
+          <div class="p-3 mb-2 bg-secondary text-white rounded">
+            <h4>How to check Spartan Tutoring attendance:  </h4>
+            <p>1. Under “Admin Pages” click “Spartan Session Index“ in the navigation bar <br/>
+               2. For the spartan session of choice press the button that says “View attendance” <br/>
+               3. If you want to download the data you can click the “Download” button which will create a CSV to download to your computer
+             </p>
+          </div>
+          <div class="p-3 mb-2 bg-secondary text-white rounded">
+            <h4>How to edit Spartan Tutoring attendance:  </h4>
+            <p>1. Under “Admin Pages” click “Spartan Session Index“ in the navigation bar <br/>
+               2. For the spartan session of choice press the button that says “View attendance” <br/>
+               3. To add someone manually to the attendance sheet follow these steps: <br/>
+                 - Enter their email under the “Need to add someone?” section <br/>
+                 - Optionally add some attendance notes explaining why they are being added <br/>
+                 - Click the “Add User” button <br/>
+               4. To edit someone’s attendance follow these steps: <br/>
+                 - Click “Edit Notes” <br/>
+                 - You can edit the attendance notes to change what status they have <br/>
+                 - Click “Update attendance” to update their notes (“Back will discard changes”)
+             </p>
+          </div>
+          <div class="p-3 mb-2 bg-secondary text-white rounded">
+            <h4>How view tutors who’ve made an A or B in a class:  </h4>
+            <p>1. Under “Admin Pages” click “Course Index” <br/>
+               2. Find the course you want to check and click the icon to view <br/>
+            </p>
+          </div>
+          <div class="p-3 mb-2 bg-secondary text-white rounded">
+            <h4>How to grant a user “Tutor” status:  </h4>
+            <p>1. On the home page, search for the user you want to grant tutor privileges <br/>
+               2. Click the edit user icon <br/>
+               3. Check the box next to “Tutor” <br/>
+               4. Click “update” to save changes or click “back” to discard your changes.
+             </p>
+          </div>
+          <div class="p-3 mb-2 bg-secondary text-white rounded">
+            <h4>How to revoke a user's “Tutor” status:  </h4>
+            <p>1. On the home page, search for the user you want to grant tutor privileges <br/>
+               2. Click the edit user icon <br/>
+               3. Uncheck the box next to “Tutor” <br/>
+               4. Click “update” to save changes or click “back” to discard your changes.
+             </p>
+          </div>
+          <div class="p-3 mb-2 bg-secondary text-white rounded">
+            <h4>How to grant a user “Admin” status:  </h4>
+            <p>1. On the home page, search for the user you want to grant tutor privileges <br/>
+               2. Click the edit user icon <br/>
+               3. Check the box next to “Admin” <br/>
+               4. Click “update” to save changes or click “back” to discard your changes. <br/>
+               Note: Granting someone Admin privileges gives them the power to delete important data. Only add admin privileges to users you trust.
+             </p>
+          </div>
+          <div class="p-3 mb-2 bg-secondary text-white rounded">
+            <h4>How to revoke a user's “Admin” status:  </h4>
+            <p>1. On the home page, search for the user you want to grant tutor privileges <br/>
+               2. Click the edit user icon <br/>
+               3. Uncheck the box next to “Admin” <br/>
+               4. Click “update” to save changes or click “back” to discard your changes. <br/>
+               Note: Always make sure to have at least one "Admin." If you remove your own Admin status, you cannot add it back by yourself.
+             </p>
+          </div>
+          <div class="p-3 mb-2 bg-secondary text-white rounded">
+            <h4>Steps to take at the end of each semester:  </h4>
+            <p>1. Ensure at least one admin account will remain active for the next semester.
+               If all admin accounts decide to cancel their accounts,
+               there will be no way to create new admins or Tutors without the help of someone familiar with the back end of the website.
+               Perhaps have the organization’s sponsor make an admin account.<br/>
+               2. Export spartan session data and tutor hour reports. You can do this as many times as necessary throughout the semester,
+               but make sure to save them at the end.
+             </p>
+          </div>
+          <div class="p-3 mb-2 bg-secondary text-white rounded">
+            <h4>Steps to take at the beginning of each semester:  </h4>
+            <p>1. Grant admin privileges to new admins <br/>
+               2. Ask new tutors to create an account <br/>
+               3. Grant tutor privileges to new tutors <br/>
+               4. Revoke tutor/admin privileges from tutors and admins no longer active in the organization, especially tutors.  <br/>
+               5. Direct students to create an account to receive tutoring and attendance credit for Spartan Tutoring.
+             </p>
+          </div>
+
+        </div>
+        <% end %>
+        </div>
+    </div>
+  </div>
+</div>

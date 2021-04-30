@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get '/users/help', :to => 'users#help'
+  get '/help', :to => 'tutor#help'
   post '/courses', :to => 'courses#create'
   get '/courses/index', :to => 'courses#index'
   get '/departments/index', :to => 'departments#index'
