@@ -59,19 +59,18 @@ class CourseRequestController < ApplicationController
   end
 
   def session_confirmation
-    student = current_user
-    selected_session = TutoringSession.find(params[:sessionID])
-    session_course = params[:session_course]
-    student_notes = params[:student_notes]
-    schedule_session_student_cr(selected_session, student, session_course, student_notes) if session_course.nil? == false
+    @selected_session = params[:sessionID]
   end
 
   # getting links for tutoring sessions, obtained from user_controller
-  def schedule_session_student_cr(tutoring_session, user, session_course, student_notes)
-  
-    schedule_use_helpers(tutoring_session, user, session_course, student_notes)
+  def schedule_session_student_cr
+    student = current_user
+    return unless params[:session_course].nil? == false && (params[:sessionID].nil? == false)
 
-    redirect_to "/users/#{params[:id]}"
+    tutoring_session = TutoringSession.find(params[:sessionID])
+    schedule_use_helpers(tutoring_session, student, params[:session_course],
+                         params[:student_notes])
+    redirect_to "/users/#{params[:id]}", notice: 'Confirmed tutoring session'
   end
 
   def schedule_use_helpers(tutoring_session, user, session_course, student_notes)

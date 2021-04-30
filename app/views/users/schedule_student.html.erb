@@ -29,15 +29,18 @@
                 <td><%= date %></td>
 
                 <!-- Tutoring session should not be associated with the user -->
-                <% if session.tutoring_session_users.find_by(id: @user.id).blank? or
-                      session.tutoring_session_users.find_by(id: @user.id).link_status == 'denied' %>
-                  <td><%= button_to "Join session", {:action => 'schedule_session_student', :sessionID => session},
-                                    :id => session.id, :class => "btn btn-primary", :method => :post %></td>
-                <% else # Disable the button %>
-                  <td><%= button_to "Join session", {:action => 'schedule_session_student', :sessionID => session},
-                                    :disabled => true, :id => session.id, :class => "btn btn-secondary",
-                                    :method => :post %></td>
-                <% end %>
+                <% if session.tutoring_session_users.find_by(id: user.id).blank? or
+                                                        session.tutoring_session_users.find_by(id: user.id).link_status == 'denied' %>
+                                                        
+                                                        <td><%= button_to "Join session", {:action => 'session_confirmation', :controller => 'course_request', :sessionID => session},
+                                                        :id => session.id, :class => "btn btn-primary", :method => :post %></td>
+                                                        
+                                                        <% else  %>
+                                                        <!-- Disable the button -->
+                                                        <td><%= button_to "Join session", {:action => 'session_confirmation', :controller => 'course_request', :sessionID => session},
+                                                                                                                    :disabled => true, :class => "btn btn-secondary",
+                                                                                                                    :method => :post %></td>
+                                                    <% end %>
               </tr>
             <% end %>
           </tbody>
