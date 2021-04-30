@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2021-04-30T18:12:57-05:00">2021-04-30T18:12:57-05:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2021-04-30T18:29:18-05:00">2021-04-30T18:29:18-05:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -23,14 +23,14 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="red">
-  78.8%
+  78.69%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         15.39
+         15.37
        </span>
     </span> hits/line
     )
@@ -43,11 +43,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>717</b> relevant lines,
+    <b>718</b> relevant lines,
     <span class="green"><b>565</b> lines covered</span> and
-    <span class="red"><b>152</b> lines missed. </span>
+    <span class="red"><b>153</b> lines missed. </span>
     (<span class="red">
-  78.8%
+  78.69%
 </span>
 )
   </div>
@@ -128,10 +128,10 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#37a296fd51d31c895e00333bae54fd6e928413d3" class="src_link" title="app/controllers/notification_controller.rb">app/controllers/notification_controller.rb</a></td>
             <td class="red strong cell--number t-file__coverage">0.00 %</td>
-            <td class="cell--number">26</td>
-            <td class="cell--number">20</td>
+            <td class="cell--number">27</td>
+            <td class="cell--number">21</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">20</td>
+            <td class="cell--number">21</td>
             <td class="cell--number">0.00</td>
             
           </tr>
@@ -500,14 +500,14 @@
     <span class="group_name">Controllers</span>
     (<span class="covered_percent">
       <span class="red">
-  64.46%
+  64.3%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         10.22
+         10.19
        </span>
     </span> hits/line
     )
@@ -520,11 +520,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>408</b> relevant lines,
+    <b>409</b> relevant lines,
     <span class="green"><b>263</b> lines covered</span> and
-    <span class="red"><b>145</b> lines missed. </span>
+    <span class="red"><b>146</b> lines missed. </span>
     (<span class="red">
-  64.46%
+  64.3%
 </span>
 )
   </div>
@@ -605,10 +605,10 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#37a296fd51d31c895e00333bae54fd6e928413d3" class="src_link" title="app/controllers/notification_controller.rb">app/controllers/notification_controller.rb</a></td>
             <td class="red strong cell--number t-file__coverage">0.00 %</td>
-            <td class="cell--number">26</td>
-            <td class="cell--number">20</td>
+            <td class="cell--number">27</td>
+            <td class="cell--number">21</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">20</td>
+            <td class="cell--number">21</td>
             <td class="cell--number">0.00</td>
             
           </tr>
@@ -3764,9 +3764,9 @@
     
 
     <div class="t-line-summary">
-      <b>20</b> relevant lines.
+      <b>21</b> relevant lines.
       <span class="green"><b>0</b> lines covered</span> and
-      <span class="red"><b>20</b> lines missed.</span>
+      <span class="red"><b>21</b> lines missed.</span>
     </div>
 
     
@@ -4014,7 +4014,7 @@
 
             
 
-            <code class="ruby">      noti.save</code>
+            <code class="ruby">      noti.notifiable = nil</code>
           </li>
         </div>
       
@@ -4025,7 +4025,7 @@
 
             
 
-            <code class="ruby">    end</code>
+            <code class="ruby">      noti.save!</code>
           </li>
         </div>
       
@@ -4036,7 +4036,7 @@
 
             
 
-            <code class="ruby">    redirect_to controller: &#39;tutoring_session_user&#39;, action: &#39;show&#39;</code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
@@ -4047,12 +4047,23 @@
 
             
 
-            <code class="ruby">  end</code>
+            <code class="ruby">    redirect_to controller: &#39;tutoring_session_user&#39;, action: &#39;show&#39;</code>
           </li>
         </div>
       
         <div>
           <li class="missed" data-hits="0" data-linenumber="26">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="27">
             
             
 
@@ -15492,7 +15503,7 @@
 
             
 
-            <code class="ruby">  belongs_to :notifiable, polymorphic: true</code>
+            <code class="ruby">  belongs_to :notifiable, polymorphic: true, optional: true</code>
           </li>
         </div>
       
