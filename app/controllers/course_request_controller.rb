@@ -65,7 +65,7 @@ class CourseRequestController < ApplicationController
   # getting links for tutoring sessions, obtained and altered from user_controller
   def schedule_session_student_cr
     student = current_user
-    return unless params[:sessionID].nil? == false # && (params[:session_course].nil? == false) rubocop thinks it's too much 
+    return unless params[:sessionID].nil? == false
 
     tutoring_session = TutoringSession.find(params[:sessionID])
     schedule_use_helpers(tutoring_session, student, params[:session_course],
