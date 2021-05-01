@@ -16,6 +16,9 @@ class TutoringSessionUserController < ApplicationController
     end
 
     link.link_status = 'confirmed'
+    tutorSess = TutoringSession.find(link.tutoring_session_id)
+    tutorSess.session_status = 'confirmed'
+    tutorSess.save!
     link.save
 
     mail_with(link, 'confirmed').link_action_email.deliver_now
@@ -30,6 +33,9 @@ class TutoringSessionUserController < ApplicationController
     end
 
     link.link_status = 'denied'
+    tutorSess = TutoringSession.find(link.tutoring_session_id)
+    tutorSess.session_status = 'denied'
+    tutorSess.save!
     link.save
 
     mail_with(link, 'denied').link_action_email.deliver_now
