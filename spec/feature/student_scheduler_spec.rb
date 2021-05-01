@@ -103,6 +103,7 @@ RSpec.describe 'Student scheduler', :no_auth, type: :feature do
       click_link 'Join Tutoring Session'
 
       # Join a session
+
       click_button 'Join session', id: join_id
       fill_in 'session_course', with: 'math 101'
       fill_in 'student_notes', with: 'derivatives'
