@@ -9,8 +9,9 @@
         <tr>
           <th scope="col">Student Name</th>
           <th scope="col">Tutor Name</th>
-          <th scope="col">Tutor Major</th>
+          <th scope="col">Tutoring Subject</th>
           <th scope="col">Scheduled Datetime</th>
+          <th scope="col">Notes</th>
         </tr>
       </thead>
       <tbody>
@@ -24,9 +25,11 @@
                     <td><%= link_to student.first_name + " " + student.last_name, student %></td>
                     <% tutor = User.find(session.tutor_id) %>
                     <td><%= link_to tutor.first_name + " " + tutor.last_name, tutor %></td>
-                    <td><%=tutor.major%></td>
+                    <% grab_notes = TutoringSessionUser.find_or_create_by(tutoring_session: session, user: student)%>
+                    <td><%= grab_notes.session_course%></td>
                     <% date = session.scheduled_datetime.localtime.strftime("%B %d at %l:%M %p %Z") %>
-                    <td><%= date %></td>   
+                    <td><%= date %></td> 
+                    <td><%= grab_notes.student_notes%></td>  
                   </tr>
               <% end %>
           <% end %>

@@ -14,6 +14,8 @@
             <th scope="col">Session Link</th>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
+            <th scope="col">Tutoring Course</th>
+            <th scope="col">Notes</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -23,6 +25,8 @@
             <td><%= link_to "Session Link", tutoring_session_path(link.tutoring_session), target: '_blank' %> </td>
             <td><%= link.user.first_name %> <%= link.user.last_name  %></td>
             <td><%= link.user.email  %></td>
+            <td><%= link.user.session_course %></td>
+            <td><%= link.user.student_notes %></td>
             <td>
               <button type="button" class="btn btn-link text-danger action" data-bs-toggle="modal" data-bs-target="#actionModal" data-action="Deny" data-formto="<%= "/tutoring_session_user/#{link.id}/deny" %>" data-recipient="<%= link.user.first_name %> <%= link.user.last_name %> (<%= link.user.email  %>)">
                 <i class="fas fa-times"></i>

@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 2021_04_29_180357) do
     t.bigint "tutoring_session_id", null: false
     t.string "link_status"
     t.text "student_notes"
+    t.string "session_course"
   end
 
   create_table "tutoring_sessions", force: :cascade do |t|
