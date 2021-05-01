@@ -11,7 +11,8 @@ module UserControllerHelper
     link.session_course = session_course
     link.student_notes = student_notes if student_notes.nil? == false
     link.save if session_course.nil? == false
-
+    tutoring_session.session_status = 'pending'
+    tutoring_session.save
     Notification.notify_student_application_for(tutoring_session.tutor, user, link)
   end
 

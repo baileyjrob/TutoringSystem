@@ -16,6 +16,7 @@
               <th scope="col">Contact Info</th>
               <th scope="col">Scheduled Datetime</th>
               <th scope="col"></th>
+              <th scope="col">Status</th>
             </tr>
           </thead>
           <tbody>
@@ -29,18 +30,23 @@
                 <td><%= date %></td>
 
                 <!-- Tutoring session should not be associated with the user -->
-                <% if session.tutoring_session_users.find_by(id: user.id).blank? or
-                                                        session.tutoring_session_users.find_by(id: user.id).link_status == 'denied' %>
-                                                        
-                                                        <td><%= button_to "Join session", {:action => 'session_confirmation', :controller => 'course_request', :sessionID => session},
-                                                        :id => session.id, :class => "btn btn-primary", :method => :post %></td>
-                                                        
-                                                        <% else  %>
-                                                        <!-- Disable the button -->
-                                                        <td><%= button_to "Join session", {:action => 'session_confirmation', :controller => 'course_request', :sessionID => session},
-                                                                                                                    :disabled => true, :class => "btn btn-secondary",
-                                                                                                                    :method => :post %></td>
-                                                    <% end %>
+                <% if session.tutor_id == current_user.id ||
+                      session.session_status == ('denied' || 'confirmed' || 'pending') %>
+                  
+                  <td><%= button_to "Join session", {:action => 'session_confirmation', :controller => 'course_request', :sessionID => session},
+                  :disabled => true, :class => "btn btn-secondary", :method => :post %></td>
+                  
+                <% else  %>
+                  <!-- Disable the button -->
+                  <td><%= button_to "Join session", {:action => 'session_confirmation', :controller => 'course_request', :sessionID => session},
+                  :disabled => false, :class => "btn btn-primary", :method => :post %></td>
+                <% end %>
+                <% if session.session_status != "" %>
+                  <td><%= session.session_status %></td>
+                <% else %>
+                  <td>No Session Status</td>
+                <% end %>
+
               </tr>
             <% end %>
           </tbody>
