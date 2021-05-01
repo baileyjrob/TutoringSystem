@@ -15,6 +15,10 @@
           <%= f.datetime_field  :scheduled_datetime, class: "form-control", required: true %>
         </div>
         <div class="mb-3">
+          <%= f.label :completed_datetime %><br>
+          <%= f.datetime_field  :completed_datetime, class: "form-control", required: true %>
+        </div>
+        <div class="mb-3">
           <div class="form-check">
             <%= check_box :repeat, :session, class: "form-check-input" %>
             <label class="form-check-label" for="repeat_session">
@@ -22,7 +26,16 @@
             </label>
           </div>
         </div>
-        <%=link_to "Cancel", tutoring_session_index_path, class: 'btn btn-danger' %>  
+        <div class="mb-3">
+          <div class="field">
+            <%= f.label :session_status %><br />
+            <%= f.radio_button :session_status, "new", :checked => true  %>
+            <%= f.label :session_status, "Allow Students to sign up for this session", :value => "new"  %> <br/>
+            <%= f.radio_button :session_status, "In-Person" %>
+            <%= f.label :session_status, "This event already occured in person", :value => "In Person" %>
+          </div>
+        </div>
+        <%=link_to "Cancel", tutoring_session_index_path, class: 'btn btn-danger' %>
         <%= f.submit class: "btn btn-primary float-right" %>
       <% end %>
     </div>

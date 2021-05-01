@@ -89,7 +89,8 @@ class TutoringSessionController < ApplicationController
   private
 
   def tsession_params
-    params.require(:tutoring_session).permit(:scheduled_datetime)
+    params.require(:tutoring_session).permit(:scheduled_datetime, :completed_datetime,
+                                             :session_status)
   end
 
   def determine_start
@@ -111,7 +112,6 @@ class TutoringSessionController < ApplicationController
   def create_setup
     @tsession = TutoringSession.new(tsession_params)
 
-    @tsession.session_status = 'new'
     @tsession.tutor_id = current_user.id
 
     local_time = Time.zone.local(params[:tutoring_session][:scheduled_datetime])
