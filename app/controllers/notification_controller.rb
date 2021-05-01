@@ -19,6 +19,7 @@ class NotificationController < ApplicationController
   def tutoring_session_user_notification
     Notification.where(notifiable_type: 'TutoringSessionUser').each do |noti|
       noti.read_at = Time.zone.now.to_datetime
+      noti.notifiable = nil
       noti.save
     end
     redirect_to controller: 'tutoring_session_user', action: 'show'

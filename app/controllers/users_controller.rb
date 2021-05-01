@@ -89,6 +89,9 @@ class UsersController < ApplicationController
                                .order(:scheduled_datetime)
   end
 
+  # schedule session student should no longer be used
+  # function was copied and placed into course request controller
+  # all normal tutoring session confirmations are routed through there
   def schedule_session_student
     user = User.find(params[:id])
     bounce and return unless user == current_user || current_user.admin?
@@ -137,7 +140,8 @@ class UsersController < ApplicationController
 
   def schedule_use_helpers(tutoring_session, user)
     helpers.pending_mail_with(tutoring_session.tutor, user).link_pending_email.deliver_now
-
+    # helpers.create_or_update_link_for function has been changed to take 4 inputs instead of 2
+    # added notes and session course as inputs
     helpers.create_or_update_link_for(user, tutoring_session)
   end
 end
