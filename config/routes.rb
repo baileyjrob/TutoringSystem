@@ -18,10 +18,12 @@ Rails.application.routes.draw do
  
   post '/course_request/delete_all_request', :to => 'course_request#delete_all_request', :as => :delete_all_request
   post '/course_request/schedule_session_student_cr', :to => 'course_request#schedule_session_student_cr', :as => :schedule_session_student_cr
+  post '/course_request/session_confirmation', :to => 'course_request#session_confirmation'
   get '/course_request/admin_view_course_requests', :to => 'course_request#admin_view_course_requests'
   get '/course_request/admin_view_tutor_matches', :to => 'course_request#admin_view_tutor_matches'
   get '/course_request/tutor_match_by_course', :to => 'course_request#tutor_match_by_course'
-  
+ 
+
   post '/spartan_sessions/check_in_first' => 'spartan_sessions#check_in_first'
   post '/spartan_sessions/check_in_second' => 'spartan_sessions#check_in_second'
   get '/spartan_sessions/index', :to => 'spartan_sessions#index'
@@ -39,6 +41,7 @@ Rails.application.routes.draw do
   get '/tutoring_session/pending', :to => 'tutoring_session_user#show'
   post '/tutoring_session_user/:id/deny', :to => 'tutoring_session_user#deny_pending_link'
   post '/tutoring_session_user/:id/confirm', :to => 'tutoring_session_user#confirm_pending_link'
+  get '/tutoring_session_user/:id/session_confirmation', :to => 'tutoring_session_user#session_confirmation', :as => :session_confirmation_link
   get '/tutor/:id/course_edit', :to => 'tutor#course_edit'
   get '/tutor/:id/edit', :to => 'tutor#edit'
   get '/tutor/:id/show', :to => 'tutor#show'
