@@ -1,11 +1,12 @@
-
 <div class="container">
   <div class="row">
     <div class="col-12">
       <h1><%=Department.find_by(id: @course.department_id).department_name %> <%=@course.course_name %> Course Page</h1>
+      <h2>Spartan: <% @course.spartan %></h2>
       <h3>Tutors that have made an A or B in this class</h3>
     </div>
-  </div><div class="row">
+  </div>
+  <div class="row">
     <div class="col-12 mt-3">
       <table class="table" id="users">
         <thead>
@@ -35,25 +36,6 @@
       <script>
         $(function() {
           $('#users').DataTable();
-          // $('#users').api().columns().every(function () {
-          //   console.log('test');
-          //   var column = this;
-          //   var select = $('<select class="form-select"><option value=""></option></select>')
-          //     .prependTo($(column.header()))
-          //     .on('change', function() {
-          //       var val = $.fn.dataTable.util.escapeRegex(
-          //         $(this).val()
-          //       );
-
-          //       column
-          //         .search(val ? '^'+val+'$' : '', true, false)
-          //         .draw();
-          //     });
-
-          //   column.data().unique().sort().each(function (d, j) {
-          //     select.append('<option value="'+d+'">'+d+'</option>')
-          //   });
-          // });
         });
       </script>
-</div>
+    </div>

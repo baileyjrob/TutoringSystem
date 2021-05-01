@@ -85,17 +85,18 @@ class UsersController < ApplicationController
   def schedule_student
     @user = User.find(params[:id])
     bounce_unless_ad_or_match(@user)
-
     @sessions = TutoringSession.where('scheduled_datetime > :now', now: Time.zone.now.to_datetime)
                                .order(:scheduled_datetime)
   end
 
+  # schedule session student should no longer be used
+  # function was copied and placed into course request controller
+  # all normal tutoring session confirmations are routed through there
   def schedule_session_student
     user = User.find(params[:id])
     bounce and return unless user == current_user || current_user.admin?
 
     tutoring_session = TutoringSession.find(params[:sessionID])
-
     schedule_use_helpers(tutoring_session, user)
 
     redirect_to "/users/#{params[:id]}"
@@ -139,7 +140,8 @@ class UsersController < ApplicationController
 
   def schedule_use_helpers(tutoring_session, user)
     helpers.pending_mail_with(tutoring_session.tutor, user).link_pending_email.deliver_now
-
+    # helpers.create_or_update_link_for function has been changed to take 4 inputs instead of 2
+    # added notes and session course as inputs
     helpers.create_or_update_link_for(user, tutoring_session)
   end
 end

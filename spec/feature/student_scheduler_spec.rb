@@ -68,6 +68,7 @@ RSpec.describe 'Student scheduler', :no_auth, type: :feature do
     after do
       TutoringSession.destroy_all
       User.destroy_all
+      Role.destroy_all
     end
 
     it 'can get to the scheduling page' do
@@ -102,7 +103,11 @@ RSpec.describe 'Student scheduler', :no_auth, type: :feature do
       click_link 'Join Tutoring Session'
 
       # Join a session
+
       click_button 'Join session', id: join_id
+      fill_in 'session_course', with: 'math 101'
+      fill_in 'student_notes', with: 'derivatives'
+      find(:link_or_button, 'Confirm').click
 
       # Expect to be at student index page
       expect(page).to have_content(student_name)
@@ -114,6 +119,9 @@ RSpec.describe 'Student scheduler', :no_auth, type: :feature do
 
       # Join a session
       click_button 'Join session', id: join_id
+      fill_in 'session_course', with: 'math 101'
+      fill_in 'student_notes', with: 'derivatives'
+      find(:link_or_button, 'Confirm').click
 
       # Make sure join table worked
       tsession = TutoringSession.find(join_id)
@@ -126,6 +134,9 @@ RSpec.describe 'Student scheduler', :no_auth, type: :feature do
 
       # Join a session
       click_button 'Join session', id: join_id
+      fill_in 'session_course', with: 'math 101'
+      fill_in 'student_notes', with: 'derivatives'
+      find(:link_or_button, 'Confirm').click
 
       # Check that the session is no longer joinable
       click_link 'Join Tutoring Session'
@@ -141,6 +152,9 @@ RSpec.describe 'Student scheduler', :no_auth, type: :feature do
 
       # Join a session
       click_button 'Join session', id: join_id
+      fill_in 'session_course', with: 'math 101'
+      fill_in 'student_notes', with: 'derivatives'
+      find(:link_or_button, 'Confirm').click
 
       # Make sure the CURRENT user joined the session
       tsession = TutoringSession.find(join_id)

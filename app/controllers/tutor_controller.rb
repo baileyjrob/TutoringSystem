@@ -33,4 +33,8 @@ class TutorController < ApplicationController
   def user_params
     params.require(:user).permit(course_ids: [])
   end
+
+  def help
+    render 'help'
+  end
 end

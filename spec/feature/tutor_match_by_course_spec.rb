@@ -42,6 +42,9 @@ RSpec.describe 'Tutor Matching', :no_auth, type: :feature do
     # Join a session
     click_link 'Join Tutoring Session'
     click_button 'Join session', id: 1
+    fill_in 'session_course', with: 'math 101'
+    fill_in 'student_notes', with: 'derivatives'
+    find(:link_or_button, 'Confirm').click
 
     # go to tutor match by course page
     visit('/course_request')

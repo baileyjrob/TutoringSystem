@@ -51,7 +51,9 @@
   $(function() {
     $('.tsession').on('click', function() {
       window.location = $(this).data("edit-url");
+      window.location.reload();
     });
+    
     $('.calendar-controls a.change-week').on('click', function() {
       document.cookie = "week_offset=" + $(this).data('week-offset') + ";";
       

@@ -35,7 +35,9 @@ RSpec.describe 'Tutor Matching', :no_auth, type: :feature do
     # Join a session
     find(:link_or_button, 'Join Tutoring Session').click
     click_button 'Join session', id: 1
-
+    fill_in 'session_course', with: 'math 101'
+    fill_in 'student_notes', with: 'derivatives'
+    find(:link_or_button, 'Confirm').click
     # go to tutor matching page
     visit('/course_request')
   end
@@ -48,8 +50,7 @@ RSpec.describe 'Tutor Matching', :no_auth, type: :feature do
   describe 'Available tutor matching' do
     it 'matches tutors using tutor majors' do
       fill_in 'filter_major', with: 'MATH'
-      find_button 'Find'
-      click_button 'Find'
+      find(:link_or_button, 'Find').click
       expect(page).to have_content('Dakota Doe')
     end
   end
@@ -77,6 +78,18 @@ RSpec.describe 'Tutor Matching', :no_auth, type: :feature do
       find(:link_or_button, 'Admin Pages').click
       find(:link_or_button, 'See Tutor Matches').click
       expect(page).to have_content('Dakota Doe')
+    end
+
+    it 'checks tutor course' do
+      find(:link_or_button, 'Admin Pages').click
+      find(:link_or_button, 'See Tutor Matches').click
+      expect(page).to have_content('math 101')
+    end
+
+    it 'checks student notes' do
+      find(:link_or_button, 'Admin Pages').click
+      find(:link_or_button, 'See Tutor Matches').click
+      expect(page).to have_content('derivatives')
     end
   end
 
