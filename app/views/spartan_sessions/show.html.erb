@@ -34,6 +34,8 @@
         <th scope="col">First</th>
         <th scope="col">Last</th>
         <th scope="col">Email</th>
+        <th scope="col">MU</th>
+        <th scope="col">Outift</th>
         <th scope="col">Check In</th>
         <th scope="col">Check Out</th>
         <th scope="col">Attendance Notes</th>
@@ -51,6 +53,8 @@
           <td><%= user.first_name %></td>
           <td><%= user.last_name %></td>
           <td><%= user.email %></td>
+          <td><%= user.mu %></td>
+          <td><%= user.outfit %></td>
           <% if suser.first_checkin.nil? %>
             <td></td>
           <% else %>

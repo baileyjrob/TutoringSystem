@@ -10,6 +10,8 @@ RSpec.describe SpartanSessionExportHelper, type: :helper do
       first_name: 'John',
       last_name: 'Smith',
       password: 'asdasd',
+      outfit: 'Alpha',
+      mu: '2',
       email: 'john@tamu.edu'
     )
   end
@@ -18,6 +20,8 @@ RSpec.describe SpartanSessionExportHelper, type: :helper do
       first_name: 'Jane',
       last_name: 'Doe',
       password: 'asdasd',
+      outfit: 'Alpha',
+      mu: '2',
       email: 'jane@tamu.edu'
     )
   end
@@ -52,8 +56,10 @@ RSpec.describe SpartanSessionExportHelper, type: :helper do
     it 'generates a csv for someone who checked in and out with no notes' do
       csv_table = CSV.read(Rails.root.join("#{filepath}.csv"), headers: true)
       expect([csv_table[0]['First_Name'], csv_table[0]['Last_Name'], csv_table[0]['Email'],
+              csv_table[0]['Outfit'], csv_table[0]['MU'],
               csv_table[0]['Check_In'], csv_table[0]['Check_Out'],
-              csv_table[0]['Attendance_NOTES']]).to eq ['John', 'Smith', 'john@tamu.edu',
+              csv_table[0]['Attendance_Notes']]).to eq ['John', 'Smith', 'john@tamu.edu', 'Alpha',
+                                                        '2',
                                                         user_first_checkin.strftime('%m/%d/%Y %T'),
                                                         user_second_checkin.strftime('%m/%d/%Y %T'),
                                                         nil]
@@ -67,8 +73,10 @@ RSpec.describe SpartanSessionExportHelper, type: :helper do
     it 'generates a csv for someone who was added to the attendance list via notes' do
       csv_table = CSV.read(Rails.root.join("#{filepath}.csv"), headers: true)
       expect([csv_table[1]['First_Name'], csv_table[1]['Last_Name'], csv_table[1]['Email'],
+              csv_table[0]['Outfit'], csv_table[0]['MU'],
               csv_table[1]['Check_In'], csv_table[1]['Check_Out'], csv_table[1]['Time_In_Session'],
-              csv_table[1]['Attendance_Notes']]).to eq %w[Jane Doe jane@tamu.edu N/A N/A 0.0 TEST]
+              csv_table[1]['Attendance_Notes']]).to eq %w[Jane Doe jane@tamu.edu Alpha 2 N/A N/A
+                                                          0.0 TEST]
     end
   end
 end
