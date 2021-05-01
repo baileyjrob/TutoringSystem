@@ -89,7 +89,8 @@ class TutoringSessionController < ApplicationController
   private
 
   def tsession_params
-    params.require(:tutoring_session).permit(:scheduled_datetime, :completed_datetime, :session_status)
+    params.require(:tutoring_session).permit(:scheduled_datetime, :completed_datetime,
+                                             :session_status)
   end
 
   def determine_start

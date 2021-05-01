@@ -8,9 +8,9 @@ module UserControllerHelper
   def create_or_update_link_for(user, tutoring_session, session_course, student_notes)
     link = TutoringSessionUser.find_or_create_by(tutoring_session: tutoring_session, user: user)
     link.link_status = 'pending'
-    tutorSess = TutoringSession.find(link.tutoring_session_id)
-    tutorSess.session_status = 'pending'
-    tutorSess.save!
+    tutor_sess = TutoringSession.find(link.tutoring_session_id)
+    tutor_sess.session_status = 'pending'
+    tutor_sess.save!
     link.session_course = session_course
     link.student_notes = student_notes if student_notes.nil? == false
     link.save if session_course.nil? == false
