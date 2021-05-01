@@ -9,9 +9,11 @@
             
             <%= label_tag(:student_notes, "Notes: ") %> 
             <%= text_area_tag(:student_notes,"", :class => 'form-control', :required => false) %>
-            <br><br>
             <%= hidden_field_tag(:sessionID, @selected_session) %>
-            <%= submit_tag("Confirm", :class => "btn btn-primary float-left", params: {name: "session_course", value: :session_course, name: "student_notes", value: :student_notes, name: "sessionID", value: :sessionID}) %> 
+            <br>
+            <%= submit_tag("Confirm", :class => "btn btn-primary float-left", params: { "session_course" => :session_course, 
+                                                                                        "student_notes" => :student_notes, 
+                                                                                        "sessionID" => :sessionID}) %> 
         </div>
       <%end%>
       <%= button_to "Return to Tutor Matching", {:action => 'index'}, :method => :get,  class: "btn btn-primary float-left" %>

@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2021-04-30T18:57:50-05:00">2021-04-30T18:57:50-05:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2021-04-30T19:14:06-05:00">2021-04-30T19:14:06-05:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -23,7 +23,7 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="red">
-  34.17%
+  34.25%
 </span>
 
      </span>
@@ -43,11 +43,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>799</b> relevant lines,
-    <span class="green"><b>273</b> lines covered</span> and
+    <b>800</b> relevant lines,
+    <span class="green"><b>274</b> lines covered</span> and
     <span class="red"><b>526</b> lines missed. </span>
     (<span class="red">
-  34.17%
+  34.25%
 </span>
 )
   </div>
@@ -94,12 +94,12 @@
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#3d4d0141331743dcc47594f77e976d90abca8535" class="src_link" title="app/controllers/course_request_controller.rb">app/controllers/course_request_controller.rb</a></td>
-            <td class="red strong cell--number t-file__coverage">75.51 %</td>
-            <td class="cell--number">89</td>
-            <td class="cell--number">49</td>
-            <td class="cell--number">37</td>
+            <td class="red strong cell--number t-file__coverage">76.00 %</td>
+            <td class="cell--number">91</td>
+            <td class="cell--number">50</td>
+            <td class="cell--number">38</td>
             <td class="cell--number">12</td>
-            <td class="cell--number">3.10</td>
+            <td class="cell--number">3.14</td>
             
           </tr>
         
@@ -500,14 +500,14 @@
     <span class="group_name">Controllers</span>
     (<span class="covered_percent">
       <span class="red">
-  18.35%
+  18.52%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
        <span class="red">
-         0.78
+         0.79
        </span>
     </span> hits/line
     )
@@ -520,11 +520,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>485</b> relevant lines,
-    <span class="green"><b>89</b> lines covered</span> and
+    <b>486</b> relevant lines,
+    <span class="green"><b>90</b> lines covered</span> and
     <span class="red"><b>396</b> lines missed. </span>
     (<span class="red">
-  18.35%
+  18.52%
 </span>
 )
   </div>
@@ -571,12 +571,12 @@
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#3d4d0141331743dcc47594f77e976d90abca8535" class="src_link" title="app/controllers/course_request_controller.rb">app/controllers/course_request_controller.rb</a></td>
-            <td class="red strong cell--number t-file__coverage">75.51 %</td>
-            <td class="cell--number">89</td>
-            <td class="cell--number">49</td>
-            <td class="cell--number">37</td>
+            <td class="red strong cell--number t-file__coverage">76.00 %</td>
+            <td class="cell--number">91</td>
+            <td class="cell--number">50</td>
+            <td class="cell--number">38</td>
             <td class="cell--number">12</td>
-            <td class="cell--number">3.10</td>
+            <td class="cell--number">3.14</td>
             
           </tr>
         
@@ -1847,7 +1847,7 @@
     <h3>app/controllers/course_request_controller.rb</h3>
     <h4>
       <span class="red">
-  75.51%
+  76.0%
 </span>
 
       lines covered
@@ -1856,8 +1856,8 @@
     
 
     <div class="t-line-summary">
-      <b>49</b> relevant lines.
-      <span class="green"><b>37</b> lines covered</span> and
+      <b>50</b> relevant lines.
+      <span class="green"><b>38</b> lines covered</span> and
       <span class="red"><b>12</b> lines missed.</span>
     </div>
 
@@ -2612,29 +2612,29 @@
 
             
 
-            <code class="ruby">    tutoring_session = TutoringSession.find(params[:sessionID])</code>
+            <code class="ruby">    return unless params[:session_course].nil? == false &amp;&amp; (params[:sessionID].nil? == false)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="5" data-linenumber="69">
+          <li class="never" data-hits="" data-linenumber="69">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="5" data-linenumber="70">
             <span class="hits">5</span>
             
 
             
 
-            <code class="ruby">    schedule_use_helpers(tutoring_session, student, params[:session_course],</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="70">
-            
-            
-
-            
-
-            <code class="ruby">                         params[:student_notes])</code>
+            <code class="ruby">    tutoring_session = TutoringSession.find(params[:sessionID])</code>
           </li>
         </div>
       
@@ -2645,7 +2645,7 @@
 
             
 
-            <code class="ruby">    redirect_to &quot;/users/#{params[:id]}&quot;, notice: &#39;Confirmed tutoring session&#39;</code>
+            <code class="ruby">    schedule_use_helpers(tutoring_session, student, params[:session_course],</code>
           </li>
         </div>
       
@@ -2656,12 +2656,34 @@
 
             
 
+            <code class="ruby">                         params[:student_notes])</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="5" data-linenumber="73">
+            <span class="hits">5</span>
+            
+
+            
+
+            <code class="ruby">    redirect_to &quot;/users/#{params[:id]}&quot;, notice: &#39;Confirmed tutoring session&#39;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="74">
+            
+            
+
+            
+
             <code class="ruby">  end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="73">
+          <li class="never" data-hits="" data-linenumber="75">
             
             
 
@@ -2672,7 +2694,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="74">
+          <li class="covered" data-hits="1" data-linenumber="76">
             <span class="hits">1</span>
             
 
@@ -2683,7 +2705,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="5" data-linenumber="75">
+          <li class="covered" data-hits="5" data-linenumber="77">
             <span class="hits">5</span>
             
 
@@ -2694,7 +2716,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="76">
+          <li class="never" data-hits="" data-linenumber="78">
             
             
 
@@ -2705,7 +2727,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="5" data-linenumber="77">
+          <li class="covered" data-hits="5" data-linenumber="79">
             <span class="hits">5</span>
             
 
@@ -2716,7 +2738,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="78">
+          <li class="never" data-hits="" data-linenumber="80">
             
             
 
@@ -2727,7 +2749,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="79">
+          <li class="never" data-hits="" data-linenumber="81">
             
             
 
@@ -2738,7 +2760,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="80">
+          <li class="covered" data-hits="1" data-linenumber="82">
             <span class="hits">1</span>
             
 
@@ -2749,7 +2771,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="81">
+          <li class="covered" data-hits="1" data-linenumber="83">
             <span class="hits">1</span>
             
 
@@ -2760,35 +2782,13 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="82">
+          <li class="never" data-hits="" data-linenumber="84">
             
             
 
             
 
             <code class="ruby">  end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="83">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="84">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">  private</code>
           </li>
         </div>
       
@@ -2810,12 +2810,34 @@
 
             
 
+            <code class="ruby">  private</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="87">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="88">
+            <span class="hits">1</span>
+            
+
+            
+
             <code class="ruby">  def course_request_params</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="87">
+          <li class="missed" data-hits="0" data-linenumber="89">
             
             
 
@@ -2826,7 +2848,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="88">
+          <li class="never" data-hits="" data-linenumber="90">
             
             
 
@@ -2837,7 +2859,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="89">
+          <li class="never" data-hits="" data-linenumber="91">
             
             
 
