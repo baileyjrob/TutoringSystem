@@ -9,7 +9,8 @@ module SpartanSessionExportHelper
         "public/spartan_attendance_#{time}.csv")
     file = Rails.root.join(filepath)
     users = SpartanSession.find(session_id).users
-    headers = %w[First_Name Last_Name Email Check_In Check_Out Time_In_Session Attendance_Notes]
+    headers = %w[First_Name Last_Name Email Outfit MU Check_In Check_Out Time_In_Session
+                 Attendance_Notes]
     write_to_csv(file, users, session_id, headers)
   end
 
@@ -41,13 +42,24 @@ module SpartanSessionExportHelper
     users.each do |user|
       # Fill in headers
       session_user = SpartanSessionUser.find_by(spartan_session_id: session_id, user_id: user.id)
-      time = find_duration(session_user.first_checkin, session_user.second_checkin)
-      first = get_time(session_user.first_checkin)
-      second = get_time(session_user.second_checkin)
 
       # Write to csv
-      writer << [user.first_name, user.last_name, user.email, first, second, time,
-                 session_user.attendance]
+      setup_writer(user, session_user, session_user.attendance, writer)
     end
+  end
+
+  def setup_writer(user, sess_user, attendance, writer)
+    # Get arguments
+    time = find_duration(sess_user.first_checkin, sess_user.second_checkin)
+    first = get_time(sess_user.first_checkin)
+    second = get_time(sess_user.second_checkin)
+
+    # Need to add arguments to writer
+    fill_writer(writer, [user.first_name, user.last_name, user.email, user.outfit, user.mu, first,
+                         second, time, attendance])
+  end
+
+  def fill_writer(writer, args)
+    writer << args
   end
 end
