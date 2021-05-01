@@ -33,6 +33,9 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <%=link_to "Help", "/help", class: 'nav-link' %>
+          </li>
           <% if current_user %>
           <li class="nav-item">
             <%=link_to "Find a Tutor", course_request_index_path, class: 'nav-link', text: 'Tutor Matching'  %>

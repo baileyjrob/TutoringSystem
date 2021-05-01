@@ -85,7 +85,6 @@ class UsersController < ApplicationController
   def schedule_student
     @user = User.find(params[:id])
     bounce_unless_ad_or_match(@user)
-
     @sessions = TutoringSession.where('scheduled_datetime > :now', now: Time.zone.now.to_datetime)
                                .order(:scheduled_datetime)
   end
@@ -98,7 +97,6 @@ class UsersController < ApplicationController
     bounce and return unless user == current_user || current_user.admin?
 
     tutoring_session = TutoringSession.find(params[:sessionID])
-
     schedule_use_helpers(tutoring_session, user)
 
     redirect_to "/users/#{params[:id]}"
