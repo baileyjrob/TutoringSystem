@@ -35,7 +35,8 @@ RSpec.describe TutoringSessionUserController, type: :feature do
   end
 
   let!(:link1) do
-    TutoringSessionUser.create(tutoring_session: tsession, user: student1, link_status: 'pending', session_course: "math 101")
+    TutoringSessionUser.create(tutoring_session: tsession, user: student1, link_status: 'pending',
+                               session_course: 'math 101')
   end
 
   after do
@@ -45,7 +46,8 @@ RSpec.describe TutoringSessionUserController, type: :feature do
   end
 
   before do
-    TutoringSessionUser.create(tutoring_session: tsession, user: student2, link_status: 'pending', session_course: "csce 101")
+    TutoringSessionUser.create(tutoring_session: tsession, user: student2, link_status: 'pending',
+                               session_course: 'csce 101')
     visit('/users/sign_in/')
     fill_in 'user_email', with: 'tutor@tamu.edu'
     fill_in 'user_password', with: 'T3st!!a'
