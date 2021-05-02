@@ -1,0 +1,63 @@
+<div class="container show-pending">
+  <div class="row">
+    <div class="col-12">
+      <h1>Open Tutoring Sessions</h1>
+      <p>
+        These are sessions no students have signed up for. A "new" status indicates
+        no studnt has attempted to sign up for this session, and A "denied" status
+        indicates a student attempted to sign up, but you denied them.
+      </p>
+    </div>
+    <div class="col-12 mt-3">
+      <table class="table" id="open">
+        <thead>
+          <tr>
+            <th scope="col">Session Link</th>
+            <th scope="col">Status</th>
+            <th scope="col">Start Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @open_sessions.each do |session| %>
+          <tr class="open-link" data-target="<%= session.id %>">
+            <td><%= link_to "Session Link", tutoring_session_path(session), target: '_blank' %> </td>
+            <td><%= session.session_status %></td>
+            <td><%= session.scheduled_datetime.localtime.strftime("%B %d at %l:%M %p %Z") %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+
+
+
+
+
+  <script>
+    $(function() {
+      $('#open').DataTable();
+      // $('#open').api().columns().every(function () {
+      //   console.log('test');
+      //   var column = this;
+      //   var select = $('<select class="form-select"><option value=""></option></select>')
+      //     .prependTo($(column.header()))
+      //     .on('change', function() {
+      //       var val = $.fn.dataTable.util.escapeRegex(
+      //         $(this).val()
+      //       );
+
+      //       column
+      //         .search(val ? '^'+val+'$' : '', true, false)
+      //         .draw();
+      //     });
+
+      //   column.data().unique().sort().each(function (d, j) {
+      //     select.append('<option value="'+d+'">'+d+'</option>')
+      //   });
+      // });
+    });
+  </script>
+</div>

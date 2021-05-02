@@ -143,7 +143,7 @@ RSpec.describe TutoringSessionController, :no_auth, type: :feature do
       expect(TutoringSession.all.count).to eq(0)
     end
 
-    #it 'errors on session overlap' do
+    # it 'errors on session overlap' do
     #  expect(TutoringSession.all.count).to eq(0)
 
     #  visit('/tutoring_session/new')
@@ -158,7 +158,7 @@ RSpec.describe TutoringSessionController, :no_auth, type: :feature do
 
     #  expect(page).to have_content('Create Tutoring Session')
     #  expect(page).to have_content('overlaps with one of yours that is currently scheduled')
-    #end
+    # end
   end
 
   describe 'SHOW' do
