@@ -60,6 +60,8 @@
                 <li><a class="dropdown-item" <%=link_to "Tutor Calendar", tutoring_session_index_path, class: 'nav-link' %></a></li>
                 <li><a class="dropdown-item" <%=link_to "My Courses", tutor_path(current_user), class: 'nav-link' %></a></li>
                 <li><a class="dropdown-item"   <%=link_to "Pending Tutoring Requests", "/tutoring_session/pending", class: 'nav-link' %></a></li>
+                <li><a class="dropdown-item"   <%=link_to "Confirmed Tutoring Sessions", "/tutor/confirmed", class: 'nav-link' %></a></li>
+                <li><a class="dropdown-item"   <%=link_to "Open Tutoring Sessions", "/tutor/open", class: 'nav-link' %></a></li>
               </ul>
             </div>
           </li>

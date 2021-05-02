@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get '/tutor/confirmed', :to => 'tutor#confirmed'
+  get '/tutor/open', :to => 'tutor#open'
   get '/help', :to => 'tutor#help'
   post '/courses', :to => 'courses#create'
   get '/courses/index', :to => 'courses#index'
