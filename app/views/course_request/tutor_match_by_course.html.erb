@@ -23,6 +23,7 @@
         <% end %>
             <div class="row">
                 <div class="col-12 mt-3">
+                  <br><p>Searching sessions up to two weeks from now.<p/>
                     <table class = "table" id= "tutors">
                         <thead>
                             <tr>
@@ -57,10 +58,10 @@
                                                 <!-- Tutoring session should not be associated with the user -->
                                                 <% if session.tutoring_session_users.find_by(id: user.id).blank? or
                                                         session.tutoring_session_users.find_by(id: user.id).link_status == 'denied' %>
-                                                        
+
                                                         <td><%= button_to "Join session", {:action => 'session_confirmation', :sessionID => session},
                                                         :id => session.id, :class => "btn btn-primary", :method => :post %></td>
-                                                        
+
                                                         <% else  %>
                                                         <!-- Disable the button -->
                                                         <td><%= button_to "Join session", {:action => 'session_confirmation', :sessionID => session},

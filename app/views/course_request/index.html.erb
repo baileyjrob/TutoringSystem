@@ -7,10 +7,12 @@
                     <%= label_tag(:filter_major, "Course Department: ") %>
                     <div class="mb-3">
                         <%= text_field_tag(:filter_major, "", :class => 'form-control',  :required => true) %>
-                        <br><br>
+                        <br>
                         <%= submit_tag("Find", :class => "btn btn-primary float-left") %>
                     </div>
                 <%end%>
+                <br>
+                <p>Searching sessions up to two weeks from now.<p/>
                 <table class="table" id="tutors">
                 <thead>
                     <tr>

@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   post '/users/admin_view_hours', :to =>'users#output_admin_view_hours'
   get '/users/:id', :to => 'users#show', :as => :user
   post '/users/:id/delete_session', :to => 'users#delete_session', :as => :delete_session
-  get '/users/:id/schedule_student', :to => 'users#schedule_student'
+  #get '/users/:id/schedule_student', :to => 'users#schedule_student'
   post '/users/:id/schedule_session_student' => 'users#schedule_session_student'
 
   post '/course_request/delete_all_request', :to => 'course_request#delete_all_request', :as => :delete_all_request
