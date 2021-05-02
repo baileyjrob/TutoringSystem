@@ -49,8 +49,8 @@ class TutorController < ApplicationController
 
   def open
     @open_sessions = TutoringSession.where(tutor_id: current_user.id)
-                                      .where(session_status: 'new')
-                                      .or(TutoringSession.where(tutor_id: current_user.id)
+                                    .where(session_status: 'new')
+                                    .or(TutoringSession.where(tutor_id: current_user.id)
                                       .where(session_status: 'denied'))
   end
 end
