@@ -40,12 +40,13 @@ RSpec.describe 'Tutor Matching', :no_auth, type: :feature do
     visit "/users/#{user1.id}"
 
     # Join a session
-    click_link 'Join Tutoring Session'
+    find(:link_or_button, 'Find a Tutor').click
+    fill_in 'filter_major', with: 'MATH'
+    find(:link_or_button, 'Find').click
     click_button 'Join session', id: 1
     fill_in 'session_course', with: 'math 101'
     fill_in 'student_notes', with: 'derivatives'
     find(:link_or_button, 'Confirm').click
-
     # go to tutor match by course page
     visit('/course_request')
     find(:link_or_button, 'Search by Specific Class').click

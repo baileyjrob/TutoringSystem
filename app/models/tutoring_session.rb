@@ -15,7 +15,7 @@ class TutoringSession < ApplicationRecord
   belongs_to :tutor, class_name: 'User', inverse_of: :sessions_tutoring, optional: true
 
   validates :scheduled_datetime, presence: true
-  #validate :scheduled_datetime_has_no_overlap
+  # validate :scheduled_datetime_has_no_overlap
 
   # Duration of all sessions set to 1 hour
   def duration_datetime
@@ -72,9 +72,7 @@ class TutoringSession < ApplicationRecord
     User.find_by(id: tutor_id)
   end
 
-  private
-
-  #def scheduled_datetime_has_no_overlap
+  # def scheduled_datetime_has_no_overlap
   #  return if scheduled_datetime.nil?
   #  return if tutor_id.nil?
   #
@@ -84,5 +82,5 @@ class TutoringSession < ApplicationRecord
   #  return unless overlap.exists?
   #
   #  errors.add(:scheduled_datetime, 'overlaps with one of yours that is currently scheduled')
-  #end
+  # end
 end
