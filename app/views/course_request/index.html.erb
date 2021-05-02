@@ -24,31 +24,24 @@
                     <% if @matching_tutors.nil? == false %>
                         <% @matching_tutors.each do |user| %>
                             <% if user.major.nil? == false %>
-                                <!-- makes sure users with no majors are not displayed -->
                                 <% if user.tutor? %>
-                                    <!-- only displays tutors -->
                                     <% @sessions.each do |session| %>
-                                        <tr class= tutorInfo>
-                                            <% if user.id == session.tutor_id %>
-                                                <tr class='tutorInfo'>
-                                                    <!-- Tutoring session should not be associated with the user -->
-                                                    <% student_session_status = TutoringSessionUser.find_or_create_by(tutoring_session: session, user: current_user).link_status%>
-                                                    <% if session.tutor_id == current_user.id || 
-                                                        session.session_status == ("Confirmed" || "In-Person") || 
-                                                        student_session_status == ("pending" || "denied" || "confirmed") %>
-                                                        <!-- no session information displayed -->                                                        
-                                                    <% else  %>
-                                                        <td><%=user.first_name + " " + user.last_name%></td>
-                                                        <td><%=user.email%></td>
-                                                        <!-- Make a row in the table for each tutoring session. Includes details and join option -->
-                                                        <% date = session.scheduled_datetime.in_time_zone("Central Time (US & Canada)").strftime("%B %d at %l:%M %p %Z") %>
-                                                        <td><%= date %></td>
-                                                        <td><%= button_to "Join session", {:action => 'session_confirmation', :sessionID => session},
-                                                        :disabled => false, :class => "btn btn-primary", :method => :post %></td>
-                                                    <% end %>
+                                        <% if user.id == session.tutor_id %>
+                                            <% student_session_status = TutoringSessionUser.find_or_create_by(tutoring_session: session, user: current_user).link_status%>
+                                            <% if session.tutor_id == current_user.id || 
+                                                session.session_status == ("Confirmed" || "In-Person") || 
+                                                student_session_status == ("pending" || "denied" || "confirmed") %>                                                    
+                                            <% else  %>
+                                                <tr class= tutorInfo>
+                                                    <td><%=user.first_name + " " + user.last_name%></td>
+                                                    <td><%=user.email%></td>
+                                                    <% date = session.scheduled_datetime.in_time_zone("Central Time (US & Canada)").strftime("%B %d at %l:%M %p %Z") %>
+                                                    <td><%= date %></td>
+                                                    <td><%= button_to "Join session", {:action => 'session_confirmation', :sessionID => session},
+                                                    :id => session.id, :disabled => false, :class => "btn btn-primary", :method => :post %></td>
                                                 </tr>
                                             <% end %>
-                                        </tr>
+                                        <% end %>
                                     <% end %>
                                 <% end %>
                             <% end %>
