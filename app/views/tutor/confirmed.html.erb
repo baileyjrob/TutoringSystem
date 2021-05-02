@@ -1,0 +1,113 @@
+<div class="container show-pending">
+  <div class="row">
+    <div class="col-12">
+      <h1>Confirmed Tutoring Sessions</h1>
+      <p>
+        These are Sessions that have been confirmed by you.
+      </p>
+    </div>
+    <div class="col-12 mt-3">
+      <table class="table" id="confirmed">
+        <thead>
+          <tr>
+            <th scope="col">Session Link</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Tutoring Course</th>
+            <th scope="col">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @confirmed_links.each do |link| %>
+          <tr class="confirmed-link" data-target="<%= link.id %>">
+            <td><%= link_to "Session Link", tutoring_session_path(link.tutoring_session), target: '_blank' %> </td>
+            <td><%= link.user.first_name %> <%= link.user.last_name  %></td>
+            <td><%= link.user.email  %></td>
+            <td><%= link.session_course %></td>
+            <td><%= link.student_notes %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <br/>
+      <div class="col-12">
+        <h1>In-Person Tutoring Sessions</h1>
+        <p>
+          These are sessions you have manually added for credit.
+        </p>
+      </div>
+      <div class="col-12 mt-3">
+        <table class="table" id="in-person">
+          <thead>
+            <tr>
+              <th scope="col">Session Link</th>
+              <th scope="col">Start Time</th>
+              <th scope="col">End Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @in_person_sessions.each do |session| %>
+            <tr class="in-person-link" data-target="<%= session.id %>">
+              <td><%= link_to "Session Link", tutoring_session_path(session), target: '_blank' %> </td>
+              <td><%= session.scheduled_datetime.localtime.strftime("%B %d at %l:%M %p %Z") %></td>
+              <td><%= session.completed_datetime.localtime.strftime("%B %d at %l:%M %p %Z") %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+    </div>
+  </div>
+
+
+
+
+
+
+
+  <script>
+    $(function() {
+      $('#confirmed').DataTable();
+      // $('#confirmed').api().columns().every(function () {
+      //   console.log('test');
+      //   var column = this;
+      //   var select = $('<select class="form-select"><option value=""></option></select>')
+      //     .prependTo($(column.header()))
+      //     .on('change', function() {
+      //       var val = $.fn.dataTable.util.escapeRegex(
+      //         $(this).val()
+      //       );
+
+      //       column
+      //         .search(val ? '^'+val+'$' : '', true, false)
+      //         .draw();
+      //     });
+
+      //   column.data().unique().sort().each(function (d, j) {
+      //     select.append('<option value="'+d+'">'+d+'</option>')
+      //   });
+      // });
+    });
+    $(function() {
+      $('#in-person').DataTable();
+      // $('#in-person').api().columns().every(function () {
+      //   console.log('test');
+      //   var column = this;
+      //   var select = $('<select class="form-select"><option value=""></option></select>')
+      //     .prependTo($(column.header()))
+      //     .on('change', function() {
+      //       var val = $.fn.dataTable.util.escapeRegex(
+      //         $(this).val()
+      //       );
+
+      //       column
+      //         .search(val ? '^'+val+'$' : '', true, false)
+      //         .draw();
+      //     });
+
+      //   column.data().unique().sort().each(function (d, j) {
+      //     select.append('<option value="'+d+'">'+d+'</option>')
+      //   });
+      // });
+    });
+  </script>
+</div>

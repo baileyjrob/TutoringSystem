@@ -82,12 +82,12 @@ class UsersController < ApplicationController
     @sessions = current_user.tutoring_sessions
   end
 
-  def schedule_student
-    @user = User.find(params[:id])
-    bounce_unless_ad_or_match(@user)
-    @sessions = TutoringSession.where('scheduled_datetime > :now', now: Time.zone.now.to_datetime)
-                               .order(:scheduled_datetime)
-  end
+  # def schedule_student
+  #  @user = User.find(params[:id])
+  #  bounce_unless_ad_or_match(@user)
+  #  @sessions = TutoringSession.where('scheduled_datetime > :now', now: Time.zone.now.to_datetime)
+  #                             .order(:scheduled_datetime)
+  # end
 
   # schedule session student should no longer be used
   # function was copied and placed into course request controller

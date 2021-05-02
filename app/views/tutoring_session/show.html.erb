@@ -6,7 +6,7 @@
         Tutoring Session
       </h1>
       <p>
-        Session scheduled for 
+        Session scheduled for
         <%= @tsession.scheduled_datetime.to_date.to_formatted_s(:long_ordinal) %> at
         <%= @tsession.scheduled_datetime.strftime("%I:%M %p")  %>
       </p>
@@ -15,17 +15,17 @@
       </p>
       <p>
       <% @tsession.tutoring_session_users.each do |link| %>
-        <%= link.user.first_name %> <%= link.user.last_name %> | <%= link.link_status %>
+        <%= link.user.first_name %> <%= link.user.last_name %> | <%= link.link_status %> <br/>
       <% end %>
       </p>
-      <p class="mt-5"><%= link_to 'edit', edit_tutoring_session_path(@tsession) %> | 
+      <p class="mt-5"><%= link_to 'edit', edit_tutoring_session_path(@tsession) %> |
             <%= link_to 'delete', tutoring_session_path(@tsession),
               method: :delete,
               data: { confirm: 'Are you sure?' } %>
-              | 
+              |
             <%= link_to 'delete self and following repeats', tutoring_session_path(@tsession, :delete_repeating => true),
               method: :delete,
               data: { confirm: 'Are you sure?' } %></p>
     </div>
-  </div>  
+  </div>
 </div>
