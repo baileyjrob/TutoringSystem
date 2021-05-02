@@ -14,7 +14,7 @@ class TutoringSessionUserController < ApplicationController
     unless (link.tutoring_session.tutor == current_user) || current_user.is_admin?
       redirect_to action: 'show'
     end
-
+    link.link_status = 'confirmed'
     tutor_sess_update(link, 'confirmed')
 
     mail_with(link, 'confirmed').link_action_email.deliver_now
