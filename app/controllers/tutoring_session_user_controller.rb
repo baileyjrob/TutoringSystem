@@ -15,8 +15,7 @@ class TutoringSessionUserController < ApplicationController
       redirect_to action: 'show'
     end
 
-    link.link_status = 'confirmed'
-    link.save
+    tutor_sess_update(link, 'confirmed')
 
     mail_with(link, 'confirmed').link_action_email.deliver_now
 
@@ -30,11 +29,18 @@ class TutoringSessionUserController < ApplicationController
     end
 
     link.link_status = 'denied'
-    link.save
+    tutor_sess_update(link, 'denied')
 
     mail_with(link, 'denied').link_action_email.deliver_now
 
     redirect_to action: 'show'
+  end
+
+  def tutor_sess_update(link, status)
+    tutor_sess = TutoringSession.find(link.tutoring_session_id)
+    tutor_sess.session_status = status
+    tutor_sess.save!
+    link.save
   end
 
   private
