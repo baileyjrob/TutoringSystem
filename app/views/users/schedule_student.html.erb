@@ -38,8 +38,7 @@
                 <% else  %>
                   <!-- Disable the button -->
                   <td><%= button_to "Join session", {:action => 'session_confirmation', :controller => 'course_request', :sessionID => session},
-                                                                              :disabled => true, :class => "btn btn-secondary",
-                                                                              :method => :post %></td>
+                  :id => session.id, :disabled => true, :class => "btn btn-secondary", :method => :post %></td>
                 <% end %>
               </tr>
             <% end %>
