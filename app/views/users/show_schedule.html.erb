@@ -26,7 +26,7 @@
             <% tutor = User.find(session.tutor_id) %>
             <td><%= tutor.first_name + " " + tutor.last_name %></td>
             <td><%= tutor.email %></td>
-            <% date = session.scheduled_datetime.localtime.strftime("%B %d at %l:%M %p %Z") %>
+            <% date = session.scheduled_datetime.in_time_zone("Central Time (US & Canada)").strftime("%B %d at %l:%M %p %Z") %>
             <td><%= date %></td>
             <td><%= get_status(session) %></td>
             <td><%= button_to 'Cancel Session', delete_session_path(session), data: {confirm: "Are you sure?"}, class: "btn btn-primary" %></td>
