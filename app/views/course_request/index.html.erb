@@ -31,23 +31,20 @@
                                         <tr class= tutorInfo>
                                             <% if user.id == session.tutor_id %>
                                                 <tr class='tutorInfo'>
-                                                    <td><%=user.first_name + " " + user.last_name%></td>
-                                                    <td><%=user.email%></td>
-
-                                                    <!-- Make a row in the table for each tutoring session. Includes details and join option -->
-                                                    <% date = session.scheduled_datetime.in_time_zone("Central Time (US & Canada)").strftime("%B %d at %l:%M %p %Z") %>
-                                                    <td><%= date %></td>
-
                                                     <!-- Tutoring session should not be associated with the user -->
-                                                    <% if session.tutoring_session_users.find_by(id: user.id).blank? or
-                                                        session.tutoring_session_users.find_by(id: user.id).link_status == 'denied' %>
-            <td><%= button_to "Join session", {:action => 'session_confirmation', :sessionID => session},
-                                                                        :id => session.id, :class => "btn btn-primary", :method => :post %></td>
-            <% else  %>
-            <!-- Disable the button -->
-            <td><%= button_to "Join session", {:action => 'session_confirmation', :sessionID => session},
-                                                                        :disabled => true, :id => session.id, :class => "btn btn-secondary",
-                                                                        :method => :post %></td>
+                                                    <% student_session_status = TutoringSessionUser.find_or_create_by(tutoring_session: session, user: current_user).link_status%>
+                                                    <% if session.tutor_id == current_user.id || 
+                                                        session.session_status == ("Confirmed" || "In-Person") || 
+                                                        student_session_status == ("pending" || "denied" || "confirmed") %>
+                                                        <!-- no session information displayed -->                                                        
+                                                    <% else  %>
+                                                        <td><%=user.first_name + " " + user.last_name%></td>
+                                                        <td><%=user.email%></td>
+                                                        <!-- Make a row in the table for each tutoring session. Includes details and join option -->
+                                                        <% date = session.scheduled_datetime.in_time_zone("Central Time (US & Canada)").strftime("%B %d at %l:%M %p %Z") %>
+                                                        <td><%= date %></td>
+                                                        <td><%= button_to "Join session", {:action => 'session_confirmation', :sessionID => session},
+                                                        :disabled => false, :class => "btn btn-primary", :method => :post %></td>
                                                     <% end %>
                                                 </tr>
                                             <% end %>
@@ -62,6 +59,7 @@
             <br>
             <h6>Can't find the class you're looking for?</h6>
             <%= button_to "Submit a request", {:action => 'new'}, :method => :get, :class => "btn btn-primary float-left"  %>
+            <br>
             <h6>Looking for the Spartan Tutoring schedule?</h6>
             <%= link_to "Spartan Tutoring Calendar", "https://www.spartan-tutoring.com/calendar", :target => "_blank", :class => "btn btn-primary float-left"   %>
         </div>
