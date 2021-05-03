@@ -47,40 +47,36 @@
             <%= link_to 'My Account', user_path(current_user), class: 'nav-link' %>
           </li>
           <% if current_user && current_user.roles.include?(Role.tutor_role) %>
-          <li class="nav-item">
-            <div class="dropdown">
-              <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                Tutor Pages
-              </a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" id="tutorDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              Tutor Pages
+            </a>
 
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" <%=link_to "Tutor Calendar", tutoring_session_index_path, class: 'nav-link' %></a></li>
-                <li><a class="dropdown-item" <%=link_to "My Courses", tutor_path(current_user), class: 'nav-link' %></a></li>
-                <li><a class="dropdown-item"   <%=link_to "Pending Tutoring Requests", "/tutoring_session/pending", class: 'nav-link' %></a></li>
-                <li><a class="dropdown-item"   <%=link_to "Confirmed Tutoring Sessions", "/tutor/confirmed", class: 'nav-link' %></a></li>
-                <li><a class="dropdown-item"   <%=link_to "Open Tutoring Sessions", "/tutor/open", class: 'nav-link' %></a></li>
-              </ul>
-            </div>
+            <ul class="dropdown-menu" aria-labelledby="tutorDropdown">
+              <li><a class="dropdown-item" <%=link_to "Tutor Calendar", tutoring_session_index_path, class: 'nav-link' %></a></li>
+              <li><a class="dropdown-item" <%=link_to "My Courses", tutor_path(current_user), class: 'nav-link' %></a></li>
+              <li><a class="dropdown-item"   <%=link_to "Pending Tutoring Requests", "/tutoring_session/pending", class: 'nav-link' %></a></li>
+              <li><a class="dropdown-item"   <%=link_to "Confirmed Tutoring Sessions", "/tutor/confirmed", class: 'nav-link' %></a></li>
+              <li><a class="dropdown-item"   <%=link_to "Open Tutoring Sessions", "/tutor/open", class: 'nav-link' %></a></li>
+            </ul>
           </li>
           <% end %>
 
           <!-- TEMPORARY UNTIL EMAIL SET UP -->
           <% if current_user && current_user.roles.include?(Role.admin_role) %>
-          <li class="nav-item">
-            <div class="dropdown">
-              <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                Admin Pages
-              </a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" id="adminDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              Admin Pages
+            </a>
 
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" <%= link_to 'Get Tutoring Hours', '/users/admin_view_hours' , class: 'nav-link' %></a></li>
-                <li><a class="dropdown-item" <%= link_to 'Spartan Session Index', '/spartan_sessions' , class: 'nav-link' %></a></li>
-                <li><a class="dropdown-item" <%= link_to 'Department Index', '/departments/index' , class: 'nav-link' %></a></li>
-                <li><a class="dropdown-item" <%= link_to 'Course Index', '/courses/index' , class: 'nav-link' %></a></li>
-                <li><a class="dropdown-item" <%= link_to 'See Tutor Matches', '/course_request/admin_view_tutor_matches' , class: 'nav-link' %></a></li>
-                <li><a class="dropdown-item" <%= link_to 'See Course Requests', '/course_request/admin_view_course_requests' , class: 'nav-link' %></a></li>
-              </ul>
-            </div>
+            <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+              <li><a class="dropdown-item" <%= link_to 'Get Tutoring Hours', '/users/admin_view_hours' , class: 'nav-link' %></a></li>
+              <li><a class="dropdown-item" <%= link_to 'Spartan Session Index', '/spartan_sessions' , class: 'nav-link' %></a></li>
+              <li><a class="dropdown-item" <%= link_to 'Department Index', '/departments/index' , class: 'nav-link' %></a></li>
+              <li><a class="dropdown-item" <%= link_to 'Course Index', '/courses/index' , class: 'nav-link' %></a></li>
+              <li><a class="dropdown-item" <%= link_to 'See Tutor Matches', '/course_request/admin_view_tutor_matches' , class: 'nav-link' %></a></li>
+              <li><a class="dropdown-item" <%= link_to 'See Course Requests', '/course_request/admin_view_course_requests' , class: 'nav-link' %></a></li>
+            </ul>
           </li>
           <% end %>
           <% else %>
