@@ -51,8 +51,7 @@
   $(function() {
     document.cookie = "week_offset= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
     $('.tsession').on('click', function() {
-      window.location = $(this).data("edit-url");
-      window.location.reload();
+      window.location.href = $(this).data("edit-url");
     });
     
     $('.calendar-controls a.change-week').on('click', function() {
