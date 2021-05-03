@@ -54,7 +54,7 @@
       <br>
       <h3>Cancel account</h3>
 
-      <p><%= button_to "Cancel account", registration_path(@user), data: { confirm: "Are you sure?" }, class: 'btn btn-danger', method: :delete %></p>
+      <p><%= button_to "Cancel account", user_path(@user), data: { confirm: "Are you sure? This action cannot be undone." }, class: 'btn btn-danger', method: :delete %></p>
 
       <%= link_to "Back", :back %>
     </div>
