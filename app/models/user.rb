@@ -15,6 +15,8 @@ class User < ApplicationRecord
       end
     end
   end
+  has_many :spartan_session_users, dependent: :delete_all
+  has_many :spartan_sessions, through: :spartan_session_users
   # has_and_belongs_to_many :courses
   has_many :course_users, dependent: :delete_all
   has_many :courses, through: :course_users
