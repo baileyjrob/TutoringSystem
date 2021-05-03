@@ -55,14 +55,14 @@ module AdminViewHoursHelper
   private
 
   def generate_tutor_query(start_date, end_date)
+    user = User.find(params[:id])
     User.joins('LEFT JOIN tutoring_sessions ON tutoring_sessions.tutor_id = users.id')
         .where("(tutoring_sessions.session_status = 'Confirmed' \
                   OR tutoring_sessions.session_status = 'In-Person' OR \
                   tutoring_sessions.session_status IS NULL) AND users.id = ? AND \
                   (scheduled_datetime BETWEEN ? AND ? OR scheduled_datetime IS NULL)",
-               current_user.id, start_date, end_date)
-        .select("users.first_name,\
-                  users.last_name,\
+               user.id, start_date, end_date)
+        .select("users.first_name,\ users.last_name,\
                   tutoring_sessions.scheduled_datetime,\
                   tutoring_sessions.completed_datetime")
   end
